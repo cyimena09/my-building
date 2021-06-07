@@ -1,6 +1,6 @@
 <?php
 
 
-class Building extends AbstractController {
+class Building {
 
 }
