@@ -282,7 +282,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `idUser` int(11) NOT NULL AUTO_INCREMENT,
-  `fkAparment` int(11) NOT NULL,
+  `fkApartment` int(11) NOT NULL,
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
@@ -299,8 +299,8 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `role` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
-  KEY `user_FK` (`fkAparment`),
-  CONSTRAINT `user_FK` FOREIGN KEY (`fkAparment`) REFERENCES `apartment` (`idapartment`)
+  KEY `user_FK` (`fkApartment`),
+  CONSTRAINT `user_FK` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idapartment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -326,4 +326,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-07 21:03:15
+-- Dump completed on 2021-06-07 21:10:38
