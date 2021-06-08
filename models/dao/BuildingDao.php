@@ -8,7 +8,6 @@ class BuildingDao extends AbstractDao {
         parent::__construct('building');
     }
 
-
     public function getBuildings() {
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
@@ -22,7 +21,7 @@ class BuildingDao extends AbstractDao {
 
     public function getBuildingById($id) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE id = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE idBuilding = ?");
             $statement->execute([
                 $id
             ]);
@@ -33,69 +32,48 @@ class BuildingDao extends AbstractDao {
         }
     }
 
-    function instantiateAll($results) {
-        $productList = array();
+    public function createBuilding($data) {
+        if (empty($data['name']) ||
+            empty($data['street']) ||
+            empty($data['houseNumber']) ||
+            empty($data['zip']) ||
+            empty($data['city']) ||
+            empty($data['country'])) {
 
+            return false;
+        }
+
+        $building = $this->instantiate($data);
+
+        if ($building) {
+            try {
+                $statement = $this->connection->prepare(
+                    "INSERT INTO {$this->table} (name) VALUES (?)"
+                );
+                $statement->execute([
+                    htmlspecialchars($building->__get('name')),
+                ]);
+                return true;
+            } catch (PDOException $e) {
+                print $e->getMessage();
+                return false;
+            }
+        }
+    }
+
+    public function instantiate ($result) {
+        return new Building(
+            !empty($result['idBuilding']) ? $result['idBuilding'] : 0,
+            $result['name']
+        );
+    }
+
+    public function instantiateAll($results) {
+        $productList = array();
         foreach ($results as $result) {
-            array_push($productList, $this->deepCreate($result));
+            array_push($productList, $this->instantiate($result));
         }
         return $productList;
     }
 
-    // Instantiate a animals
-    public function instantiate($result) {
-        $person = new Person($result['fk_person'], null, null, null, null, null);
-        $race = new Race($result['fk_race'], null);
-
-        return new Animal(
-            $result['id'],
-            $result['name'],
-            $result['chip'],
-            $result['sex'],
-            $result['sterilized'],
-            $result['birthDate'],
-            $person,
-            $race
-        );
-    }
-
-    /**
-     * @param $result
-     * @return Animal comprend le propriétaire de l'animal
-     */
-    public function deepCreate($result)
-    {
-        $animalId = $result['id']; // identifiant de l'animal
-
-        // get owner
-        $ownerId = $result['fk_person']; // owner id
-        $personDao = new PersonDao();
-        $person = $personDao->getPersonById($ownerId); // get animal owner
-
-        // get race
-        $raceId = $result['fk_race']; // race id
-        $raceDao = new RaceDao();
-        $race = $raceDao->getRaceById($raceId); // get animal race
-
-        // get stays
-        $stayDao = new StayDao();
-        $stays = $stayDao->getStaysByAnimalId($animalId); // get animal race
-
-        // get vaccines
-        $vaccineDao = new VaccineDao();
-        $vaccines = $vaccineDao->getVaccinesByAnimalId($animalId); // get animal race
-
-        return new Animal(
-            $result['id'],
-            $result['name'],
-            $result['chip'],
-            $result['sex'],
-            $result['sterilized'],
-            $result['birthDate'],
-            $person,
-            $race,
-            $stays,
-            $vaccines
-        );
-    }
 }

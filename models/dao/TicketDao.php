@@ -32,6 +32,19 @@ class TicketDao extends AbstractDao {
         }
     }
 
+    public function getTicketByUserId($id) {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkUser = ?");
+            $statement->execute([
+                $id
+            ]);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->instantiate($result);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
     public function createTicket($data) {
         if (empty($data['description'])) {
             return false;

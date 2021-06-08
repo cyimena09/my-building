@@ -18,7 +18,8 @@ class Router {
             'auth' => 'AuthController',
             'user' => 'UserController',
             'ticket' => 'TicketController',
-            'buildings' => 'BuildingController'];
+            'building' => 'BuildingController',
+            'apartment' => 'ApartmentController'];
 
         $this->request = array();
         $this->data = $this->parseURI($_SERVER['REQUEST_URI']);
