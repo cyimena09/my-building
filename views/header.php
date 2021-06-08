@@ -29,7 +29,7 @@
             <ul>
                 <li><a href="/auth/loginView">Se connecter</a></li>
                 <li><a href="/auth/registerView">S'inscrire</a></li>
-                <li><a href="/user/accountView">Espace</a></li>
+                <li><a href="/user">Espace</a></li>
             </ul>
         </div>
     </div>

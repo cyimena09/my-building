@@ -12,11 +12,12 @@ class Router {
         $this->get = $_GET;
         $this->post = $_POST;
 
-        $this->actions = ['registerView', 'register', 'loginView', 'login', 'accountView', 'ticketsListView', 'create', 'edit', 'delete', 'show', 'showAll', 'update', 'store', 'index', 'search'];
+        $this->actions = ['registerView', 'register', 'loginView', 'login', 'create', 'createView', 'edit', 'delete', 'show', 'showAll', 'update', 'store', 'index', 'search'];
         $this->controllers = [
             'index' => 'MainController',
             'auth' => 'AuthController',
             'user' => 'UserController',
+            'ticket' => 'TicketController',
             'buildings' => 'BuildingController'];
 
         $this->request = array();

@@ -22,6 +22,11 @@
     margin-top: 60px;
 }
 
+h1 {
+    font-size: 28px;
+    margin-bottom: 50px;
+}
+
 li {
     list-style: none;
 }

@@ -6,22 +6,13 @@ class UserController extends AbstractController {
         $this->dao = new UserDao();
     }
 
-    public function accountView () {
+    public function index() {
         $user = $this->isLogged();
+        $content = 'user-account.php';
 
         include ('../views/header.php');
-        include ('../views/user/user-account.php');
+        include ('../views/user/user-space.php');
         include ('../views/footer.php');
     }
-
-    public function edit ($id) {
-        $user = $this->dao->fetch($id);
-        include('../views/user/form.php');
-    }
-
-    public function store ($id, $data) {
-        $this->dao->store($data);
-    }
-
 
 }
