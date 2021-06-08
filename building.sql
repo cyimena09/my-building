@@ -34,12 +34,12 @@ CREATE TABLE `address` (
   `session_time` datetime DEFAULT NULL,
   `fkUser` int(11) DEFAULT NULL,
   `fkTrustee` int(11) DEFAULT NULL,
-  `fkApartement` int(11) DEFAULT NULL,
+  `fkApartment` int(11) DEFAULT NULL,
   PRIMARY KEY (`idaddress`),
   KEY `address_FK_1` (`fkTrustee`),
   KEY `address_FK_2` (`fkUser`),
-  KEY `address_FK` (`fkApartement`),
-  CONSTRAINT `address_FK` FOREIGN KEY (`fkApartement`) REFERENCES `apartment` (`idapartment`),
+  KEY `address_FK` (`fkApartment`),
+  CONSTRAINT `address_FK` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idapartment`),
   CONSTRAINT `address_FK_1` FOREIGN KEY (`fkTrustee`) REFERENCES `trustee` (`idTrustee`),
   CONSTRAINT `address_FK_2` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -172,14 +172,10 @@ DROP TABLE IF EXISTS `ticket`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ticket` (
   `idTicket` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status` varchar(100) DEFAULT NULL,
   `date_creation` date DEFAULT NULL,
-  `assigned` varchar(100) DEFAULT NULL,
   `last_update` date DEFAULT NULL,
-  `session_token` varchar(100) DEFAULT NULL,
-  `session_time` datetime DEFAULT NULL,
   PRIMARY KEY (`idTicket`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
