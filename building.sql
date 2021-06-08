@@ -174,7 +174,7 @@ CREATE TABLE `ticket` (
   `idTicket` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `status` varchar(1) DEFAULT NULL,
+  `status` varchar(100) DEFAULT NULL,
   `date_creation` date DEFAULT NULL,
   `assigned` varchar(100) DEFAULT NULL,
   `last_update` date DEFAULT NULL,
@@ -381,4 +381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-07 21:57:30
+-- Dump completed on 2021-06-08 16:33:05
