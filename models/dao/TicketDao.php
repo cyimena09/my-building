@@ -75,7 +75,7 @@ class TicketDao extends AbstractDao {
         );
     }
 
-    function instantiateAll($results) {
+    public function instantiateAll($results) {
         $productList = array();
         foreach ($results as $result) {
             array_push($productList, $this->instantiate($result));

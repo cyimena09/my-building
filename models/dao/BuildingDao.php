@@ -43,7 +43,7 @@ class BuildingDao extends AbstractDao {
     }
 
     // Instantiate a animals
-    function instantiate($result) {
+    public function instantiate($result) {
         $person = new Person($result['fk_person'], null, null, null, null, null);
         $race = new Race($result['fk_race'], null);
 

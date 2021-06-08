@@ -32,6 +32,19 @@ class AddressDao extends AbstractDao {
         }
     }
 
+    public function getAddressByUserId($id) {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkUser = ?");
+            $statement->execute([
+                $id
+            ]);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $this->instantiate($result);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
     public function createAddress($data) {
         if (empty($data['street']) ||
             empty($data['houseNumber']) ||
@@ -88,7 +101,7 @@ class AddressDao extends AbstractDao {
             $result['fkUser']);
     }
 
-    function instantiateAll($results) {
+    public function instantiateAll($results) {
         $productList = array();
         foreach ($results as $result) {
             array_push($productList, $this->instantiate($result));

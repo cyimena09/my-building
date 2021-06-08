@@ -1,8 +1,16 @@
 <div id="login" class="page">
     <div class="content-page">
 
+        <!--        Message d'information-->
+        <?php if (!empty($message)): ?>
+            <div class="container-info">
+                <p><?php echo $message ?></p>
+            </div>
+        <?php endif ?>
+
         <h1 style="display: flex; flex-direction: column">
-            <span class="color-turquoise" style="font-size: 36px; font-weight: bold; margin-bottom: 10px">Bienvenue,</span>
+            <span class="color-turquoise"
+                  style="font-size: 36px; font-weight: bold; margin-bottom: 10px">Bienvenue,</span>
             <span>Veuillez vous authentifier</span>
         </h1>
 

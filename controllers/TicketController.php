@@ -31,8 +31,11 @@ class TicketController extends AbstractController {
     }
 
     public function createView () {
+        $user = $this->isLogged();
+        $content = '../views/ticket/create-form.php';
+
         include ('../views/header.php');
-        include ('../views/ticket/create-form.php');
+        include ('../views/user/user-space.php');
         include ('../views/footer.php');
     }
 

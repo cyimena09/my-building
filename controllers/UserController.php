@@ -2,6 +2,7 @@
 
 
 class UserController extends AbstractController {
+
     public function __construct () {
         $this->dao = new UserDao();
     }

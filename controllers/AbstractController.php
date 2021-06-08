@@ -13,6 +13,7 @@ abstract class AbstractController {
 
     public function isLogged() {
         $user = $this->getUser();
+
         if (!$user) {
             include ('../views/header.php');
             include ('../views/auth/login.php');

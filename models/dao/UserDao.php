@@ -40,7 +40,6 @@ class UserDao extends AbstractDao {
             empty($data['gender']) ||
             empty($data['street']) ||
             empty($data['houseNumber']) ||
-            empty($data['boxNumber']) ||
             empty($data['zip']) ||
             empty($data['city']) ||
             empty($data['country']) ||
@@ -105,6 +104,7 @@ class UserDao extends AbstractDao {
                 print $e->getMessage();
                 return false;
             }
+            return true; // si on arrive ici c'est que tout s'est bien passé
     }
 
     public function verify ($data) {
@@ -123,8 +123,10 @@ class UserDao extends AbstractDao {
 
             if ($user) {
                 if (password_verify($data['password'], $user->password)) {
+                    // ajout du token et suppression du mot de passe par sécurité
                     $user = $this->setToken($user);
-                    $user->password = ''; // on retire le mot de passe de l'user par sécurité
+                    $user->password = '';
+
                     return $user;
                 }
             }
@@ -143,12 +145,6 @@ class UserDao extends AbstractDao {
             $result['email'],
             $result['phone'],
             $result['gender'],
-            $result['street'],
-            $result['house_number'],
-            $result['box_number'],
-            $result['zip'],
-            $result['city'],
-            $result['country'],
             $result['role'],
             $result['password']
         );
@@ -191,7 +187,16 @@ class UserDao extends AbstractDao {
             $statement->execute([$session_token]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $result['password'] = ''; // on retire le mot de passe
-            return $this->instantiate($result);
+
+            $user = $this->instantiate($result);
+
+            // on recupère et on ajoute l'adresse de l'utilisateur
+            $addressDao = new AddressDao();
+            $address = $addressDao->getAddressByUserId($user->id);
+            $user->address = $address;
+
+            return $user;
+
         } catch (PDOException $e) {
             print $e->getMessage();
             return false;
