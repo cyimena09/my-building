@@ -23,15 +23,13 @@ DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `address` (
-  `idaddress` int(11) NOT NULL,
+  `idaddress` int(11) NOT NULL AUTO_INCREMENT,
   `street` varchar(100) DEFAULT NULL,
   `house_number` varchar(100) DEFAULT NULL,
   `box_number` varchar(100) DEFAULT NULL,
   `zip` varchar(100) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `country` varchar(100) DEFAULT NULL,
-  `session_token` varchar(100) DEFAULT NULL,
-  `session_time` datetime DEFAULT NULL,
   `fkUser` int(11) DEFAULT NULL,
   `fkTrustee` int(11) DEFAULT NULL,
   `fkApartment` int(11) DEFAULT NULL,
@@ -116,8 +114,6 @@ CREATE TABLE `message` (
   `description` varchar(255) DEFAULT NULL,
   `date_creation` date DEFAULT NULL,
   `last_update` date DEFAULT NULL,
-  `session_token` varchar(100) DEFAULT NULL,
-  `session_time` datetime DEFAULT NULL,
   `fkMessage_Trustee` int(11) NOT NULL,
   `fkMessage_User` int(11) NOT NULL,
   PRIMARY KEY (`idmessage`),
@@ -319,7 +315,7 @@ CREATE TABLE `user` (
   `session_token` varchar(100) DEFAULT NULL,
   `session_time` datetime DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(10) DEFAULT NULL,
+  `role` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

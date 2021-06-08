@@ -13,7 +13,7 @@ class TicketDao extends AbstractDao {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $this->createAll($result);
+            return $this->instantiateAll($result);
         } catch (PDOException $e) {
             print $e->getMessage();
         }
@@ -26,7 +26,7 @@ class TicketDao extends AbstractDao {
                 $id
             ]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->create($result);
+            return $this->instantiate($result);
         } catch (PDOException $e) {
             print $e->getMessage();
         }
@@ -73,6 +73,14 @@ class TicketDao extends AbstractDao {
             !empty($result['date_creation']) ? $result['date_creation'] : null,
             !empty($result['last_update']) ? $result['last_update'] : null
         );
+    }
+
+    function instantiateAll($results) {
+        $productList = array();
+        foreach ($results as $result) {
+            array_push($productList, $this->instantiate($result));
+        }
+        return $productList;
     }
 
 }
