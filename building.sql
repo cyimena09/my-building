@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.5.62, for Win64 (AMD64)
 --
--- Host: localhost    Database: buildings
+-- Host: localhost    Database: building
 -- ------------------------------------------------------
--- Server version	5.5.5-10.5.9-MariaDB
+-- Server version	5.7.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,23 +23,19 @@ DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `address` (
-  `idaddress` int(11) NOT NULL AUTO_INCREMENT,
+  `idAddress` int(11) NOT NULL,
   `street` varchar(100) DEFAULT NULL,
   `house_number` varchar(100) DEFAULT NULL,
   `box_number` varchar(100) DEFAULT NULL,
   `zip` varchar(100) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `country` varchar(100) DEFAULT NULL,
+  `session_token` varchar(100) DEFAULT NULL,
+  `session_time` datetime DEFAULT NULL,
   `fkUser` int(11) DEFAULT NULL,
-  `fkTrustee` int(11) DEFAULT NULL,
-  `fkApartment` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idaddress`),
-  KEY `address_FK_1` (`fkTrustee`),
+  PRIMARY KEY (`idAddress`),
   KEY `address_FK_2` (`fkUser`),
-  KEY `address_FK` (`fkApartment`),
-  CONSTRAINT `address_FK` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idapartment`),
-  CONSTRAINT `address_FK_1` FOREIGN KEY (`fkTrustee`) REFERENCES `trustee` (`idTrustee`),
-  CONSTRAINT `address_FK_2` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`)
+  CONSTRAINT `address_FK` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,9 +56,12 @@ DROP TABLE IF EXISTS `apartment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `apartment` (
-  `idapartment` int(11) NOT NULL AUTO_INCREMENT,
+  `idApartment` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`idapartment`)
+  `fkBuilding` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idApartment`),
+  KEY `apartment_FK` (`fkBuilding`),
+  CONSTRAINT `apartment_FK` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -85,10 +84,7 @@ DROP TABLE IF EXISTS `building`;
 CREATE TABLE `building` (
   `idBuilding` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
-  `fkApartment` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idBuilding`),
-  KEY `building_FK` (`fkApartment`),
-  CONSTRAINT `building_FK` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idapartment`)
+  PRIMARY KEY (`idBuilding`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -109,17 +105,18 @@ DROP TABLE IF EXISTS `message`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `message` (
-  `idmessage` int(11) NOT NULL AUTO_INCREMENT,
+  `idMessage` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
   `date_creation` date DEFAULT NULL,
   `last_update` date DEFAULT NULL,
-  `fkMessage_Trustee` int(11) NOT NULL,
-  `fkMessage_User` int(11) NOT NULL,
-  PRIMARY KEY (`idmessage`),
-  KEY `message_FK_2` (`fkMessage_Trustee`),
-  KEY `message_FK` (`fkMessage_User`),
-  CONSTRAINT `message_FK` FOREIGN KEY (`fkMessage_User`) REFERENCES `user` (`idUser`)
+  `session_token` varchar(100) DEFAULT NULL,
+  `session_time` datetime DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `fkUser` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idMessage`),
+  KEY `message_FK` (`fkUser`),
+  CONSTRAINT `message_FK` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -133,33 +130,6 @@ LOCK TABLES `message` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `message_trustee`
---
-
-DROP TABLE IF EXISTS `message_trustee`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `message_trustee` (
-  `idMessage_Trustee` int(11) NOT NULL AUTO_INCREMENT,
-  `fkTrustee` int(11) DEFAULT NULL,
-  `fkMessage` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idMessage_Trustee`),
-  KEY `message_trustee_FK` (`fkTrustee`),
-  CONSTRAINT `message_trustee_FK` FOREIGN KEY (`fkTrustee`) REFERENCES `trustee` (`idTrustee`),
-  CONSTRAINT `message_trustee_FK_1` FOREIGN KEY (`fkTrustee`) REFERENCES `message` (`idmessage`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `message_trustee`
---
-
-LOCK TABLES `message_trustee` WRITE;
-/*!40000 ALTER TABLE `message_trustee` DISABLE KEYS */;
-/*!40000 ALTER TABLE `message_trustee` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `ticket`
 --
 
@@ -168,10 +138,15 @@ DROP TABLE IF EXISTS `ticket`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ticket` (
   `idTicket` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status` varchar(100) DEFAULT NULL,
   `date_creation` date DEFAULT NULL,
+  `assigned` varchar(100) DEFAULT NULL,
   `last_update` date DEFAULT NULL,
+  `session_token` varchar(100) DEFAULT NULL,
+  `session_time` datetime DEFAULT NULL,
+  `Subject` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idTicket`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -183,34 +158,6 @@ CREATE TABLE `ticket` (
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ticket_trustee`
---
-
-DROP TABLE IF EXISTS `ticket_trustee`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ticket_trustee` (
-  `id_Ticket_Trustee` int(11) NOT NULL,
-  `fkTrustee` int(11) DEFAULT NULL,
-  `fkTicket` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_Ticket_Trustee`),
-  KEY `ticket_trustee_FK_2` (`fkTrustee`),
-  KEY `ticket_trustee_FK` (`fkTicket`),
-  CONSTRAINT `ticket_trustee_FK` FOREIGN KEY (`fkTicket`) REFERENCES `ticket` (`idTicket`),
-  CONSTRAINT `ticket_trustee_FK_2` FOREIGN KEY (`fkTrustee`) REFERENCES `trustee` (`idTrustee`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ticket_trustee`
---
-
-LOCK TABLES `ticket_trustee` WRITE;
-/*!40000 ALTER TABLE `ticket_trustee` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ticket_trustee` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -242,63 +189,6 @@ LOCK TABLES `ticket_user` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `trustee`
---
-
-DROP TABLE IF EXISTS `trustee`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `trustee` (
-  `idTrustee` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(255) DEFAULT NULL,
-  `lastname` varchar(255) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `gender` varchar(1) DEFAULT NULL,
-  `session_token` varchar(100) DEFAULT NULL,
-  `session_time` datetime DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`idTrustee`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `trustee`
---
-
-LOCK TABLES `trustee` WRITE;
-/*!40000 ALTER TABLE `trustee` DISABLE KEYS */;
-/*!40000 ALTER TABLE `trustee` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `trustee_building`
---
-
-DROP TABLE IF EXISTS `trustee_building`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `trustee_building` (
-  `idTrustee_Building` int(11) NOT NULL,
-  `fkTrustee` int(11) NOT NULL,
-  `fkBuilding` int(11) NOT NULL,
-  KEY `trustee_building_FK_1` (`fkBuilding`),
-  KEY `trustee_building_FK` (`fkTrustee`),
-  CONSTRAINT `trustee_building_FK` FOREIGN KEY (`fkTrustee`) REFERENCES `trustee` (`idTrustee`),
-  CONSTRAINT `trustee_building_FK_1` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `trustee_building`
---
-
-LOCK TABLES `trustee_building` WRITE;
-/*!40000 ALTER TABLE `trustee_building` DISABLE KEYS */;
-/*!40000 ALTER TABLE `trustee_building` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `user`
 --
 
@@ -315,7 +205,7 @@ CREATE TABLE `user` (
   `session_token` varchar(100) DEFAULT NULL,
   `session_time` datetime DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(20) DEFAULT NULL,
+  `role` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -339,15 +229,12 @@ DROP TABLE IF EXISTS `user_apartment`;
 CREATE TABLE `user_apartment` (
   `idUser_Apartment` int(11) NOT NULL AUTO_INCREMENT,
   `fkApartment` int(11) DEFAULT NULL,
-  `fkTenant` int(11) DEFAULT NULL,
-  `fkOwner` int(11) DEFAULT NULL,
+  `fkUser` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUser_Apartment`),
   KEY `user_apartment_FK` (`fkApartment`),
-  KEY `user_apartment_FK_1` (`fkTenant`),
-  KEY `user_apartment_FK_2` (`fkOwner`),
-  CONSTRAINT `user_apartment_FK` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idapartment`),
-  CONSTRAINT `user_apartment_FK_1` FOREIGN KEY (`fkTenant`) REFERENCES `user` (`idUser`),
-  CONSTRAINT `user_apartment_FK_2` FOREIGN KEY (`fkOwner`) REFERENCES `user` (`idUser`)
+  KEY `user_apartment_FK_1` (`fkUser`),
+  CONSTRAINT `user_apartment_FK` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idApartment`),
+  CONSTRAINT `user_apartment_FK_1` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -361,7 +248,7 @@ LOCK TABLES `user_apartment` WRITE;
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'buildings'
+-- Dumping routines for database 'building'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -373,4 +260,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-08 16:33:05
+-- Dump completed on 2021-06-09  0:43:03
