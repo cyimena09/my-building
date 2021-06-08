@@ -12,15 +12,12 @@ class Router {
         $this->get = $_GET;
         $this->post = $_POST;
 
-        $this->actions = ['create_form','create', 'edit', 'delete', 'show', 'showAll', 'update', 'store', 'index', 'search', 'addVaccineToAnimal'];
+        $this->actions = ['registerView', 'register', 'loginView', 'login', 'accountView', 'ticketsListView', 'create', 'edit', 'delete', 'show', 'showAll', 'update', 'store', 'index', 'search'];
         $this->controllers = [
             'index' => 'MainController',
-            'animals' => 'AnimalController',
-            'persons' => 'PersonController',
-            'species' => 'SpeciesController',
-            'races' => 'RaceController',
-            'vaccines' => 'VaccineController',
-            'stays' => 'StayController'];
+            'auth' => 'AuthController',
+            'user' => 'UserController',
+            'buildings' => 'BuildingController'];
 
         $this->request = array();
         $this->data = $this->parseURI($_SERVER['REQUEST_URI']);

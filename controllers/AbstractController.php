@@ -1,6 +1,27 @@
 <?php
 
 abstract class AbstractController {
+
+    public function getUser() {
+        if (!isset($_COOKIE['session_token'])) {
+            return false;
+        }
+
+        $userDao = new UserDao();
+        return $userDao->fetchBySession($_COOKIE['session_token']);
+    }
+
+    public function isLogged() {
+        $user = $this->getUser();
+        if (!$user) {
+            include ('../views/header.php');
+            include ('../views/auth/login.php');
+            include ('../views/footer.php');
+            die;
+        }
+        return $user;
+    }
+
     public function create ($id, $data) {
         var_dump('no create');
     }
