@@ -43,7 +43,7 @@ class AuthController extends AbstractController {
     }
 
     public function logout() {
-        unset($_COOKIE['remember_user']);
+        unset($_COOKIE['session_token']);
 
         include ('../views/header.php');
         include ('../views/auth/login.php');
