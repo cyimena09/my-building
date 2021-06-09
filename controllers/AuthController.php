@@ -41,4 +41,14 @@ class AuthController extends AbstractController {
             include ('../views/footer.php');
         }
     }
+
+    public function logout() {
+        unset($_COOKIE['remember_user']);
+
+        include ('../views/header.php');
+        include ('../views/auth/login.php');
+        include ('../views/footer.php');
+    }
+
+
 }

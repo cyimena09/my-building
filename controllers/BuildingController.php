@@ -18,8 +18,8 @@ class BuildingController extends AbstractController {
     }
 
     public function show ($id) {
-        $ticket = $this->dao->getBuildingById($id);
-        $content = '../building/one.php';
+        $building = $this->dao->getBuildingById($id);
+        $content = '../views/building/one.php';
 
         include ('../views/header.php');
         include ('../views/user/user-space.php');
