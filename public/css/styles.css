@@ -53,14 +53,20 @@ li {
 
 /* NOTIFICATION MESSAGE*/
 
-.container-info {
+.container-info, #js-container-info {
     margin-bottom: 30px;
     padding: 15px 10px;
     border-radius: 3px;
+    width: 100%;
+    color: white;
 }
 
 .container-info p {
     color: white;
+}
+
+#js-container-info {
+    display: none;
 }
 
 /* HEADER & FOOTER */

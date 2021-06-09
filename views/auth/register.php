@@ -1,7 +1,9 @@
 <div id="register" class="page">
     <div class="content-page">
 
-        <form action="/auth/register" method="post">
+        <?php include('../views/notification.php'); // communication de notification ?>
+
+        <form id="form-create-user" action="/auth/register" method="post">
             <!--  ********************   TOP PART ********************  -->
             <!--      Radio button -->
             <div class="create-as group">
@@ -104,3 +106,5 @@
 
     </div>
 </div>
+
+<script src="/js/register.js"></script>

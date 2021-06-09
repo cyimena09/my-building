@@ -1,7 +1,7 @@
 <div id="login" class="page">
     <div class="content-page">
 
-       <?php   include('../views/notification.php'); // communication de notification ?>
+       <?php include('../views/notification.php');  ?>
 
         <h1 style="display: flex; flex-direction: column">
             <span class="color-turquoise"

@@ -30,8 +30,6 @@ CREATE TABLE `address` (
   `zip` varchar(100) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `country` varchar(100) DEFAULT NULL,
-  `session_token` varchar(100) DEFAULT NULL,
-  `session_time` datetime DEFAULT NULL,
   `fkUser` int(11) DEFAULT NULL,
   PRIMARY KEY (`idAddress`),
   KEY `address_FK_2` (`fkUser`),
