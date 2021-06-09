@@ -9,7 +9,17 @@ class UserController extends AbstractController {
 
     public function index() {
         $user = $this->isLogged();
-        $content = 'user-account.php';
+        $users = $this->dao->getUsers();
+        $content = 'list.php';
+
+        include ('../views/header.php');
+        include ('../views/user/user-space.php');
+        include ('../views/footer.php');
+    }
+
+    public function show ($id) {
+        $user = $this->dao->getUserById($id);
+        $content = '../views/user/one.php';
 
         include ('../views/header.php');
         include ('../views/user/user-space.php');

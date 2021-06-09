@@ -43,12 +43,24 @@ class AuthController extends AbstractController {
     }
 
     public function logout() {
-        unset($_COOKIE['session_token']);
+        // on supprime le cookie
+        if (isset($_COOKIE['session_token'])) {
+            unset($_COOKIE['session_token']);
+            setcookie('session_token', null, -1, '/');
+        }
 
         include ('../views/header.php');
         include ('../views/auth/login.php');
         include ('../views/footer.php');
     }
 
+    public function accountView() {
+        $user = $this->isLogged();
+        $content = 'user-account.php';
+
+        include ('../views/header.php');
+        include ('../views/user/user-space.php');
+        include ('../views/footer.php');
+    }
 
 }

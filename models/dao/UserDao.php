@@ -13,7 +13,7 @@ class UserDao extends AbstractDao {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $this->createAll($result);
+            return $this->instantiateAll($result);
         } catch (PDOException $e) {
             print $e->getMessage();
         }
@@ -21,12 +21,12 @@ class UserDao extends AbstractDao {
 
     public function getUserById($id) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE id = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE idUser = ?");
             $statement->execute([
                 $id
             ]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->create($result);
+            return $this->instantiate($result);
         } catch (PDOException $e) {
             print $e->getMessage();
         }
@@ -51,6 +51,7 @@ class UserDao extends AbstractDao {
 
         // Enregistrement de l'utilisateur
 
+        // todo utiliser instantiate plutot ?
         $user = new User(
                  !empty($data['id']) ? $data['id'] : 0,
                 $data['firstName'],
@@ -148,6 +149,14 @@ class UserDao extends AbstractDao {
             $result['role'],
             $result['password']
         );
+    }
+
+    public function instantiateAll($results) {
+        $productList = array();
+        foreach ($results as $result) {
+            array_push($productList, $this->instantiate($result));
+        }
+        return $productList;
     }
 
     public function setToken($user) {
