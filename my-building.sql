@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `address` (
-  `idAddress` int(11) NOT NULL,
+  `idAddress` int(11) NOT NULL AUTO_INCREMENT,
   `street` varchar(100) DEFAULT NULL,
   `house_number` varchar(100) DEFAULT NULL,
   `box_number` varchar(100) DEFAULT NULL,
@@ -206,7 +206,7 @@ CREATE TABLE `user` (
   `fkAddress` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   KEY `user_FK` (`fkAddress`),
-  CONSTRAINT `user_FK` FOREIGN KEY (`fkAddress`) REFERENCES `address` (`idAddress`)
+  CONSTRAINT `user_FK` FOREIGN KEY (`fkAddress`) REFERENCES `address` (`idAddress`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -232,4 +232,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-09 21:48:33
+-- Dump completed on 2021-06-09 22:25:54
