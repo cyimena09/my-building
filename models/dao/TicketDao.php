@@ -32,21 +32,24 @@ class TicketDao extends AbstractDao {
         }
     }
 
-    public function getTicketByUserId($id) {
+    public function getTicketsByUserId($id) {
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkUser = ?");
             $statement->execute([
                 $id
             ]);
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->instantiate($result);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $this->instantiateAll($result);
         } catch (PDOException $e) {
             print $e->getMessage();
         }
     }
 
     public function createTicket($data) {
-        if (empty($data['description'])) {
+        if (empty($data['subject']) ||
+            empty($data['description']) ||
+            empty($data['fkUser'])) {
+
             return false;
         }
 
@@ -61,14 +64,16 @@ class TicketDao extends AbstractDao {
         if ($ticket) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (description, status, date_creation, last_update) 
-                                VALUES (?, ?, ?, ?)"
+                    "INSERT INTO {$this->table} (subject, status, description, date_creation, last_update, fkUser) 
+                                VALUES (?, ?, ?, ?, ?, ?)"
                 );
                 $statement->execute([
-                    htmlspecialchars($ticket->__get('description')),
+                    htmlspecialchars($ticket->__get('subject')),
                     htmlspecialchars($ticket->__get('status')),
+                    htmlspecialchars($ticket->__get('description')),
                     htmlspecialchars($ticket->__get('dateCreation')),
-                    htmlspecialchars($ticket->__get('lastUpdate'))
+                    htmlspecialchars($ticket->__get('lastUpdate')),
+                    htmlspecialchars($ticket->__get('fkUser'))
                 ]);
                 return true;
             } catch (PDOException $e) {
@@ -81,10 +86,12 @@ class TicketDao extends AbstractDao {
     public function instantiate ($result) {
         return new Ticket(
             !empty($result['idTicket']) ? $result['idTicket'] : 0,
+            $result['subject'],
+            !empty($result['status']) ? $result['status'] : 'Envoyé',
             $result['description'],
-            !empty($result['status']) ? $result['status'] : 'O',
             !empty($result['date_creation']) ? $result['date_creation'] : null,
-            !empty($result['last_update']) ? $result['last_update'] : null
+            !empty($result['last_update']) ? $result['last_update'] : null,
+            $result['fkUser']
         );
     }
 

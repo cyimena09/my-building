@@ -1,16 +1,16 @@
 <div class="page">
     <div class="content-page">
-        <h1>Créer un nouveau ticket</h1>
-        <form action="/ticket/create">
+        <h1>Envoyer un message</h1>
+        <form action="/message/create">
             <div class="group">
                 <label for="subject"></label>
                 <input id="subject" name="subject" placeholder="Sujet">
             </div>
             <div class="group">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" cols="30" rows="10"></textarea>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" cols="30" rows="10"></textarea>
             </div>
-            <button type="submit">Créer le ticket</button>
+            <button type="submit">Envoyer</button>
         </form>
     </div>
 </div>

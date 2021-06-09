@@ -26,8 +26,19 @@ class MessageController extends AbstractController {
     }
 
     public function create ($id, $data) {
-        $this->dao->createMessage($data);
-        $this->index();
+        $user = $this->isLogged();
+        $data['fkUser'] = $user->id;
+
+        if ($this->dao->createTicket($data)) {
+            $successMessage = 'Le message a bien été envoyé.';
+        } else {
+            $errorMessage = "Désolé, le message n'a pas pu être envoyé.";
+        }
+
+        $content = '../views/message/list.php';
+        include ('../views/header.php');
+        include ('../views/user/user-space.php');
+        include ('../views/footer.php');
     }
 
     public function createView () {

@@ -9,6 +9,7 @@ class TicketController extends AbstractController {
 
     public function index () {
         $user = $this->isLogged();
+        $tickets = $this->dao->getTicketsByUserId($user->id);
         $content = '../views/ticket/list.php';
 
         include ('../views/header.php');
@@ -18,16 +19,27 @@ class TicketController extends AbstractController {
 
     public function show ($id) {
         $ticket = $this->dao->getTicketById($id);
-        $content = '../ticket/one.php';
 
+        $content = '../views/ticket/one.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
     }
 
     public function create ($id, $data) {
-        $this->dao->createTicket($data);
-        $this->index();
+        $user = $this->isLogged();
+        $data['fkUser'] = $user->id;
+
+        if ($this->dao->createTicket($data)) {
+            $successMessage = 'Un nouveau ticket a été créé !';
+        } else {
+            $errorMessage = "Désolé, le ticket n'a pas pu être créé.";
+        }
+
+        $content = '../views/ticket/list.php';
+        include ('../views/header.php');
+        include ('../views/user/user-space.php');
+        include ('../views/footer.php');
     }
 
     public function createView () {

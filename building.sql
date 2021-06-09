@@ -106,13 +106,10 @@ DROP TABLE IF EXISTS `message`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `message` (
   `idMessage` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
   `date_creation` date DEFAULT NULL,
   `last_update` date DEFAULT NULL,
-  `session_token` varchar(100) DEFAULT NULL,
-  `session_time` datetime DEFAULT NULL,
-  `subject` varchar(255) DEFAULT NULL,
   `fkUser` int(11) DEFAULT NULL,
   PRIMARY KEY (`idMessage`),
   KEY `message_FK` (`fkUser`),
@@ -138,15 +135,12 @@ DROP TABLE IF EXISTS `ticket`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ticket` (
   `idTicket` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
   `status` varchar(100) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `date_creation` date DEFAULT NULL,
-  `assigned` varchar(100) DEFAULT NULL,
   `last_update` date DEFAULT NULL,
-  `session_token` varchar(100) DEFAULT NULL,
-  `session_time` datetime DEFAULT NULL,
-  `Subject` varchar(255) DEFAULT NULL,
+  `fkUser` int(11) NOT NULL,
   PRIMARY KEY (`idTicket`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

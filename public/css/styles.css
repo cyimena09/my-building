@@ -43,6 +43,26 @@ li {
     color: #939393;
 }
 
+.bg-success {
+    background-color: #45a045;
+}
+
+.bg-error {
+    background-color: #9b1717;;
+}
+
+/* NOTIFICATION MESSAGE*/
+
+.container-info {
+    margin-bottom: 30px;
+    padding: 15px 10px;
+    border-radius: 3px;
+}
+
+.container-info p {
+    color: white;
+}
+
 /* HEADER & FOOTER */
 
 header .content-page, footer .content-page {
@@ -152,17 +172,6 @@ footer {
 
 #login .content-page {
     width: 550px;
-}
-
-#login .container-info {
-    margin-bottom: 30px;
-    padding: 15px 10px;
-    background-color: #45a045;
-    border-radius: 3px;
-}
-
-#login .container-info p {
-    color: white;
 }
 
 /* FORM */

@@ -1,10 +1,9 @@
 <div id="user-space" class="page">
     <div class="content-page">
-
-        <!-- MENU -->
-        <?php include('user-menu.php'); ?>
-        <!-- CONTENT -->
-        <?php include($content); ?>
-
+        <?php
+        include('user-menu.php'); // menu à droite
+        include('../views/notification.php'); // message de notification
+        include($content); // contenu principal de la page
+        ?>
     </div>
 </div>

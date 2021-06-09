@@ -1,12 +1,7 @@
 <div id="login" class="page">
     <div class="content-page">
 
-        <!--        Message d'information-->
-        <?php if (!empty($message)): ?>
-            <div class="container-info">
-                <p><?php echo $message ?></p>
-            </div>
-        <?php endif ?>
+       <?php   include('../views/notification.php'); // message de notification ?>
 
         <h1 style="display: flex; flex-direction: column">
             <span class="color-turquoise"

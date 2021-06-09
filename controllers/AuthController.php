@@ -15,7 +15,7 @@ class AuthController extends AbstractController {
 
     public function register ($id, $data) {
         if ($this->dao->createUser($data)) {
-            $message = 'Félicitation, votre compte a bien été créé !';
+            $successMessage = 'Félicitation, votre compte a bien été créé !';
             include ('../views/header.php');
             include ('../views/auth/login.php');
             include ('../views/footer.php');
@@ -35,7 +35,10 @@ class AuthController extends AbstractController {
             $url = $data['route'] ? $data['route'] : '/user';
             header("Location:{$url}");
         } else {
-            echo "Erreur au login";
+            $errorMessage = 'Email ou mot de passe incorrect !';
+            include ('../views/header.php');
+            include ('../views/auth/login.php');
+            include ('../views/footer.php');
         }
     }
 }
