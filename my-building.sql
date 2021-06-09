@@ -205,6 +205,7 @@ CREATE TABLE `user` (
   `role` varchar(10) DEFAULT NULL,
   `fkAddress` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
+  UNIQUE KEY `user_un` (`email`),
   KEY `user_FK` (`fkAddress`),
   CONSTRAINT `user_FK` FOREIGN KEY (`fkAddress`) REFERENCES `address` (`idAddress`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -232,4 +233,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-09 22:25:54
+-- Dump completed on 2021-06-09 22:32:18
