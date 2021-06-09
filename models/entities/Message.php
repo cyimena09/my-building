@@ -3,21 +3,19 @@
 
 class Message {
     private $id;
-    private $name;
-    private $description;
+    private $subject;
+    private $message;
+    private $authorId;
     private $dateCreation;
     private $lastUpdate;
-    private $sessionToken;
-    private $sessionTime;
 
-    public function __construct($id, $name, $description, $dateCreation, $lastUpdate, $sessionToken, $sessionTime) {
+    public function __construct($id, $subject, $message, $authorId, $dateCreation, $lastUpdate) {
         $this->id = $id;
-        $this->name = $name;
-        $this->description = $description;
+        $this->subject = $subject;
+        $this->message = $message;
+        $this->authorId = $authorId;
         $this->dateCreation = $dateCreation;
         $this->lastUpdate = $lastUpdate;
-        $this->sessionToken = $sessionToken;
-        $this->sessionTime = $sessionTime;
     }
 
     public function __get($prop) {
