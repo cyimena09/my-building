@@ -1,6 +1,6 @@
 <div>
-    <h1>Information sur votre compte</h1>
-    <form action="">
+    <h1>Communication</h1>
+    <form action="" method="post">
         <div class="group">
             <label for="id"></label>
             <input id="id" type="text" placeholder="Numéro de ticket" name="id"

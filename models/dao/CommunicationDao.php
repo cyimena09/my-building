@@ -1,14 +1,14 @@
 <?php
 
 
-class MessageDao extends AbstractDao {
+class CommunicationDao extends AbstractDao {
 
     public function __construct() {
         // call parent constructor (AbstractDAO)
-        parent::__construct('message');
+        parent::__construct('communication');
     }
 
-    public function getMessages() {
+    public function getCommunications() {
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
             $statement->execute();
@@ -19,9 +19,9 @@ class MessageDao extends AbstractDao {
         }
     }
 
-    public function getMessageById($id) {
+    public function getCommunicationById($id) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE idMessage = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE idCommunication = ?");
             $statement->execute([
                 $id
             ]);
@@ -32,34 +32,49 @@ class MessageDao extends AbstractDao {
         }
     }
 
-    public function createMessage($data) {
+    public function getCommunicationsByBuildingId($id) {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
+            $statement->execute(
+                [
+                    $id
+                ]
+            );
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $this->instantiateAll($result);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
+    public function createCommunication($data) {
         if (empty($data['subject']) ||
             empty($data['message']) ||
-            empty($data['authorId'])) {
+            empty($data['fkBuilding'])) {
 
             return false;
         }
 
-        $message = $this->instantiate($data);
+        $communication = $this->instantiate($data);
 
         // on ajoute la date de création et de mise à jour qui sont identique lors de la création
         $currentDate = date('Y-m-d H:i:s');
 
-        $message->dateCreation = $currentDate;
-        $message->lastUpdate = $currentDate;
+        $communication->dateCreation = $currentDate;
+        $communication->lastUpdate = $currentDate;
 
-        if ($message) {
+        if ($communication) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (subject, message, date_creation, last_update, authorId) 
+                    "INSERT INTO {$this->table} (subject, message, date_creation, last_update, fkBuilding) 
                                 VALUES (?, ?, ?, ?, ?)"
                 );
                 $statement->execute([
-                    htmlspecialchars($message->__get('subject')),
-                    htmlspecialchars($message->__get('message')),
-                    htmlspecialchars($message->__get('dateCreation')),
-                    htmlspecialchars($message->__get('lastUpdate')),
-                    htmlspecialchars($message->__get('authorId'))
+                    htmlspecialchars($communication->__get('subject')),
+                    htmlspecialchars($communication->__get('message')),
+                    htmlspecialchars($communication->__get('dateCreation')),
+                    htmlspecialchars($communication->__get('lastUpdate')),
+                    htmlspecialchars($communication->__get('fkBuilding'))
                 ]);
                 return true;
             } catch (PDOException $e) {
@@ -70,13 +85,13 @@ class MessageDao extends AbstractDao {
     }
 
     public function instantiate ($result) {
-        return new Message(
-            !empty($result['idTicket']) ? $result['idTicket'] : 0,
+        return new Communication(
+            !empty($result['idCommunication']) ? $result['idCommunication'] : 0,
             $result['subject'],
             $result['message'],
             !empty($result['date_creation']) ? $result['date_creation'] : null,
             !empty($result['last_update']) ? $result['last_update'] : null,
-            $result['authorId']);
+            $result['fkBuilding']);
     }
 
     public function instantiateAll($results) {

@@ -1,21 +1,21 @@
 <?php
 
 
-class Message {
+class Communication {
     private $id;
     private $subject;
     private $message;
     private $dateCreation;
     private $lastUpdate;
-    private $fkUser;
+    private $fkBuilding;
 
-    public function __construct($id, $subject, $message, $dateCreation, $lastUpdate, $fkUser) {
+    public function __construct($id, $subject, $message, $dateCreation, $lastUpdate, $fkBuilding) {
         $this->id = $id;
         $this->subject = $subject;
         $this->message = $message;
         $this->dateCreation = $dateCreation;
         $this->lastUpdate = $lastUpdate;
-        $this->fkUser = $fkUser;
+        $this->fkBuilding = $fkBuilding;
     }
 
     public function __get($prop) {

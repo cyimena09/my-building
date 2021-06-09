@@ -1,7 +1,7 @@
 <div class="page">
     <div class="content-page">
-        <h1>Envoyer un message</h1>
-        <form action="/message/create">
+        <h1>Envoyer une communication</h1>
+        <form action="/communication/create" method="post">
             <div class="group">
                 <label for="subject"></label>
                 <input id="subject" name="subject" placeholder="Sujet">

@@ -1,7 +1,7 @@
 <div class="page">
     <div class="content-page">
         <h1>Ajouter un nouvel immeuble</h1>
-        <form action="/building/create">
+        <form action="/building/create" method="post">
             <div class="group">
                 <label for="name"></label>
                 <input id="name" type="text" placeholder="Nom de l'immeuble" name="name">

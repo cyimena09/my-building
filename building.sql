@@ -98,32 +98,32 @@ LOCK TABLES `building` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `message`
+-- Table structure for table `communication`
 --
 
-DROP TABLE IF EXISTS `message`;
+DROP TABLE IF EXISTS `communication`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `message` (
-  `idMessage` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `communication` (
+  `idCommunication` int(11) NOT NULL AUTO_INCREMENT,
   `subject` varchar(255) DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
   `date_creation` date DEFAULT NULL,
   `last_update` date DEFAULT NULL,
-  `fkUser` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idMessage`),
-  KEY `message_FK` (`fkUser`),
-  CONSTRAINT `message_FK` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE
+  `fkBuilding` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idCommunication`),
+  KEY `communication_FK` (`fkBuilding`),
+  CONSTRAINT `communication_FK` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `message`
+-- Dumping data for table `communication`
 --
 
-LOCK TABLES `message` WRITE;
-/*!40000 ALTER TABLE `message` DISABLE KEYS */;
-/*!40000 ALTER TABLE `message` ENABLE KEYS */;
+LOCK TABLES `communication` WRITE;
+/*!40000 ALTER TABLE `communication` DISABLE KEYS */;
+/*!40000 ALTER TABLE `communication` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

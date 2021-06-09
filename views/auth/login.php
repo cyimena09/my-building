@@ -1,7 +1,7 @@
 <div id="login" class="page">
     <div class="content-page">
 
-       <?php   include('../views/notification.php'); // message de notification ?>
+       <?php   include('../views/notification.php'); // communication de notification ?>
 
         <h1 style="display: flex; flex-direction: column">
             <span class="color-turquoise"
@@ -9,7 +9,7 @@
             <span>Veuillez vous authentifier</span>
         </h1>
 
-        <form action="/auth/login">
+        <form action="/auth/login" method="post">
             <div class="group">
                 <label for="email"></label>
                 <input id="email" type="text" placeholder="Email" name="email">

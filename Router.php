@@ -20,7 +20,7 @@ class Router {
             'building' => 'BuildingController',
             'apartment' => 'ApartmentController',
             'ticket' => 'TicketController',
-            'message' => 'MessageController',];
+            'communication' => 'CommunicationController',];
 
         $this->request = array();
         $this->data = $this->parseURI($_SERVER['REQUEST_URI']);

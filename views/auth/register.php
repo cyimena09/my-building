@@ -1,7 +1,7 @@
 <div id="register" class="page">
     <div class="content-page">
 
-        <form action="/auth/register">
+        <form action="/auth/register" method="post">
             <!--  ********************   TOP PART ********************  -->
             <!--      Radio button -->
             <div class="create-as group">

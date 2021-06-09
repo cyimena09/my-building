@@ -9,4 +9,4 @@ VALUES
 
 
 
-INSERT INTO apartment(name) Values ('La Belle Etoile')
+INSERT INTO building(name) Values ('La Belle Etoile')

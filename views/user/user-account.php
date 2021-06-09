@@ -1,7 +1,7 @@
 <div>
     <h1>Information sur votre compte</h1>
 
-    <form action="">
+    <form action="" method="post">
         <div class="group">
             <label for="firstname"></label>
             <input id="firstname" type="text" placeholder="Prénom" name="firstname"
