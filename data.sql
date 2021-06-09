@@ -65,8 +65,8 @@ VALUES
 ('Sujet Building B', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 2),
 ('Sujet Building C', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3),
 ('Sujet Building D', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 4),
-('Sujet Building E', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 5),
-('Sujet Building F', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 6),
+('Sujet Building E', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 4),
+('Sujet Building F', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 4),
 ('Sujet Building A', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 1),
 ('Sujet Building A', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 1),
 ('Sujet Building A', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 1);
