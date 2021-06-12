@@ -106,6 +106,7 @@ class UserDao extends AbstractDao {
             return false;
         }
 
+        var_dump($data);
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE email = ?");
             $statement->execute([
@@ -140,6 +141,7 @@ class UserDao extends AbstractDao {
             $result['phone'],
             $result['gender'],
             $result['role'],
+            $result['fkApartment'],
             $result['password']
         );
     }

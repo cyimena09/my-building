@@ -45,39 +45,6 @@
             </div>
         </div>
 
-        <!--  Address  -->
-        <div class="group">
-            <label for="street"></label>
-            <input id="street" type="text" placeholder="Rue" name="street" value="<?= $user->address->street; ?>">
-        </div>
-
-        <div class="group">
-            <label for="houseNumber"></label>
-            <input id="houseNumber" type="text" placeholder="Nom" name="houseNumber"
-                   value="<?= $user->address->houseNumber; ?>">
-        </div>
-
-        <div class="group">
-            <label for="boxNumber"></label>
-            <input id="boxNumber" type="text" placeholder="Boite" name="boxNumber"
-                   value="<?= $user->address->boxNumber; ?>">
-        </div>
-
-        <div class="group">
-            <label for="zip"></label>
-            <input id="zip" type="text" placeholder="Code postal" name="zip" value="<?= $user->address->zip; ?>">
-        </div>
-
-        <div class="group">
-            <label for="city"></label>
-            <input id="city" type="text" placeholder="Ville" name="city" value="<?= $user->address->city; ?>">
-        </div>
-
-        <div class="group">
-            <label for="country"></label>
-            <input id="country" type="text" placeholder="Pays" name="country" value="<?= $user->address->country; ?>">
-        </div>
-
         <button>Mettre à jour</button>
     </form>
 
