@@ -31,6 +31,8 @@ class UserDao extends AbstractDao {
             $addressDao = new AddressDao();
             $userAddress = $addressDao->getAddressById($user->id);
             $user->address = $userAddress;
+
+            return $user;
         } catch (PDOException $e) {
             print $e->getMessage();
         }

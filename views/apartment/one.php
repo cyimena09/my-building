@@ -10,8 +10,17 @@
         <button>Mettre à jour</button>
     </form>
 
+    <!-- Propriétaire de l'appartement-->
+    <h2>Propriétaire de l'appartement</h2>
+    <p>Prénom : <?= $owner->__get('firstName'); ?> </p>
+    <p>Nom : <?= $owner->__get('lastName'); ?></p>
+
+    <div class="actions">
+        <a href="/user/show/<?= $owner->__get('id'); ?>">Voir</a>
+    </div>
+
     <!-- Locataire de l'appartement -->
-    <h2>Ses appartements</h2>
+    <h2>Locataire de l'appartement</h2>
     <table>
         <thead>
         <tr>
@@ -31,7 +40,7 @@
                     <td><?= $tenant->__get('lastName'); ?></td>
                     <td>
                         <a href="/user/show/<?= $tenant->__get('id'); ?>">Voir</a>
-                        <a href="/user/delete/<?= $tenant->__get('id'); ?>">Voir</a>
+                        <a href="/user/delete/<?= $tenant->__get('id'); ?>">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

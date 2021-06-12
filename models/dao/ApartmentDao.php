@@ -71,7 +71,9 @@ class ApartmentDao extends AbstractDao {
     public function instantiate ($result) {
         return new Apartment(
             !empty($result['idApartment']) ? $result['idApartment'] : 0,
-            $result['name']
+            $result['name'],
+            $result['fkOwner'],
+            $result['fkBuilding']
         );
     }
 

@@ -18,8 +18,8 @@ VALUES
 -- User
 INSERT INTO user(firstname, lastname, email, phone, gender, role, password, fkAddress, fkApartment )
 VALUES
-('Emile', 'Cyimena', 'cyimena09@hotmail.com', '0484090853', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 1, 1),
-('Benoit', 'Vankoningsloo', 'benoit@hotmail.com', '0477213465', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 2, 1),
+('Emile', 'Cyimena', 'cyimena09@hotmail.com', '0484090853', 'M', 'SYNDIC', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 1, null),
+('Benoit', 'Vankoningsloo', 'benoit@hotmail.com', '0477213465', 'M', 'SYNDIC', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 2, 1),
 ('Amaury', 'Cyemezo', 'cyemezo@hotmail.com', '0499591245', 'M', 'SYNDIC', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 3, 1),
 ('Alice', 'Malaika', 'malaika@hotmail.com', '0476134465', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 4, 1),
 ('Mike', 'Francois', 'mike@hotmail.com', '0488124678', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 5, 2),
