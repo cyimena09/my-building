@@ -55,7 +55,7 @@ $(document).ready(function () {
         // si on ne peut pas récupérer le fkApartment c'est qu'aucun immeuble n'a été sélectionné
         let fkApartment;
         try {
-            let fkApartment = document.forms["form-create-user"]["fkApartment"].value;
+            fkApartment = document.forms["form-create-user"]["fkApartment"].value;
         } catch (error) {
             containerInfo.style.display = 'block';
             containerInfo.innerText = "Veuillez choisir une résidence.";
@@ -92,14 +92,14 @@ $(document).ready(function () {
         }
 
         let data = {
-            role: role,
             firstName: firstName ,
             lastName: lastName ,
-            phone: phone,
             email: email,
-            password: password,
+            phone: phone,
             gender: gender,
-            fkApartment: fkApartment
+            role: role,
+            fkApartment: fkApartment,
+            password: password
         }
 
         $.post('/auth/register', data, function () {
