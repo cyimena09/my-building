@@ -37,7 +37,7 @@ class CommunicationController extends AbstractController {
             $errorMessage = "Désolé, le communication n'a pas pu être envoyé.";
         }
 
-        // on récupère l'id pour retourner le formulaire meme formulaire pour des ajouts multiple
+        // on récupère l'id de l'immeuble pour retourner le meme formulaire et permettre des ajouts multiples
         $idBuilding = $data['fkBuilding'];
 
         $content = '../views/communication/create-form.php';

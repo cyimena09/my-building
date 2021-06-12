@@ -40,7 +40,8 @@
     </form>
 
     <!-- Liste des appartements de l'immeuble-->
-    <h2>Ses appartements</h2>
+    <a href="/apartment/createView?idBuilding=<?= $building->__get('id'); ?>">Ajouter un nouvel appartement</a>
+    <h2>Appartements de l'immeuble</h2>
     <table>
         <thead>
         <tr>

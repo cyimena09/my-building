@@ -19,6 +19,23 @@ class BuildingDao extends AbstractDao {
         }
     }
 
+    /**
+     * Récupères tous les immeubles et leurs appartements
+     */
+    public function getBuildingsWithApartments() {
+        $apartmentDao = new ApartmentDao();
+
+        // Etape 1 : on récupère tous les immeubles
+        $buildings = $this->getBuildings();
+
+        foreach ($buildings as $building) {
+            $apartments = $apartmentDao->getApartmentsByBuildingId($building->id);
+            $building->apartments = $apartments;
+        }
+
+        return $buildings;
+    }
+
     public function getBuildingById($id) {
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE idBuilding = ?");

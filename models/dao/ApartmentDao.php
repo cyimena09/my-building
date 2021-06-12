@@ -46,7 +46,9 @@ class ApartmentDao extends AbstractDao {
     }
 
     public function createApartment($data) {
-        if (empty($data['name'])) {
+        if (empty($data['name']) ||
+            empty($data['fkBuilding'])) {
+
             return false;
         }
 
@@ -55,10 +57,11 @@ class ApartmentDao extends AbstractDao {
         if ($apartment) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (name) VALUES (?)"
+                    "INSERT INTO {$this->table} (name, fkBuilding) VALUES (?, ?)"
                 );
                 $statement->execute([
                     htmlspecialchars($apartment->__get('name')),
+                    htmlspecialchars($apartment->__get('idBuilding')),
                 ]);
                 return true;
             } catch (PDOException $e) {
@@ -72,7 +75,7 @@ class ApartmentDao extends AbstractDao {
         return new Apartment(
             !empty($result['idApartment']) ? $result['idApartment'] : 0,
             $result['name'],
-            $result['fkOwner'],
+            !empty($result['fkOwner']) ? $result['fkOwner'] : null,
             $result['fkBuilding']
         );
     }

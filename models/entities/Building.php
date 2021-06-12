@@ -5,6 +5,7 @@ class Building {
     private $id;
     private $name;
     private $address;
+    private $apartments;
 
     public function __construct($id, $name) {
         $this->id = $id;
