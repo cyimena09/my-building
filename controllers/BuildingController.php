@@ -21,9 +21,15 @@ class BuildingController extends AbstractController {
         $user = $this->isLogged();
         $building = $this->dao->getBuildingById($id);
 
-        // on récupère les appartments de l'immeuble
+        // récupération des appartments
         $apartmentDao = new ApartmentDao();
         $apartments = $apartmentDao->getApartmentsByBuildingId($building->id);
+        // récupération des communications
+        $communicationDao = new communicationDao();
+        $communications = $communicationDao->getCommunicationsByBuildingId($building->id);
+        // récupération des tickets
+        $ticketDao = new ticketDao();
+        $tickets = $ticketDao->getTicketsByBuildingId($building->id);
 
         $content = '../views/building/one.php';
         include ('../views/header.php');

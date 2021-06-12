@@ -10,6 +10,11 @@
                 <label for="message">Message</label>
                 <textarea id="message" name="message" cols="30" rows="10"></textarea>
             </div>
+            <?php if (isset($_GET['idBuilding'])): ?>
+                <input type="hidden" name="fkBuilding" value="<?= $_GET['idBuilding']; ?>">
+            <?php elseif (!empty($idBuilding)): ?>
+                <input type="hidden" name="fkBuilding" value="<?= $idBuilding; ?>">
+            <?php endif; ?>
             <button type="submit">Envoyer</button>
         </form>
     </div>

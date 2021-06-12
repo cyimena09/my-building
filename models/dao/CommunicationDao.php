@@ -34,9 +34,8 @@ class CommunicationDao extends AbstractDao {
 
     public function getCommunicationsByBuildingId($id) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
-            $statement->execute(
-                [
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkBuilding = ?");
+            $statement->execute([
                     $id
                 ]
             );
@@ -74,7 +73,7 @@ class CommunicationDao extends AbstractDao {
                     htmlspecialchars($communication->__get('message')),
                     htmlspecialchars($communication->__get('dateCreation')),
                     htmlspecialchars($communication->__get('lastUpdate')),
-                    htmlspecialchars($communication->__get('fkBuilding'))
+                    htmlspecialchars($communication->__get('idBuilding'))
                 ]);
                 return true;
             } catch (PDOException $e) {

@@ -144,6 +144,7 @@ CREATE TABLE `ticket` (
   `date_creation` date DEFAULT NULL,
   `last_update` date DEFAULT NULL,
   `fkUser` int(11) NOT NULL,
+  `fkBuilding` int(11) NOT NULL,
   PRIMARY KEY (`idTicket`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

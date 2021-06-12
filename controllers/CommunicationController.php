@@ -7,19 +7,20 @@ class CommunicationController extends AbstractController {
         $this->dao = new CommunicationDao();
     }
 
-    public function index () {
-        $user = $this->isLogged();
-        // todo a terminer
-        $communications = $this->dao->getCommunicationsByBuildingId(1);
-
-        $content = '../views/communication/list.php';
-        include ('../views/header.php');
-        include ('../views/user/user-space.php');
-        include ('../views/footer.php');
-    }
+//    public function index () {
+//        $user = $this->isLogged();
+//        // todo a terminer
+//        $communications = $this->dao->getCommunicationsByBuildingId(1);
+//
+//        $content = '../views/communication/list.php';
+//        include ('../views/header.php');
+//        include ('../views/user/user-space.php');
+//        include ('../views/footer.php');
+//    }
 
     public function show ($id) {
-        $ticket = $this->dao->getCommunicationById($id);
+        $user = $this->isLogged();
+        $communication = $this->dao->getCommunicationById($id);
 
         $content = '../views/communication/one.php';
         include ('../views/header.php');
@@ -29,8 +30,6 @@ class CommunicationController extends AbstractController {
 
     public function create ($id, $data) {
         $user = $this->isLogged();
-        $data['fkUser'] = $user->id;
-        $data['fkBuilding'] = 1;
 
         if ($this->dao->createCommunication($data)) {
             $successMessage = 'Le communication a bien été envoyé.';
@@ -38,7 +37,10 @@ class CommunicationController extends AbstractController {
             $errorMessage = "Désolé, le communication n'a pas pu être envoyé.";
         }
 
-        $content = '../views/communication/list.php';
+        // on récupère l'id pour retourner le formulaire meme formulaire pour des ajouts multiple
+        $idBuilding = $data['fkBuilding'];
+
+        $content = '../views/communication/create-form.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');

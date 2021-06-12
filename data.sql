@@ -68,3 +68,17 @@ VALUES
 ('Sujet Building A', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 1),
 ('Sujet Building A', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 1),
 ('Sujet Building A', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 1);
+
+-- Ticket
+INSERT INTO ticket(subject, status, description, date_creation, last_update, fkUser, fkBuilding)
+VALUES
+('Ticket Building A', 'WAITING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3, 1),
+('Ticket Building A', 'WAITING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3, 1),
+('Ticket Building B', 'WAITING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3, 2),
+('Ticket Building C', 'WAITING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3, 3),
+('Ticket Building D', 'WAITING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3, 4),
+('Ticket Building E', 'WAITING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3, 4),
+('Ticket Building F', 'WAITING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3, 4),
+('Ticket Building A', 'WAITING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3, 1),
+('Ticket Building A', 'WAITING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3, 1),
+('Ticket Building A', 'WAITING', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?', '2021-05-24', '2021-05-24', 3, 1);

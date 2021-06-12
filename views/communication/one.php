@@ -1,26 +1,20 @@
 <div>
     <h1>Communication</h1>
+
     <form action="" method="post">
-        <div class="group">
-            <label for="id"></label>
-            <input id="id" type="text" placeholder="Numéro de ticket" name="id"
-                   value="<?= $ticket->id ?>">
-        </div>
         <div class="group">
             <label for="subject"></label>
             <input id="subject" type="text" placeholder="Sujet" name="subject"
-                   value="<?= $ticket->subject ?>">
+                   value="<?= $communication->subject ?>">
         </div>
         <div class="group">
-            <p>Date de création : <?= $ticket->dateCreation ?></p>
-            <p>Dernière mise à jour : <?= $ticket->lastUpdate ?></p>
+            <p>Date de création : <?= $communication->dateCreation ?></p>
+            <p>Dernière mise à jour : <?= $communication->lastUpdate ?></p>
         </div>
+
         <div class="group">
-            <p>Statut : <?= $ticket->status ?></p>
-        </div>
-        <div class="group">
-            <label for="description"></label>
-            <textarea id="description" name="description" cols="30" rows="10" placeholder="Description"><?= $ticket->description ?></textarea>
+            <label for="message"></label>
+            <textarea id="message" name="message" cols="30" rows="10" placeholder="Message"><?= $communication->message ?></textarea>
         </div>
         <button>Mettre à jour</button>
     </form>
