@@ -57,35 +57,30 @@ class UserDao extends AbstractDao {
             empty($data['email']) ||
             empty($data['phone']) ||
             empty($data['gender']) ||
-            empty($data['street']) ||
-            empty($data['houseNumber']) ||
-            empty($data['zip']) ||
-            empty($data['city']) ||
-            empty($data['country']) ||
+            empty($data['fkApartment']) ||
             empty($data['role']) ||
             empty($data['password'])) {
 
             return false;
         }
 
-        // Enregistrement de l'utilisateur
-
         // todo utiliser instantiate plutot ?
         $user = new User(
-                 !empty($data['id']) ? $data['id'] : 0,
+            !empty($data['id']) ? $data['id'] : 0,
                 $data['firstName'],
                 $data['lastName'],
                 $data['email'],
                 $data['phone'],
                 $data['gender'],
                 $data['role'],
+                $data['fkApartment'],
                 password_hash($data['password'], PASSWORD_DEFAULT));
 
         if ($user) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (firstname, lastname, email, phone, gender, role, password) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO {$this->table} (firstname, lastname, email, phone, gender, role, password, fkApartment) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
                 );
                 $statement->execute([
                     htmlspecialchars($user->__get('firstName')),
@@ -94,37 +89,16 @@ class UserDao extends AbstractDao {
                     htmlspecialchars($user->__get('phone')),
                     htmlspecialchars($user->__get('gender')),
                     htmlspecialchars($user->__get('role')),
-                    htmlspecialchars($user->__get('password'))
+                    htmlspecialchars($user->__get('password')),
+                    htmlspecialchars($user->__get('idApartment'))
                 ]);
 
-                // on récupère l'id de l'utilisateur créé et ensuite on insert l'adresse
-                $lastInsertedId = $this->connection->lastInsertId();
+                return true;
             } catch (PDOException $e) {
                 print $e->getMessage();
                 return false;
             }
         }
-
-        // Enregistrement de l'adresse de l'utilisateur
-
-        $data = [
-            "street" => $data['street'],
-            "houseNumber" => $data['houseNumber'],
-            "boxNumber" => $data['boxNumber'],
-            "zip" => $data['zip'],
-            "city" => $data['city'],
-            "country" => $data['country'],
-            "userId" => $lastInsertedId
-        ];
-
-            $addressDao = new AddressDao();
-            try {
-                $addressDao->createAddress($data);
-            } catch (PDOException $e) {
-                print $e->getMessage();
-                return false;
-            }
-            return true; // si on arrive ici c'est que tout s'est bien passé
     }
 
     public function verify ($data) {

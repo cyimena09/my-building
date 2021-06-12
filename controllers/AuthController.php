@@ -8,6 +8,9 @@ class AuthController extends AbstractController {
     }
 
     public function registerView () {
+        $buildingDao = new BuildingDao();
+        $buildings = $buildingDao->getBuildings();
+
         include ('../views/header.php');
         include ('../views/auth/register.php');
         include ('../views/footer.php');

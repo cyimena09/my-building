@@ -72,28 +72,16 @@
                 <!--  Right  -->
                 <div class="right">
                     <div class="group">
-                        <label for="street"></label>
-                        <input id="street" type="text" placeholder="Rue" name="street">
+                        <label class="label" for="fkBuilding">Choisissez votre résidence</label>
+                        <select name="fkBuilding" id="fkBuilding">
+                            <?php foreach ($buildings as $building): ?>
+                                <option value="<?= $building->__get('id'); ?>"><?= $building->__get('name'); ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
-                    <div class="group">
-                        <label for="houseNumber"></label>
-                        <input id="houseNumber" type="text" placeholder="Numéro" name="houseNumber">
-                    </div>
-                    <div class="group">
-                        <label for="boxNumber"></label>
-                        <input id="boxNumber" type="text" placeholder="Boite" name="boxNumber">
-                    </div>
-                    <div class="group">
-                        <label for="zip"></label>
-                        <input id="zip" type="text" placeholder="Code postal" name="zip">
-                    </div>
-                    <div class="group">
-                        <label for="city"></label>
-                        <input id="city" type="text" placeholder="Ville" name="city">
-                    </div>
-                    <div class="group">
-                        <label for="country"></label>
-                        <input id="country" type="text" placeholder="Pays" name="country">
+
+                    <div id="js-result" style="visibility: hidden">
+
                     </div>
                 </div>
             </div>

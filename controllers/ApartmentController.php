@@ -59,4 +59,15 @@ class ApartmentController extends AbstractController {
         include ('../views/footer.php');
     }
 
+    /**
+     * Affiche une liste déroulante d'appartements en fonction de l'id contenu dans le paramètre data
+     * @param $id
+     * @param $data
+     */
+    public function dropdown($id, $data) {
+        $apartments = $this->dao->getApartmentsByBuildingId($data['idBuilding']);
+
+        include ('../views/apartment/dropdown.php');
+    }
+
 }

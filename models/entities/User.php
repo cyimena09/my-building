@@ -8,13 +8,13 @@ class User {
     private $email;
     private $phone;
     private $gender;
-    private $address;
     private $role;
+    private $idApartment;
     private $password;
     private $sessionToken;
     private $sessionTime;
 
-    public function __construct($id, $firstName, $lastName, $email, $phone, $gender, $role, $password = false, $sessionToken = false, $sessionTime = false) {
+    public function __construct($id, $firstName, $lastName, $email, $phone, $gender, $role, $idApartment, $password = false, $sessionToken = false, $sessionTime = false) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -22,6 +22,7 @@ class User {
         $this->phone = $phone;
         $this->gender = $gender;
         $this->role = $role;
+        $this->idApartment = $idApartment;
         $this->password = $password;
         $this->sessionToken = $sessionToken;
         $this->sessionTime = $sessionTime;

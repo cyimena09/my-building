@@ -1,6 +1,39 @@
 $(document).ready(function () {
 
     /* *****************************************************************************************
+      * -----------------------  AFFICHE LISTE DES APPARTEMENTS --------------------------------
+      *  *****************************************************************************************
+      * */
+
+        let select = document.getElementById('fkBuilding'); // element declencheur
+        let container = document.getElementById('js-result'); // container du resultat
+
+
+        select.addEventListener('click', function(e) {
+            $('#dropdown-apartment').remove(); // on retire l'ancienne liste si elle existe
+            container.style.visibility = 'visible';
+
+            let idBuilding = select.value; // récupération de l'id de l'immeuble
+
+            let data = {
+                idBuilding: idBuilding
+            }
+
+            $.post('/apartment/dropdown/', data, function () {
+
+            })
+                .done(function (result) {
+                    if (result) {
+                        $('#js-result').append(result) // on ajoute l'animal dans le container
+                    }
+                })
+                .fail(function (error) {
+                    console.log('error', error);
+                });
+        });
+
+
+    /* *****************************************************************************************
     * ------------------------------  CREER UTILISATEUR -----------------------------------
     *  *****************************************************************************************
     * */
@@ -18,13 +51,16 @@ $(document).ready(function () {
         let email = document.forms["form-create-user"]["email"].value;
         let password = document.forms["form-create-user"]["password"].value;
         let gender = document.forms["form-create-user"]["gender"].value;
-        // address
-        let street = document.forms["form-create-user"]["street"].value;
-        let houseNumber = document.forms["form-create-user"]["houseNumber"].value;
-        let boxNumber = document.forms["form-create-user"]["boxNumber"].value;
-        let zip = document.forms["form-create-user"]["zip"].value;
-        let city = document.forms["form-create-user"]["city"].value;
-        let country = document.forms["form-create-user"]["country"].value;
+
+        // si on ne peut pas récupérer le fkApartment c'est qu'aucun immeuble n'a été sélectionné
+        let fkApartment;
+        try {
+            let fkApartment = document.forms["form-create-user"]["fkApartment"].value;
+        } catch (error) {
+            containerInfo.style.display = 'block';
+            containerInfo.innerText = "Veuillez choisir une résidence.";
+            return;
+        }
 
         // On vérifie que tous les champs ont été encodé
         if (role == "" ||
@@ -34,12 +70,7 @@ $(document).ready(function () {
             email == "" ||
             password == "" ||
             gender == "" ||
-            street == "" ||
-            houseNumber == "" ||
-            boxNumber == "" ||
-            zip == "" ||
-            city == "" ||
-            country == "") {
+            fkApartment == "") {
 
             containerInfo.style.display = 'block';
             containerInfo.innerText = "Veuillez encoder tous les champs !";
@@ -68,12 +99,7 @@ $(document).ready(function () {
             email: email,
             password: password,
             gender: gender,
-            street: street ,
-            houseNumber: houseNumber ,
-            boxNumber: boxNumber,
-            zip: zip,
-            city: city,
-            country: country,
+            fkApartment: fkApartment
         }
 
         $.post('/auth/register', data, function () {
@@ -81,7 +107,7 @@ $(document).ready(function () {
         })
             .done(function (e) {
                 const successMessage =  encodeURI('Félicitation, votre compte a bien été créé !');
-                window.location = '/auth/login?success-message=' + successMessage;
+                window.location = '/auth/loginView?success-message=' + successMessage;
             })
             .fail(function (error) {
                 console.log('error', error);
