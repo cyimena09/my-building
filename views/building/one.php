@@ -32,10 +32,35 @@
 
         <div class="group">
             <label for="country"></label>
-            <input id="country" type="text" placeholder="Pays" name="country" value="<?= $building->address->country; ?>">
+            <input id="country" type="text" placeholder="Pays" name="country"
+                   value="<?= $building->address->country; ?>">
         </div>
 
         <button>Mettre à jour</button>
     </form>
+
+    <!--    Liste des appartements de l'immeuble-->
+    <h2>Ses appartements</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Numéro de l'appartement</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <?php if (!empty($apartments)): ?>
+            <?php foreach ($apartments as $apartment): ?>
+                <tr>
+                    <td></td>
+                    <td><?= $apartment->__get('name'); ?></td>
+                    <td><a href="/apartment/show/<?= $apartment->__get('id'); ?>">Voir</a></td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        </tbody>
+    </table>
 
 </div>

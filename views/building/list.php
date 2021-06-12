@@ -17,7 +17,7 @@
                 <td><?= $building->__get('name'); ?></td>
                 <td></td>
                 <td></td>
-                <td><a class="btn bg-yellow" href="/building/show/<?= $building->__get('id'); ?>">Voir</a></td>
+                <td><a href="/building/show/<?= $building->__get('id'); ?>">Voir</a></td>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>

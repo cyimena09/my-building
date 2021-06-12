@@ -32,18 +32,18 @@ class AddressDao extends AbstractDao {
         }
     }
 
-    public function getAddressByUserId($id) {
-        try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkUser = ?");
-            $statement->execute([
-                $id
-            ]);
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->instantiate($result);
-        } catch (PDOException $e) {
-            print $e->getMessage();
-        }
-    }
+//    public function getAddressByUserId($id) {
+//        try {
+//            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkUser = ?");
+//            $statement->execute([
+//                $id
+//            ]);
+//            $result = $statement->fetch(PDO::FETCH_ASSOC);
+//            return $this->instantiate($result);
+//        } catch (PDOException $e) {
+//            print $e->getMessage();
+//        }
+//    }
 
     public function createAddress($data) {
         if (empty($data['street']) ||
@@ -97,8 +97,7 @@ class AddressDao extends AbstractDao {
             $result['box_number'],
             $result['zip'],
             $result['city'],
-            $result['country'],
-            $result['fkUser']);
+            $result['country']);
     }
 
     public function instantiateAll($results) {

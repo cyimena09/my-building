@@ -4,6 +4,7 @@
 class Building {
     private $id;
     private $name;
+    private $address;
 
     public function __construct($id, $name) {
         $this->id = $id;

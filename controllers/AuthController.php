@@ -51,8 +51,8 @@ class AuthController extends AbstractController {
 
     public function accountView() {
         $user = $this->isLogged();
-        $content = 'user-account.php';
 
+        $content = 'user-account.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');

@@ -26,7 +26,16 @@ class BuildingDao extends AbstractDao {
                 $id
             ]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->instantiate($result);
+
+            $building = $this->instantiate($result);
+
+            // on recupère et on ajoute l'adresse au batiment
+            $addressDao = new AddressDao();
+            $address = $addressDao->getAddressById($building->id);
+            $building->address = $address;
+
+            return $building;
+
         } catch (PDOException $e) {
             print $e->getMessage();
         }

@@ -26,7 +26,24 @@ class UserDao extends AbstractDao {
                 $id
             ]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $this->instantiate($result);
+            $user =  $this->instantiate($result);
+            // recupération de l'adresse de l'utilisateur
+            $addressDao = new AddressDao();
+            $userAddress = $addressDao->getAddressById($user->id);
+            $user->address = $userAddress;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
+    public function getUsersByApartmentId($id) {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkApartment = ?");
+            $statement->execute([
+                $id
+            ]);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $this->instantiateAll($result);
         } catch (PDOException $e) {
             print $e->getMessage();
         }
@@ -201,7 +218,7 @@ class UserDao extends AbstractDao {
 
             // on recupère et on ajoute l'adresse de l'utilisateur
             $addressDao = new AddressDao();
-            $address = $addressDao->getAddressByUserId($user->id);
+            $address = $addressDao->getAddressById($user->id);
             $user->address = $address;
 
             return $user;

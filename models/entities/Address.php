@@ -9,9 +9,8 @@ class Address {
     private $zip;
     private $city;
     private $country;
-    private $userId;
 
-    public function __construct($id, $street, $houseNumber, $boxNumber, $zip, $city, $country, $userId) {
+    public function __construct($id, $street, $houseNumber, $boxNumber, $zip, $city, $country) {
         $this->id = $id;
         $this->street = $street;
         $this->houseNumber = $houseNumber;
@@ -19,7 +18,6 @@ class Address {
         $this->zip = $zip;
         $this->city = $city;
         $this->country = $country;
-        $this->userId = $userId;
     }
 
     public function __get($prop) {

@@ -10,14 +10,15 @@ class TicketController extends AbstractController {
     public function index () {
         $user = $this->isLogged();
         $tickets = $this->dao->getTicketsByUserId($user->id);
-        $content = '../views/ticket/list.php';
 
+        $content = '../views/ticket/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
     }
 
     public function show ($id) {
+        $user = $this->isLogged();
         $ticket = $this->dao->getTicketById($id);
 
         $content = '../views/ticket/one.php';
@@ -44,8 +45,8 @@ class TicketController extends AbstractController {
 
     public function createView () {
         $user = $this->isLogged();
-        $content = '../views/ticket/create-form.php';
 
+        $content = '../views/ticket/create-form.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');

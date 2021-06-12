@@ -16,23 +16,21 @@ VALUES
 ('Rue Cour Boisacq13', '18', 'B', '1306', 'Bierges', 'Belgique');
 
 -- User
-INSERT INTO user(firstname, lastname, email, phone, gender, role, password, fkAddress )
+INSERT INTO user(firstname, lastname, email, phone, gender, role, password, fkAddress, fkApartment )
 VALUES
-('Emile', 'Cyimena', 'cyimena09@hotmail.com', '0484090853', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 1),
-('Benoit', 'Vankoningsloo', 'benoit@hotmail.com', '0477213465', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 2),
-('Amaury', 'Cyemezo', 'cyemezo@hotmail.com', '0499591245', 'M', 'SYNDIC', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 3),
-('Alice', 'Malaika', 'malaika@hotmail.com', '0476134465', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 4),
-('Mike', 'Francois', 'mike@hotmail.com', '0488124678', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 5),
-('Susi', 'Toupe', 'stoupe0@symantec.com', '6685851293', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 6),
-('Eveline', 'Joyner', 'ejoyner1@cloudflare.com', '7861614104', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 7),
-('Eba', 'Penquet', 'epenquet2@walmart.com', '7779636737', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 8),
-('Justina', 'Dearth', 'jdearth3@hc360.com', '5481337107', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 9),
-('Venus', 'Tolwood', 'vtolwood4@w3.org', '2896359988', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 10),
-('Napoleon', 'Jencey', 'njencey5@csmonitor.com', '5625961927', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 11),
-('Kain', 'Wrist', 'kwrist6@mayoclinic.com', '5729661592', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 12),
-('Vernor', 'Titchen', 'vtitchen7@moonfruit.com', '2342462343', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 13);
-
-
+('Emile', 'Cyimena', 'cyimena09@hotmail.com', '0484090853', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 1, 1),
+('Benoit', 'Vankoningsloo', 'benoit@hotmail.com', '0477213465', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 2, 1),
+('Amaury', 'Cyemezo', 'cyemezo@hotmail.com', '0499591245', 'M', 'SYNDIC', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 3, 1),
+('Alice', 'Malaika', 'malaika@hotmail.com', '0476134465', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 4, 1),
+('Mike', 'Francois', 'mike@hotmail.com', '0488124678', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 5, 2),
+('Susi', 'Toupe', 'stoupe0@symantec.com', '6685851293', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 6, 2),
+('Eveline', 'Joyner', 'ejoyner1@cloudflare.com', '7861614104', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 7, 2),
+('Eba', 'Penquet', 'epenquet2@walmart.com', '7779636737', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 8, 3),
+('Justina', 'Dearth', 'jdearth3@hc360.com', '5481337107', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 9, 4),
+('Venus', 'Tolwood', 'vtolwood4@w3.org', '2896359988', 'F', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 10, 5),
+('Napoleon', 'Jencey', 'njencey5@csmonitor.com', '5625961927', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 11, 6),
+('Kain', 'Wrist', 'kwrist6@mayoclinic.com', '5729661592', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 12, 7),
+('Vernor', 'Titchen', 'vtitchen7@moonfruit.com', '2342462343', 'M', 'TENANT', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 13, 8);
 
 -- Building
 INSERT INTO building(name) VALUES ('Building A');
@@ -40,7 +38,7 @@ INSERT INTO building(name) VALUES ('Building B');
 INSERT INTO building(name) VALUES ('Building C');
 INSERT INTO building(name) VALUES ('Building D');
 
--- apartment
+-- Apartment
 INSERT INTO apartment(name, fkBuilding, fkOwner, fkTenant)
 VALUES
 ('Apartement A1', 1, 2, 1),

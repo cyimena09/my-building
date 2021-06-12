@@ -9,10 +9,10 @@ class CommunicationController extends AbstractController {
 
     public function index () {
         $user = $this->isLogged();
-        $content = '../views/communication/list.php';
         // todo a terminer
         $communications = $this->dao->getCommunicationsByBuildingId(1);
 
+        $content = '../views/communication/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
@@ -20,8 +20,8 @@ class CommunicationController extends AbstractController {
 
     public function show ($id) {
         $ticket = $this->dao->getCommunicationById($id);
-        $content = '../views/communication/one.php';
 
+        $content = '../views/communication/one.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
@@ -30,7 +30,6 @@ class CommunicationController extends AbstractController {
     public function create ($id, $data) {
         $user = $this->isLogged();
         $data['fkUser'] = $user->id;
-
         $data['fkBuilding'] = 1;
 
         if ($this->dao->createCommunication($data)) {
@@ -47,8 +46,8 @@ class CommunicationController extends AbstractController {
 
     public function createView () {
         $user = $this->isLogged();
-        $content = '../views/communication/create-form.php';
 
+        $content = '../views/communication/create-form.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
