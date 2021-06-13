@@ -54,13 +54,10 @@ class CommunicationDao extends AbstractDao {
             return false;
         }
 
-        $communication = $this->instantiate($data);
-
-        // on ajoute la date de création et de mise à jour qui sont identique lors de la création
+        // on récupère la date actuelle qu'on ajoutera a l'objet communcation
         $currentDate = date('Y-m-d H:i:s');
 
-        $communication->dateCreation = $currentDate;
-        $communication->lastUpdate = $currentDate;
+        $communication = new Communication(null, $data['subject'], $data['message'], $currentDate, $currentDate, $data['fkBuilding']);
 
         if ($communication) {
             try {
@@ -73,7 +70,7 @@ class CommunicationDao extends AbstractDao {
                     htmlspecialchars($communication->__get('message')),
                     htmlspecialchars($communication->__get('dateCreation')),
                     htmlspecialchars($communication->__get('lastUpdate')),
-                    htmlspecialchars($communication->__get('idBuilding'))
+                    htmlspecialchars($communication->__get('building'))
                 ]);
                 return true;
             } catch (PDOException $e) {

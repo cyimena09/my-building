@@ -27,9 +27,9 @@ class AuthController extends AbstractController {
     }
 
     public function login ($id, $data) {
-        $user = $this->dao->verify($data); // retourne 'false' si 'data' ne matche avec aucun utilisateur
+        $authenticatedUser = $this->dao->verify($data); // retourne 'false' si 'data' ne matche avec aucun utilisateur
 
-        if ($user) {
+        if ($authenticatedUser) {
             $url = $data['route'] ? $data['route'] : '/auth/accountView';
             header("Location:{$url}");
         } else {
@@ -53,7 +53,7 @@ class AuthController extends AbstractController {
     }
 
     public function accountView() {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
 
         $content = 'user-account.php';
         include ('../views/header.php');

@@ -205,6 +205,7 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `role` varchar(10) DEFAULT NULL,
   `fkAddress` int(11) DEFAULT NULL,
+  `fkBuilding` int(11) DEFAULT NULL,
   `fkApartment` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `user_un` (`email`),

@@ -51,6 +51,19 @@ class UserDao extends AbstractDao {
         }
     }
 
+    public function getUsersByFilter($filter, $value) {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE {$filter} = ?");
+            $statement->execute([
+                $value
+            ]);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $this->instantiateAll($result);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
     public function createUser($data) {
         if (empty($data['firstName']) ||
             empty($data['lastName']) ||
@@ -106,7 +119,6 @@ class UserDao extends AbstractDao {
             return false;
         }
 
-        var_dump($data);
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE email = ?");
             $statement->execute([
@@ -132,8 +144,17 @@ class UserDao extends AbstractDao {
         }
     }
 
+    /**
+     * Méthode à utiliser lorsque l'on récupère les données depuis la db
+     * sinon utiliser la méthode d'instanciation classique  ex : '$object = new Object()'
+     * @param $result
+     * @return User
+     */
     public function instantiate ($result) {
-        return new User(
+        $building = new Building($result['fkBuilding'], null);
+        $apartment = new Apartment($result['fkApartment'], null, null, null);
+
+        $user = new User(
             !empty($result['idUser']) ? $result['idUser'] : 0,
             $result['firstname'],
             $result['lastname'],
@@ -141,9 +162,12 @@ class UserDao extends AbstractDao {
             $result['phone'],
             $result['gender'],
             $result['role'],
-            $result['fkApartment'],
-            $result['password']
-        );
+            $result['password']);
+
+        $user->building = $building;
+        $user->apartment = $apartment;
+
+        return $user;
     }
 
     public function instantiateAll($results) {

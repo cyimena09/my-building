@@ -51,6 +51,15 @@ li {
     background-color: #9b1717;;
 }
 
+.bg-mauve {
+    background-color: #732DD9;
+}
+
+.bg-orange {
+    background-color: #FF5722;
+}
+
+
 /* NOTIFICATION MESSAGE*/
 
 .container-info, #js-container-info {
@@ -247,4 +256,22 @@ button {
 
 button:hover {
     color: #26a4ae;
+}
+
+
+/* ROLE */
+
+.role {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.role span {
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    width: fit-content;
+    padding: 5px 10px;
 }

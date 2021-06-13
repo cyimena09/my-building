@@ -8,16 +8,16 @@ class Ticket {
     private $description;
     private $dateCreation;
     private $lastUpdate;
-    private $fkUser;
+    private $user;
 
-    public function __construct($id, $subject, $status, $description, $dateCreation, $lastUpdate, $fkUser) {
+    public function __construct($id, $subject, $status, $description, $dateCreation, $lastUpdate, $user) {
         $this->id = $id;
         $this->subject = $subject;
         $this->status = $status;
         $this->description = $description;
         $this->dateCreation = $dateCreation;
         $this->lastUpdate = $lastUpdate;
-        $this->fkUser = $fkUser;
+        $this->user = $user;
     }
 
     public function __get($prop) {

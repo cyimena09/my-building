@@ -1,10 +1,10 @@
 <div id="user-space-menu">
     <ul >
         <li><a href="/auth/accountView">Votre compte</a></li>
-        <li><a href="/communication">Liste des communications</a></li>
+        <li><a href="/communication">Toutes les communications</a></li>
     </ul>
     <!-- ROLE == TENANT -->
-    <?php if ($user->role == 'TENANT'): ?>
+    <?php if ($authenticatedUser->role == 'TENANT'): ?>
         <!--TICKETS-->
         <ul>
             <li><a href="/ticket">Voir mes tickets</a></li>
@@ -13,7 +13,7 @@
     <?php endif; ?>
 
     <!-- ROLE == SYNDIC -->
-    <?php if ($user->role == 'SYNDIC'): ?>
+    <?php if ($authenticatedUser->role == 'SYNDIC'): ?>
         <!--COMMUNICATION-->
         <h3>Communications</h3>
         <ul>
@@ -31,8 +31,8 @@
             <li><a href="/apartment">Liste des appartements</a></li>
             <li><a href="/apartment/createView">Ajouter un appartement</a></li>
         </ul>
-        <!-- PROPRIETAIRES -->
-        <h3>Propriétaires</h3>
+        <!-- UTILISATEURS -->
+        <h3>Utilisateurs</h3>
         <ul>
             <li><a href="/user">Liste des utilisateurs</a></li>
         </ul>

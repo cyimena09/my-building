@@ -7,15 +7,15 @@ class Communication {
     private $message;
     private $dateCreation;
     private $lastUpdate;
-    private $idBuilding;
+    private $building;
 
-    public function __construct($id, $subject, $message, $dateCreation, $lastUpdate, $idBuilding) {
+    public function __construct($id, $subject, $message, $dateCreation, $lastUpdate, $building) {
         $this->id = $id;
         $this->subject = $subject;
         $this->message = $message;
         $this->dateCreation = $dateCreation;
         $this->lastUpdate = $lastUpdate;
-        $this->idBuilding = $idBuilding;
+        $this->building = $building;
     }
 
     public function __get($prop) {

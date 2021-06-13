@@ -52,7 +52,8 @@ class ApartmentDao extends AbstractDao {
             return false;
         }
 
-        $apartment = $this->instantiate($data);
+        $building = new Building($data['fkBuilding'], null);
+        $apartment = new Apartment(null, $data['name'], null, $building);
 
         if ($apartment) {
             try {
@@ -61,7 +62,7 @@ class ApartmentDao extends AbstractDao {
                 );
                 $statement->execute([
                     htmlspecialchars($apartment->__get('name')),
-                    htmlspecialchars($apartment->__get('idBuilding')),
+                    htmlspecialchars($apartment->__get('building')->id),
                 ]);
                 return true;
             } catch (PDOException $e) {
@@ -71,6 +72,12 @@ class ApartmentDao extends AbstractDao {
         }
     }
 
+    /**
+     * Méthode à utiliser lorsque l'on récupère les données depuis la db
+     * sinon utiliser la méthode d'instanciation classique  ex : '$object = new Object()'
+     * @param $result
+     * @return Apartment
+     */
     public function instantiate ($result) {
         return new Apartment(
             !empty($result['idApartment']) ? $result['idApartment'] : 0,

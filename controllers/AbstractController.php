@@ -12,15 +12,15 @@ abstract class AbstractController {
     }
 
     public function isLogged() {
-        $user = $this->getUser();
+        $authenticatedUser = $this->getUser();
 
-        if (!$user) {
+        if (!$authenticatedUser) {
             include ('../views/header.php');
             include ('../views/auth/login.php');
             include ('../views/footer.php');
             die;
         }
-        return $user;
+        return $authenticatedUser;
     }
 
     public function create ($id, $data) {

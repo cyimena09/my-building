@@ -8,8 +8,8 @@ class TicketController extends AbstractController {
     }
 
     public function index () {
-        $user = $this->isLogged();
-        $tickets = $this->dao->getTicketsByUserId($user->id);
+        $authenticatedUser = $this->isLogged();
+        $tickets = $this->dao->getTicketsByUserId($authenticatedUser->id);
 
         $content = '../views/ticket/list.php';
         include ('../views/header.php');
@@ -18,7 +18,7 @@ class TicketController extends AbstractController {
     }
 
     public function show ($id) {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
         $ticket = $this->dao->getTicketById($id);
 
         $content = '../views/ticket/one.php';
@@ -28,7 +28,7 @@ class TicketController extends AbstractController {
     }
 
     public function create ($id, $data) {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
         $data['fkUser'] = $user->id;
 
         if ($this->dao->createTicket($data)) {
@@ -44,7 +44,7 @@ class TicketController extends AbstractController {
     }
 
     public function createView () {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
 
         $content = '../views/ticket/create-form.php';
         include ('../views/header.php');

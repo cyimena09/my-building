@@ -8,7 +8,7 @@ class BuildingController extends AbstractController {
     }
 
     public function index () {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
         $buildings = $this->dao->getBuildings();
 
         $content = '../views/building/list.php';
@@ -18,7 +18,7 @@ class BuildingController extends AbstractController {
     }
 
     public function show ($id) {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
         $building = $this->dao->getBuildingById($id);
 
         // récupération des appartments
@@ -38,13 +38,13 @@ class BuildingController extends AbstractController {
     }
 
     public function create ($id, $data) {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
         $this->dao->createBuilding($data);
         $this->index();
     }
 
     public function createView () {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
 
         $content = '../views/building/create-form.php';
         include ('../views/header.php');

@@ -27,7 +27,7 @@
         </nav>
         <div class="actions">
             <ul>
-                <?php if(isset($user) && $user): ?>
+                <?php if(isset($authenticatedUser) && $authenticatedUser): ?>
                     <li><a href="/auth/accountView">Votre Espaces</a></li>
                     <li><a href="/auth/logout">Se déconnecter</a></li>
                 <?php else: ?>

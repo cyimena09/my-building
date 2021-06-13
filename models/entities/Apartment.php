@@ -4,14 +4,14 @@
 class Apartment {
     private $id;
     private $name;
-    private $ownerId;
-    private $idBuilding;
+    private $owner;
+    private $building;
 
-    public function __construct($id, $name, $ownerId, $idBuilding) {
+    public function __construct($id, $name, $owner, $building) {
         $this->id = $id;
         $this->name = $name;
-        $this->ownerId = $ownerId;
-        $this->idBuilding = $idBuilding;
+        $this->owner = $owner;
+        $this->building = $building;
     }
 
     public function __get($prop) {

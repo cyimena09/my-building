@@ -7,19 +7,19 @@ class CommunicationController extends AbstractController {
         $this->dao = new CommunicationDao();
     }
 
-//    public function index () {
-//        $user = $this->isLogged();
-//        // todo a terminer
-//        $communications = $this->dao->getCommunicationsByBuildingId(1);
-//
-//        $content = '../views/communication/list.php';
-//        include ('../views/header.php');
-//        include ('../views/user/user-space.php');
-//        include ('../views/footer.php');
-//    }
+    public function index () {
+        $authenticatedUser = $this->isLogged();
+        // todo a terminer
+        $communications = $this->dao->getCommunicationsByBuildingId(1);
+
+        $content = '../views/communication/list.php';
+        include ('../views/header.php');
+        include ('../views/user/user-space.php');
+        include ('../views/footer.php');
+    }
 
     public function show ($id) {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
         $communication = $this->dao->getCommunicationById($id);
 
         $content = '../views/communication/one.php';
@@ -29,7 +29,7 @@ class CommunicationController extends AbstractController {
     }
 
     public function create ($id, $data) {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
 
         if ($this->dao->createCommunication($data)) {
             $successMessage = 'Le communication a bien été envoyé.';
@@ -37,8 +37,8 @@ class CommunicationController extends AbstractController {
             $errorMessage = "Désolé, le communication n'a pas pu être envoyé.";
         }
 
-        // on récupère l'id de l'immeuble pour retourner le meme formulaire et permettre des ajouts multiples
-        $idBuilding = $data['fkBuilding'];
+        $buildingDao = new BuildingDao();
+        $buildings = $buildingDao->getBuildings();
 
         $content = '../views/communication/create-form.php';
         include ('../views/header.php');
@@ -47,7 +47,10 @@ class CommunicationController extends AbstractController {
     }
 
     public function createView () {
-        $user = $this->isLogged();
+        $authenticatedUser = $this->isLogged();
+        // récupération des résidences
+        $buildingDao = new BuildingDao();
+        $buildings = $buildingDao->getBuildings();
 
         $content = '../views/communication/create-form.php';
         include ('../views/header.php');
