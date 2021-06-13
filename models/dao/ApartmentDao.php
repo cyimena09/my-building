@@ -45,6 +45,19 @@ class ApartmentDao extends AbstractDao {
         }
     }
 
+    public function getApartmentsByFilter($filter, $value) {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE {$filter} = ?");
+            $statement->execute([
+                $value
+            ]);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $this->instantiateAll($result);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
     public function createApartment($data) {
         if (empty($data['name']) ||
             empty($data['fkBuilding'])) {

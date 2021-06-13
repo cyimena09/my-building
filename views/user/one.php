@@ -7,61 +7,49 @@
 
         <div class="group">
             <label for="firstName"></label>
-            <input id="firstName" type="text" placeholder="Prénom" name="firstName" value="<?= $userInfo->firstName; ?>">
+            <input id="firstName" type="text" placeholder="Prénom" name="firstName"
+                   value="<?= $user->firstName; ?>">
         </div>
 
         <div class="group">
             <label for="lastName"></label>
-            <input id="lastName" type="text" placeholder="Nom" name="lastName" value="<?= $userInfo->lastName; ?>">
+            <input id="lastName" type="text" placeholder="Nom" name="lastName" value="<?= $user->lastName; ?>">
         </div>
 
         <div class="group">
             <label for="gender"></label>
-            <input id="gender" type="text" placeholder="Genre" name="gender" value="<?= $userInfo->gender; ?>">
+            <input id="gender" type="text" placeholder="Genre" name="gender" value="<?= $user->gender; ?>">
         </div>
 
         <div class="group">
             <label for="email"></label>
-            <input id="email" type="text" placeholder="Email" name="email" value="<?= $userInfo->email; ?>">
+            <input id="email" type="text" placeholder="Email" name="email" value="<?= $user->email; ?>">
         </div>
 
         <div class="group">
             <label for="phone"></label>
-            <input id="phone" type="text" placeholder="Téléphone" name="firstName" value="<?= $userInfo->phone; ?>">
+            <input id="phone" type="text" placeholder="Téléphone" name="firstName" value="<?= $user->phone; ?>">
         </div>
 
         <div class="group">
             <label for="role"></label>
-            <input id="role" type="text" placeholder="Rôle" name="role" value="<?= $userInfo->role; ?>">
+            <input id="role" type="text" placeholder="Rôle" name="role" value="<?= $user->role; ?>">
         </div>
 
-        <!--        Adresse-->
-        <h2>Adresse</h2>
-
-        <div class="group">
-            <label for="street"></label>
-            <input id="street" type="text" placeholder="Rue" name="street" value="<?= $userInfo->address->street; ?>">
-        </div>
-        <div class="group">
-            <label for="houseNumber"></label>
-            <input id="houseNumber" type="text" placeholder="Numéro" name="houseNumber" value="<?= $userInfo->address->houseNumber; ?>">
-        </div>
-        <div class="group">
-            <label for="boxNumber"></label>
-            <input id="boxNumber" type="text" placeholder="Boite" name="boxNumber" value="<?= $userInfo->address->boxNumber; ?>">
-        </div>
-        <div class="group">
-            <label for="zip"></label>
-            <input id="zip" type="text" placeholder="Code postal" name="zip" value="<?= $userInfo->address->zip; ?>">
-        </div>
-        <div class="group">
-            <label for="city"></label>
-            <input id="city" type="text" placeholder="Ville" name="city" value="<?= $userInfo->address->city; ?>">
-        </div>
-        <div class="group">
-            <label for="country"></label>
-            <input id="country" type="text" placeholder="Pays" name="country" value="<?= $userInfo->address->country; ?>">
-        </div>
         <button>Mettre à jour</button>
     </form>
+
+    <!--        Locations-->
+    <h2>Location</h2>
+    <?php foreach ($rentedApartments as $rentedApartment): ?>
+        <p>Apartement : <?= $rentedApartment->name; ?> de l'immeuble <?= $rentedApartment->building->name; ?></p>
+        <a href="/apartment/show/<?= $rentedApartment->id; ?>">Voir</a>
+    <?php endforeach; ?>
+
+    <!--        Propriétés -->
+    <h2>Propriété</h2>
+    <?php foreach ($ownedApartments as $ownedApartment): ?>
+        <p>Apartement : <?= $ownedApartment->name; ?> de l'immeuble <?= $ownedApartment->name; ?></p>
+        <a href="/apartment/show/<?= $ownedApartment->id; ?>">Voir</a>
+    <?php endforeach; ?>
 </div>

@@ -7,7 +7,6 @@
         <th>Nom</th>
         <th>Téléphone</th>
         <th>Email</th>
-        <th>Immeuble</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -20,7 +19,6 @@
                 <td><?= $user->__get('lastName'); ?></td>
                 <td><?= $user->__get('phone'); ?></td>
                 <td><?= $user->__get('email'); ?></td>
-                <td><?= $user->__get('building')->name; ?></td>
                 <td><a href="/user/show/<?= $user->__get('id'); ?>">Voir</a></td>
             </tr>
         <?php endforeach; ?>

@@ -24,28 +24,28 @@ class TicketController extends AbstractController {
      * Retourne les tickets créé par un utilisateur
      */
     public function ticketByUserView() {
-        var_dump('ticket par utilisateur');
         $authenticatedUser = $this->isLogged();
-//        $tickets = $this->dao->getTicketsByUserId($authenticatedUser->id);
-//
-//        $content = '../views/ticket/list.php';
-//        include ('../views/header.php');
-//        include ('../views/user/user-space.php');
-//        include ('../views/footer.php');
+
+        $tickets = $this->dao->getTicketsByFilter('fkUser', $authenticatedUser->id);
+
+        $content = '../views/ticket/list.php';
+        include ('../views/header.php');
+        include ('../views/user/user-space.php');
+        include ('../views/footer.php');
     }
 
     /**
-     * Retourne les tickets qui concerne un immeuble
+     * Retourne tous les tickets d'un immeuble
      */
     public function ticketByBuildingView() {
         $authenticatedUser = $this->isLogged();
-//        $tickets = $this->dao->getTicketsByUserId($authenticatedUser->id);
-//
-//        $content = '../views/ticket/list.php';
-//        include ('../views/header.php');
-//        include ('../views/user/user-space.php');
-//        include ('../views/footer.php');
-        var_dump('ticket par immeuble');
+
+        $tickets = $this->dao->getTicketsByFilter('fkBuilding', $authenticatedUser->id);
+
+        $content = '../views/ticket/list.php';
+        include ('../views/header.php');
+        include ('../views/user/user-space.php');
+        include ('../views/footer.php');
     }
 
     public function show($id) {

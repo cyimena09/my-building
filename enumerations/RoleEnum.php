@@ -3,5 +3,5 @@
 
 abstract class RoleEnum {
     const SYNDIC = 'SYNDIC';
-    const TENANT = 'TENANT';
+    const TENANT = 'LOCATAIRE';
 }

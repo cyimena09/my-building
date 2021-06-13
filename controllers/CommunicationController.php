@@ -18,6 +18,20 @@ class CommunicationController extends AbstractController {
         include ('../views/footer.php');
     }
 
+    /**
+     * Retourne tous les tickets d'un immeuble
+     */
+    public function communicationByBuildingView() {
+        $authenticatedUser = $this->isLogged();
+
+        $communications = $this->dao->getCommunicationsByFilter('fkBuilding', $authenticatedUser->id);
+
+        $content = '../views/communication/list.php';
+        include ('../views/header.php');
+        include ('../views/user/user-space.php');
+        include ('../views/footer.php');
+    }
+
     public function show($id) {
         $authenticatedUser = $this->isLogged();
         $communication = $this->dao->getCommunicationById($id);

@@ -25,6 +25,7 @@ class Router {
             'ticketByUserView',
             'ticketByBuildingView',
             'updateStatus',
+            'communicationByBuildingView',
             'edit',
             'delete',
             'show',

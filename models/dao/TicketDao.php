@@ -32,11 +32,17 @@ class TicketDao extends AbstractDao {
         }
     }
 
-    public function getTicketsByUserId($id) {
+    /**
+     * Récupère les tickets en fonction du filtre appliqué
+     * @param $filter string que vous souhaitez filtrer
+     * @param $value integer valeur du champ à récupérer
+     * @return array
+     */
+    public function getTicketsByFilter($filter, $value) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkUser = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE {$filter} = ?");
             $statement->execute([
-                $id
+                $value
             ]);
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);

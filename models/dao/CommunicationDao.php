@@ -33,12 +33,32 @@ class CommunicationDao extends AbstractDao {
     }
 
     public function getCommunicationsByBuildingId($id) {
+        // todo utiliser le filtre
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkBuilding = ?");
             $statement->execute([
                     $id
                 ]
             );
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $this->instantiateAll($result);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
+    /**
+     * Récupère les communications en fonction du filtre appliqué
+     * @param $filter string que vous souhaitez filtrer
+     * @param $value integer valeur du champ à récupérer
+     * @return array
+     */
+    public function getCommunicationsByFilter($filter, $value) {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE {$filter} = ?");
+            $statement->execute([
+                $value
+            ]);
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
