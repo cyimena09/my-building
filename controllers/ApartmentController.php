@@ -21,11 +21,12 @@ class ApartmentController extends AbstractController {
 
     public function show($id) {
         $authenticatedUser = $this->isLogged();
+
         $apartment = $this->dao->getApartmentById($id);
         // on récupère les locataires de l'appartement
         $userDao = new UserDao();
         $tenants = $userDao->getUsersByApartmentId($id); // récupération des locataires
-        $owner = $userDao->getUserById($apartment->ownerId); // récupération du propriétaire
+        $owner = $userDao->getUserById($apartment->owner); // récupération du propriétaire
 
         $content = '../views/apartment/one.php';
         include ('../views/header.php');

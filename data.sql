@@ -42,18 +42,18 @@ INSERT INTO building(name) VALUES ('Building D');
 INSERT INTO apartment(name, fkBuilding, fkOwner, fkTenant)
 VALUES
 ('Apartement A1', 1, 2, 1),
-('Apartement A2', 1, 2, 2),
-('Apartement A3', 1, 2, 3),
-('Apartement A4', 1, 2, 4),
-('Apartement B1', 2, 2, 5),
-('Apartement B2', 2, 2, 6),
-('Apartement B3', 2, 2, 7),
-('Apartement C1', 3, 2, 8),
-('Apartement C2', 3, 2, 9),
+('Apartement A2', 1, 6, 2),
+('Apartement A3', 1, 7, 3),
+('Apartement A4', 1, 8, 4),
+('Apartement B1', 2, 9, 5),
+('Apartement B2', 2, 10, 6),
+('Apartement B3', 2, 11, 7),
+('Apartement C1', 3, 12, 8),
+('Apartement C2', 3, 13, 9),
 ('Apartement C3', 3, 2, 10),
-('Apartement D1', 4, 2, 11),
-('Apartement D2', 4, 2, 12),
-('Apartement D3', 4, 2, 13);
+('Apartement D1', 4, 3, 11),
+('Apartement D2', 4, 4, 12),
+('Apartement D3', 4, 5, 13);
 
 -- Communication
 INSERT INTO communication(subject, message, date_creation, last_update, fkBuilding)
