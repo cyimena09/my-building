@@ -114,7 +114,7 @@ class UserDao extends AbstractDao {
         }
     }
 
-    public function verify ($data) {
+    public function verify($data) {
         if (empty($data['email']) || empty($data['password'])) {
             return false;
         }
@@ -150,7 +150,7 @@ class UserDao extends AbstractDao {
      * @param $result
      * @return User
      */
-    public function instantiate ($result) {
+    public function instantiate($result) {
         $building = new Building($result['fkBuilding'], null);
         $apartment = new Apartment($result['fkApartment'], null, null, null);
 
@@ -193,7 +193,7 @@ class UserDao extends AbstractDao {
         return $user;
     }
 
-    public function updateToken ($user) {
+    public function updateToken($user) {
 
         try {
             $statement = $this->connection->prepare("UPDATE {$this->table} SET session_token = ?, session_time = ? WHERE idUser = ?");

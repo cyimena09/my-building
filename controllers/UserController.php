@@ -3,7 +3,7 @@
 
 class UserController extends AbstractController {
 
-    public function __construct () {
+    public function __construct() {
         $this->dao = new UserDao();
     }
 
@@ -52,7 +52,7 @@ class UserController extends AbstractController {
 //        include ('../views/footer.php');
 //    }
 
-    public function show ($id) {
+    public function show($id) {
         $authenticatedUser = $this->isLogged(); // attention ici il s'agit de vérifier que l'utilisateur est connecté
         $userInfo = $this->dao->getUserById($id); // cette variable contient les informations de l'utilisateur à afficher
 

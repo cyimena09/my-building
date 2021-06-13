@@ -5,17 +5,17 @@ $(document).ready(function () {
       *  *****************************************************************************************
       * */
 
-        let select = document.getElementById('fkBuilding'); // element declencheur
-        let container = document.getElementById('js-result'); // container du resultat
+        const select = document.getElementById('fkBuilding'); // element declencheur
+    const container = document.getElementById('js-result'); // container du resultat
 
 
         select.addEventListener('click', function(e) {
             $('#dropdown-apartment').remove(); // on retire l'ancienne liste si elle existe
             container.style.visibility = 'visible';
 
-            let idBuilding = select.value; // récupération de l'id de l'immeuble
+            const idBuilding = select.value; // récupération de l'id de l'immeuble
 
-            let data = {
+            const data = {
                 idBuilding: idBuilding
             }
 
@@ -38,19 +38,19 @@ $(document).ready(function () {
     *  *****************************************************************************************
     * */
 
-    let containerInfo = document.getElementById('js-container-info');
+    const containerInfo = document.getElementById('js-container-info');
 
     $('form#form-create-user').on('submit', function (e) {
         e.preventDefault();
 
         // On récupère les valeurs du formulaire
-        let role = document.forms["form-create-user"]["role"].value;
-        let firstName = document.forms["form-create-user"]["firstName"].value;
-        let lastName = document.forms["form-create-user"]["lastName"].value;
-        let phone = document.forms["form-create-user"]["phone"].value;
-        let email = document.forms["form-create-user"]["email"].value;
-        let password = document.forms["form-create-user"]["password"].value;
-        let gender = document.forms["form-create-user"]["gender"].value;
+        const role = document.forms["form-create-user"]["role"].value;
+        const firstName = document.forms["form-create-user"]["firstName"].value;
+        const lastName = document.forms["form-create-user"]["lastName"].value;
+        const phone = document.forms["form-create-user"]["phone"].value;
+        const email = document.forms["form-create-user"]["email"].value;
+        const password = document.forms["form-create-user"]["password"].value;
+        const gender = document.forms["form-create-user"]["gender"].value;
 
         // si on ne peut pas récupérer le fkApartment c'est qu'aucun immeuble n'a été sélectionné
         let fkApartment;
@@ -91,7 +91,7 @@ $(document).ready(function () {
             }
         }
 
-        let data = {
+        const data = {
             firstName: firstName ,
             lastName: lastName ,
             email: email,

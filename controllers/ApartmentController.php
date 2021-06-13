@@ -3,12 +3,12 @@
 
 class ApartmentController extends AbstractController {
 
-    public function __construct () {
+    public function __construct() {
         //$authenticatedUser = $this->isLogged();
         $this->dao = new ApartmentDao();
     }
 
-    public function index () {
+    public function index() {
         $authenticatedUser = $this->isLogged();
         $buildingDao = new BuildingDao();
         $buildings = $buildingDao->getBuildingsWithApartments();
@@ -19,7 +19,7 @@ class ApartmentController extends AbstractController {
         include ('../views/footer.php');
     }
 
-    public function show ($id) {
+    public function show($id) {
         $authenticatedUser = $this->isLogged();
         $apartment = $this->dao->getApartmentById($id);
         // on récupère les locataires de l'appartement
@@ -33,7 +33,7 @@ class ApartmentController extends AbstractController {
         include ('../views/footer.php');
     }
 
-    public function create ($id, $data) {
+    public function create($id, $data) {
         $authenticatedUser = $this->isLogged();
 
         if ( $this->dao->createApartment($data)) {
@@ -51,7 +51,7 @@ class ApartmentController extends AbstractController {
         include ('../views/footer.php');
     }
 
-    public function createView () {
+    public function createView() {
         $authenticatedUser = $this->isLogged();
 
         $content = '../views/apartment/create-form.php';

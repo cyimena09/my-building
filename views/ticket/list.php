@@ -24,12 +24,11 @@ $enums = statusEnum();
                 <!-- Statut du ticket -->
                 <td>
                     <label for="status"></label>
-                    <select name="status" id="status">
-                        <!-- Lorsque la résidence est inqué dans l'url (arrive lorsque l'on charge la page depuis une résidence) -->
+                    <select name="status" id="<?= $ticket->__get('id'); ?>">
                         <?php foreach ($enums as $enum): ?>
                             <?php if ($ticket->__get('status') == $enum): ?>
-                                <option value="<?= $ticket->__get('id') ?>"
-                                        selected="selected"><?= $ticket->__get('status') ?></option>
+                                <option value="<?= $ticket->__get('id'); ?>"
+                                        selected="selected"><?= $ticket->__get('status'); ?></option>
                             <?php endif; ?>
                             <?php if ($ticket->__get('status') !== $enum): ?>
                                 <option value="<?= $enum; ?>"><?= $enum; ?></option>
@@ -49,3 +48,5 @@ $enums = statusEnum();
     <?php endif; ?>
     </tbody>
 </table>
+
+<script src="/js/ticket.js"></script>

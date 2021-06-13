@@ -3,14 +3,14 @@
 
 class TicketController extends AbstractController {
 
-    public function __construct () {
+    public function __construct() {
         $this->dao = new TicketDao();
     }
 
     /**
      * Retourne tous les tickets (uniquement pour le syndicat)
      */
-    public function index () {
+    public function index() {
         $authenticatedUser = $this->isLogged();
         $tickets = $this->dao->getTickets();
 
@@ -48,7 +48,7 @@ class TicketController extends AbstractController {
         var_dump('ticket par immeuble');
     }
 
-    public function show ($id) {
+    public function show($id) {
         $authenticatedUser = $this->isLogged();
         $ticket = $this->dao->getTicketById($id);
 
@@ -58,7 +58,7 @@ class TicketController extends AbstractController {
         include ('../views/footer.php');
     }
 
-    public function create ($id, $data) {
+    public function create($id, $data) {
         $authenticatedUser = $this->isLogged();
         $data['fkUser'] = $authenticatedUser->id;
 
@@ -74,13 +74,21 @@ class TicketController extends AbstractController {
         include ('../views/footer.php');
     }
 
-    public function createView () {
+    public function createView() {
         $authenticatedUser = $this->isLogged();
 
         $content = '../views/ticket/create-form.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
+    }
+
+    public function updateStatus($id, $data) {
+        $authenticatedUser = $this->isLogged();
+
+        $idTicket = $data['idTicket'];
+
+        $this->dao->updateStatus($idTicket, $data);
     }
 
 }

@@ -87,7 +87,7 @@ class BuildingDao extends AbstractDao {
         }
     }
 
-    public function instantiate ($result) {
+    public function instantiate($result) {
         return new Building(
             !empty($result['idBuilding']) ? $result['idBuilding'] : 0,
             $result['name']

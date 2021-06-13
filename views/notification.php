@@ -29,4 +29,6 @@
 <?php endif ?>
 
 <!-- Lorsque le message vient du javascript -->
-<div id="js-container-info" class="container-info bg-error"></div>
+<div id="js-container-info" class="container-info"></div>
+
+<div id="js-quick-info" class="container-info"></div>

@@ -15,6 +15,7 @@ class Router {
         $this->actions = [
             'registerView',
             'register',
+            'dropdown',
             'loginView',
             'login',
             'logout',
@@ -23,7 +24,7 @@ class Router {
             'createView',
             'ticketByUserView',
             'ticketByBuildingView',
-            'dropdown',
+            'updateStatus',
             'edit',
             'delete',
             'show',

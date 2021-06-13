@@ -89,7 +89,7 @@ class AddressDao extends AbstractDao {
         }
     }
 
-    public function instantiate ($result) {
+    public function instantiate($result) {
         return new Address(
             !empty($result['idAddress']) ? $result['idAddress'] : 0,
             $result['street'],

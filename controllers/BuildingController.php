@@ -3,11 +3,11 @@
 
 class BuildingController extends AbstractController {
 
-    public function __construct () {
+    public function __construct() {
         $this->dao = new BuildingDao();
     }
 
-    public function index () {
+    public function index() {
         $authenticatedUser = $this->isLogged();
         $buildings = $this->dao->getBuildings();
 
@@ -17,7 +17,7 @@ class BuildingController extends AbstractController {
         include ('../views/footer.php');
     }
 
-    public function show ($id) {
+    public function show($id) {
         $authenticatedUser = $this->isLogged();
         $building = $this->dao->getBuildingById($id);
 
@@ -37,13 +37,13 @@ class BuildingController extends AbstractController {
         include ('../views/footer.php');
     }
 
-    public function create ($id, $data) {
+    public function create($id, $data) {
         $authenticatedUser = $this->isLogged();
         $this->dao->createBuilding($data);
         $this->index();
     }
 
-    public function createView () {
+    public function createView() {
         $authenticatedUser = $this->isLogged();
 
         $content = '../views/building/create-form.php';

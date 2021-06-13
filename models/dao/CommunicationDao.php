@@ -80,7 +80,7 @@ class CommunicationDao extends AbstractDao {
         }
     }
 
-    public function instantiate ($result) {
+    public function instantiate($result) {
         return new Communication(
             !empty($result['idCommunication']) ? $result['idCommunication'] : 0,
             $result['subject'],

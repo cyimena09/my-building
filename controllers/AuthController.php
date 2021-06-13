@@ -7,7 +7,7 @@ class AuthController extends AbstractController {
        $this->dao = new UserDao();
     }
 
-    public function registerView () {
+    public function registerView() {
         $buildingDao = new BuildingDao();
         $buildings = $buildingDao->getBuildings();
 
@@ -16,17 +16,17 @@ class AuthController extends AbstractController {
         include ('../views/footer.php');
     }
 
-    public function register ($id, $data) {
+    public function register($id, $data) {
         $this->dao->createUser($data);
     }
 
-    public function loginView () {
+    public function loginView() {
         include ('../views/header.php');
         include ('../views/auth/login.php');
         include ('../views/footer.php');
     }
 
-    public function login ($id, $data) {
+    public function login($id, $data) {
         $authenticatedUser = $this->dao->verify($data); // retourne 'false' si 'data' ne matche avec aucun utilisateur
 
         if ($authenticatedUser) {
