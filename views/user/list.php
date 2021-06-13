@@ -1,3 +1,4 @@
+<?php $i = 0; ?>
 <table>
     <thead>
     <tr>
@@ -12,9 +13,9 @@
     </thead>
     <tbody>
     <?php if (!empty($users)): ?>
-        <?php foreach ($users as $user): ?>
+        <?php foreach ($users as $user): $i++; ?>
             <tr>
-                <td></td>
+                <th><?= $i; ?></th>
                 <td><?= $user->__get('firstName'); ?></td>
                 <td><?= $user->__get('lastName'); ?></td>
                 <td><?= $user->__get('phone'); ?></td>

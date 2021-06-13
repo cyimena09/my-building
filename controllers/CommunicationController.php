@@ -10,7 +10,7 @@ class CommunicationController extends AbstractController {
     public function index () {
         $authenticatedUser = $this->isLogged();
         // todo a terminer
-        $communications = $this->dao->getCommunicationsByBuildingId(1);
+        $communications = $this->dao->getCommunications();
 
         $content = '../views/communication/list.php';
         include ('../views/header.php');

@@ -12,7 +12,28 @@ class Router {
         $this->get = $_GET;
         $this->post = $_POST;
 
-        $this->actions = ['registerView', 'register', 'loginView', 'login', 'logout', 'accountView', 'create', 'createView', 'dropdown', 'edit', 'delete', 'show', 'showAll', 'update', 'store', 'index', 'search'];
+        $this->actions = [
+            'registerView',
+            'register',
+            'loginView',
+            'login',
+            'logout',
+            'accountView',
+            'create',
+            'createView',
+            'ticketByUserView',
+            'ticketByBuildingView',
+            'dropdown',
+            'edit',
+            'delete',
+            'show',
+            'showAll',
+            'update',
+            'store',
+            'index',
+            'search'
+        ];
+
         $this->controllers = [
             'index' => 'MainController',
             'auth' => 'AuthController',
@@ -20,7 +41,8 @@ class Router {
             'building' => 'BuildingController',
             'apartment' => 'ApartmentController',
             'ticket' => 'TicketController',
-            'communication' => 'CommunicationController',];
+            'communication' => 'CommunicationController'
+        ];
 
         $this->request = array();
         $this->data = $this->parseURI($_SERVER['REQUEST_URI']);

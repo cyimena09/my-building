@@ -1,5 +1,5 @@
 <div>
-    <h1>Information sur votre compte</h1>
+    <h1>Information sur le ticket</h1>
     <form action="" method="post">
         <div class="group">
             <label for="id"></label>

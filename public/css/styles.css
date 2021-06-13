@@ -214,8 +214,8 @@ input:focus, textarea:focus {
     outline: none;
 }
 
-textarea:focus {
-    border: solid #668b8f 1px;
+textarea {
+    padding: 5px;
 }
 
 form .group {

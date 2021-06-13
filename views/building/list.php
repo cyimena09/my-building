@@ -1,3 +1,4 @@
+<?php $i = 0; ?>
 <table>
     <thead>
     <tr>
@@ -11,9 +12,9 @@
 
     <tbody>
     <?php if (!empty($buildings)): ?>
-        <?php foreach ($buildings as $building): ?>
+        <?php foreach ($buildings as $building): $i++; ?>
             <tr>
-                <td></td>
+                <th><?= $i; ?></th>
                 <td><?= $building->__get('name'); ?></td>
                 <td></td>
                 <td></td>

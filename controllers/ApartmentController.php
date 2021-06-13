@@ -4,6 +4,7 @@
 class ApartmentController extends AbstractController {
 
     public function __construct () {
+        //$authenticatedUser = $this->isLogged();
         $this->dao = new ApartmentDao();
     }
 
@@ -68,6 +69,10 @@ class ApartmentController extends AbstractController {
         $apartments = $this->dao->getApartmentsByBuildingId($data['idBuilding']);
 
         include ('../views/apartment/dropdown.php');
+    }
+
+    public function includesList() {
+        // todo regrouper tous les includes
     }
 
 }
