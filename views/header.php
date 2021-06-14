@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>My Building</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="shortcut icon" type="image/png" href="images/favicon_mybuilding.png"/>
     <script src="https://kit.fontawesome.com/acb4dd5af3.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
             integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
