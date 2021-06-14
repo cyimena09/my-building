@@ -1,12 +1,12 @@
 <div class="page">
     <div class="content-page">
         <h1>Envoyer une communication</h1>
-        <form action="/communication/create" method="post">
+        <form class="form-in-column" action="/communications/create" method="post">
 
 
             <!-- Choix de la résidence -->
             <div class="group">
-                <label class="label" for="fkBuilding">Choisissez la résidence</label>
+                <label class="label" for="fkBuilding" style="margin-right: 10px">Choisissez la résidence</label>
                 <select name="fkBuilding" id="fkBuilding">
                     <!-- Lorsque la résidence est inqué dans l'url (arrive lorsque l'on charge la page depuis une résidence) -->
                     <?php if (isset($_GET['idBuilding'])): ?>
@@ -41,7 +41,11 @@
             <?php elseif (!empty($idBuilding)): ?>
                 <input type="hidden" name="fkBuilding" value="<?= $idBuilding; ?>">
             <?php endif; ?>
-            <button type="submit">Envoyer</button>
+
+            <div class="group">
+                <button type="submit">Envoyer</button>
+            </div>
+
         </form>
     </div>
 </div>

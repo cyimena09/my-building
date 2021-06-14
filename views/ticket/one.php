@@ -1,40 +1,68 @@
-<div>
-    <h1>Information sur le ticket</h1>
-    <form action="" method="post">
-        <div class="group">
-            <label for="id">Numéro du ticket :</label>
-            <input id="id" type="text" placeholder="Numéro du ticket" name="id"
-                   value="<?= $ticket->id ?>">
+<?php
+include('../enumerations/statusEnum.php');
+$enums = statusEnum();
+?>
+
+<h1>Information sur le ticket</h1>
+<section>
+    <form id="form-update-ticket" action="" method="post">
+        <div class="group group-hover">
+            <label for="idTicket">Numéro du ticket</label>
+            <input id="idTicket" type="text" placeholder="Numéro du ticket" name="idTicket"
+                   value="<?= $ticket->id ?>" disabled>
         </div>
-        <div class="group">
-            <label for="subject">Sujet :</label>
+        <div class="group group-hover">
+            <label for="subject">Sujet</label>
             <input id="subject" type="text" placeholder="Sujet" name="subject"
-                   value="<?= $ticket->subject ?>">
+                   value="<?= $ticket->subject ?>" <?php if ($authenticatedUser->__get('role') == 'SYNDIC'): ?> disabled <?php endif; ?>>
         </div>
+        <div class="group group-hover">
+            <p>Date de création</p>
+            <p><?= $ticket->dateCreation ?></p>
+        </div>
+
+        <div class="group group-hover">
+            <p>Dernière mise à jour</p>
+            <p><?= $ticket->lastUpdate ?></p>
+        </div>
+
+        <!--        Statut si non syndic -->
+        <?php if ($authenticatedUser->__get('role') != 'SYNDIC'): ?>
+            <div>
+                <p class="group status-ticket">
+                    <?php if ($ticket->__get('status') == 'Non traité'): ?>
+                        <span class="bg-error"><?= $ticket->__get('status'); ?></span>
+                    <?php elseif ($ticket->__get('status') == 'En attente'): ?>
+                        <span class="bg-orange"><?= $ticket->__get('status'); ?></span>
+                    <?php elseif ($ticket->__get('status') == 'Traité'): ?>
+                        <span class="bg-success"><?= $ticket->__get('status'); ?></span>
+                    <?php endif; ?>
+                </p>
+            </div>
+        <?php endif; ?>
+
+        <!-- Statut du ticket pour le syndic -->
+        <?php if ($authenticatedUser->__get('role') == 'SYNDIC'): ?>
+            <div class="group">
+                <select name="status" id="<?= $ticket->__get('id'); ?>">
+                    <?php foreach ($enums as $enum): ?>
+                        <?php if ($ticket->__get('status') == $enum): ?>
+                            <option value="<?= $ticket->__get('id'); ?>"
+                                    selected="selected"><?= $ticket->__get('status'); ?></option>
+                        <?php endif; ?>
+                        <?php if ($ticket->__get('status') !== $enum): ?>
+                            <option value="<?= $enum; ?>"><?= $enum; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        <?php endif; ?>
+
         <div class="group">
-            <p>Date de création : <?= $ticket->dateCreation ?></p>
-            <p>Dernière mise à jour : <?= $ticket->lastUpdate ?></p>
-        </div>
-
-        <div>
-
-
-        <p class="group status-ticket">
-            <?php if ($ticket->__get('status')  == 'Non traité'): ?>
-                <span class="bg-error"><?= $ticket->__get('status'); ?></span>
-            <?php elseif ($ticket->__get('status') == 'En attente'): ?>
-                <span class="bg-orange"><?= $ticket->__get('status'); ?></span>
-            <?php elseif ($ticket->__get('status') == 'Traité'): ?>
-                <span class="bg-success"><?= $ticket->__get('status'); ?></span>
-            <?php endif; ?>
-        </p>
-        </div>
-
-
-        <div class="group">
-            <label for="description"></label>
-            <textarea id="description" name="description" cols="30" rows="10" placeholder="Description"><?= $ticket->description ?></textarea>
+            <textarea id="description" name="description" cols="30" rows="10"
+                      placeholder="Description" <?php if ($authenticatedUser->__get('role') == 'SYNDIC'): ?> disabled <?php endif; ?>><?= $ticket->description ?></textarea>
         </div>
         <button>Mettre à jour</button>
     </form>
-</div>
+</section>
+<script src="/js/ticket.js"></script>

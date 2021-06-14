@@ -9,9 +9,9 @@
         <div class="group">
             <h3><i class="fas fa-tasks"></i>Tickets</h3>
             <ul>
-                <li><a href="/ticket/ticketByUserView">Vos tickets</a></li>
-                <li><a href="/ticket/ticketByBuildingView">Tous les tickets</a></li>
-                <li><a href="/ticket/createView">Créer un ticket</a></li>
+                <li><a href="/tickets/ticketByUserView">Vos tickets</a></li>
+                <li><a href="/tickets/ticketByBuildingView">Tous les tickets</a></li>
+                <li><a href="/tickets/createView">Créer un ticket</a></li>
             </ul>
         </div>
 
@@ -19,7 +19,7 @@
         <div class="group">
             <h3><i class="fas fa-comments"></i>Communications</h3>
             <ul>
-                <li><a href="/communication/communicationByBuildingView">Voir les communications</a></li>
+                <li><a href="/communications/communicationByBuildingView">Voir les communications</a></li>
             </ul>
         </div>
     <?php endif; ?>
@@ -30,8 +30,8 @@
         <div class="group">
             <h3><i class="fas fa-comments"></i>Communications</h3>
             <ul>
-                <li><a href="/communication">Voir les communications</a></li>
-                <li><a href="/communication/createView">Nouvelle communication</a></li>
+                <li><a href="/communications">Voir les communications</a></li>
+                <li><a href="/communications/createView">Nouvelle communication</a></li>
             </ul>
         </div>
 
@@ -39,7 +39,7 @@
         <div class="group">
             <h3><i class="fas fa-tasks"></i>Tickets</h3>
             <ul>
-                <li><a href="/ticket">Voir les tickets</a></li>
+                <li><a href="/tickets">Voir les tickets</a></li>
             </ul>
         </div>
 
@@ -47,8 +47,8 @@
         <div class="group">
             <h3><i class="fas fa-building"></i>Immeubles</h3>
             <ul>
-                <li><a href="/building">Liste des immeubles</a></li>
-                <li><a href="/building/createView">Ajouter un immeuble</a></li>
+                <li><a href="/buildings">Liste des immeubles</a></li>
+                <li><a href="/buildings/createView">Ajouter un immeuble</a></li>
             </ul>
         </div>
 
@@ -56,8 +56,8 @@
         <div class="group">
             <h3><i class="fas fa-door-closed"></i>Appartements</h3>
             <ul>
-                <li><a href="/apartment">Liste des appartements</a></li>
-                <li><a href="/apartment/createView">Ajouter un appartement</a></li>
+                <li><a href="/apartments">Liste des appartements</a></li>
+                <li><a href="/apartments/createView">Ajouter un appartement</a></li>
             </ul>
         </div>
 
@@ -65,7 +65,8 @@
         <div class="group">
             <h3><i class="fas fa-users"></i>Utilisateurs</h3>
             <ul>
-                <li><a href="/user">Liste des utilisateurs</a></li>
+                <li><a href="/users">Liste des utilisateurs</a></li>
+                <li><a href="/users/inactive">Comptes non activé</a></li>
             </ul>
         </div>
 

@@ -120,6 +120,27 @@ class TicketDao extends AbstractDao {
         }
     }
 
+    public function updateTicket($id, $data) {
+        if (empty($id || empty($data))) {
+            return false;
+        }
+
+        $currentDate = date('Y-m-d H:i:s');
+
+        try {
+            $statement = $this->connection->prepare(
+                "UPDATE {$this->table} SET subject = ?, description = ?, last_update = ? WHERE idTicket = ?");
+            $statement->execute([
+                htmlspecialchars($data['subject']),
+                htmlspecialchars($data['description']),
+                htmlspecialchars($currentDate),
+                htmlspecialchars($id)
+            ]);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
     public function instantiate($result) {
         return new Ticket(
             !empty($result['idTicket']) ? $result['idTicket'] : 0,

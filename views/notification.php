@@ -31,4 +31,5 @@
 <!-- Lorsque le message vient du javascript -->
 <div id="js-container-info" class="container-info"></div>
 
+<!--Notification en bas à droite de l'écran-->
 <div id="js-quick-info" class="container-info"></div>

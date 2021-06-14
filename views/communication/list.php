@@ -1,4 +1,5 @@
 <?php $i = 0; ?>
+<h1>Communications</h1>
 <table>
     <thead>
     <tr>
@@ -17,7 +18,7 @@
                 <td><?= $communication->__get('subject'); ?></td>
                 <td><?= $communication->__get('dateCreation'); ?></td>
                 <td><?= $communication->__get('lastUpdate'); ?></td>
-                <td><a href="/communication/show/<?= $communication->__get('id'); ?>">Voir</a></td>
+                <td><a href="/communications/show/<?= $communication->__get('id'); ?>">Voir</a></td>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>

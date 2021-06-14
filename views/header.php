@@ -9,13 +9,14 @@
             integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
             crossorigin="anonymous"></script>
     <script src="/js/script.js"></script>
+    <script src="/js/functions.js"></script>
 </head>
 <body>
 
 <header>
     <div class="content-page">
         <div class="logo">
-            <a href="/home">My Building</a>
+            <a href="/">My Building</a>
         </div>
         <nav>
             <ul>
@@ -29,9 +30,9 @@
             <ul>
                 <?php if(isset($authenticatedUser) && $authenticatedUser): ?>
                     <li><a href="/auth/accountView">Votre Espaces</a></li>
-                    <li><a href="/auth/logout">Se déconnecter</a></li>
+                    <li><a class="a-btn a-btn-red" href="/auth/logout"><i class="fas fa-power-off"></i>Se déconnecter</a></li>
                 <?php else: ?>
-                    <li><a href="/auth/loginView">Se connecter</a></li>
+                    <li><a href="/">Se connecter</a></li>
                     <li><a href="/auth/registerView">S'inscrire</a></li>
                 <?php endif; ?>
             </ul>

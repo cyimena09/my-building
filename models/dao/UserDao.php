@@ -64,6 +64,27 @@ class UserDao extends AbstractDao {
         }
     }
 
+    public function updateAccount($id, $data) {
+        if (empty($id || empty($data))) {
+            return false;
+        }
+
+        try {
+            $statement = $this->connection->prepare(
+                "UPDATE {$this->table} SET firstname = ?, lastname = ?, email = ?, phone = ?, gender = ? WHERE idUser = ?");
+            $statement->execute([
+                htmlspecialchars($data['firstname']),
+                htmlspecialchars($data['lastname']),
+                htmlspecialchars($data['email']),
+                htmlspecialchars($data['phone']),
+                htmlspecialchars($data['gender']),
+                htmlspecialchars($id)
+            ]);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
     public function createUser($data) {
         if (empty($data['firstName']) ||
             empty($data['lastName']) ||

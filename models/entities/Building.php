@@ -6,6 +6,7 @@ class Building {
     private $name;
     private $address;
     private $apartments;
+    private $nbApartments; // nombre d'apartement dans un immeuble
 
     public function __construct($id, $name) {
         $this->id = $id;

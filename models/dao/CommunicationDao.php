@@ -73,7 +73,6 @@ class CommunicationDao extends AbstractDao {
 
             return false;
         }
-
         // on récupère la date actuelle qu'on ajoutera a l'objet communcation
         $currentDate = date('Y-m-d H:i:s');
 
@@ -97,6 +96,29 @@ class CommunicationDao extends AbstractDao {
                 print $e->getMessage();
                 return false;
             }
+        }
+    }
+
+    public function updateCommunication($id, $data) {
+        if (empty($id) || empty($data)) {
+            return false;
+        }
+
+        $currentDate = date('Y-m-d H:i:s');
+
+        try {
+            $statement = $this->connection->prepare(
+                "UPDATE {$this->table} SET subject = ?, message = ?, last_update = ? WHERE idCommunication = ?");
+            $statement->execute([
+                htmlspecialchars($data['subject']),
+                htmlspecialchars($data['message']),
+                htmlspecialchars($currentDate),
+                htmlspecialchars($id)
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            return false;
         }
     }
 

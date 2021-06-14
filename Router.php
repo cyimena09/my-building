@@ -37,13 +37,13 @@ class Router {
         ];
 
         $this->controllers = [
-            'index' => 'MainController',
+            'index' => 'AuthController',
             'auth' => 'AuthController',
-            'user' => 'UserController',
-            'building' => 'BuildingController',
-            'apartment' => 'ApartmentController',
-            'ticket' => 'TicketController',
-            'communication' => 'CommunicationController'
+            'users' => 'UserController',
+            'buildings' => 'BuildingController',
+            'apartments' => 'ApartmentController',
+            'tickets' => 'TicketController',
+            'communications' => 'CommunicationController'
         ];
 
         $this->request = array();

@@ -1,7 +1,7 @@
 <div class="page">
     <div class="content-page">
         <h1>Créer un nouveau ticket</h1>
-        <form action="/ticket/create" method="post">
+        <form action="/tickets/create" method="post">
             <div class="group">
                 <label for="subject"></label>
                 <input id="subject" name="subject" placeholder="Sujet">

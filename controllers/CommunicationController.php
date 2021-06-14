@@ -46,9 +46,9 @@ class CommunicationController extends AbstractController {
         $authenticatedUser = $this->isLogged();
 
         if ($this->dao->createCommunication($data)) {
-            $successMessage = 'Le communication a bien été envoyé.';
+            $successMessage = 'La communication a été envoyé.';
         } else {
-            $errorMessage = "Désolé, le communication n'a pas pu être envoyé.";
+            $errorMessage = "Désolé, la communication n'a pas pu être envoyé.";
         }
 
         $buildingDao = new BuildingDao();
@@ -70,6 +70,13 @@ class CommunicationController extends AbstractController {
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
+    }
+
+    public function update($id, $data) {
+        $authenticatedUser = $this->isLogged();
+
+        $idCommunication = $data['idCommunication'];
+        $this->dao->updateCommunication($idCommunication, $data);
     }
 
 }

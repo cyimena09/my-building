@@ -1,4 +1,5 @@
 <?php $i = 0; ?>
+<h1>Utilisateurs</h1>
 <table>
     <thead>
     <tr>
@@ -19,7 +20,10 @@
                 <td><?= $user->__get('lastName'); ?></td>
                 <td><?= $user->__get('phone'); ?></td>
                 <td><?= $user->__get('email'); ?></td>
-                <td><a href="/user/show/<?= $user->__get('id'); ?>">Voir</a></td>
+                <td>
+                    <a href="/users/show/<?= $user->__get('id'); ?>"><i class="fas fa-edit"></i></a>
+                    <a href="/users/delete/<?= $user->__get('id'); ?>"><i class="fas fa-trash"></i></a>
+                </td>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>

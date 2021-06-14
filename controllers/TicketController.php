@@ -91,4 +91,11 @@ class TicketController extends AbstractController {
         $this->dao->updateStatus($idTicket, $data);
     }
 
+    public function update($id, $data) {
+        $authenticatedUser = $this->isLogged();
+
+        $idTicket = $data['idTicket'];
+        $this->dao->updateTicket($idTicket, $data);
+    }
+
 }

@@ -14,7 +14,7 @@ class UserController extends AbstractController {
         $authenticatedUser = $this->isLogged();
 
         $filter = 'role'; // champ dans la db
-        $value = 'TENANT'; // valeur du champ  todo utiliser l'enum
+        $value = 'LOCATAIRE'; // valeur du champ  todo utiliser l'enum
         $users = $this->dao->getUsersByFilter($filter, $value);
 //
 //        // pour chaque utilisateurs on affiche leur immeuble

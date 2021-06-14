@@ -3,6 +3,7 @@ include('../enumerations/statusEnum.php');
 $enums = statusEnum();
 ?>
 
+<h1>Tickets</h1>
 <table>
     <thead>
     <tr>
@@ -59,11 +60,10 @@ $enums = statusEnum();
                 <td><?= $ticket->__get('dateCreation'); ?></td>
                 <td><?= $ticket->__get('lastUpdate'); ?></td>
 
-                <td><a href="/ticket/show/<?= $ticket->__get('id'); ?>">Voir</a></td>
+                <td><a href="/tickets/show/<?= $ticket->__get('id'); ?>">Voir</a></td>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>
     </tbody>
 </table>
-
 <script src="/js/ticket.js"></script>

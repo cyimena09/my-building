@@ -5,32 +5,32 @@ $(document).ready(function () {
       *  *****************************************************************************************
       * */
 
-        const select = document.getElementById('fkBuilding'); // element declencheur
+    const select = document.getElementById('fkBuilding'); // element declencheur
     const container = document.getElementById('js-result'); // container du resultat
 
 
-        select.addEventListener('click', function(e) {
-            $('#dropdown-apartment').remove(); // on retire l'ancienne liste si elle existe
-            container.style.visibility = 'visible';
+    select.addEventListener('click', function (e) {
+        $('#dropdown-apartment').remove(); // on retire l'ancienne liste si elle existe
+        container.style.visibility = 'visible';
 
-            const idBuilding = select.value; // récupération de l'id de l'immeuble
+        const idBuilding = select.value; // récupération de l'id de l'immeuble
 
-            const data = {
-                idBuilding: idBuilding
-            }
+        const data = {
+            idBuilding: idBuilding
+        }
 
-            $.post('/apartment/dropdown/', data, function () {
+        $.post('/apartments/dropdown/', data, function () {
 
+        })
+            .done(function (result) {
+                if (result) {
+                    $('#js-result').append(result) // on ajoute l'animal dans le container
+                }
             })
-                .done(function (result) {
-                    if (result) {
-                        $('#js-result').append(result) // on ajoute l'animal dans le container
-                    }
-                })
-                .fail(function (error) {
-                    console.log('error', error);
-                });
-        });
+            .fail(function (error) {
+                console.log('error', error);
+            });
+    });
 
 
     /* *****************************************************************************************
@@ -92,8 +92,8 @@ $(document).ready(function () {
         }
 
         const data = {
-            firstName: firstName ,
-            lastName: lastName ,
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             phone: phone,
             gender: gender,
@@ -106,8 +106,8 @@ $(document).ready(function () {
 
         })
             .done(function (e) {
-                const successMessage =  encodeURI('Félicitation, votre compte a bien été créé !');
-                window.location = '/auth/loginView?success-message=' + successMessage;
+                const successMessage = encodeURI('Félicitation, votre compte a bien été créé !');
+                window.location = '/?success-message=' + successMessage;
             })
             .fail(function (error) {
                 console.log('error', error);

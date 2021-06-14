@@ -60,13 +60,12 @@ class ApartmentDao extends AbstractDao {
 
     public function createApartment($data) {
         if (empty($data['name']) ||
-            empty($data['fkBuilding'])) {
+            empty($data['idBuilding'])) {
 
             return false;
         }
 
-        $building = new Building($data['fkBuilding'], null);
-        $apartment = new Apartment(null, $data['name'], null, $building);
+        $apartment = new Apartment(null, $data['name'], null, $data['idBuilding']);
 
         if ($apartment) {
             try {
@@ -75,13 +74,30 @@ class ApartmentDao extends AbstractDao {
                 );
                 $statement->execute([
                     htmlspecialchars($apartment->__get('name')),
-                    htmlspecialchars($apartment->__get('building')->id),
+                    htmlspecialchars($apartment->__get('building')),
                 ]);
                 return true;
             } catch (PDOException $e) {
                 print $e->getMessage();
                 return false;
             }
+        }
+    }
+
+    public function updateApartment($id, $data) {
+        if (empty($id || empty($data))) {
+            return false;
+        }
+
+        try {
+            $statement = $this->connection->prepare(
+                "UPDATE {$this->table} SET name = ? WHERE idApartment = ?");
+            $statement->execute([
+                htmlspecialchars($data['name']),
+                htmlspecialchars($id)
+            ]);
+        } catch (PDOException $e) {
+            print $e->getMessage();
         }
     }
 

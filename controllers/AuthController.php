@@ -7,6 +7,12 @@ class AuthController extends AbstractController {
        $this->dao = new UserDao();
     }
 
+    public function index() {
+        include ('../views/header.php');
+        include ('../views/auth/login.php');
+        include ('../views/footer.php');
+    }
+
     public function registerView() {
         $buildingDao = new BuildingDao();
         $buildings = $buildingDao->getBuildings();
@@ -18,12 +24,6 @@ class AuthController extends AbstractController {
 
     public function register($id, $data) {
         $this->dao->createUser($data);
-    }
-
-    public function loginView() {
-        include ('../views/header.php');
-        include ('../views/auth/login.php');
-        include ('../views/footer.php');
     }
 
     public function login($id, $data) {
@@ -59,6 +59,13 @@ class AuthController extends AbstractController {
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
+    }
+
+    public function update($id, $data) {
+        $authenticatedUser = $this->isLogged();
+
+        $idUser = $data['idUser'];
+        $this->dao->updateAccount($idUser, $data);
     }
 
 }

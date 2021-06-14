@@ -9,7 +9,8 @@ class BuildingController extends AbstractController {
 
     public function index() {
         $authenticatedUser = $this->isLogged();
-        $buildings = $this->dao->getBuildings();
+
+        $buildings = $this->dao->getBuildingsWithNbApartmentsAndAddress();
 
         $content = '../views/building/list.php';
         include ('../views/header.php');
@@ -50,6 +51,13 @@ class BuildingController extends AbstractController {
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
+    }
+
+    public function update($id, $data) {
+        $authenticatedUser = $this->isLogged();
+
+        $idBuilding = $data['idBuilding'];
+        $this->dao->updateBuilding($idBuilding, $data);
     }
 
 }

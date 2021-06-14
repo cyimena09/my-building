@@ -4,7 +4,6 @@
 class ApartmentController extends AbstractController {
 
     public function __construct() {
-        //$authenticatedUser = $this->isLogged();
         $this->dao = new ApartmentDao();
     }
 
@@ -37,14 +36,15 @@ class ApartmentController extends AbstractController {
     public function create($id, $data) {
         $authenticatedUser = $this->isLogged();
 
-        if ( $this->dao->createApartment($data)) {
-            $successMessage = "L'appartement a bien été ajouté au batiment";
-        } else {
-            $errorMessage = "Désolé, l'appartement n'a pas pu être créé.";
-        }
+        $this->dao->createApartment($data);
+    }
 
-        // on récupère l'id de l'immeuble pour retourner le meme formulaire et permettre des ajouts multiples
-        $idBuilding = $data['fkBuilding'];
+    public function createView() {
+        $authenticatedUser = $this->isLogged();
+
+        // récupération des immeubles
+        $buildingDao = new BuildingDao();
+        $buildings = $buildingDao->getBuildings();
 
         $content = '../views/apartment/create-form.php';
         include ('../views/header.php');
@@ -52,13 +52,11 @@ class ApartmentController extends AbstractController {
         include ('../views/footer.php');
     }
 
-    public function createView() {
+    public function update($id, $data) {
         $authenticatedUser = $this->isLogged();
 
-        $content = '../views/apartment/create-form.php';
-        include ('../views/header.php');
-        include ('../views/user/user-space.php');
-        include ('../views/footer.php');
+        $idApartment = $data['idApartment'];
+        $this->dao->updateApartment($idApartment, $data);
     }
 
     /**

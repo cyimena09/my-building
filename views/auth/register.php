@@ -3,7 +3,8 @@
 
         <?php include('../views/notification.php'); // communication de notification ?>
 
-        <form id="form-create-user" action="/auth/register" method="post">
+        <h1>Nouveau compte</h1>
+        <form id="form-create-user" class="form-in-column" action="/auth/register" method="post">
             <!--  ********************   TOP PART ********************  -->
             <!--      Radio button -->
             <div class="create-as group">

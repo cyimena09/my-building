@@ -20,38 +20,61 @@ $(document).ready(function () {
                 status: status
             }
 
-            $.post('/ticket/updateStatus/', data, function () {
+            $.post('/tickets/updateStatus/', data, function () {
 
             })
                 .done(function (result) {
-                    // animation de la notification en bas à droite
-                    containerInfo.innerText = "Le status a été mis à jour.";
-                    containerInfo.classList.add("bg-success");
-                    containerInfo.style.display = 'block';
-                    // lorsque la notification apparait
-                    setTimeout(
-                        () => {
-                            containerInfo.style.opacity = '1';
-                            containerInfo.style.bottom = '0';
-                        });
-
-                    // lorsqu'elle disparait
-                    setTimeout(
-                        () => {
-                            containerInfo.style.opacity = '0';
-                            containerInfo.style.bottom = '-20px';
-                        }, 2000);
-
-                    // lorsqu'elle disparait (lanimation dure 4 secondes donc le 'display: none' doit attendre au moins ce délai
-                    setTimeout(
-                        () => {
-                            containerInfo.style.display = 'none';
-                        }, 2600);
+                    const message = "Le status a été mis à jour.";
+                    const cssClass = 'bg-success';
+                    animateNotification(message, cssClass)
                 })
                 .fail(function (error) {
                     console.log('error', error);
                 });
         });
     }
+
+    /* *****************************************************************************************
+ * ------------------------------  METTRE A JOUR UN TICKET ----------------------------------
+ *  *****************************************************************************************
+ * */
+
+    $('form#form-update-ticket').on('submit', function (e) {
+        e.preventDefault();
+
+        // On récupère les valeurs du formulaire
+        const idTicket = document.forms["form-update-ticket"]["idTicket"].value;
+        const subject = document.forms["form-update-ticket"]["subject"].value;
+        const description = document.forms["form-update-ticket"]["description"].value;
+
+
+        // On vérifie que tous les champs ont été encodé
+        if (subject == "" ||
+            description == "") {
+
+            const message = "Veuillez encoder tous les champs !";
+            const cssClass = 'bg-error';
+            animateNotification(message, cssClass)
+            return;
+        }
+
+        const data = {
+            idTicket: idTicket,
+            subject: subject,
+            description: description,
+        }
+
+        $.post('/tickets/update', data, function () {
+
+        })
+            .done(function (e) {
+                const message = "Mise à jour réussie !";
+                const cssClass = 'bg-success';
+                animateNotification(message, cssClass)
+            })
+            .fail(function (error) {
+                console.log('error', error);
+            });
+    });
 
 });
