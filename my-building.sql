@@ -61,7 +61,8 @@ CREATE TABLE `apartment` (
   KEY `apartment_FK_1` (`fkOwner`),
   KEY `apartment_FK_2` (`fkTenant`),
   CONSTRAINT `apartment_FK` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `apartment_FK_1` FOREIGN KEY (`fkOwner`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `apartment_FK_1` FOREIGN KEY (`fkOwner`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `apartment_FK_2` FOREIGN KEY (`fkTenant`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -111,8 +112,8 @@ CREATE TABLE `communication` (
   `idCommunication` int(11) NOT NULL AUTO_INCREMENT,
   `subject` varchar(255) DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
-  `date_creation` date DEFAULT NULL,
-  `last_update` date DEFAULT NULL,
+  `date_creation` datetime DEFAULT NULL,
+  `last_update` datetime DEFAULT NULL,
   `fkBuilding` int(11) DEFAULT NULL,
   PRIMARY KEY (`idCommunication`),
   KEY `communication_FK` (`fkBuilding`),
@@ -141,11 +142,15 @@ CREATE TABLE `ticket` (
   `subject` varchar(255) DEFAULT NULL,
   `status` varchar(100) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `date_creation` date DEFAULT NULL,
-  `last_update` date DEFAULT NULL,
+  `date_creation` datetime DEFAULT NULL,
+  `last_update` datetime DEFAULT NULL,
   `fkUser` int(11) NOT NULL,
   `fkBuilding` int(11) NOT NULL,
-  PRIMARY KEY (`idTicket`)
+  PRIMARY KEY (`idTicket`),
+  KEY `ticket_FK` (`fkBuilding`),
+  KEY `ticket_FK_1` (`fkUser`),
+  CONSTRAINT `ticket_FK` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ticket_FK_1` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -207,10 +212,15 @@ CREATE TABLE `user` (
   `fkAddress` int(11) DEFAULT NULL,
   `fkBuilding` int(11) DEFAULT NULL,
   `fkApartment` int(11) DEFAULT NULL,
+  `isActiveColumn1` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `user_un` (`email`),
   KEY `user_FK` (`fkAddress`),
-  CONSTRAINT `user_FK` FOREIGN KEY (`fkAddress`) REFERENCES `address` (`idAddress`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `user_FK_1` (`fkApartment`),
+  KEY `user_FK_2` (`fkBuilding`),
+  CONSTRAINT `user_FK` FOREIGN KEY (`fkAddress`) REFERENCES `address` (`idAddress`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_FK_1` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idApartment`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_FK_2` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -236,4 +246,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-09 22:32:18
+-- Dump completed on 2021-06-14 20:50:40
