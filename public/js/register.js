@@ -1,37 +1,71 @@
 $(document).ready(function () {
 
+
+    /* *****************************************************************************************
+    * -----------------------  GERER LE CHOIX EN FONCTION DU TYPE DE COMPTE ---------------------------
+    *  *****************************************************************************************
+    * */
+
+    let radios = document.getElementsByName("role");
+
+    for (let i = 0; i < radios.length; ++i) {
+        console.log(radios[i])
+        radios[i].addEventListener('click', function (e) {
+            // récupération des valeurs du formulaire
+            const role = radios[i].value;
+
+            $.get('/auth/sectionByRoleView/' + role, function () {
+
+            })
+                .done(function (result) {
+                    if (result) {
+                        $('#js-section-result').append(result);
+
+                        dynamicMenu() // on active le code qui permet de générer dynamiquement les appartements en fonction de l'immeuble choisi
+                    }
+                })
+                .fail(function (error) {
+                    console.log('error', error);
+                });
+
+
+        });
+    }
+
     /* *****************************************************************************************
       * -----------------------  AFFICHE LISTE DES APPARTEMENTS --------------------------------
       *  *****************************************************************************************
       * */
 
-    const select = document.getElementById('fkBuilding'); // element declencheur
-    const container = document.getElementById('js-result'); // container du resultat
+
+    function dynamicMenu() {
+        const select = document.getElementById('fkBuilding'); // element declencheur
+        const container = document.getElementById('js-result'); // container du resultat
 
 
-    select.addEventListener('click', function (e) {
-        $('#dropdown-apartment').remove(); // on retire l'ancienne liste si elle existe
-        container.style.visibility = 'visible';
+        select.addEventListener('click', function (e) {
+            $('#dropdown-apartment').remove(); // on retire l'ancienne liste si elle existe
+            container.style.visibility = 'visible';
 
-        const idBuilding = select.value; // récupération de l'id de l'immeuble
+            const idBuilding = select.value; // récupération de l'id de l'immeuble
 
-        const data = {
-            idBuilding: idBuilding
-        }
+            const data = {
+                idBuilding: idBuilding
+            }
 
-        $.post('/apartments/dropdown/', data, function () {
+            $.post('/apartments/dropdown/', data, function () {
 
-        })
-            .done(function (result) {
-                if (result) {
-                    $('#js-result').append(result) // on ajoute l'animal dans le container
-                }
             })
-            .fail(function (error) {
-                console.log('error', error);
-            });
-    });
-
+                .done(function (result) {
+                    if (result) {
+                        $('#js-result').append(result) // on ajoute l'animal dans le container
+                    }
+                })
+                .fail(function (error) {
+                    console.log('error', error);
+                });
+        });
+    }
 
     /* *****************************************************************************************
     * ------------------------------  CREER UTILISATEUR -----------------------------------

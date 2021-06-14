@@ -15,6 +15,7 @@ class Router {
         $this->actions = [
             'registerView',
             'register',
+            'sectionByRoleView',
             'dropdown',
             'loginView',
             'login',

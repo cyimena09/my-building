@@ -5,9 +5,9 @@
 
         <h1>Nouveau compte</h1>
         <form id="form-create-user" class="form-in-column" action="/auth/register" method="post">
-            <!--  ********************   TOP PART ********************  -->
-            <!--      Radio button -->
-            <div class="create-as group">
+
+            <!--            Créer en tant que -->
+            <section id="role" class="create-as">
                 <p>Créer un compte en tant que :</p>
                 <div class="group-radio">
                     <input type="radio" id="tenant" name="role" value="TENANT">
@@ -21,73 +21,102 @@
                     <input type="radio" id="both" name="role" value="TENANT_OWNER">
                     <label for="both">Propriétaire et résident</label>
                 </div>
-            </div>
+            </section>
 
-            <!--  ********************  MID RIGHT & LEFT PART ********************  -->
-            <div class="parts">
-                <!-- Left -->
-                <div class="left">
-                    <div class="group">
-                        <label for="firstName"></label>
-                        <input id="firstName" type="text" placeholder="Prénom" name="firstName">
-                    </div>
-                    <div class="group">
-                        <label for="lastName"></label>
-                        <input id="lastName" type="text" placeholder="Nom" name="lastName">
-                    </div>
 
-                    <div class="group">
-                        <label for="phone"></label>
-                        <input id="phone" type="text" placeholder="Numéro de téléphone" name="phone">
-                    </div>
+            <!--            Informations personnelles -->
+            <section class="parts">
 
-                    <div class="group">
-                        <label for="email"></label>
-                        <input id="email" type="text" placeholder="Email" name="email">
-                    </div>
-
-                    <div class="group">
-                        <label for="password"></label>
-                        <input id="password" type="password" placeholder="Mot de passe" name="password">
-                    </div>
-
-                    <!--      Radio button-->
-
-                    <div class="group">
-                        <p style="font-size: 18px; margin-bottom: 10px">Genre</p>
-                        <div class="group-radio">
-                            <input type="radio" id="male" name="gender" value="M">
-                            <label for="male">Homme</label>
-                        </div>
-                        <div class="group-radio">
-                            <input type="radio" id="female" name="gender" value="F">
-                            <label for="female">Femme</label>
-                        </div>
-                        <div class="group-radio">
-                            <input type="radio" id="other" name="gender" value="O">
-                            <label for="other">Autre</label>
-                        </div>
-                    </div>
+                <div class="head">
+                    <h3>Informations personnelles</h3>
                 </div>
 
-                <!--  Right  -->
-                <div class="right">
-                    <div class="group">
-                        <label class="label" for="fkBuilding">Choisissez votre résidence</label>
-                        <select name="fkBuilding" id="fkBuilding">
-                            <?php foreach ($buildings as $building): ?>
-                                <option value="<?= $building->__get('id'); ?>"><?= $building->__get('name'); ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                <div class="group">
+                    <label for="firstName"></label>
+                    <input id="firstName" type="text" placeholder="Prénom" name="firstName">
+                </div>
+                <div class="group">
+                    <label for="lastName"></label>
+                    <input id="lastName" type="text" placeholder="Nom" name="lastName">
+                </div>
+
+                <div class="group">
+                    <label for="phone"></label>
+                    <input id="phone" type="text" placeholder="Numéro de téléphone" name="phone">
+                </div>
+
+                <div class="group">
+                    <label for="email"></label>
+                    <input id="email" type="text" placeholder="Email" name="email">
+                </div>
+
+                <div class="group">
+                    <label for="password"></label>
+                    <input id="password" type="password" placeholder="Mot de passe" name="password">
+                </div>
+
+                <!-- Radio button-->
+                <div class="group">
+                    <p style="font-size: 18px; margin-bottom: 10px">Genre</p>
+                    <div class="group-radio">
+                        <input type="radio" id="male" name="gender" value="M">
+                        <label for="male">Homme</label>
                     </div>
-
-                    <div id="js-result" style="visibility: hidden">
-
+                    <div class="group-radio">
+                        <input type="radio" id="female" name="gender" value="F">
+                        <label for="female">Femme</label>
+                    </div>
+                    <div class="group-radio">
+                        <input type="radio" id="other" name="gender" value="O">
+                        <label for="other">Autre</label>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <p class="color-blue">Ajouter une personne résidant avec moi +</p>
+
+
+                <!-- Address -->
+            <section>
+                <div class="head">
+                    <h3>Adresse de contact</h3>
+                </div>
+                <div class="group">
+                    <label for="street"></label>
+                    <input id="street" type="text" placeholder="Rue" name="street">
+                </div>
+                <div class="group">
+                    <label for="houseNumber"></label>
+                    <input id="houseNumber" type="text" placeholder="Numéro" name="houseNumber">
+                </div>
+                <div class="group">
+                    <label for="boxNumber"></label>
+                    <input id="boxNumber" type="text" placeholder="Boite" name="boxNumber">
+                </div>
+                <div class="group">
+                    <label for="zip"></label>
+                    <input id="zip" type="text" placeholder="Code postal" name="zip">
+                </div>
+                <div class="group">
+                    <label for="city"></label>
+                    <input id="city" type="text" placeholder="Ville" name="city">
+                </div>
+                <div class="group">
+                    <label for="country"></label>
+                    <input id="country" type="text" placeholder="Pays" name="country">
+                </div>
+            </section>
+
+
+<!--           Js result -->
+
+            <section id="js-section-result">
+
+
+            </section>
+
+
+
+
             <div class="container-button">
                 <button type="submit">Créer le compte</button>
             </div>

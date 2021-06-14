@@ -243,7 +243,7 @@ img {
     margin-bottom: 30px;
 }
 
-#user-space .head {
+.head {
     margin-bottom: 20px;
 }
 
@@ -462,8 +462,12 @@ button:hover {
     background-color: #811616;;
 }
 
-#user-space .head a i {
-    color: white;
+.a-btn-mauve {
+    background-color: #732DD9;
+}
+
+.a-btn-mauve:hover {
+    background-color: #6125b5;
 }
 
 /* ROLE */

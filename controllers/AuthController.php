@@ -14,9 +14,6 @@ class AuthController extends AbstractController {
     }
 
     public function registerView() {
-        $buildingDao = new BuildingDao();
-        $buildings = $buildingDao->getBuildings();
-
         include ('../views/header.php');
         include ('../views/auth/register.php');
         include ('../views/footer.php');
@@ -66,6 +63,29 @@ class AuthController extends AbstractController {
 
         $idUser = $data['idUser'];
         $this->dao->updateAccount($idUser, $data);
+    }
+
+    /**
+     * Retourne une section du formulaire en fonction du role indiqué par l'utilisateur
+     * @param $role
+     * @param $data
+     */
+    public function sectionByRoleView($role, $data) {
+        //$apartmentController = new ApartmentController();
+        $buildingDao = new BuildingDao();
+
+        if ($role == 'TENANT') {
+            //$apartmentController->dropdown()
+
+            $buildings = $buildingDao->getBuildings();
+            include ('../views/auth/section-tenant.php');
+        } elseif ($role = 'OWNER') {
+            $buildings = $buildingDao->getBuildings();
+            include ('../views/auth/section-owner.php');
+        } elseif ($role == 'TENANT_OWNER') {
+            $buildings = $buildingDao->getBuildings();
+            include ('../views/auth/section-tenant-owner.php');
+        }
     }
 
 }

@@ -8,6 +8,29 @@ VALUES
 ('Place du Building C', '18', null, '1304', 'Bruxelles', 'Espagne'),
 ('Chaussée du Building D', '18', null, '1306', 'Ottignies', 'Colombie');
 
+-- Building
+INSERT INTO building(name, fkAddress) VALUES ('Building A', 3);
+INSERT INTO building(name, fkAddress) VALUES ('Building B', 4);
+INSERT INTO building(name, fkAddress) VALUES ('Building C', 5);
+INSERT INTO building(name, fkAddress) VALUES ('Building D', 6);
+
+-- Apartment
+INSERT INTO apartment(name, fkBuilding)
+VALUES
+('Apartement A1', 1),
+('Apartement A2', 1),
+('Apartement A3', 1),
+('Apartement A4', 1),
+('Apartement B1', 2),
+('Apartement B2', 2),
+('Apartement B3', 2),
+('Apartement C1', 3),
+('Apartement C2', 3),
+('Apartement C3', 3),
+('Apartement D1', 4),
+('Apartement D2', 4),
+('Apartement D3', 4);
+
 -- User
 INSERT INTO user(firstname, lastname, email, phone, gender, role, password, fkAddress, fkBuilding, fkApartment )
 VALUES
@@ -24,29 +47,6 @@ VALUES
 ('Napoleon', 'Jencey', 'njencey5@csmonitor.com', '5625961927', 'M', 'LOCATAIRE', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', null, 2, 6),
 ('Kain', 'Wrist', 'kwrist6@mayoclinic.com', '5729661592', 'M', 'LOCATAIRE', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', null, 2, 7),
 ('Vernor', 'Titchen', 'vtitchen7@moonfruit.com', '2342462343', 'M', 'LOCATAIRE', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', null, 3, 8);
-
--- Building
-INSERT INTO building(name, fkAddress) VALUES ('Building A', 3);
-INSERT INTO building(name, fkAddress) VALUES ('Building B', 4);
-INSERT INTO building(name, fkAddress) VALUES ('Building C', 5);
-INSERT INTO building(name, fkAddress) VALUES ('Building D', 6);
-
--- Apartment
-INSERT INTO apartment(name, fkBuilding, fkOwner, fkTenant)
-VALUES
-('Apartement A1', 1, 2, 1),
-('Apartement A2', 1, 6, 2),
-('Apartement A3', 1, 7, 3),
-('Apartement A4', 1, 8, 4),
-('Apartement B1', 2, 9, 5),
-('Apartement B2', 2, 10, 6),
-('Apartement B3', 2, 11, 7),
-('Apartement C1', 3, 12, 8),
-('Apartement C2', 3, 13, 9),
-('Apartement C3', 3, 2, 10),
-('Apartement D1', 4, 3, 11),
-('Apartement D2', 4, 4, 12),
-('Apartement D3', 4, 5, 13);
 
 -- Communication
 INSERT INTO communication(subject, message, date_creation, last_update, fkBuilding)
