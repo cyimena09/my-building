@@ -80,7 +80,7 @@ $x = 0;
                     <tr>
                         <th><?= $i ?></th>
                         <td><?= $apartment->__get('name'); ?></td>
-                        <td><a href="/apartment/show/<?= $apartment->__get('id'); ?>">Voir</a></td>
+                        <td><a href="/apartments/show/<?= $apartment->__get('id'); ?>">Voir</a></td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -92,7 +92,7 @@ $x = 0;
     <section>
 
         <div class="head">
-            <h2>Communication</h2>
+            <h2>Communications</h2>
             <a href="/communications/createView?idBuilding=<?= $building->__get('id'); ?>">
                 <i class="fas fa-plus"></i>
                 Ajouter une nouvelle communication
@@ -120,7 +120,7 @@ $x = 0;
                         <td><?= $communication->__get('dateCreation'); ?></td>
                         <td><?= $communication->__get('lastUpdate'); ?></td>
                         <td><?= $communication->__get('message'); ?></td>
-                        <td><a href="/communication/show/<?= $communication->__get('id'); ?>">Voir</a></td>
+                        <td><a href="/communications/show/<?= $communication->__get('id'); ?>">Voir</a></td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -171,7 +171,7 @@ $x = 0;
                         </td>
 
                         <td><?= $ticket->__get('dateCreation'); ?></td>
-                        <td><a href="/ticket/show/<?= $ticket->__get('id'); ?>">Voir</a></td>
+                        <td><a href="/tickets/show/<?= $ticket->__get('id'); ?>">Voir</a></td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>

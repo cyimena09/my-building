@@ -5,7 +5,7 @@ $enums = statusEnum();
 
 <h1>Information sur le ticket</h1>
 <section>
-    <form id="form-update-ticket" action="" method="post">
+    <form id="form-update-ticket" class="form-in-column" action="" method="post">
         <div class="group group-hover">
             <label for="idTicket">Numéro du ticket</label>
             <input id="idTicket" type="text" placeholder="Numéro du ticket" name="idTicket"
@@ -62,7 +62,9 @@ $enums = statusEnum();
             <textarea id="description" name="description" cols="30" rows="10"
                       placeholder="Description" <?php if ($authenticatedUser->__get('role') == 'SYNDIC'): ?> disabled <?php endif; ?>><?= $ticket->description ?></textarea>
         </div>
-        <button>Mettre à jour</button>
+        <div class="group">
+            <button>Mettre à jour</button>
+        </div>
     </form>
 </section>
 <script src="/js/ticket.js"></script>
