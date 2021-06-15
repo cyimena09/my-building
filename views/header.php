@@ -19,14 +19,6 @@
         <div class="logo">
             <a href="/">My Building</a>
         </div>
-        <nav>
-            <ul>
-                <li>Solutions</li>
-                <li>A propos</li>
-                <li>Prix</li>
-                <li>Contact</li>
-            </ul>
-        </nav>
         <div class="actions">
             <ul>
                 <?php if(isset($authenticatedUser) && $authenticatedUser): ?>
