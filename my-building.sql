@@ -121,7 +121,7 @@ CREATE TABLE `communication` (
   PRIMARY KEY (`idCommunication`),
   KEY `communication_FK` (`fkBuilding`),
   CONSTRAINT `communication_FK_1` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,8 +130,37 @@ CREATE TABLE `communication` (
 
 LOCK TABLES `communication` WRITE;
 /*!40000 ALTER TABLE `communication` DISABLE KEYS */;
-INSERT INTO `communication` VALUES (1,'Sujet Building A','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',1),(2,'Sujet Building A','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-17 00:00:00','2021-05-17 00:00:00',1),(3,'Sujet Building B','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-13 00:00:00','2021-05-13 00:00:00',2),(4,'Sujet Building C','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-05 00:00:00','2021-05-05 00:00:00',3),(5,'Sujet Building D','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-07 00:00:00','2021-05-07 00:00:00',4),(6,'Sujet Building D','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-01 00:00:00','2021-05-01 00:00:00',4),(7,'Sujet Building D','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-04-24 00:00:00','2021-05-10 00:00:00',4),(8,'Sujet Building ABIS','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-11-24 00:00:00','2021-05-10 00:00:00',1),(9,'Sujet Building ABIS','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-12-24 00:00:00','2021-05-10 00:00:00',1),(10,'Sujet Building ABIS','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-03-24 00:00:00','2021-05-05 00:00:00',1);
+INSERT INTO `communication` VALUES (1,'Sujet Building A','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',1),(2,'Sujet Building A','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-17 00:00:00','2021-05-17 00:00:00',1),(3,'Sujet Building B','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-13 00:00:00','2021-05-13 00:00:00',2),(4,'Sujet Building C','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-05 00:00:00','2021-05-05 00:00:00',3),(5,'Sujet Building D','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-07 00:00:00','2021-05-07 00:00:00',4),(6,'Sujet Building D','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-01 00:00:00','2021-05-01 00:00:00',4),(7,'Sujet Building D','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-04-24 00:00:00','2021-05-10 00:00:00',4),(8,'Sujet Building ABIS','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-11-24 00:00:00','2021-05-10 00:00:00',1),(9,'Sujet Building ABIS','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-12-24 00:00:00','2021-05-10 00:00:00',1),(10,'Sujet Building ABIS','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-03-24 00:00:00','2021-05-05 00:00:00',1),(11,'nex com','sqfdsfsd','2021-06-15 10:49:12','2021-06-15 10:49:12',5);
 /*!40000 ALTER TABLE `communication` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `request`
+--
+
+DROP TABLE IF EXISTS `request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `request` (
+  `idRequest` int(11) NOT NULL AUTO_INCREMENT,
+  `ownerRequest` varchar(100) DEFAULT NULL,
+  `fkApartment` int(11) DEFAULT NULL,
+  `fkUser` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idRequest`),
+  KEY `request_FK` (`fkUser`),
+  KEY `request_FK_1` (`fkApartment`),
+  CONSTRAINT `request_FK` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `request_FK_1` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idApartment`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `request`
+--
+
+LOCK TABLES `request` WRITE;
+/*!40000 ALTER TABLE `request` DISABLE KEYS */;
+/*!40000 ALTER TABLE `request` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -164,7 +193,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'Ticket Building A','Non traité','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-06-14 19:43:14',3,1),(2,'Ticket Building A','En attente','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',3,1),(3,'Ticket Building B','Non trait├®','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',4,2),(4,'Ticket Building C','En attente','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',5,3),(5,'Ticket Building D','Non trait├®','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',6,4),(6,'Ticket Building E','En attente','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',7,4),(7,'Ticket Building F','En attente','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',8,4),(8,'Ticket Building A','Non trait├®','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',7,1),(9,'Ticket Building A','Traité','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',6,1),(10,'Ticket Building A','Traité','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',5,1);
+INSERT INTO `ticket` VALUES (1,'Ticket Building A','1','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-06-15 10:32:17',3,1),(2,'Ticket Building A','En attente','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',3,1),(3,'Ticket Building B','Non trait├®','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',4,2),(4,'Ticket Building C','En attente','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',5,3),(5,'Ticket Building D','Non trait├®','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',6,4),(6,'Ticket Building E','En attente','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',7,4),(7,'Ticket Building F','En attente','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',8,4),(8,'Ticket Building A','Non trait├®','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',7,1),(9,'Ticket Building A','Traité','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-05-24 00:00:00',6,1),(10,'Ticket Building A','Traité','Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-05-24 00:00:00','2021-06-15 10:48:30',5,1);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +264,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Emile','Cyimena','cyimena09@hotmail.com','0484090853','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','SYNDIC',1,NULL,NULL,NULL),(2,'Benoit','Vankoningsloo','benoit@hotmail.com','0477213465','F','44292964e0cc89b1.1623699541','2021-06-14 21:39:01','$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','SYNDIC',2,1,1,NULL),(3,'Amaury','Cyemezo','cyemezo@hotmail.com','0499591245','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,1,NULL),(4,'Alice','Malaika','malaika@hotmail.com','0476134465','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,1,NULL),(5,'Mike','Francois','mike@hotmail.com','0488124678','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),(6,'Susi','Toupe','stoupe0@symantec.com','6685851293','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),(7,'Eveline','Joyner','ejoyner1@cloudflare.com','7861614104','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),(8,'Eba','Penquet','epenquet2@walmart.com','7779636737','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,3,NULL),(9,'Justina','Dearth','jdearth3@hc360.com','5481337107','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,4,NULL),(10,'Venus','Tolwood','vtolwood4@w3.org','2896359988','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,5,NULL),(11,'Napoleon','Jencey','njencey5@csmonitor.com','5625961927','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,6,NULL),(12,'Kain','Wrist','kwrist6@mayoclinic.com','5729661592','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,7,NULL),(13,'Vernor','Titchen','vtitchen7@moonfruit.com','2342462343','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,3,8,NULL);
+INSERT INTO `user` VALUES (1,'Emile','Cyimena','cyimena09@hotmail.com','0484090853','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','SYNDIC',1,NULL,NULL,NULL),(2,'Benoit','Vankoningsloo','benoit@hotmail.com','0477213465','F','c811b231aae4b859.1623754709','2021-06-15 12:58:29','$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','SYNDIC',2,1,1,NULL),(3,'Amaury','Cyemezo','cyemezo@hotmail.com','0499591245','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,1,NULL),(4,'Alice','Malaika','malaika@hotmail.com','0476134465','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,1,NULL),(5,'Mike','Francois','mike@hotmail.com','0488124678','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),(6,'Susi','Toupe','stoupe0@symantec.com','6685851293','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),(7,'Eveline','Joyner','ejoyner1@cloudflare.com','7861614104','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),(8,'Eba','Penquet','epenquet2@walmart.com','7779636737','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,3,NULL),(9,'Justina','Dearth','jdearth3@hc360.com','5481337107','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,4,NULL),(10,'Venus','Tolwood','vtolwood4@w3.org','2896359988','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,5,NULL),(11,'Napoleon','Jencey','njencey5@csmonitor.com','5625961927','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,6,NULL),(12,'Kain','Wrist','kwrist6@mayoclinic.com','5729661592','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,7,NULL),(13,'Vernor','Titchen','vtitchen7@moonfruit.com','2342462343','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,3,8,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,4 +281,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-14 22:03:19
+-- Dump completed on 2021-06-15 17:37:07
