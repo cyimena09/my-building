@@ -143,7 +143,7 @@ DROP TABLE IF EXISTS `request`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `request` (
   `idRequest` int(11) NOT NULL AUTO_INCREMENT,
-  `ownerRequest` varchar(100) DEFAULT NULL,
+  `isOwnerRequest` varchar(1) DEFAULT NULL,
   `fkApartment` int(11) DEFAULT NULL,
   `fkUser` int(11) DEFAULT NULL,
   PRIMARY KEY (`idRequest`),
@@ -253,4 +253,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-15 18:18:43
+-- Dump completed on 2021-06-15 19:25:16
