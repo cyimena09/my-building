@@ -214,7 +214,7 @@ CREATE TABLE `user` (
   `session_token` varchar(100) DEFAULT NULL,
   `session_time` datetime DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(10) DEFAULT NULL,
+  `role` varchar(30) DEFAULT NULL,
   `fkAddress` int(11) DEFAULT NULL,
   `fkBuilding` int(11) DEFAULT NULL,
   `fkApartment` int(11) DEFAULT NULL,

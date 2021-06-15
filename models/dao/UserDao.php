@@ -86,19 +86,43 @@ class UserDao extends AbstractDao {
     }
 
     public function createUser($data) {
-        if (empty($data['firstName']) ||
+        // on vérifie que les informations de bases soit encodé
+        if (
+            // user
+            empty($data['firstName']) ||
             empty($data['lastName']) ||
             empty($data['email']) ||
             empty($data['phone']) ||
             empty($data['gender']) ||
-            empty($data['fkApartment']) ||
             empty($data['role']) ||
-            empty($data['password'])) {
+            empty($data['password']) ||
+            // address
+            empty($data['street']) ||
+            empty($data['houseNumber']) ||
+            empty($data['zip']) ||
+            empty($data['city']) ||
+            empty($data['country'])) {
 
             return false;
         }
 
-        // todo utiliser instantiate plutot ?
+        // todo vérifier qu'un utilisateur n'a pas déjà le meme mot de passe
+
+        // Etape 1 : enregistrer l'adresse de l'utilisateur
+
+        $dataAddress = [
+            "street" => $data['street'],
+            "houseNumber" => $data['houseNumber'],
+            "boxNumber" => $data['boxNumber'],
+            "zip" => $data['zip'],
+            "city" => $data['city'],
+            "country" => $data['country'],
+        ];
+
+        $addressDao = new AddressDao();
+        $addressId = $addressDao->createAddress($dataAddress);
+
+        // Etape 2 : cas ou l'utilisateur est un LOCATAIRE
         $user = new User(
             !empty($data['id']) ? $data['id'] : 0,
                 $data['firstName'],
@@ -107,14 +131,19 @@ class UserDao extends AbstractDao {
                 $data['phone'],
                 $data['gender'],
                 $data['role'],
-                $data['fkApartment'],
                 password_hash($data['password'], PASSWORD_DEFAULT));
+
+        // l'appartement, l'adresse et isActive ne sont pas dans le contructor
+        $user->apartment = $data['fkApartment'];
+        $user->building = $data['fkBuilding'];
+        $user->address = $addressId;
+        $user->isActive = 0;
 
         if ($user) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (firstname, lastname, email, phone, gender, role, password, fkApartment) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO {$this->table} (firstname, lastname, email, phone, gender, password, role, fkAddress, fkBuilding, fkApartment, isActive) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 );
                 $statement->execute([
                     htmlspecialchars($user->__get('firstName')),
@@ -122,9 +151,12 @@ class UserDao extends AbstractDao {
                     htmlspecialchars($user->__get('email')),
                     htmlspecialchars($user->__get('phone')),
                     htmlspecialchars($user->__get('gender')),
-                    htmlspecialchars($user->__get('role')),
                     htmlspecialchars($user->__get('password')),
-                    htmlspecialchars($user->__get('idApartment'))
+                    htmlspecialchars($user->__get('role')),
+                    htmlspecialchars($user->__get('address')),
+                    htmlspecialchars($user->__get('building')),
+                    htmlspecialchars($user->__get('apartment')),
+                    htmlspecialchars($user->__get('isActive'))
                 ]);
 
                 return true;
@@ -204,7 +236,7 @@ class UserDao extends AbstractDao {
         $user->sessionToken = $token; // on ajoute le token à l'utilisateur
         date_default_timezone_set('Europe/Brussels');
         $user->sessionTime = date("Y-m-d H:i:s");
-        echo time();
+
         //créer un cookie avec le token
         setcookie('session_token', $token, time()+60*60*24, "/");
 

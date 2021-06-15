@@ -21,6 +21,7 @@ class AuthController extends AbstractController {
 
     public function register($id, $data) {
         $this->dao->createUser($data);
+        //return http_response_code(401);
     }
 
     public function login($id, $data) {
@@ -71,20 +72,19 @@ class AuthController extends AbstractController {
      * @param $data
      */
     public function sectionByRoleView($role, $data) {
-        //$apartmentController = new ApartmentController();
         $buildingDao = new BuildingDao();
 
-        if ($role == 'TENANT') {
-            //$apartmentController->dropdown()
 
+        if ($role == 'LOCATAIRE') {
             $buildings = $buildingDao->getBuildings();
             include ('../views/auth/section-tenant.php');
-        } elseif ($role = 'OWNER') {
+        } elseif ($role == 'PROPRIETAIRE') {
             $buildings = $buildingDao->getBuildings();
             include ('../views/auth/section-owner.php');
-        } elseif ($role == 'TENANT_OWNER') {
+        } elseif ($role == 'PROPRIETAIRE_LOCATAIRE') {
             $buildings = $buildingDao->getBuildings();
-            include ('../views/auth/section-tenant-owner.php');
+            include ('../views/auth/section-tenant.php');
+            include ('../views/auth/section-owner.php');
         }
     }
 

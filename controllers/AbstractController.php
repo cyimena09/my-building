@@ -6,8 +6,8 @@ abstract class AbstractController {
         if (!isset($_COOKIE['session_token'])) {
             return false;
         }
-
         $userDao = new UserDao();
+
         return $userDao->fetchBySession($_COOKIE['session_token']);
     }
 

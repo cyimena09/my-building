@@ -10,17 +10,24 @@
             <section id="role" class="create-as">
                 <p>Créer un compte en tant que :</p>
                 <div class="group-radio">
-                    <input type="radio" id="tenant" name="role" value="TENANT">
+                    <input type="radio" id="tenant-radio" name="role" value="LOCATAIRE">
                     <label for="tenant">Locataire</label>
                 </div>
                 <div class="group-radio">
-                    <input type="radio" id="owner" name="role" value="OWNER">
+                    <input type="radio" id="owner-radio" name="role" value="PROPRIETAIRE">
                     <label for="owner">Propriétaire et non résidant</label>
                 </div>
                 <div class="group-radio">
-                    <input type="radio" id="both" name="role" value="TENANT_OWNER">
+                    <input type="radio" id="both-radio" name="role" value="PROPRIETAIRE_LOCATAIRE">
                     <label for="both">Propriétaire et résident</label>
                 </div>
+
+                <!--           Js result -->
+                <div id="js-section-result" style="margin-top: 20px">
+
+                </div>
+
+
             </section>
 
 
@@ -74,8 +81,7 @@
             </section>
 
 
-
-                <!-- Address -->
+            <!-- Address -->
             <section>
                 <div class="head">
                     <h3>Adresse de contact</h3>
@@ -106,13 +112,6 @@
                 </div>
             </section>
 
-
-<!--           Js result -->
-
-            <section id="js-section-result">
-
-
-            </section>
 
 
 

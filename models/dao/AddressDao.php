@@ -32,19 +32,11 @@ class AddressDao extends AbstractDao {
         }
     }
 
-//    public function getAddressByUserId($id) {
-//        try {
-//            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkUser = ?");
-//            $statement->execute([
-//                $id
-//            ]);
-//            $result = $statement->fetch(PDO::FETCH_ASSOC);
-//            return $this->instantiate($result);
-//        } catch (PDOException $e) {
-//            print $e->getMessage();
-//        }
-//    }
-
+    /**
+     * Enregistre une adresse et retourne l'id de l'adresse enregistré
+     * @param $data
+     * @return false|string
+     */
     public function createAddress($data) {
         if (empty($data['street']) ||
             empty($data['houseNumber']) ||
@@ -63,14 +55,13 @@ class AddressDao extends AbstractDao {
             $data['boxNumber'],
             $data['zip'],
             $data['city'],
-            $data['country'],
-            $data['userId']);
+            $data['country']);
 
         if ($address) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (street, house_number, box_number, zip, city, country, fkUser) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO {$this->table} (street, house_number, box_number, zip, city, country) 
+                                VALUES (?, ?, ?, ?, ?, ?)"
                 );
                 $statement->execute([
                     htmlspecialchars($address->__get('street')),
@@ -78,10 +69,9 @@ class AddressDao extends AbstractDao {
                     htmlspecialchars($address->__get('boxNumber')),
                     htmlspecialchars($address->__get('zip')),
                     htmlspecialchars($address->__get('city')),
-                    htmlspecialchars($address->__get('country')),
-                    htmlspecialchars($address->__get('userId'))
+                    htmlspecialchars($address->__get('country'))
                 ]);
-                return true;
+                return $lastInsertedId = $this->connection->lastInsertId();
             } catch (PDOException $e) {
                 print $e->getMessage();
                 return false;
