@@ -27,10 +27,11 @@ class BuildingDao extends AbstractDao {
         try {
             $statement = $this->connection->prepare(
                 "SELECT b.idBuilding, b.name, COUNT(a.idApartment) as nbApartments FROM {$this->table} b 
-                            INNER JOIN apartment a on a.fkBuilding = b.idBuilding 
+                            LEFT JOIN apartment a on a.fkBuilding = b.idBuilding 
                             GROUP BY b.idBuilding");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            //var_dump($result);
             $buildings =  $this->instantiateAll($result);
 
             $addressDao = new AddressDao();
@@ -39,6 +40,10 @@ class BuildingDao extends AbstractDao {
                 $address = $addressDao->getAddressById($building->id); // récupération de l'addresse
                 // affectations
                 $building->address = $address;
+
+                if ($building->nbApartments == null) {
+                    $building->nbApartments = 0;
+                }
             }
             return $buildings;
         } catch (PDOException $e) {
@@ -99,16 +104,32 @@ class BuildingDao extends AbstractDao {
 
             return false;
         }
+        // Etape 1 : enregistrer l'adresse du batiment
+        $dataAddress = [
+            "street" => $data['street'],
+            "houseNumber" => $data['houseNumber'],
+            "boxNumber" => $data['boxNumber'],
+            "zip" => $data['zip'],
+            "city" => $data['city'],
+            "country" => $data['country'],
+        ];
+        $addressDao = new AddressDao();
+        $addressId = $addressDao->createAddress($dataAddress);
 
-        $building = $this->instantiate($data);
+        // Etape 2 : cas ou l'utilisateur est un LOCATAIRE
+        $building = new Building(!empty($data['id']) ? $data['id'] : 0, $data['name']);
+
+        // l'appartement, l'adresse et isActive ne sont pas dans le contructor
+        $building->address = $addressId;
 
         if ($building) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (name) VALUES (?)"
+                    "INSERT INTO {$this->table} (name, fkAddress) VALUES (?, ?)"
                 );
                 $statement->execute([
                     htmlspecialchars($building->__get('name')),
+                    htmlspecialchars($building->__get('address')),
                 ]);
                 return true;
             } catch (PDOException $e) {

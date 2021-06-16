@@ -60,6 +60,8 @@ class ApartmentController extends AbstractController {
     }
 
     public function delete($id) {
+        $authenticatedUser = $this->isLogged();
+
         $this->dao->deleteApartment($id);
         $this->index();
     }

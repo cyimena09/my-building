@@ -21,14 +21,20 @@ class AuthController extends AbstractController {
 
     public function register($id, $data) {
         $lastInserted = $this->dao->createUser($data);
-        $requestDao = new RequestDao();
-        // on encode toutes les requetes dans la db
-        for($i = 0; $i < count($data['request']); $i++) {
-            $data['request'][$i]['idUser'] = $lastInserted;
-            $requestDao->createRequest( $data['request'][$i]);
+
+        if (!isset($lastInserted) || empty($lastInserted)) {
+            return http_response_code(401);
         }
 
-        //return http_response_code(401);
+        $requestDao = new RequestDao();
+        // on encode toutes les requetes dans la db
+        for ($i = 0; $i < count($data['request']); $i++) {
+            $data['request'][$i]['idUser'] = $lastInserted;
+
+            if (!$requestDao->createRequest($data['request'][$i])) {
+                return http_response_code(401);
+            }
+        }
     }
 
     public function login($id, $data) {
@@ -60,6 +66,13 @@ class AuthController extends AbstractController {
     public function accountView() {
         $authenticatedUser = $this->isLogged();
 
+        if ($authenticatedUser->building->id != null) {
+            $buildingDao = new buildingDao();
+            $building = $buildingDao->getBuildingById($authenticatedUser->building->id);
+            $apartmentDao = new ApartmentDao();
+            $apartment = $apartmentDao->getApartmentById($authenticatedUser->apartment->id);
+        }
+
         $content = 'user-account.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -70,7 +83,10 @@ class AuthController extends AbstractController {
         $authenticatedUser = $this->isLogged();
 
         $idUser = $data['idUser'];
-        $this->dao->updateAccount($idUser, $data);
+
+        if (!$this->dao->updateAccount($idUser, $data)) {
+            return http_response_code(401);
+        }
     }
 
     /**
@@ -80,7 +96,6 @@ class AuthController extends AbstractController {
      */
     public function sectionByRoleView($role, $data) {
         $buildingDao = new BuildingDao();
-
 
         if ($role == 'LOCATAIRE') {
             $buildings = $buildingDao->getBuildings();

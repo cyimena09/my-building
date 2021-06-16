@@ -28,3 +28,8 @@ function animateNotification(message, cssClass) {
             containerInfo.style.display = 'none';
         }, 2600);
 }
+
+function errorMessage(message) {
+    const cssClass = 'bg-error';
+    animateNotification(message, cssClass)
+}

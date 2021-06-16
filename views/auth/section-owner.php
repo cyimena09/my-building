@@ -21,10 +21,17 @@
     </div>
 
     <!--Liste des appartements ajoutés-->
-    <div id="js-container-list-apartments" style="display: none">
-        <p>Appartements ajoutés : </p>
-        <ul id="js-ul">
-        </ul>
+    <!--    <div style="display: none">-->
+    <!--        <p>Appartements ajoutés : </p>-->
+    <!--        <ul id="js-ul">-->
+    <!--        </ul>-->
+    <!--    </div>-->
+
+
+    <div id="js-container-list-apartments" style="display: none;">
+        <div id="js-ul">
+
+        </div>
     </div>
 
 </div>

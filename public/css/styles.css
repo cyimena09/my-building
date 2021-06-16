@@ -113,7 +113,7 @@ li {
     position: fixed;
     bottom: -20px;
     right: 30px;
-    width: 220px;
+    width: 300px;
     text-align: center;
 }
 
@@ -241,6 +241,41 @@ img {
 
 #register .parts .left, #register .parts .right {
     width: 45%;
+}
+
+#register #js-container-list-apartments #js-ul {
+    border-top: 1px solid #cbcaca;
+    margin-top: 20px;
+}
+
+#register #js-container-list-apartments .container {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    margin-top: 5px;
+}
+
+#register #js-container-list-apartments  .container-icon{
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+#register #js-container-list-apartments p {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 270px;
+}
+
+#register #js-container-list-apartments  .building span{
+    font-size: 16px;
+}
+
+#register #js-container-list-apartments  .apartment span{
+    color: #939393;
+    font-size: 14px;
 }
 
 /* USER SPACE */

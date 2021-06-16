@@ -14,7 +14,7 @@ $(document).ready(function () {
         const message = document.forms["form-update-communication"]["message"].value;
 
         // On vérifie que tous les champs ont été encodé
-        if (idCommunication =="" || subject == "" || message == "") {
+        if (idCommunication == "" || subject == "" || message == "") {
             const message = "Veuillez encoder tous les champs !";
             const cssClass = 'bg-error';
             animateNotification(message, cssClass)
@@ -34,6 +34,10 @@ $(document).ready(function () {
                 const message = "Mise à jour réussie !";
                 const cssClass = 'bg-success';
                 animateNotification(message, cssClass)
+                setTimeout(
+                    () => {
+                        window.location = '/communications';
+                    }, 2500);
             })
             .fail(function (error) {
                 console.log('error', error);

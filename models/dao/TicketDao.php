@@ -10,7 +10,7 @@ class TicketDao extends AbstractDao {
 
     public function getTickets() {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} ORDER BY last_update DESC");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
@@ -53,7 +53,7 @@ class TicketDao extends AbstractDao {
 
     public function getTicketsByBuildingId($id) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkBuilding = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkBuilding = ? ORDER BY last_update DESC");
             $statement->execute([
                     $id
                 ]
@@ -68,24 +68,21 @@ class TicketDao extends AbstractDao {
     public function createTicket($data) {
         if (empty($data['subject']) ||
             empty($data['description']) ||
+            empty($data['fkBuilding']) ||
             empty($data['fkUser'])) {
 
             return false;
         }
 
-        $ticket = $this->instantiate($data);
-
         // on ajoute la date de création et de mise à jour qui sont identique lors de la création
         $currentDate = date('Y-m-d H:i:s');
-
-        $ticket->dateCreation = $currentDate;
-        $ticket->lastUpdate = $currentDate;
+        $ticket = new Ticket(null, $data['subject'], 'Non traité', $data['description'], $currentDate, $currentDate, $data['fkUser']);
 
         if ($ticket) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (subject, status, description, date_creation, last_update, fkUser) 
-                                VALUES (?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO {$this->table} (subject, status, description, date_creation, last_update, fkUser, fkBuilding) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?)"
                 );
                 $statement->execute([
                     htmlspecialchars($ticket->__get('subject')),
@@ -93,7 +90,8 @@ class TicketDao extends AbstractDao {
                     htmlspecialchars($ticket->__get('description')),
                     htmlspecialchars($ticket->__get('dateCreation')),
                     htmlspecialchars($ticket->__get('lastUpdate')),
-                    htmlspecialchars($ticket->__get('fkUser'))
+                    htmlspecialchars($ticket->__get('user')),
+                    htmlspecialchars($data['fkBuilding'])
                 ]);
                 return true;
             } catch (PDOException $e) {

@@ -122,7 +122,7 @@ $(document).ready(function () {
 
                             addButton()
                             let mainElement = document.getElementById('js-result-owned');
-                            let drop = mainElement.ownerDocument.getElementsByTagName('div');
+                            let drop = mainElement.children[0].getElementsByTagName('select')[0]
                             drop.id = 'dropdown-apartment-owned';
                         }
                     })
@@ -225,13 +225,7 @@ $(document).ready(function () {
                         if (result) {
                             $('#js-result-owned').append(result) // on ajoute le menu des appartements (en fonction de l'identifiant du building indiqué
                             let mainElement = document.getElementById('js-result-owned');
-                            //mainElement.children.id = 'dropdown-apartment-owned'
-                            //let e  = mainElement.firstChild
-                            //e.style.border = 'solid red 1px'
-
-
                             let drop = mainElement.ownerDocument.getElementsByTagName('div')[1];
-                            //console.log(drop)
                             drop.id = 'dropdown-apartment-owned'
                         }
                     })
@@ -254,13 +248,13 @@ $(document).ready(function () {
 
         const addButton = document.getElementById('js-add-btn');
         const containerListApartment = document.getElementById('js-container-list-apartments');
-        const ul = document.getElementById('js-ul');
 
 
         addButton.addEventListener('click', function (e) {
-            //console.log(containerOwned)
             const idBuilding = document.getElementById('fkBuildingOwned').value // on récupère le building
+            const nameBuilding = $("#fkBuildingOwned option:selected").text();
             const idApart = containerOwned.children[0].getElementsByTagName('select')[0].value; // on récupère l'appartement
+            const nameApart = $("#dropdown-apartment-owned option:selected").text();
 
             // on vérifie si les valeurs ne sont pas nulles
             if (idApart == "" || idBuilding == "") {
@@ -281,9 +275,19 @@ $(document).ready(function () {
             }
             // on crée et on affiche l'element
             apartmentOwnedList.push(data);
-            let li = document.createElement("li");
-            li.innerText = 'Immeuble : ' + idBuilding + 'appartement : ' + idApart;
-            ul.appendChild(li);
+
+
+            let div = '      <div class="container">' +
+                '                <div class="container-icon">' +
+                '                    <i class="fas fa-building"></i>' +
+                '                </div>' +
+                '                <div class="container-text">' +
+                '                    <p class="building"> <span>Immeuble</span> · <span>' + nameBuilding + '</span></p>' +
+                '                    <p class="apartment"> <span>Appartement</span> · <span>' + nameApart + '</span></p>' +
+                '                </div>' +
+                '            </div>'
+
+            $('#js-ul').append(div);
             containerListApartment.style.display = 'flex';
         });
     }
@@ -293,7 +297,7 @@ $(document).ready(function () {
     *  *****************************************************************************************
     * */
 
-    const containerInfo = document.getElementById('js-container-info');
+    const containerInfo = document.getElementById('js-quick-info');
 
     $('form#form-create-user').on('submit', function (e) {
         e.preventDefault();
@@ -331,40 +335,45 @@ $(document).ready(function () {
             city == "" ||
             country == "") {
 
-            console.log('tout na pas ete encode')
-            // fkAPartment
-
-            containerInfo.style.display = 'block';
-            containerInfo.innerText = "Veuillez encoder tous les champs !";
+            const message = "Veuillez encoder tous les champs !";
+            errorMessage(message);
             return;
         }
 
         // vérification de la cohérence des valeurs
         if (!(role == "LOCATAIRE" || role == "PROPRIETAIRE" || role == "PROPRIETAIRE_LOCATAIRE")) {
-            containerInfo.style.display = 'block';
-            containerInfo.innerText = "Le rôle n'est pas valide.";
-            console.log('le role nest pas validee')
+            const message = "Le rôle n'est pas valide.";
+            errorMessage(message);
             return;
         }
+
+        const reg = new RegExp('^[0-9]+$');
+
+        if(!reg.test(phone)) {
+            const message = "Numéro de téléphone non valide.";
+            errorMessage(message);
+            return;
+        }
+
 
         if (!(gender == "M" || gender == "F" || gender == "O")) {
-            formError.style.display = 'block';
-            formError.innerText = "Le genre n'est pas valide.";
-            console.log('le genre  nest pas validee')
+            const message = "Le genre n'est pas valide.";
+            errorMessage(message);
             return;
         }
-        // on récupère la location sil y a qu'on ajoute a la liste d'appartements a traiter(apartmentOwnedList
-        let containerRented = document.getElementById('tenant')
-        let fkBuilding = containerRented.ownerDocument.getElementsByTagName('select')[0].value;
-        let fkApartment = containerRented.ownerDocument.getElementsByTagName('select')[1].value;
+        // Si le role est différent de propriétaire cela signifie que l'utilisateur loue au moins un appartement
+        if (globalRole != 'PROPRIETAIRE') {
+            let containerRented = document.getElementById('tenant')
+            let fkBuilding = containerRented.ownerDocument.getElementsByTagName('select')[0].value;
+            let fkApartment = containerRented.ownerDocument.getElementsByTagName('select')[1].value;
 
-        let dataToPush = {
-            isOwnerRequest: 0,
-            idBuilding: fkBuilding,
-            idApartment: fkApartment
+            let dataToPush = {
+                isOwnerRequest: 0,
+                idBuilding: fkBuilding,
+                idApartment: fkApartment
+            }
+            apartmentOwnedList.push(dataToPush);
         }
-
-        apartmentOwnedList.push(dataToPush);
 
         const data = {
             firstName: firstName,
@@ -389,10 +398,12 @@ $(document).ready(function () {
         })
             .done(function (e) {
                 const successMessage = encodeURI('Félicitation, votre compte a bien été créé !');
-                //window.location = '/?success-message=' + successMessage;
+                window.location = '/?success-message=' + successMessage;
             })
             .fail(function (error) {
                 console.log('error', error);
+                const message = "Une erreure est survenue.";
+                errorMessage(message)
             });
     });
 

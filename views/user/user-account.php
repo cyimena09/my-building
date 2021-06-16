@@ -1,3 +1,8 @@
+<?php
+if ($authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE') {
+    $authenticatedUser->role = 'PROPRIÉTAIRE ET LOCATAIRE';
+}
+?>
 <div style="margin-top: 30px">
     <p class="role">
             <span <?php if ($authenticatedUser->role == 'SYNDIC'): ?> class="bg-mauve"
@@ -8,8 +13,6 @@
 
     <h1>Information sur votre compte</h1>
     <section>
-
-
         <form id="form-update-account" action="" class="form-in-line" method="post">
             <input type="hidden" name="idUser" value="<?= $authenticatedUser->id; ?>">
             <div class="group group-hover">
@@ -61,5 +64,22 @@
 
         </form>
     </section>
+
+    <?php if (isset($building) && isset($apartment)): ?>
+        <section>
+            <div class="head">
+                <h2>Votre location</h2>
+                <div class="container" style="display: flex; align-items: center;">
+                    <div class="container-icon">
+                        <i class="fas fa-building" style="font-size: 25px; margin-right: 20px"></i>
+                    </div>
+                    <div class="container-text">
+                        <p class="building"><span>Immeuble</span> · <span><?= $building->name ?></span></p>
+                        <p class="apartment"><span>Appartement</span> · <span><?= $apartment->name ?></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <?php endif ?>
 </div>
 <script src="/js/account.js"></script>

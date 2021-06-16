@@ -80,8 +80,10 @@ class UserDao extends AbstractDao {
                 htmlspecialchars($data['gender']),
                 htmlspecialchars($id)
             ]);
+            return true;
         } catch (PDOException $e) {
             print $e->getMessage();
+            return false;
         }
     }
 
@@ -167,7 +169,7 @@ class UserDao extends AbstractDao {
         if (empty($id)) {
             return false;
         }
-
+var_dump($id);
         try {
             $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE idUser = ?");
             $statement->execute([

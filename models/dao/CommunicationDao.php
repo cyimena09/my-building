@@ -10,7 +10,7 @@ class CommunicationDao extends AbstractDao {
 
     public function getCommunications() {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} ORDER BY last_update DESC");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
@@ -33,9 +33,8 @@ class CommunicationDao extends AbstractDao {
     }
 
     public function getCommunicationsByBuildingId($id) {
-        // todo utiliser le filtre
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkBuilding = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkBuilding = ? ORDER BY last_update DESC");
             $statement->execute([
                     $id
                 ]

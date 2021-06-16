@@ -30,6 +30,8 @@ $(document).ready(function () {
                 })
                 .fail(function (error) {
                     console.log('error', error);
+                    const message = "Le ticket n'a pas pu être mis à jour";
+                    errorMessage(message);
                 });
         });
     }

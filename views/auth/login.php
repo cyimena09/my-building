@@ -21,13 +21,12 @@
             <form action="/auth/login" class="form-in-column" method="post">
                 <div class="group">
                     <label for="email"></label>
-                    <input id="email" type="text" placeholder="Email" name="email">
+                    <input id="email" type="email" placeholder="Email" name="email">
                 </div>
                 <div class="group">
                     <label for="password"></label>
-                    <input id="password" type="text" placeholder="Mot de passe" name="password">
+                    <input id="password" type="password" placeholder="Mot de passe" name="password">
                 </div>
-                <p class="forgot-password color-blue">Mot de passe oublié ?</p>
                 <div class="container-button">
                     <button type="submit">Se connecter</button>
                 </div>

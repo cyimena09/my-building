@@ -4,7 +4,7 @@
     </div>
 
     <!-- ROLE == TENANT -->
-    <?php if ($authenticatedUser->role == 'LOCATAIRE'): ?>
+    <?php if ($authenticatedUser->role == 'LOCATAIRE' || $authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE'): ?>
         <!-- Tickets -->
         <div class="group">
             <h3><i class="fas fa-tasks"></i>Tickets</h3>

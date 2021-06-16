@@ -19,7 +19,7 @@ class CommunicationController extends AbstractController {
     }
 
     /**
-     * Retourne tous les tickets d'un immeuble
+     * Retourne toutes les communications en fonction du filtre
      */
     public function communicationByBuildingView() {
         $authenticatedUser = $this->isLogged();
@@ -80,8 +80,15 @@ class CommunicationController extends AbstractController {
     }
 
     public function delete($id) {
+        $authenticatedUser = $this->isLogged();
+
         $this->dao->deleteCommunication($id);
-        $this->index();
+
+        if ($authenticatedUser == 'SYNDIC') {
+            $this->index();
+        } else {
+            $this->communicationByBuildingView();
+        }
     }
 
 

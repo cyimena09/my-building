@@ -40,8 +40,16 @@ class BuildingController extends AbstractController {
 
     public function create($id, $data) {
         $authenticatedUser = $this->isLogged();
-        $this->dao->createBuilding($data);
-        $this->index();
+
+        if (!$this->dao->createBuilding($data)) {
+        $errorMessage = "L'immeuble n'a pas pu être sauvegardé, veuillez vérifier tous les champs.";
+        $content = '../views/building/create-form.php';
+        include ('../views/header.php');
+        include ('../views/user/user-space.php');
+        include ('../views/footer.php');
+        } else {
+            $this->index();
+        }
     }
 
     public function createView() {
@@ -61,6 +69,8 @@ class BuildingController extends AbstractController {
     }
 
     public function delete($id) {
+        $authenticatedUser = $this->isLogged();
+
         $this->dao->deleteBuilding($id);
         $this->index();
     }

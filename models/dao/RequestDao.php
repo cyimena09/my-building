@@ -33,15 +33,15 @@ class RequestDao extends AbstractDao {
     }
 
     public function createRequest($data) {
-        if (empty($data['isOwnerRequest']) ||
-            empty($data['idBuilding']) ||
+        if (empty($data['idBuilding']) ||
             empty($data['idApartment']) ||
             empty($data['idUser'])) {
 
+            var_dump('CEST FAUX ????????');
             return false;
         }
 
-        $request = $this->instantiate($data);
+        $request = new Request(null, $data['isOwnerRequest'], $data['idApartment'], $data['idUser'] );
 
         if ($request) {
             try {
@@ -56,6 +56,7 @@ class RequestDao extends AbstractDao {
                     htmlspecialchars($request->__get('user'))
                 ]);
 
+                var_dump('ca a marché');
                 return true;
             } catch (PDOException $e) {
                 print $e->getMessage();

@@ -40,14 +40,21 @@ class ApartmentDao extends AbstractDao {
     public function getApartmentsByBuildingId($id) {
         try {
             $statement = $this->connection->prepare("SELECT a.idApartment, a.name, a.fkOwner, a.fkBuilding, COUNT(u.idUser) AS nbTenants
-                                                                FROM {$this->table} a INNER JOIN user u ON u.fkApartment = a.idApartment 
+                                                                FROM {$this->table} a LEFT JOIN user u ON u.fkApartment = a.idApartment 
                                                                 WHERE a.fkBuilding = ? 
                                                                 GROUP BY a.idApartment");
             $statement->execute([
                 $id
             ]);
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $this->instantiateAll($result);
+            $apartments = $this->instantiateAll($result);
+
+            foreach ($apartments as $apartment) {
+                if ($apartment->nbTenants == null) {
+                    $apartment->nbTenants = 0;
+                }
+            }
+            return $apartments;
         } catch (PDOException $e) {
             print $e->getMessage();
         }

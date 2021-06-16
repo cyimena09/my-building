@@ -35,7 +35,7 @@ class TicketController extends AbstractController {
     }
 
     /**
-     * Retourne tous les tickets d'un immeuble
+     * Retourne tous les tickets de l'immeuble de l'utilisateur connecté
      */
     public function ticketByBuildingView() {
         $authenticatedUser = $this->isLogged();
@@ -76,6 +76,9 @@ class TicketController extends AbstractController {
 
     public function createView() {
         $authenticatedUser = $this->isLogged();
+
+        $buildingDao = new BuildingDao();
+        $buildings = $buildingDao->getBuildings();
 
         $content = '../views/ticket/create-form.php';
         include ('../views/header.php');

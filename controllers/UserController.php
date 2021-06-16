@@ -84,6 +84,8 @@ class UserController extends AbstractController {
     }
 
     public function delete($id) {
+        $authenticatedUser = $this->isLogged();
+
         $this->dao->deleteUser($id);
         $this->index();
     }
