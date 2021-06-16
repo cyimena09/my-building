@@ -25,7 +25,7 @@
                     <li><a href="/auth/accountView">Votre Espaces</a></li>
                     <li><a class="a-btn a-btn-red" href="/auth/logout"><i class="fas fa-power-off"></i>Se déconnecter</a></li>
                 <?php else: ?>
-                    <li><a href="/">Se connecter</a></li>
+                    <li><a class="a-btn a-btn-grey" href="/">Se connecter</a></li>
                     <li><a class="a-btn a-btn-mauve" href="/auth/registerView">S'inscrire</a></li>
                 <?php endif; ?>
             </ul>

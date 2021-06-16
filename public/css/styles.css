@@ -521,6 +521,15 @@ button:hover {
     background-color: darkgreen;
 }
 
+.a-btn-grey {
+    color: #565656;
+    background-color: #eceaea;
+}
+
+.a-btn-grey:hover {
+    background-color: #cbcbcb;
+}
+
 .icon-delete {
     color: #9b1717;
 }
