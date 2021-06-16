@@ -27,7 +27,7 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE') {
             </div>
             <div class="group group-hover">
                 <label for="email">Email</label>
-                <input id="email" type="text" name="email" value="<?= $authenticatedUser->email ?>">
+                <input id="email" type="email" name="email" value="<?= $authenticatedUser->email ?>">
             </div>
             <div class="group group-hover">
                 <label for="phone">Téléphone</label>

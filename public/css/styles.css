@@ -395,6 +395,7 @@ form input {
 
 form input[type=radio] {
     margin-right: 10px;
+    margin-bottom: 6px;
 }
 
 form input:focus, textarea:focus {

@@ -13,7 +13,6 @@
     <script src="/js/functions.js"></script>
 </head>
 <body>
-
 <header>
     <div class="content-page">
         <div class="logo">
@@ -21,9 +20,9 @@
         </div>
         <div class="actions">
             <ul>
-                <?php if(isset($authenticatedUser) && $authenticatedUser): ?>
+                <?php if (isset($authenticatedUser) && $authenticatedUser): ?>
                     <li><a class="a-btn a-btn-grey" href="/auth/accountView">Votre Espace</a></li>
-                    <li><a class="a-btn a-btn-red" href="/auth/logout"><i class="fas fa-power-off"></i>Se déconnecter</a></li>
+                    <li><a class="a-btn a-btn-red" href="/auth/logout"><i class="fas fa-power-off"></i>Déconnexion</a></li>
                 <?php else: ?>
                     <li><a class="a-btn a-btn-grey" href="/">Se connecter</a></li>
                     <li><a class="a-btn a-btn-mauve" href="/auth/registerView">S'inscrire</a></li>

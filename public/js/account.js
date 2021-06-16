@@ -30,6 +30,14 @@ $(document).ready(function () {
             return;
         }
 
+        const reg = new RegExp('^[0-9]+$');
+
+        if (!reg.test(phone)) {
+            const message = "Numéro de téléphone non valide.";
+            errorMessage(message);
+            return;
+        }
+
         const data = {
             idUser: idUser,
             firstname: firstname,

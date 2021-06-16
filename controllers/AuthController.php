@@ -8,6 +8,8 @@ class AuthController extends AbstractController {
     }
 
     public function index() {
+        $authenticatedUser = $this->isLogged();
+
         include ('../views/header.php');
         include ('../views/auth/login.php');
         include ('../views/footer.php');

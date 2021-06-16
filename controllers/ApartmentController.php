@@ -9,6 +9,7 @@ class ApartmentController extends AbstractController {
 
     public function index() {
         $authenticatedUser = $this->isLogged();
+
         $buildingDao = new BuildingDao();
         $buildings = $buildingDao->getBuildingsWithApartments();
 

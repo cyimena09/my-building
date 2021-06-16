@@ -78,7 +78,6 @@
                 </div>
             </section>
 
-
             <!-- Address -->
             <section>
                 <div class="head">
@@ -110,7 +109,6 @@
                 </div>
             </section>
 
-
             <div class="container-button">
                 <button type="submit">Créer le compte</button>
             </div>
@@ -118,5 +116,4 @@
 
     </div>
 </div>
-
 <script src="/js/register.js"></script>

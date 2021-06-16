@@ -355,7 +355,6 @@ $(document).ready(function () {
             return;
         }
 
-
         if (!(gender == "M" || gender == "F" || gender == "O")) {
             const message = "Le genre n'est pas valide.";
             errorMessage(message);
