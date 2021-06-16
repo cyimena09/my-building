@@ -70,6 +70,10 @@ li {
     color: #939393;
 }
 
+.color-orange {
+    color: #FF5722;
+}
+
 .bg-success {
     background-color: #45a045;
 }
@@ -549,6 +553,15 @@ button:hover {
     color: #565656;
     background-color: #a9a8a8;
 }
+
+.a-btn-orange {
+    background-color: #FF5722;
+}
+
+.a-btn-orange:hover {
+    background-color: #d44c20;
+}
+
 
 .icon-delete {
     color: #9b1717;

@@ -22,7 +22,7 @@
         <div class="actions">
             <ul>
                 <?php if(isset($authenticatedUser) && $authenticatedUser): ?>
-                    <li><a href="/auth/accountView">Votre Espace</a></li>
+                    <li><a class="a-btn a-btn-grey" href="/auth/accountView">Votre Espace</a></li>
                     <li><a class="a-btn a-btn-red" href="/auth/logout"><i class="fas fa-power-off"></i>Se déconnecter</a></li>
                 <?php else: ?>
                     <li><a class="a-btn a-btn-grey" href="/">Se connecter</a></li>

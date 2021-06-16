@@ -20,18 +20,15 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE') {
                 <input id="firstname" type="text" name="firstname"
                        value="<?= $authenticatedUser->firstName ?>">
             </div>
-
             <div class="group group-hover">
                 <label for="lastname">Nom</label>
                 <input id="lastname" type="text" name="lastname"
                        value="<?= $authenticatedUser->lastName ?>">
             </div>
-
             <div class="group group-hover">
                 <label for="email">Email</label>
                 <input id="email" type="text" name="email" value="<?= $authenticatedUser->email ?>">
             </div>
-
             <div class="group group-hover">
                 <label for="phone">Téléphone</label>
                 <input id="phone" type="text" placeholder="Numéro de téléphone" name="phone"
@@ -57,11 +54,9 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE') {
                     <label for="other">Autre</label>
                 </div>
             </div>
-
             <div class="group">
                 <button>Mettre à jour</button>
             </div>
-
         </form>
     </section>
 
@@ -72,13 +67,18 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE') {
             </div>
             <div class="container" style="display: flex; align-items: center;">
                 <div class="container-icon">
-                    <i class="fas fa-building" style="font-size: 25px; margin-right: 20px"></i>
+                    <i class="fas fa-building" style="font-size: 45px; margin-right: 20px"></i>
                 </div>
                 <div class="container-text">
-                    <p style="display: flex; justify-content: space-between; width: 300px"><span>Immeuble</span> ·
-                        <span><?= $building->name ?></span></p>
-                    <p style="display: flex; justify-content: space-between"><span>Appartement</span> ·
-                        <span><?= $apartment->name ?></span></p>
+                    <p style="display: flex; justify-content: space-between; align-items: center; width: 300px; margin-bottom: 10px">
+                        <span>Immeuble</span><span>·</span>
+                        <span><a style="font-size: 13px" class="a-btn a-btn-mauve"
+                                 href="/buildings/show/<?= $building->id ?>"> <?= $building->name ?></a></span></p>
+
+                    <p style="display: flex; justify-content: space-between; align-items: center; width: 300px;"><span>Appartement</span>
+                        <span>·</span>
+                        <span><a style="font-size: 13px" class="a-btn a-btn-orange"
+                                 href="/apartments/show/<?= $apartment->id ?>"> <?= $apartment->name ?></a></span></p>
                 </div>
             </div>
         </section>
