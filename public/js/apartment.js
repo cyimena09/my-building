@@ -31,9 +31,13 @@ $(document).ready(function () {
             .done(function (e) {
                 const message = "L'apartement a été créé !";
                 const cssClass = 'bg-success';
-                animateNotification(message, cssClass)
+                animateNotification(message, cssClass);
+                document.forms["form-create-apartment"]["name"].value = "";
             })
             .fail(function (error) {
+                const message = "Une erreur est survenue, l'apartement n'a pas pu être créé.";
+                const cssClass = 'bg-error';
+                animateNotification(message, cssClass)
                 console.log('error', error);
             });
     });

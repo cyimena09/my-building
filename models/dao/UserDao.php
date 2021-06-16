@@ -169,7 +169,7 @@ class UserDao extends AbstractDao {
         if (empty($id)) {
             return false;
         }
-var_dump($id);
+
         try {
             $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE idUser = ?");
             $statement->execute([
@@ -283,6 +283,7 @@ var_dump($id);
             $result['password'] = ''; // on retire le mot de passe
 
             $user = $this->instantiate($result);
+            $user->isActive = $result['isActive'];
 
             // on recupère et on ajoute l'adresse de l'utilisateur
             $addressDao = new AddressDao();

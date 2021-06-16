@@ -40,7 +40,6 @@ class AddressDao extends AbstractDao {
     public function createAddress($data) {
         if (empty($data['street']) ||
             empty($data['houseNumber']) ||
-            empty($data['boxNumber']) ||
             empty($data['zip']) ||
             empty($data['city']) ||
             empty($data['country'])) {
@@ -52,7 +51,7 @@ class AddressDao extends AbstractDao {
             !empty($data['id']) ? $data['id'] : 0,
             $data['street'],
             $data['houseNumber'],
-            $data['boxNumber'],
+            $data['boxNumber'] ? $data['boxNumber']  : null,
             $data['zip'],
             $data['city'],
             $data['country']);
@@ -76,6 +75,28 @@ class AddressDao extends AbstractDao {
                 print $e->getMessage();
                 return false;
             }
+        }
+    }
+
+    public function updateAddress($id, $data) {
+        if (empty($id || empty($data))) {
+            return false;
+        }
+
+        try {
+            $statement = $this->connection->prepare(
+                "UPDATE {$this->table} SET street = ?, house_number = ?, box_number = ?, zip = ?, city = ?, country = ? WHERE idAddress = ?");
+            $statement->execute([
+                htmlspecialchars($data['street']),
+                htmlspecialchars($data['houseNumber']),
+                htmlspecialchars($data['boxNumber']) ? htmlspecialchars($data['boxNumber']) : null,
+                htmlspecialchars($data['zip']),
+                htmlspecialchars($data['city']),
+                htmlspecialchars($data['country']),
+                htmlspecialchars($id)
+            ]);
+        } catch (PDOException $e) {
+            print $e->getMessage();
         }
     }
 

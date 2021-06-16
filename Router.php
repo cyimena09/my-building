@@ -46,7 +46,8 @@ class Router {
             'apartments' => 'ApartmentController',
             'tickets' => 'TicketController',
             'communications' => 'CommunicationController',
-            'requests' => 'RequestController'
+            'requests' => 'RequestController',
+            'address' => 'AddressController'
         ];
 
         $this->request = array();

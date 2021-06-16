@@ -41,7 +41,9 @@ class ApartmentController extends AbstractController {
     public function create($id, $data) {
         $authenticatedUser = $this->isLogged();
 
-        $this->dao->createApartment($data);
+        if (!$this->dao->createApartment($data)) {
+            return http_response_code(401);
+        }
     }
 
     public function createView() {

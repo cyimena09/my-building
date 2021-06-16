@@ -60,7 +60,8 @@ class TicketController extends AbstractController {
 
     public function create($id, $data) {
         $authenticatedUser = $this->isLogged();
-        $data['fkUser'] = $authenticatedUser->id;
+
+        $data['idUser'] = $authenticatedUser->id;
 
         if ($this->dao->createTicket($data)) {
             $successMessage = 'Un nouveau ticket a été créé !';

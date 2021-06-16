@@ -32,15 +32,19 @@ class RequestController extends AbstractController {
     }
 
     /**
-     * Valide une demande d'affiliation, la validation entraine la suppression du champ dans la Db
+     * Valide une demande d'affiliation, la validation entraine la suppression de la requete dans la Db
+     * Et active le compte de l'utilisateur
      * @param $id
      */
     public function validate($id) {
+        // todo terminer ce code
         $authenticatedUser = $this->isLogged();
 
         $request = $this->dao->getRequestById($id);
         $apartmentDao = new ApartmentDao();
         $apartment = $apartmentDao->getApartmentById($request->apartment);
+
+        $userDao = new UserDao();
 
         // si un utilisateur signal qu'il possède l'appartement alors on modifie uniquement l'appartement concerné
         if ($request->isOwnerRequest == 1) {

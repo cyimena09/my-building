@@ -69,6 +69,5 @@
                 <li><a href="/requests">Demandes d'affiliation</a></li>
             </ul>
         </div>
-
     <?php endif; ?>
 </div>

@@ -73,6 +73,9 @@ class AuthController extends AbstractController {
             $building = $buildingDao->getBuildingById($authenticatedUser->building->id);
             $apartmentDao = new ApartmentDao();
             $apartment = $apartmentDao->getApartmentById($authenticatedUser->apartment->id);
+            // affectation
+            $authenticatedUser->building = $building;
+            $authenticatedUser->apartment = $apartment;
         }
 
         $content = 'user-account.php';

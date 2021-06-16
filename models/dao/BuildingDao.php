@@ -31,7 +31,6 @@ class BuildingDao extends AbstractDao {
                             GROUP BY b.idBuilding");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            //var_dump($result);
             $buildings =  $this->instantiateAll($result);
 
             $addressDao = new AddressDao();

@@ -68,15 +68,15 @@ class TicketDao extends AbstractDao {
     public function createTicket($data) {
         if (empty($data['subject']) ||
             empty($data['description']) ||
-            empty($data['fkBuilding']) ||
-            empty($data['fkUser'])) {
+            empty($data['idBuilding']) ||
+            empty($data['idUser'])) {
 
             return false;
         }
 
         // on ajoute la date de création et de mise à jour qui sont identique lors de la création
         $currentDate = date('Y-m-d H:i:s');
-        $ticket = new Ticket(null, $data['subject'], 'Non traité', $data['description'], $currentDate, $currentDate, $data['fkUser']);
+        $ticket = new Ticket(null, $data['subject'], 'Non traité', $data['description'], $currentDate, $currentDate, $data['idUser']);
 
         if ($ticket) {
             try {
@@ -91,7 +91,7 @@ class TicketDao extends AbstractDao {
                     htmlspecialchars($ticket->__get('dateCreation')),
                     htmlspecialchars($ticket->__get('lastUpdate')),
                     htmlspecialchars($ticket->__get('user')),
-                    htmlspecialchars($data['fkBuilding'])
+                    htmlspecialchars($data['idBuilding'])
                 ]);
                 return true;
             } catch (PDOException $e) {

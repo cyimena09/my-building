@@ -37,7 +37,6 @@ class RequestDao extends AbstractDao {
             empty($data['idApartment']) ||
             empty($data['idUser'])) {
 
-            var_dump('CEST FAUX ????????');
             return false;
         }
 
@@ -56,7 +55,6 @@ class RequestDao extends AbstractDao {
                     htmlspecialchars($request->__get('user'))
                 ]);
 
-                var_dump('ca a marché');
                 return true;
             } catch (PDOException $e) {
                 print $e->getMessage();

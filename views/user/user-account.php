@@ -1,9 +1,9 @@
 <?php
-if ($authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE') {
-    $authenticatedUser->role = 'PROPRIÉTAIRE ET LOCATAIRE';
+if ($authenticatedUser->role == 'PROPRIETAIRE_RESIDENT') {
+    $authenticatedUser->role = 'PROPRIÉTAIRE ET RÉSIDENT';
 }
 ?>
-<div style="margin-top: 30px">
+<div id="user-account" style="margin-top: 30px">
     <p class="role">
             <span <?php if ($authenticatedUser->role == 'SYNDIC'): ?> class="bg-mauve"
             <?php else : ?> class="bg-orange"<?php endif ?>>
@@ -11,8 +11,20 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE') {
             </span>
     </p>
 
-    <h1>Informations personnelles</h1>
+    <h1>Votre espace</h1>
+
+    <?php if (empty($authenticatedUser->building->id)): ?>
+    <div class="location">
+        <p>Vous louez
+            <a class="a-btn-orange" href="/apartments/show/<?= $authenticatedUser->apartment->id; ?>"><?= $authenticatedUser->apartment->name; ?></a>
+            du batiment
+            <a class="a-btn-mauve" href="/buildings/show/<?= $authenticatedUser->apartment->id; ?>"><?= $authenticatedUser->building->name; ?></a>
+        </p>
+    </div>
+    <?php endif ?>
+
     <section>
+        <h2>Informations personnelles</h2>
         <form id="form-update-account" action="" class="form-in-line" method="post">
             <input type="hidden" name="idUser" value="<?= $authenticatedUser->id; ?>">
             <div class="group group-hover">
@@ -53,6 +65,41 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE') {
                            value="O" <?php if ($authenticatedUser->gender == 'O'): ?> checked <?php endif ?>>
                     <label for="other">Autre</label>
                 </div>
+            </div>
+            <div class="group">
+                <button>Mettre à jour</button>
+            </div>
+        </form>
+    </section>
+
+    <section>
+        <h2>Adresse de contact</h2>
+        <form id="form-update-address" action="" class="form-in-line" method="post">
+            <input type="hidden" name="idAddress" value="<?= $authenticatedUser->address->id; ?>">
+
+            <div class="group group-hover">
+                <label for="street">Rue</label>
+                <input id="street" type="text" placeholder="Rue" name="street" value="<?= $authenticatedUser->address->street ?>">
+            </div>
+            <div class="group group-hover">
+                <label for="houseNumber">Numéro</label>
+                <input id="houseNumber" type="text" placeholder="Numéro" name="houseNumber" value="<?= $authenticatedUser->address->houseNumber ?>">
+            </div>
+            <div class="group group-hover">
+                <label for="boxNumber">Boite</label>
+                <input id="boxNumber" type="text" placeholder="Boite" name="boxNumber" value="<?= $authenticatedUser->address->boxNumber ?>">
+            </div>
+            <div class="group group-hover">
+                <label for="zip">Code postal</label>
+                <input id="zip" type="text" placeholder="Code postal" name="zip" value="<?= $authenticatedUser->address->zip ?>">
+            </div>
+            <div class="group group-hover">
+                <label for="city">Ville</label>
+                <input id="city" type="text" placeholder="Ville" name="city" value="<?= $authenticatedUser->address->city ?>">
+            </div>
+            <div class="group group-hover">
+                <label for="country">Pays</label>
+                <input id="country" type="text" placeholder="Pays" name="country" value="<?= $authenticatedUser->address->country ?>">
             </div>
             <div class="group">
                 <button>Mettre à jour</button>

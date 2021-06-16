@@ -39,7 +39,7 @@ $enums = statusEnum();
                     </td>
 
                     <!-- Statut du ticket pour les autres utilisateurs-->
-                <?php else : ?>
+                <?php else: ?>
                     <td>
                         <?php foreach ($enums as $enum): ?>
                             <p class="status-ticket">
@@ -63,7 +63,8 @@ $enums = statusEnum();
 
                     <!-- Un ticket n'est supprimable que par un syndic ou le propriétaire-->
                     <?php if ($ticket->__get('user') == $authenticatedUser->id || $authenticatedUser->role == 'SYNDIC'): ?>
-                        <a href="/tickets/delete/<?= $ticket->__get('id'); ?>?tt=oui"><i class="fas fa-trash icon-delete"></i></a>
+                        <a href="/tickets/delete/<?= $ticket->__get('id'); ?>?tt=oui"><i
+                                    class="fas fa-trash icon-delete"></i></a>
                     <?php endif; ?>
                 </td>
             </tr>

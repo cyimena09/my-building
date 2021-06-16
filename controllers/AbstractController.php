@@ -20,6 +20,15 @@ abstract class AbstractController {
             include ('../views/footer.php');
             die;
         }
+
+        if (!$authenticatedUser->isActive) {
+            $errorMessage = "Un administrateur doit activer votre compte.";
+            $authenticatedUser = null;
+            include ('../views/header.php');
+            include ('../views/auth/login.php');
+            include ('../views/footer.php');
+            die;
+        }
         return $authenticatedUser;
     }
 
