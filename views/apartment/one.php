@@ -16,28 +16,28 @@
         </form>
     </section>
 
-    <!-- Propriétaire de l'appartement-->
-    <section>
-        <div class="head">
-            <h2>Propriétaire de l'appartement</h2>
-        </div>
-
-        <p>
-            <span style="margin-right: 20px; text-transform: uppercase">Prénom</span><span><?= $owner->__get('firstName'); ?></span>
-        </p>
-        <p>
-            <span style="margin-right: 20px; text-transform: uppercase">Nom</span><span><?= $owner->__get('lastName'); ?></span>
-        </p>
-
-        <div style="margin-top: 15px">
-            <a href="/users/show/<?= $owner->__get('id'); ?>">Voir</a>
-        </div>
-    </section>
+    <?php if (isset($owner)): ?>
+        <!-- Propriétaire de l'appartement-->
+        <section>
+            <div class="head">
+                <h2>Propriétaire</h2>
+            </div>
+            <p>
+                <span style="margin-right: 20px; text-transform: uppercase">Prénom</span><span><?= $owner->__get('firstName'); ?></span>
+            </p>
+            <p>
+                <span style="margin-right: 20px; text-transform: uppercase">Nom</span><span><?= $owner->__get('lastName'); ?></span>
+            </p>
+            <div style="margin-top: 15px">
+                <a href="/users/show/<?= $owner->__get('id'); ?>">Voir</a>
+            </div>
+        </section>
+    <?php endif; ?>
 
     <!-- Locataire de l'appartement -->
     <section>
         <div class="head">
-            <h2>Locataire de l'appartement</h2>
+            <h2>Locataires</h2>
         </div>
         <table>
             <thead>

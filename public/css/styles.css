@@ -54,6 +54,10 @@ li {
     letter-spacing: 1px;
 }
 
+.color-mauve {
+    color: #732DD9;
+}
+
 .color-turquoise {
     color: #26A4AE;
 }
@@ -255,7 +259,7 @@ img {
     margin-top: 5px;
 }
 
-#register #js-container-list-apartments  .container-icon{
+#register #js-container-list-apartments .container-icon {
     display: flex;
     align-items: center;
     font-size: 25px;
@@ -269,11 +273,11 @@ img {
     width: 270px;
 }
 
-#register #js-container-list-apartments  .building span{
+#register #js-container-list-apartments .building span {
     font-size: 16px;
 }
 
-#register #js-container-list-apartments  .apartment span{
+#register #js-container-list-apartments .apartment span {
     color: #939393;
     font-size: 14px;
 }
@@ -434,8 +438,14 @@ form input:focus, textarea:focus {
     align-items: center;
 }
 
-.forgot-password {
-    font-size: 12px;
+.not-registered {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.not-registered a {
+    text-decoration: none;
 }
 
 /* TABLE */
@@ -523,11 +533,21 @@ button:hover {
 
 .a-btn-grey {
     color: #565656;
-    background-color: #eceaea;
+    background-color: #d9d8d8;
 }
 
 .a-btn-grey:hover {
     background-color: #cbcbcb;
+}
+
+.a-btn-dark-grey {
+    color: #565656;
+    background-color: #cbcbcb;
+}
+
+.a-btn-dark-grey:hover {
+    color: #565656;
+    background-color: #a9a8a8;
 }
 
 .icon-delete {
@@ -561,4 +581,14 @@ button:hover {
     font-weight: bold;
     width: fit-content;
     padding: 5px 10px;
+}
+
+/* REQUEST */
+
+.ask-for {
+    padding: 10px;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
 }

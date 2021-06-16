@@ -55,7 +55,6 @@ $x = 0;
 
     <!-- Liste des appartements de l'immeuble-->
     <section>
-
         <div class="head">
             <h2>Appartements de l'immeuble</h2>
             <a href="/apartments/createView?idBuilding=<?= $building->__get('id'); ?>">
@@ -63,23 +62,22 @@ $x = 0;
                 Ajouter un nouvel appartement
             </a>
         </div>
-
-
         <table>
             <thead>
             <tr>
                 <th>#</th>
                 <th>Numéro de l'appartement</th>
+                <th>Nombre de locataire</th>
                 <th>Action</th>
             </tr>
             </thead>
-
             <tbody>
             <?php if (!empty($apartments)): ?>
                 <?php foreach ($apartments as $apartment): $i++ ?>
                     <tr>
                         <th><?= $i ?></th>
                         <td><?= $apartment->__get('name'); ?></td>
+                        <td><?= $apartment->__get('nbTenants'); ?></td>
                         <td><a href="/apartments/show/<?= $apartment->__get('id'); ?>">Voir</a></td>
                     </tr>
                 <?php endforeach; ?>

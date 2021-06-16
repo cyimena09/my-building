@@ -27,10 +27,15 @@
                     <label for="password"></label>
                     <input id="password" type="password" placeholder="Mot de passe" name="password">
                 </div>
+
                 <div class="container-button">
-                    <button type="submit">Se connecter</button>
+                    <button type="submit" style="margin-top: 0">Se connecter</button>
                 </div>
             </form>
+            <p class="not-registered" >
+                <a class="color-blue" href="/auth/registerView">Pas encore inscrit ? C'est par ici !</a>
+            </p>
+
         </div>
     </div>
 </div>

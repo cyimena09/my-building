@@ -1,5 +1,4 @@
 <h1>Information sur l'utilisateur</h1>
-
 <section>
     <div class="head">
         <h2>Personnelles</h2>

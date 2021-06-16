@@ -79,17 +79,17 @@ class CommunicationController extends AbstractController {
         $this->dao->updateCommunication($idCommunication, $data);
     }
 
+    /**
+     * Une communication n'est supprimable que par un SYNDIC
+     * @param $id
+     */
     public function delete($id) {
         $authenticatedUser = $this->isLogged();
 
-        $this->dao->deleteCommunication($id);
-
-        if ($authenticatedUser == 'SYNDIC') {
+        if ($authenticatedUser->role == 'SYNDIC') {
+            $this->dao->deleteCommunication($id);
             $this->index();
-        } else {
-            $this->communicationByBuildingView();
         }
     }
-
 
 }

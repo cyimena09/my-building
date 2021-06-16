@@ -2,7 +2,6 @@
 include('../enumerations/statusEnum.php');
 $enums = statusEnum();
 ?>
-
 <h1>Tickets</h1>
 <table>
     <thead>
@@ -11,8 +10,8 @@ $enums = statusEnum();
         <th>Sujet</th>
         <th>Statut</th>
         <th>Créé le</th>
-        <th>Dernière mise à jour</th>
-        <th>Action</th>
+        <th>Mise à jour</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -59,8 +58,14 @@ $enums = statusEnum();
                 <!-- Date de création -->
                 <td><?= $ticket->__get('dateCreation'); ?></td>
                 <td><?= $ticket->__get('lastUpdate'); ?></td>
+                <td>
+                    <a href="/tickets/show/<?= $ticket->__get('id'); ?>"><i class="fas fa-edit icon-update"></i></a>
 
-                <td><a href="/tickets/show/<?= $ticket->__get('id'); ?>">Voir</a></td>
+                    <!-- Un ticket n'est supprimable que par un syndic ou le propriétaire-->
+                    <?php if ($ticket->__get('user') == $authenticatedUser->id || $authenticatedUser->role == 'SYNDIC'): ?>
+                        <a href="/tickets/delete/<?= $ticket->__get('id'); ?>?tt=oui"><i class="fas fa-trash icon-delete"></i></a>
+                    <?php endif; ?>
+                </td>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>

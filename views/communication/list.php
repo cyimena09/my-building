@@ -7,7 +7,7 @@
         <th>Sujet</th>
         <th>Date d'envoi</th>
         <th>Mise à jour</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -20,7 +20,11 @@
                 <td><?= $communication->__get('lastUpdate'); ?></td>
                 <td>
                     <a href="/communications/show/<?= $communication->__get('id'); ?>"><i class="fas fa-edit icon-update"></i></a>
-                    <a href="/communications/delete/<?= $communication->__get('id'); ?>"><i class="fas fa-trash icon-delete"></i></a>
+
+                    <!-- Une communication n'est supprimable que par un syndic -->
+                    <?php if ($authenticatedUser->role == 'SYNDIC'): ?>
+                        <a href="/communications/delete/<?= $communication->__get('id'); ?>"><i class="fas fa-trash icon-delete"></i></a>
+                    <?php endif; ?>
                 </td>
 
             </tr>

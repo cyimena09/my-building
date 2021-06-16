@@ -27,6 +27,10 @@ class ApartmentController extends AbstractController {
         $tenants = $userDao->getUsersByApartmentId($id); // récupération des locataires
         $owner = $userDao->getUserById($apartment->owner); // récupération du propriétaire
 
+        if (!empty($owner->id == 0)) {
+            $owner =null;
+        }
+
         $content = '../views/apartment/one.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');

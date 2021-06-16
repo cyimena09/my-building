@@ -11,7 +11,7 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE') {
             </span>
     </p>
 
-    <h1>Information sur votre compte</h1>
+    <h1>Informations personnelles</h1>
     <section>
         <form id="form-update-account" action="" class="form-in-line" method="post">
             <input type="hidden" name="idUser" value="<?= $authenticatedUser->id; ?>">
@@ -69,14 +69,16 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE') {
         <section>
             <div class="head">
                 <h2>Votre location</h2>
-                <div class="container" style="display: flex; align-items: center;">
-                    <div class="container-icon">
-                        <i class="fas fa-building" style="font-size: 25px; margin-right: 20px"></i>
-                    </div>
-                    <div class="container-text">
-                        <p class="building"><span>Immeuble</span> · <span><?= $building->name ?></span></p>
-                        <p class="apartment"><span>Appartement</span> · <span><?= $apartment->name ?></span></p>
-                    </div>
+            </div>
+            <div class="container" style="display: flex; align-items: center;">
+                <div class="container-icon">
+                    <i class="fas fa-building" style="font-size: 25px; margin-right: 20px"></i>
+                </div>
+                <div class="container-text">
+                    <p style="display: flex; justify-content: space-between; width: 300px"><span>Immeuble</span> ·
+                        <span><?= $building->name ?></span></p>
+                    <p style="display: flex; justify-content: space-between"><span>Appartement</span> ·
+                        <span><?= $apartment->name ?></span></p>
                 </div>
             </div>
         </section>

@@ -62,9 +62,12 @@ $enums = statusEnum();
             <textarea id="description" name="description" cols="30" rows="10"
                       placeholder="Description" <?php if ($authenticatedUser->__get('role') == 'SYNDIC'): ?> disabled <?php endif; ?>><?= $ticket->description ?></textarea>
         </div>
-        <div class="group">
-            <button>Mettre à jour</button>
-        </div>
+
+        <?php if ($authenticatedUser->__get('role') !== 'SYNDIC'): ?>
+            <div class="group">
+                <button>Mettre à jour</button>
+            </div>
+        <?php endif; ?>
     </form>
 </section>
 <script src="/js/ticket.js"></script>

@@ -67,11 +67,7 @@ class TicketController extends AbstractController {
         } else {
             $errorMessage = "Désolé, le ticket n'a pas pu être créé.";
         }
-
-        $content = '../views/ticket/list.php';
-        include ('../views/header.php');
-        include ('../views/user/user-space.php');
-        include ('../views/footer.php');
+        $this->ticketByUserView();
     }
 
     public function createView() {
@@ -99,6 +95,27 @@ class TicketController extends AbstractController {
 
         $idTicket = $data['idTicket'];
         $this->dao->updateTicket($idTicket, $data);
+    }
+
+    /**
+     * Supprime un ticket.
+     * Un ticket ne peut être supprimé que si l'utilisateur est syndic ou créateur du ticket
+     * @param $id
+     */
+    public function delete($id) {
+        $authenticatedUser = $this->isLogged();
+
+        $ticket = $this->dao->getTicketById($id);
+
+        if ($ticket->user == $authenticatedUser->id || $authenticatedUser->role == 'SYNDIC') {
+            $this->dao->deleteTicket($id);
+        }
+
+         if ($authenticatedUser != 'SYNDIC') {
+             $this->ticketByBuildingView();
+         } else {
+             $this->index();
+         }
     }
 
 }

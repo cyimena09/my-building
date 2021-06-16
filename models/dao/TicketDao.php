@@ -139,6 +139,21 @@ class TicketDao extends AbstractDao {
         }
     }
 
+    public function deleteTicket($id) {
+        if (empty($id)) {
+            return false;
+        }
+
+        try {
+            $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE idTicket = ?");
+            $statement->execute([
+                $id
+            ]);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
     public function instantiate($result) {
         return new Ticket(
             !empty($result['idTicket']) ? $result['idTicket'] : 0,

@@ -5,9 +5,9 @@
     <tr>
         <th>#</th>
         <th>Nom de l'immeuble</th>
-        <th>Nombre d'appatement</th>
+        <th>Nombre d'appartements</th>
         <th>Ville</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
     </thead>
 
