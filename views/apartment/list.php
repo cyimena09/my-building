@@ -21,8 +21,11 @@
                     <tr>
                         <th><?= $i; ?></th>
                         <td><?= $apartment->__get('name'); ?></td>
-                        <td>xxx</td>
-                        <td><a href="/apartments/show/<?= $apartment->__get('id'); ?>">Voir</a></td>
+                        <td><?= $apartment->__get('nbTenants'); ?></td>
+                        <td>
+                            <a href="/apartments/show/<?= $apartment->__get('id'); ?>"><i class="fas fa-edit icon-update"></i></a>
+                            <a href="/apartments/delete/<?= $apartment->__get('id'); ?>"><i class="fas fa-trash icon-delete"></i></a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

@@ -21,8 +21,8 @@
                 <td><?= $user->__get('phone'); ?></td>
                 <td><?= $user->__get('email'); ?></td>
                 <td>
-                    <a href="/users/show/<?= $user->__get('id'); ?>"><i class="fas fa-edit"></i></a>
-                    <a href="/users/delete/<?= $user->__get('id'); ?>"><i class="fas fa-trash"></i></a>
+                    <a href="/users/show/<?= $user->__get('id'); ?>"><i class="fas fa-edit icon-update"></i></a>
+                    <a href="/users/delete/<?= $user->__get('id'); ?>"><i class="fas fa-trash icon-delete"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>

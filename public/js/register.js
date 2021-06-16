@@ -1,5 +1,14 @@
+// Ce code permet d'enregistrer un utilisateur,
+// on distingue 3 situations particulière. L'utilisateur qui s'inscrit doit choisir un role et en fonction de son choix
+// des sous-formulaires différents s'affichent. Les 3 rôles sont 'LOCATAIRE', 'PROPRIETAIRE' et 'LOCATAIRE_PROPRIETAIRE'
+// CAS LOCATAIRE : Un menu déroulant s'affiche et l'utilisateur choisi d'abord le batiment dans lequel il réside
+// et ensuite son appartement
+// CAS PROPRIETAIRE : Un premier menu demande à l'utilisateur de sélectionner l'appartement dans lequel se trouve
+// son appartement et une fois son choix fait un second menu lui demande de sélectionner son appartement. L'utilisateur peut effectuer ce
+// processus autant de fois qu'il le souhaite. Mais si un appartement a déjà été sélectionné, il n'est pas ajouté dans la liste.
+// CAS LOCATAIRE_PROPRIETAIRE : Comprends les deux premiers cas réunis.
 $(document).ready(function () {
-let passage = 0
+    let radios = document.getElementsByName("role");
     let globalRole; // role de l'utilisateur
     let globalIdBuildingOwned; // identifiant de l'immeuble en cours de traitement
     let globalIdBuildingRented; // identifiant de l'immeuble en cours de traitement et que le locataire loue
@@ -10,8 +19,6 @@ let passage = 0
     * -----------------------  AFFICHE (CHOIX RESIDENCE) EN FONCTION DU ROLE CHOISI ---------------------------
     *  *****************************************************************************************
     * */
-
-    let radios = document.getElementsByName("role");
 
     for (let i = 0; i < radios.length; ++i) {
         radios[i].addEventListener('change', function (e) {
@@ -33,7 +40,6 @@ let passage = 0
                 .done(function (result) {
                     if (result) {
                         $('#js-section-result').append(result);
-
                         dynamicMenu(); // on active le code qui permet de générer dynamiquement les appartements en fonction de l'immeuble choisi
                     }
                 })
@@ -55,7 +61,12 @@ let passage = 0
 
             // on ajoute un listener sur le choix de l'immeuble
             selectFkBuildingRented.addEventListener('change', function (e) {
-                $('#dropdown-apartment-rented').remove(); // on retire l'ancienne liste si elle existe
+                // on reset
+                if (containerRented.children.length > 0) {
+                    let child = containerRented.children[0];
+                    child.remove();
+                }
+
                 containerRented.style.visibility = 'visible';
 
                 const idBuilding = selectFkBuildingRented.value; // récupération de l'id de l'immeuble
@@ -72,20 +83,8 @@ let passage = 0
                         if (result) {
                             $('#js-result-rented').append(result) // on ajoute le menu des appartements (en fonction de l'identifiant du building indiqué
                             let mainElement = document.getElementById('js-result-rented');
-                            let drop  = mainElement.ownerDocument.getElementsByTagName('div');
+                            let drop = mainElement.ownerDocument.getElementsByTagName('div');
                             drop.id = 'dropdown-apartment-rented'
-
-                            // on donne un id a l'appartement
-
-                            let tenantContainer;
-                            let select;
-                            // Il faut attribuer un identifiant à la balise select
-                            // Si le role == 'LOCATAIRE' on ajoute l'id idRentedApartment
-                            tenantContainer = document.getElementById('tenant');
-                            select = tenantContainer.ownerDocument.getElementsByTagName("select")
-                            select.id = 'idApartmentRented';
-
-
                         }
                     })
                     .fail(function (error) {
@@ -94,8 +93,48 @@ let passage = 0
             });
         }
 
+        if (globalRole == 'PROPRIETAIRE') {
+            const containerRented = document.getElementById('js-result-owned');
+            let selectFkBuildingRented = document.getElementById("fkBuildingOwned");
+
+            selectFkBuildingRented.addEventListener('change', function (e) {
+
+                // on reset
+                if (containerRented.children.length > 0) {
+                    let child = containerRented.children[0];
+                    child.remove();
+                }
+                containerRented.style.visibility = 'visible';
+
+                const idBuildingRented = selectFkBuildingRented.value; // récupération de l'id de l'immeuble
+                globalIdBuildingRented = idBuildingRented
+
+                const data = {
+                    idBuilding: idBuildingRented
+                }
+
+                $.post('/apartments/dropdown/', data, function () {
+
+                })
+                    .done(function (result) {
+                        if (result) {
+                            $('#js-result-owned').append(result) // on ajoute le menu des appartements (en fonction de l'identifiant du building indiqué
+
+                            addButton()
+                            let mainElement = document.getElementById('js-result-owned');
+                            let drop = mainElement.ownerDocument.getElementsByTagName('div');
+                            drop.id = 'dropdown-apartment-owned';
+                        }
+                    })
+                    .fail(function (error) {
+                        console.log('error', error);
+                    });
+            });
+        }
+
+
         // si role == PROPRIETAIRE_LOCATAIRE
-        // il faudra gérer deux formulaires, un pour ajouter la location et un autre pour ajouter les propriétés
+        // il faudra gérer deux formulaires, un pour ajouter l'appartement loué et un autre pour ajouter les propriétés
         if (globalRole == 'PROPRIETAIRE_LOCATAIRE') {
             const containerRented = document.getElementById('js-result-rented');
             let selectFkBuildingRented = document.getElementById("fkBuildingRented");
@@ -108,7 +147,7 @@ let passage = 0
             selectFkBuildingRented.addEventListener('change', function (e) {
 
                 // on reset
-                if (containerRented.children.length > 0 ){
+                if (containerRented.children.length > 0) {
                     let child = containerRented.children[0];
                     child.remove();
                 }
@@ -131,7 +170,7 @@ let passage = 0
                             $('#js-result-rented').append(result) // on ajoute le menu des appartements (en fonction de l'identifiant du building indiqué
 
                             let mainElement = document.getElementById('js-result-rented');
-                            let drop  = mainElement.ownerDocument.getElementsByTagName('div');
+                            let drop = mainElement.ownerDocument.getElementsByTagName('div');
                             drop.id = 'dropdown-apartment-rented'
 
                             let tenantContainer;
@@ -145,13 +184,6 @@ let passage = 0
                             tenantContainer = document.getElementById('tenant');
                             select = tenantContainer.ownerDocument.getElementsByTagName("select")[1]
                             select.id = 'idApartmentRented'; // on modifie l'id du menu déroulant des appartements
-
-                            console.log(select)
-                            // on distingue les id des dropdowns
-                            //let dropdownRented = tenantContainer.ownerDocument.getElementById('dropdown-apartment');
-                            //dropdownRented.id = 'dropdown-apartment-rented';
-
-
 
                         }
                     })
@@ -171,17 +203,12 @@ let passage = 0
 
             // Etape 2 : on ajoute un listener sur l'immeuble possédé
             selectFkBuildingOwned.addEventListener('change', function (e) {
-
                 // on reset
-                if (containerOwned.children.length > 0 ){
+                if (containerOwned.children.length > 0) {
                     let child = containerOwned.children[0];
                     child.remove();
                 }
 
-
-
-                //console.log($('#dropdown-apartment-owned'))
-                //$('#dropdown-apartment-owned').remove(); // on retire l'ancienne liste si elle existe
                 containerOwned.style.visibility = 'visible';
 
                 const idBuildingOwned = selectFkBuildingOwned.value; // récupération de l'id de l'immeuble
@@ -203,28 +230,9 @@ let passage = 0
                             //e.style.border = 'solid red 1px'
 
 
-                            let drop  = mainElement.ownerDocument.getElementsByTagName('div')[1];
+                            let drop = mainElement.ownerDocument.getElementsByTagName('div')[1];
                             //console.log(drop)
                             drop.id = 'dropdown-apartment-owned'
-
-                            let tenantContainer;
-                            let select;
-                            // Il faut attribuer un identifiant à la balise select
-                            // Si le role == 'LOCATAIRE' on ajoute l'id idRentedApartment
-
-                            // on aura deux menus, le premier concerne la location et la seconde les propriétés
-
-                            // // location
-                            // tenantContainer = document.getElementById('tenant');
-                            // select = tenantContainer.ownerDocument.getElementsByTagName("select")
-                            // select.id = 'idApartmentRented';
-
-                            // propriété
-                            // let ownerContainer = document.getElementById('owner');
-                            // select = tenantContainer.ownerDocument.getElementsByTagName("select")
-                            // select.id = 'idApartmentOwned';
-
-
                         }
                     })
                     .fail(function (error) {
@@ -241,38 +249,40 @@ let passage = 0
     * */
 
     function addButton() {
+        // todo on devrait gérer l'ajout qu'ici et pas ailleurs
+        const containerOwned = document.getElementById('js-result-owned');
+
         const addButton = document.getElementById('js-add-btn');
         const containerListApartment = document.getElementById('js-container-list-apartments');
         const ul = document.getElementById('js-ul');
 
-        const containerOwned = document.getElementById('owner');
 
         addButton.addEventListener('click', function (e) {
-            //globalIdApartment = document.forms["form-create-user"]["fkApartment"].value;
+            //console.log(containerOwned)
+            const idBuilding = document.getElementById('fkBuildingOwned').value // on récupère le building
+            const idApart = containerOwned.children[0].getElementsByTagName('select')[0].value; // on récupère l'appartement
 
-            // récupération du dropdown avec les appartements (deuxième)
-            let dropdownApartOwned = containerOwned.ownerDocument.getElementsByTagName('select')[2].value
-
-            globalIdApartment = dropdownApartOwned
+            // on vérifie si les valeurs ne sont pas nulles
+            if (idApart == "" || idBuilding == "") {
+                return;
+            }
 
             // on vérifie si l'appartement n'est pas déjà dans la liste
             for (let i = 0; i < apartmentOwnedList.length; i++) {
-                if (apartmentOwnedList[i]['idApartment'] == globalIdApartment) {
+                if (apartmentOwnedList[i]['idApartment'] == idApart) {
                     return;
                 }
             }
 
-            // todo check if null
-
             let data = {
-                idBuilding: globalIdBuildingOwned,
-                idApartment: globalIdApartment
+                isOwnerRequest: 1, // booléen qui indique si on ajoute une propriété ou une location (ici propriété)
+                idBuilding: idBuilding,
+                idApartment: idApart
             }
-            apartmentOwnedList.push(data);
-
             // on crée et on affiche l'element
+            apartmentOwnedList.push(data);
             let li = document.createElement("li");
-            li.innerText = 'Immeuble : ' + globalIdBuildingOwned + 'appartement : ' + globalIdApartment;
+            li.innerText = 'Immeuble : ' + idBuilding + 'appartement : ' + idApart;
             ul.appendChild(li);
             containerListApartment.style.display = 'flex';
         });
@@ -305,20 +315,6 @@ let passage = 0
         const city = document.forms["form-create-user"]["city"].value;
         const country = document.forms["form-create-user"]["country"].value;
 
-
-
-
-
-        // si on ne peut pas récupérer le fkApartment c'est qu'aucun immeuble n'a été sélectionné
-        // let fkApartment;
-        // try {
-        //     fkApartment = document.forms["form-create-user"]["fkApartment"].value;
-        // } catch (error) {
-        //     containerInfo.style.display = 'block';
-        //     containerInfo.innerText = "Veuillez choisir une résidence.";
-        //     return;
-        // }
-
         // On vérifie que tous les champs ont été encodé
         if (firstName == "" ||
             lastName == "" ||
@@ -330,10 +326,10 @@ let passage = 0
             // address
             street == "" ||
             houseNumber == "" ||
-            boxNumber== "" ||
-            zip== "" ||
-            city== "" ||
-            country== "") {
+            boxNumber == "" ||
+            zip == "" ||
+            city == "" ||
+            country == "") {
 
             console.log('tout na pas ete encode')
             // fkAPartment
@@ -343,29 +339,32 @@ let passage = 0
             return;
         }
 
+        // vérification de la cohérence des valeurs
+        if (!(role == "LOCATAIRE" || role == "PROPRIETAIRE" || role == "PROPRIETAIRE_LOCATAIRE")) {
+            containerInfo.style.display = 'block';
+            containerInfo.innerText = "Le rôle n'est pas valide.";
+            console.log('le role nest pas validee')
+            return;
+        }
 
-
-
-
-            // une fois que tous les champs ont été encodé on vérifie la cohérence des valeurs
-            // 1. Le role doit figurer parmi : TENANT, OWNER ou TENANT_OWNER
-            if (!(role == "LOCATAIRE" || role == "PROPRIETAIRE" || role == "PROPRIETAIRE_LOCATAIRE")) {
-                containerInfo.style.display = 'block';
-                containerInfo.innerText = "Le rôle n'est pas valide.";
-                console.log('le role nest pas validee')
-                return;
-            }
-            // 2. le genre doit être "M" ou "F"
-            if (!(gender == "M" || gender == "F" || gender == "O")) {
-                formError.style.display = 'block';
-                formError.innerText = "Le genre n'est pas valide.";
-                console.log('le genre  nest pas validee')
-                return;
-            }
-        // on récupère la location sil y a
+        if (!(gender == "M" || gender == "F" || gender == "O")) {
+            formError.style.display = 'block';
+            formError.innerText = "Le genre n'est pas valide.";
+            console.log('le genre  nest pas validee')
+            return;
+        }
+        // on récupère la location sil y a qu'on ajoute a la liste d'appartements a traiter(apartmentOwnedList
         let containerRented = document.getElementById('tenant')
         let fkBuilding = containerRented.ownerDocument.getElementsByTagName('select')[0].value;
         let fkApartment = containerRented.ownerDocument.getElementsByTagName('select')[1].value;
+
+        let dataToPush = {
+            isOwnerRequest: 0,
+            idBuilding: fkBuilding,
+            idApartment: fkApartment
+        }
+
+        apartmentOwnedList.push(dataToPush);
 
         const data = {
             firstName: firstName,
@@ -375,28 +374,20 @@ let passage = 0
             gender: gender,
             password: password,
             role: role,
-            fkBuilding: fkBuilding ? fkBuilding : null,
-            fkApartment: fkApartment ? fkApartment : null,
             // address
             street: street,
             houseNumber: houseNumber,
             boxNumber: boxNumber,
             zip: zip,
             city: city,
-            country: country
+            country: country,
+            request: apartmentOwnedList
         }
-
-        console.log('les données sont : ')
-        console.log(data);
-
-        console.log('la requete est : ')
-        console.log(apartmentOwnedList)
 
         $.post('/auth/register', data, function () {
 
         })
             .done(function (e) {
-                console.log(e);
                 const successMessage = encodeURI('Félicitation, votre compte a bien été créé !');
                 //window.location = '/?success-message=' + successMessage;
             })

@@ -66,7 +66,7 @@
             <h3><i class="fas fa-users"></i>Utilisateurs</h3>
             <ul>
                 <li><a href="/users">Liste des utilisateurs</a></li>
-                <li><a href="/users/inactive">Comptes non activé</a></li>
+                <li><a href="/requests">Demandes d'affiliation</a></li>
             </ul>
         </div>
 

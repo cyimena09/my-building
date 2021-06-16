@@ -7,6 +7,10 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+/*body {*/
+/*    background-color: rgb(249, 249, 249);*/
+/*}*/
+
 /* GENERAL */
 
 .page {
@@ -128,6 +132,9 @@ header {
     display: flex;
     justify-content: center;
     padding: 30px 0;
+    border-bottom: 1px #d4e1e9 solid;
+    box-shadow: 0 3px 5px #d3e1ea;
+    background-color: #f1f3f3;
 }
 
 header .logo a {
@@ -155,7 +162,7 @@ header .actions li {
 /* FOOTER */
 
 footer {
-    margin-top: 100px;
+    margin-top: 55px;
     padding: 30px 0;
     background-color: #dfe2ec;
 }
@@ -238,9 +245,14 @@ img {
 
 /* USER SPACE */
 
+#user-space .content-page {
+/ / margin-top: 30 px;
+}
+
 #user-space h1 {
     font-size: 24px;
     margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .head {
@@ -424,9 +436,9 @@ tbody td {
 /* BUTTON */
 
 button {
-    padding: 10px 25px;
+    padding: 10px 13px;
     border: solid 1px black;
-    border-radius: 15px;
+    border-radius: 6px;
     background-color: unset;
     cursor: pointer;
 }
@@ -445,11 +457,7 @@ button:hover {
     color: white;
 }
 
-.a-btn:hover {
-    background-color: darkgreen;
-}
-
-.a-btn i{
+.a-btn i {
     color: white;
     margin-right: 7px;
 }
@@ -468,6 +476,30 @@ button:hover {
 
 .a-btn-mauve:hover {
     background-color: #6125b5;
+}
+
+.a-btn-green {
+    background-color: green;
+}
+
+.a-btn-green:hover {
+    background-color: darkgreen;
+}
+
+.icon-delete {
+    color: #9b1717;
+}
+
+.icon-delete:hover {
+    color: #811313;
+}
+
+.icon-update {
+    color: #cd8d24;
+}
+
+.icon-update:hover {
+    color: #b37808;
 }
 
 /* ROLE */

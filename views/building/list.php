@@ -19,7 +19,10 @@
                 <td><?= $building->__get('name'); ?></td>
                 <td><?= $building->__get('nbApartments'); ?></td>
                 <td><?= $building->__get('address')->city; ?></td>
-                <td><a href="/buildings/show/<?= $building->__get('id'); ?>">Voir</a></td>
+                <td>
+                    <a href="/buildings/show/<?= $building->__get('id'); ?>"><i class="fas fa-edit icon-update"></i></a>
+                    <a href="/buildings/delete/<?= $building->__get('id'); ?>"><i class="fas fa-trash icon-delete"></i></a>
+                </td>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>

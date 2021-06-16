@@ -20,7 +20,14 @@ class AuthController extends AbstractController {
     }
 
     public function register($id, $data) {
-        $this->dao->createUser($data);
+        $lastInserted = $this->dao->createUser($data);
+        $requestDao = new RequestDao();
+        // on encode toutes les requetes dans la db
+        for($i = 0; $i < count($data['request']); $i++) {
+            $data['request'][$i]['idUser'] = $lastInserted;
+            $requestDao->createRequest( $data['request'][$i]);
+        }
+
         //return http_response_code(401);
     }
 

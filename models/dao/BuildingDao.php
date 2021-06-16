@@ -135,13 +135,28 @@ class BuildingDao extends AbstractDao {
         }
     }
 
+    public function deleteBuilding($id) {
+        if (empty($id)) {
+            return false;
+        }
+
+        try {
+            $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE idBuilding = ?");
+            $statement->execute([
+                $id
+            ]);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
+
     public function instantiate($result) {
         $building =  new Building(!empty($result['idBuilding']) ? $result['idBuilding'] : 0, $result['name']);
 
         if(!empty($result['nbApartments'])) {
             $building->nbApartments = $result['nbApartments'];
         }
-        return$building;
+        return $building;
     }
 
     public function instantiateAll($results) {

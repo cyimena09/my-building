@@ -1,4 +1,4 @@
-<div  class="group" style="border: solid red">
+<div  class="group">
     <label class="label" for="fkApartment">Choisissez l'appartement</label>
     <select name="fkApartment">
         <?php foreach ($apartments as $apartment): ?>

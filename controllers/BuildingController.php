@@ -60,4 +60,9 @@ class BuildingController extends AbstractController {
         $this->dao->updateBuilding($idBuilding, $data);
     }
 
+    public function delete($id) {
+        $this->dao->deleteBuilding($id);
+        $this->index();
+    }
+
 }

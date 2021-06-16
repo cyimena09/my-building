@@ -79,4 +79,10 @@ class CommunicationController extends AbstractController {
         $this->dao->updateCommunication($idCommunication, $data);
     }
 
+    public function delete($id) {
+        $this->dao->deleteCommunication($id);
+        $this->index();
+    }
+
+
 }

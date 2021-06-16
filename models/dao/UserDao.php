@@ -134,16 +134,14 @@ class UserDao extends AbstractDao {
                 password_hash($data['password'], PASSWORD_DEFAULT));
 
         // l'appartement, l'adresse et isActive ne sont pas dans le contructor
-        $user->apartment = $data['fkApartment'];
-        $user->building = $data['fkBuilding'];
         $user->address = $addressId;
         $user->isActive = 0;
 
         if ($user) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (firstname, lastname, email, phone, gender, password, role, fkAddress, fkBuilding, fkApartment, isActive) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO {$this->table} (firstname, lastname, email, phone, gender, password, role, fkAddress, isActive) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 );
                 $statement->execute([
                     htmlspecialchars($user->__get('firstName')),
@@ -154,16 +152,29 @@ class UserDao extends AbstractDao {
                     htmlspecialchars($user->__get('password')),
                     htmlspecialchars($user->__get('role')),
                     htmlspecialchars($user->__get('address')),
-                    htmlspecialchars($user->__get('building')),
-                    htmlspecialchars($user->__get('apartment')),
                     htmlspecialchars($user->__get('isActive'))
                 ]);
 
-                return true;
+                return $lastInsertedId = $this->connection->lastInsertId();
             } catch (PDOException $e) {
                 print $e->getMessage();
                 return false;
             }
+        }
+    }
+
+    public function deleteUser($id) {
+        if (empty($id)) {
+            return false;
+        }
+
+        try {
+            $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE idUser = ?");
+            $statement->execute([
+                $id
+            ]);
+        } catch (PDOException $e) {
+            print $e->getMessage();
         }
     }
 

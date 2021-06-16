@@ -6,6 +6,8 @@ class Apartment {
     private $name;
     private $owner;
     private $building;
+    private $tenant; // todo a supprimer
+    private $nbTenants;
 
     public function __construct($id, $name, $owner, $building) {
         $this->id = $id;

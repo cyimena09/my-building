@@ -34,7 +34,8 @@ class Router {
             'update',
             'store',
             'index',
-            'search'
+            'search',
+            'validate'
         ];
 
         $this->controllers = [
@@ -44,7 +45,8 @@ class Router {
             'buildings' => 'BuildingController',
             'apartments' => 'ApartmentController',
             'tickets' => 'TicketController',
-            'communications' => 'CommunicationController'
+            'communications' => 'CommunicationController',
+            'requests' => 'RequestController'
         ];
 
         $this->request = array();

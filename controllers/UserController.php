@@ -15,7 +15,7 @@ class UserController extends AbstractController {
 
         $filter = 'role'; // champ dans la db
         $value = 'LOCATAIRE'; // valeur du champ  todo utiliser l'enum
-        $users = $this->dao->getUsersByFilter($filter, $value);
+        $users = $this->dao->getUsers();
 //
 //        // pour chaque utilisateurs on affiche leur immeuble
 //        $buildingDao = new BuildingDao();
@@ -81,6 +81,11 @@ class UserController extends AbstractController {
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
+    }
+
+    public function delete($id) {
+        $this->dao->deleteUser($id);
+        $this->index();
     }
 
 }

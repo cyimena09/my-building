@@ -18,7 +18,11 @@
                 <td><?= $communication->__get('subject'); ?></td>
                 <td><?= $communication->__get('dateCreation'); ?></td>
                 <td><?= $communication->__get('lastUpdate'); ?></td>
-                <td><a href="/communications/show/<?= $communication->__get('id'); ?>">Voir</a></td>
+                <td>
+                    <a href="/communications/show/<?= $communication->__get('id'); ?>"><i class="fas fa-edit icon-update"></i></a>
+                    <a href="/communications/delete/<?= $communication->__get('id'); ?>"><i class="fas fa-trash icon-delete"></i></a>
+                </td>
+
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>

@@ -59,6 +59,11 @@ class ApartmentController extends AbstractController {
         $this->dao->updateApartment($idApartment, $data);
     }
 
+    public function delete($id) {
+        $this->dao->deleteApartment($id);
+        $this->index();
+    }
+
     /**
      * Affiche une liste déroulante d'appartements en fonction de l'id contenu dans le paramètre data
      * @param $id
