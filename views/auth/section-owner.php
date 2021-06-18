@@ -10,7 +10,7 @@
     </select>
 
 
-    <!-- Liste des appartments-->
+    <!-- Container pour la liste des appartements -->
     <div id="js-result-owned" style="visibility: hidden">
 
     </div>
@@ -28,7 +28,7 @@
     <!--    </div>-->
 
 
-    <div id="js-container-list-apartments" style="display: none;">
+    <div id="js-container-list-apartments">
         <div id="js-ul">
 
         </div>

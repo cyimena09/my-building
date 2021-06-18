@@ -8,8 +8,8 @@
         <?php endforeach; ?>
     </select>
 
-
-    <div id="js-result-rented" style="visibility: hidden">
+    <!-- Container pour la liste des appartements -->
+    <div id="js-result-rented" style="visibility: hidden; border: solid red">
 
     </div>
 

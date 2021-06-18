@@ -18,7 +18,7 @@
                     <label for="owner-radio">Propriétaire et non résidant</label>
                 </div>
                 <div class="group-radio">
-                    <input type="radio" id="both-radio" name="role" value="PROPRIETAIRE_LOCATAIRE">
+                    <input type="radio" id="both-radio" name="role" value="PROPRIETAIRE_RESIDENT">
                     <label for="both-radio">Propriétaire et résident</label>
                 </div>
 

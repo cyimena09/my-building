@@ -109,7 +109,7 @@ class AuthController extends AbstractController {
         } elseif ($role == 'PROPRIETAIRE') {
             $buildings = $buildingDao->getBuildings();
             include ('../views/auth/section-owner.php');
-        } elseif ($role == 'PROPRIETAIRE_LOCATAIRE') {
+        } elseif ($role == 'PROPRIETAIRE_RESIDENT') {
             $buildings = $buildingDao->getBuildings();
             include ('../views/auth/section-tenant.php');
             include ('../views/auth/section-owner.php');
