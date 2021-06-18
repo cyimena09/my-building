@@ -142,7 +142,7 @@ header {
     padding: 30px 0;
     border-bottom: 1px #d4e1e9 solid;
     box-shadow: 0 3px 5px #d3e1ea;
-    background-color: #f1f3f3;
+    background-color: rgb(249,249,249);
 }
 
 header .logo a {
@@ -172,7 +172,7 @@ header .actions li {
 footer {
     margin-top: 55px;
     padding: 30px 0;
-    background-color: #dfe2ec;
+    background-color: rgb(249,249,249);
 }
 
 /* HOME */
@@ -227,6 +227,7 @@ img {
 
 #register .content-page {
     width: 800px;
+    margin-top: 30px;
 }
 
 #register form {
@@ -582,7 +583,6 @@ button:hover {
 .a-btn-orange:hover {
     background-color: #d44c20;
 }
-
 
 .icon-delete {
     color: #9b1717;

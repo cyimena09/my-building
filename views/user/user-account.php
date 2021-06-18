@@ -13,7 +13,7 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_RESIDENT') {
 
     <h1>Votre espace</h1>
 
-    <?php if (empty($authenticatedUser->building->id)): ?>
+    <?php if (!empty($authenticatedUser->building->id)): ?>
     <div class="location">
         <p>Vous louez
             <a class="a-btn-orange" href="/apartments/show/<?= $authenticatedUser->apartment->id; ?>"><?= $authenticatedUser->apartment->name; ?></a>

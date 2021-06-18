@@ -60,10 +60,9 @@ $enums = statusEnum();
                 <td><?= $ticket->__get('lastUpdate'); ?></td>
                 <td>
                     <a href="/tickets/show/<?= $ticket->__get('id'); ?>"><i class="fas fa-edit icon-update"></i></a>
-
                     <!-- Un ticket n'est supprimable que par un syndic ou le propriétaire-->
                     <?php if ($ticket->__get('user') == $authenticatedUser->id || $authenticatedUser->role == 'SYNDIC'): ?>
-                        <a href="/tickets/delete/<?= $ticket->__get('id'); ?>?tt=oui"><i
+                        <a href="/tickets/delete/<?= $ticket->__get('id'); ?>"><i
                                     class="fas fa-trash icon-delete"></i></a>
                     <?php endif; ?>
                 </td>

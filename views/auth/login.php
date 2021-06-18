@@ -12,7 +12,7 @@
         <div id="login">
             <?php include('../views/notification.php'); ?>
 
-            <?php if (!isset($authenticatedUser)): ?>
+            <?php if (!isset($authenticatedUser) || !$authenticatedUser): ?>
                 <h1 style="display: flex; flex-direction: column">
             <span class="color-turquoise"
                   style="font-size: 36px; font-weight: bold; margin-bottom: 10px">Bienvenue,</span>
@@ -36,7 +36,7 @@
                     <a class="color-blue" href="/auth/registerView">Pas encore inscrit ? C'est par ici !</a>
                 </p>
 
-            <?php else: ?>
+            <?php elseif ($authenticatedUser): ?>
                 <h1 style="display: flex; flex-direction: column">
             <span class="color-turquoise"
                   style="font-size: 36px; font-weight: bold; margin-bottom: 10px">Bienvenue...</span>

@@ -40,10 +40,14 @@
     <div class="head">
         <h2>Location</h2>
     </div>
-    <?php foreach ($rentedApartments as $rentedApartment): ?>
-        <p>Apartement : <?= $rentedApartment->name; ?> ( immeuble : <?= $rentedApartment->building->name; ?> )</p>
-        <a href="/apartments/show/<?= $rentedApartment->id; ?>">Voir</a>
-    <?php endforeach; ?>
+    <?php if (count($rentedApartments) > 0): ?>
+        <?php foreach ($rentedApartments as $rentedApartment): ?>
+            <p>Apartement : <?= $rentedApartment->name; ?> ( immeuble : <?= $rentedApartment->building->name; ?> )</p>
+            <a href="/apartments/show/<?= $rentedApartment->id; ?>">Voir</a>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <p style="color: #9d9b9b"><?= $user->firstName; ?> <?= $user->lastName; ?> ne loue aucun appartement</p>
+    <?php endif; ?>
 </section>
 
 <!--        Propriétés -->
@@ -51,8 +55,12 @@
     <div class="head">
         <h2>Propriété</h2>
     </div>
-    <?php foreach ($ownedApartments as $ownedApartment): ?>
-        <p>Apartement : <?= $ownedApartment->name; ?> de l'immeuble <?= $ownedApartment->name; ?></p>
-        <a href="/apartments/show/<?= $ownedApartment->id; ?>">Voir</a>
-    <?php endforeach; ?>
+    <?php if (count($ownedApartments) > 0): ?>
+        <?php foreach ($ownedApartments as $ownedApartment): ?>
+            <p>Apartement : <?= $ownedApartment->name; ?> de l'immeuble <?= $ownedApartment->name; ?></p>
+            <a href="/apartments/show/<?= $ownedApartment->id; ?>">Voir</a>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <p style="color: #9d9b9b"><?= $user->firstName; ?> <?= $user->lastName; ?> ne possède aucun appartement</p>
+    <?php endif; ?>
 </section>

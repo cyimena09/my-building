@@ -8,7 +8,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * Affiche la liste de tous les locataires
+     * Affiche la liste de tous les locataires et propriétaire
      */
     public function index() {
         $authenticatedUser = $this->isLogged();
@@ -87,7 +87,16 @@ class UserController extends AbstractController {
         $authenticatedUser = $this->isLogged();
 
         $this->dao->deleteUser($id);
-        $this->index();
+
+        // pour l'instant notre application ne permet de supprimer des utilisateurs depuis la liste d'user
+        // ou depuis un appartement. Le code si dessous définit ou l'internaute sera dirigé après la suppression
+        // en fonction de la page ou la suppression a été fait
+        if (isset($_GET['apartment'])) {
+            $apartmentController = new ApartmentController();
+            $apartmentController->show($_GET['apartment']);
+        } else {
+            $this->index();
+        }
     }
 
 }

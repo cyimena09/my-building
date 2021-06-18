@@ -112,11 +112,11 @@ class TicketController extends AbstractController {
             $this->dao->deleteTicket($id);
         }
 
-         if ($authenticatedUser != 'SYNDIC') {
-             $this->ticketByBuildingView();
-         } else {
-             $this->index();
-         }
+        if ($authenticatedUser->role != 'SYNDIC') {
+            $this->ticketByBuildingView();
+        } else {
+            $this->index();
+        }
     }
 
 }

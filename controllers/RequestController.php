@@ -32,8 +32,8 @@ class RequestController extends AbstractController {
     }
 
     /**
-     * Valide une demande d'affiliation, la validation entraine la suppression de la requete dans la Db
-     * Et active le compte de l'utilisateur
+     * Valide une demande d'affiliation, la validation entraine la suppression de la requete dans la Db,
+     * active le compte de l'utilisateur et lui affilie l'appartement de sa requête
      * @param $id
      */
     public function validate($id) {
@@ -46,7 +46,8 @@ class RequestController extends AbstractController {
 
         $userDao = new UserDao();
 
-        // si un utilisateur signal qu'il possède l'appartement alors on modifie uniquement l'appartement concerné
+        // CAS 1 : L'utilisateur souhaite devenir propriétaire
+        // Dans ce cas là, on modifie uniquement l'appartement concerné
         if ($request->isOwnerRequest == 1) {
             $apartment->owner = $request->user; // ici l'user est le propriétaire
 
@@ -59,7 +60,8 @@ class RequestController extends AbstractController {
                 $this->dao->deleteRequest($request->id);
             }
         }
-        // si l'utilisateur signal qu'il loue l'appartement alors on modifie l'appartement et l'user
+        // CAS 2 : L'utilisateur souhaite devenir locataire
+        // Dans ce cas là, on modifie l'appartement et l'user
         elseif ($request->isOwnerRequest == 0) {
             $apartment->tenant = $request->user; // ici l'user est le locataire
 
@@ -68,7 +70,10 @@ class RequestController extends AbstractController {
                 'tenant' => $apartment->tenant
             ];
 
+            var_dump($data);
+
             if ($apartmentDao->updateApartment($apartment->id, $data)) {
+                var_dump('CA A REUSSI');
                 $this->dao->deleteRequest($request->id);
             }
         }

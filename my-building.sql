@@ -15,6 +15,15 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+--
+-- Database: `chenil`
+--
+CREATE DATABASE IF NOT EXISTS `my-building` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `my-building`;
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `address`
 --
@@ -238,7 +247,13 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Emile','Cyimena','cyimena09@hotmail.com','0484090853','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','SYNDIC',1,NULL,NULL,NULL),(2,'Benoit','Vankoningsloo','benoit@hotmail.com','0477213465','F','ce16833c6d23fc9e.1623871238','2021-06-16 21:20:38','$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','SYNDIC',2,1,1,NULL),(3,'Amaury','Cyemezo','cyemezo@hotmail.com','0499591245','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,1,NULL),(4,'Alice','Malaika','malaika@hotmail.com','0476134465','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,1,NULL),(5,'Mike','Francois','mike@hotmail.com','0488124678','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),(6,'Susi','Toupe','stoupe0@symantec.com','6685851293','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),(7,'Eveline','Joyner','ejoyner1@cloudflare.com','7861614104','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),(8,'Eba','Penquet','epenquet2@walmart.com','7779636737','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,3,NULL),(9,'Justina','Dearth','jdearth3@hc360.com','5481337107','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,4,NULL),(10,'Venus','Tolwood','vtolwood4@w3.org','2896359988','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,5,NULL),(11,'Napoleon','Jencey','njencey5@csmonitor.com','5625961927','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,6,NULL),(12,'Kain','Wrist','kwrist6@mayoclinic.com','5729661592','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,7,NULL),(13,'Vernor','Titchen','vtitchen7@moonfruit.com','2342462343','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,3,8,NULL),(14,'monp','monn','qs@qs.qs','13564','O','198d5dba65a75af0.1623871127','2021-06-16 21:18:47','$2y$10$M18gDHwFI1tY8tIk2LD3d.yHmTAFTr3s0v4VyQjYe9.T0yd.MMilO','LOCATAIRE',16,NULL,NULL,'0'),(15,'zer','zer','zer@zer.zer','123456','F','225bb33603812a5d.1623870194','2021-06-16 21:03:14','$2y$10$pJK4SZ6I2Z7CHshfQPOgiuaJiDM.uNDsd2voZ1f6hQXF8o2FaRQ/m','PROPRIETAIRE',17,NULL,NULL,'0');
+INSERT INTO `user`
+VALUES (1,'Emile','Cyimena','cyimena09@hotmail.com','0484090853','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','SYNDIC',1,NULL, NULL, 1),
+(2,'Benoit','Vankoningsloo','benoit@hotmail.com','0477213465','F','ce16833c6d23fc9e.1623871238','2021-06-16 21:20:38','$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','SYNDIC',2,1,1,NULL),
+(3,'Amaury','Cyemezo','cyemezo@hotmail.com','0499591245','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,1,NULL),(4,'Alice','Malaika','malaika@hotmail.com','0476134465','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,1,NULL),
+(5,'Mike','Francois','mike@hotmail.com','0488124678','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),
+(6,'Susi','Toupe','stoupe0@symantec.com','6685851293','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),(7,'Eveline','Joyner','ejoyner1@cloudflare.com','7861614104','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,2,NULL),
+(8,'Eba','Penquet','epenquet2@walmart.com','7779636737','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,3,NULL),(9,'Justina','Dearth','jdearth3@hc360.com','5481337107','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,1,4,NULL),(10,'Venus','Tolwood','vtolwood4@w3.org','2896359988','F',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,5,NULL),(11,'Napoleon','Jencey','njencey5@csmonitor.com','5625961927','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,6,NULL),(12,'Kain','Wrist','kwrist6@mayoclinic.com','5729661592','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,2,7,NULL),(13,'Vernor','Titchen','vtitchen7@moonfruit.com','2342462343','M',NULL,NULL,'$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2','LOCATAIRE',NULL,3,8,NULL),(14,'monp','monn','qs@qs.qs','13564','O','198d5dba65a75af0.1623871127','2021-06-16 21:18:47','$2y$10$M18gDHwFI1tY8tIk2LD3d.yHmTAFTr3s0v4VyQjYe9.T0yd.MMilO','LOCATAIRE',16,NULL,NULL,'0'),(15,'zer','zer','zer@zer.zer','123456','F','225bb33603812a5d.1623870194','2021-06-16 21:03:14','$2y$10$pJK4SZ6I2Z7CHshfQPOgiuaJiDM.uNDsd2voZ1f6hQXF8o2FaRQ/m','PROPRIETAIRE',17,NULL,NULL,'0');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 

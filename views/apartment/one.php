@@ -39,6 +39,7 @@
         <div class="head">
             <h2>Locataires</h2>
         </div>
+        <?php if (count($tenants) > 0): ?>
         <table>
             <thead>
             <tr>
@@ -49,21 +50,23 @@
             </tr>
             </thead>
             <tbody>
-            <?php if (!empty($tenants)): $i++ ?>
-                <?php foreach ($tenants as $tenant): ?>
+                <?php foreach ($tenants as $tenant): $i++?>
                     <tr>
                         <th><?= $i; ?></th>
                         <td><?= $tenant->__get('firstName'); ?></td>
                         <td><?= $tenant->__get('lastName'); ?></td>
                         <td>
                             <a href="/users/show/<?= $tenant->__get('id'); ?>">Voir</a>
-                            <a href="/users/delete/<?= $tenant->__get('id'); ?>">Supprimer</a>
+                            <a href="/users/delete/<?= $tenant->__get('id'); ?>?apartment=<?= $apartment->id ?>">Supprimer</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
-            <?php endif; ?>
             </tbody>
         </table>
+
+        <?php else: ?>
+            <p style="color: #9d9b9b">L'appartement n'a pas de locataire</p>
+        <?php endif; ?>
     </section>
 </div>
 <script src="/js/apartment.js"></script>

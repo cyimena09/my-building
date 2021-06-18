@@ -7,9 +7,10 @@ class AuthController extends AbstractController {
        $this->dao = new UserDao();
     }
 
+    /**
+     * Page d'accueil et de connexion de l'application
+     */
     public function index() {
-        $authenticatedUser = $this->isLogged();
-
         include ('../views/header.php');
         include ('../views/auth/login.php');
         include ('../views/footer.php');
