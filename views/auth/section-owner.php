@@ -9,7 +9,6 @@
         <?php endforeach; ?>
     </select>
 
-
     <!-- Container pour la liste des appartements -->
     <div id="js-result-owned" style="visibility: hidden">
 
@@ -19,14 +18,6 @@
     <div>
         <button type="button" id="js-add-btn">Ajouter à la liste</button>
     </div>
-
-    <!--Liste des appartements ajoutés-->
-    <!--    <div style="display: none">-->
-    <!--        <p>Appartements ajoutés : </p>-->
-    <!--        <ul id="js-ul">-->
-    <!--        </ul>-->
-    <!--    </div>-->
-
 
     <div id="js-container-list-apartments">
         <div id="js-ul">

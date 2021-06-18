@@ -14,13 +14,15 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_RESIDENT') {
     <h1>Votre espace</h1>
 
     <?php if (!empty($authenticatedUser->building->id)): ?>
-    <div class="location">
-        <p>Vous louez
-            <a class="a-btn-orange" href="/apartments/show/<?= $authenticatedUser->apartment->id; ?>"><?= $authenticatedUser->apartment->name; ?></a>
-            du batiment
-            <a class="a-btn-mauve" href="/buildings/show/<?= $authenticatedUser->apartment->id; ?>"><?= $authenticatedUser->building->name; ?></a>
-        </p>
-    </div>
+        <div class="location">
+            <p>Vous louez
+                <a class="a-btn-orange"
+                   href="/apartments/show/<?= $authenticatedUser->apartment->id; ?>"><?= $authenticatedUser->apartment->name; ?></a>
+                du batiment
+                <a class="a-btn-mauve"
+                   href="/buildings/show/<?= $authenticatedUser->apartment->id; ?>"><?= $authenticatedUser->building->name; ?></a>
+            </p>
+        </div>
     <?php endif ?>
 
     <section>
@@ -79,27 +81,33 @@ if ($authenticatedUser->role == 'PROPRIETAIRE_RESIDENT') {
 
             <div class="group group-hover">
                 <label for="street">Rue</label>
-                <input id="street" type="text" placeholder="Rue" name="street" value="<?= $authenticatedUser->address->street ?>">
+                <input id="street" type="text" placeholder="Rue" name="street"
+                       value="<?= $authenticatedUser->address->street ?>">
             </div>
             <div class="group group-hover">
                 <label for="houseNumber">Numéro</label>
-                <input id="houseNumber" type="text" placeholder="Numéro" name="houseNumber" value="<?= $authenticatedUser->address->houseNumber ?>">
+                <input id="houseNumber" type="text" placeholder="Numéro" name="houseNumber"
+                       value="<?= $authenticatedUser->address->houseNumber ?>">
             </div>
             <div class="group group-hover">
                 <label for="boxNumber">Boite</label>
-                <input id="boxNumber" type="text" placeholder="Boite" name="boxNumber" value="<?= $authenticatedUser->address->boxNumber ?>">
+                <input id="boxNumber" type="text" placeholder="Boite" name="boxNumber"
+                       value="<?= $authenticatedUser->address->boxNumber ?>">
             </div>
             <div class="group group-hover">
                 <label for="zip">Code postal</label>
-                <input id="zip" type="text" placeholder="Code postal" name="zip" value="<?= $authenticatedUser->address->zip ?>">
+                <input id="zip" type="text" placeholder="Code postal" name="zip"
+                       value="<?= $authenticatedUser->address->zip ?>">
             </div>
             <div class="group group-hover">
                 <label for="city">Ville</label>
-                <input id="city" type="text" placeholder="Ville" name="city" value="<?= $authenticatedUser->address->city ?>">
+                <input id="city" type="text" placeholder="Ville" name="city"
+                       value="<?= $authenticatedUser->address->city ?>">
             </div>
             <div class="group group-hover">
                 <label for="country">Pays</label>
-                <input id="country" type="text" placeholder="Pays" name="country" value="<?= $authenticatedUser->address->country ?>">
+                <input id="country" type="text" placeholder="Pays" name="country"
+                       value="<?= $authenticatedUser->address->country ?>">
             </div>
             <div class="group">
                 <button>Mettre à jour</button>

@@ -18,12 +18,12 @@ $(document).ready(function () {
         const country = document.forms["form-update-building"]["country"].value;
 
         // On vérifie que tous les champs ont été encodé
-        if (name == "" ||
-            street == "" ||
-            houseNumber == "" ||
-            zip == "" ||
-            city == "" ||
-            country == "") {
+        if (name === "" ||
+            street === "" ||
+            houseNumber === "" ||
+            zip === "" ||
+            city === "" ||
+            country === "") {
 
             const message = "Veuillez encoder tous les champs !";
             const cssClass = 'bg-error';

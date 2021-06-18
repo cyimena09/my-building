@@ -13,44 +13,13 @@ class UserController extends AbstractController {
     public function index() {
         $authenticatedUser = $this->isLogged();
 
-        $filter = 'role'; // champ dans la db
-        $value = 'LOCATAIRE'; // valeur du champ  todo utiliser l'enum
         $users = $this->dao->getUsers();
-//
-//        // pour chaque utilisateurs on affiche leur immeuble
-//        $buildingDao = new BuildingDao();
-//
-//        foreach ($users as $user) {
-//            $building = $buildingDao->getBuildingById($user->building->id);
-//            $user->building = $building;
-//        }
 
         $content = '../views/user/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
         include ('../views/footer.php');
     }
-//
-//    /**
-//     * Affiche la liste de tout les utilisateurs avec leur immeuble
-//     */
-//    public function ownerView() {
-//        $user = $this->isLogged();
-//        $users = $this->dao->getUsers();
-//
-//        // pour chaque utilisateurs on affiche leur immeuble
-//        $buildingDao = new BuildingDao();
-//
-//        foreach ($users as $user) {
-//            $building = $buildingDao->getBuildingById($user->building->id);
-//            $user->building = $building;
-//        }
-//
-//        $content = 'list.php';
-//        include ('../views/header.php');
-//        include ('../views/user/user-space.php');
-//        include ('../views/footer.php');
-//    }
 
     public function show($id) {
         $authenticatedUser = $this->isLogged(); // attention ici il s'agit de vérifier que l'utilisateur est connecté

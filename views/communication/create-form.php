@@ -3,7 +3,6 @@
         <h1>Envoyer une communication</h1>
         <form class="form-in-column" action="/communications/create" method="post">
 
-
             <!-- Choix de la résidence -->
             <div class="group">
                 <label class="label" for="fkBuilding" style="margin-right: 10px">Choisissez la résidence</label>

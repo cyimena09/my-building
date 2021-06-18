@@ -7,7 +7,6 @@ $(document).ready(function () {
     let globalRole; // role de l'utilisateur
     let apartmentsList = []; // liste des appartements et des batiments sélectionné par l'utilisateur
 
-
     /* *****************************************************************************************
     * ------------  AFFICHE LE SOUS FORMULAIRE EN FONCTION DU ROLE DE L'UTILISATEUR  -----------
     *  *****************************************************************************************
@@ -131,7 +130,7 @@ $(document).ready(function () {
 
             // on vérifie si l'appartement n'est pas déjà dans la liste
             for (let i = 0; i < apartmentsList.length; i++) {
-                if (apartmentsList[i]['idApartment'] == idApart) {
+                if (apartmentsList[i]['idApartment'] === idApart) {
                     return;
                 }
             }

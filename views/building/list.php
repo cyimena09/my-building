@@ -10,7 +10,6 @@
         <th>Actions</th>
     </tr>
     </thead>
-
     <tbody>
     <?php if (!empty($buildings)): ?>
         <?php foreach ($buildings as $building): $i++; ?>

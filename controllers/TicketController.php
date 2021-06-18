@@ -50,6 +50,7 @@ class TicketController extends AbstractController {
 
     public function show($id) {
         $authenticatedUser = $this->isLogged();
+
         $ticket = $this->dao->getTicketById($id);
 
         $content = '../views/ticket/one.php';
@@ -83,19 +84,18 @@ class TicketController extends AbstractController {
         include ('../views/footer.php');
     }
 
-    public function updateStatus($id, $data) {
-        $authenticatedUser = $this->isLogged();
-
-        $idTicket = $data['idTicket'];
-
-        $this->dao->updateStatus($idTicket, $data);
-    }
-
     public function update($id, $data) {
         $authenticatedUser = $this->isLogged();
 
         $idTicket = $data['idTicket'];
         $this->dao->updateTicket($idTicket, $data);
+    }
+
+    public function updateStatus($id, $data) {
+        $authenticatedUser = $this->isLogged();
+
+        $idTicket = $data['idTicket'];
+        $this->dao->updateStatus($idTicket, $data);
     }
 
     /**

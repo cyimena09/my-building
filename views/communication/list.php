@@ -19,14 +19,15 @@
                 <td><?= $communication->__get('dateCreation'); ?></td>
                 <td><?= $communication->__get('lastUpdate'); ?></td>
                 <td>
-                    <a href="/communications/show/<?= $communication->__get('id'); ?>"><i class="fas fa-edit icon-update"></i></a>
+                    <a href="/communications/show/<?= $communication->__get('id'); ?>"><i
+                                class="fas fa-edit icon-update"></i></a>
 
                     <!-- Une communication n'est supprimable que par un syndic -->
                     <?php if ($authenticatedUser->role == 'SYNDIC'): ?>
-                        <a href="/communications/delete/<?= $communication->__get('id'); ?>"><i class="fas fa-trash icon-delete"></i></a>
+                        <a href="/communications/delete/<?= $communication->__get('id'); ?>"><i
+                                    class="fas fa-trash icon-delete"></i></a>
                     <?php endif; ?>
                 </td>
-
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>

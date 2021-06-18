@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
             integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
             crossorigin="anonymous"></script>
-    <script src="/js/script.js"></script>
     <script src="/js/functions.js"></script>
 </head>
 <body>
@@ -22,7 +21,8 @@
             <ul>
                 <?php if (isset($authenticatedUser) && $authenticatedUser): ?>
                     <li><a class="a-btn a-btn-grey" href="/auth/accountView">Votre Espace</a></li>
-                    <li><a class="a-btn a-btn-red" href="/auth/logout"><i class="fas fa-power-off"></i>Déconnexion</a></li>
+                    <li><a class="a-btn a-btn-red" href="/auth/logout"><i class="fas fa-power-off"></i>Déconnexion</a>
+                    </li>
                 <?php else: ?>
                     <li><a class="a-btn a-btn-grey" href="/">Se connecter</a></li>
                     <li><a class="a-btn a-btn-mauve" href="/auth/registerView">S'inscrire</a></li>

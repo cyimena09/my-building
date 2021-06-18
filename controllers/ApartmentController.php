@@ -84,8 +84,4 @@ class ApartmentController extends AbstractController {
         include ('../views/apartment/dropdown.php');
     }
 
-    public function includesList() {
-        // todo regrouper tous les includes
-    }
-
 }

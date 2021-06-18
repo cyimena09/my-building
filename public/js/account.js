@@ -17,12 +17,12 @@ $(document).ready(function () {
         const gender = document.forms["form-update-account"]["gender"].value;
 
         // On vérifie que tous les champs ont été encodé
-        if (idUser == "" ||
-            firstname == "" ||
-            lastname == "" ||
-            email == "" ||
-            phone == "" ||
-            gender == "") {
+        if (idUser === "" ||
+            firstname === "" ||
+            lastname === "" ||
+            email === "" ||
+            phone === "" ||
+            gender === "") {
 
             const message = "Veuillez encoder tous les champs !";
             const cssClass = 'bg-error';
@@ -78,12 +78,12 @@ $(document).ready(function () {
         const country = document.forms["form-update-address"]["country"].value;
 
         // On vérifie que tous les champs ont été encodé
-        if (idAddress == "" ||
-            street == "" ||
-            houseNumber == "" ||
-            zip == "" ||
-            city == "" ||
-            country == "") {
+        if (idAddress === "" ||
+            street === "" ||
+            houseNumber === "" ||
+            zip === "" ||
+            city === "" ||
+            country === "") {
 
             const message = "Veuillez encoder tous les champs !";
             const cssClass = 'bg-error';

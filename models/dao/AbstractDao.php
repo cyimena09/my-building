@@ -11,4 +11,17 @@ abstract class AbstractDao {
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    public function instantiate($result) {
+        var_dump('no override');
+        return null;
+    }
+
+    public function instantiateAll($results) {
+        $productList = array();
+        foreach ($results as $result) {
+            array_push($productList, $this->instantiate($result));
+        }
+        return $productList;
+    }
+
 }

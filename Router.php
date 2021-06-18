@@ -27,14 +27,11 @@ class Router {
             'ticketByBuildingView',
             'updateStatus',
             'communicationByBuildingView',
-            'edit',
             'delete',
             'show',
             'showAll',
             'update',
-            'store',
             'index',
-            'search',
             'validate'
         ];
 

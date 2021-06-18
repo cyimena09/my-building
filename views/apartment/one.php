@@ -40,17 +40,17 @@
             <h2>Locataires</h2>
         </div>
         <?php if (count($tenants) > 0): ?>
-        <table>
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($tenants as $tenant): $i++?>
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($tenants as $tenant): $i++ ?>
                     <tr>
                         <th><?= $i; ?></th>
                         <td><?= $tenant->__get('firstName'); ?></td>
@@ -61,8 +61,8 @@
                         </td>
                     </tr>
                 <?php endforeach; ?>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
         <?php else: ?>
             <p style="color: #9d9b9b">L'appartement n'a pas de locataire</p>

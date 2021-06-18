@@ -17,6 +17,7 @@ class AuthController extends AbstractController {
     }
 
     public function registerView() {
+        $views = '../views/auth/register.php';
         include ('../views/header.php');
         include ('../views/auth/register.php');
         include ('../views/footer.php');
@@ -108,7 +109,7 @@ class AuthController extends AbstractController {
             include ('../views/auth/section-tenant.php');
         } elseif ($role == 'PROPRIETAIRE') {
             $buildings = $buildingDao->getBuildings();
-            include ('../views/auth/section-owner.php');
+            include '../views/auth/section-owner.php' ;
         } elseif ($role == 'PROPRIETAIRE_RESIDENT') {
             $buildings = $buildingDao->getBuildings();
             include ('../views/auth/section-tenant.php');

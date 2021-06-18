@@ -13,7 +13,7 @@ $(document).ready(function () {
         const idBuilding = document.forms["form-create-apartment"]["idBuilding"].value;
 
         // On vérifie que tous les champs ont été encodé
-        if (name == "" || idBuilding == "") {
+        if (name === "" || idBuilding === "") {
             const message = "Veuillez encoder tous les champs !";
             const cssClass = 'bg-error';
             animateNotification(message, cssClass)
@@ -55,7 +55,7 @@ $(document).ready(function () {
         const name = document.forms["form-update-apartment"]["name"].value;
 
         // On vérifie que tous les champs ont été encodé
-        if (idApartment == "" || name == "") {
+        if (idApartment === "" || name === "") {
             const message = "Veuillez encoder tous les champs !";
             const cssClass = 'bg-error';
             animateNotification(message, cssClass)
@@ -71,7 +71,6 @@ $(document).ready(function () {
 
         })
             .done(function (e) {
-                console.log(e);
                 const message = "L'apartement a été mis à jour !";
                 const cssClass = 'bg-success';
                 animateNotification(message, cssClass)

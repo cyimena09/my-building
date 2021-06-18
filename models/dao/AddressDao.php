@@ -111,12 +111,4 @@ class AddressDao extends AbstractDao {
             $result['country']);
     }
 
-    public function instantiateAll($results) {
-        $productList = array();
-        foreach ($results as $result) {
-            array_push($productList, $this->instantiate($result));
-        }
-        return $productList;
-    }
-
 }

@@ -14,7 +14,6 @@ class RequestController extends AbstractController {
         $authenticatedUser = $this->isLogged();
 
         $requests = $this->dao->getRequests();
-        // recupération des users
         $userDao = new UserDao();
         $apartmentDao = new ApartmentDao();
         foreach ($requests as $request) {

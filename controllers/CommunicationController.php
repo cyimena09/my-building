@@ -9,7 +9,6 @@ class CommunicationController extends AbstractController {
 
     public function index() {
         $authenticatedUser = $this->isLogged();
-        // todo a terminer
         $communications = $this->dao->getCommunications();
 
         $content = '../views/communication/list.php';
@@ -34,6 +33,7 @@ class CommunicationController extends AbstractController {
 
     public function show($id) {
         $authenticatedUser = $this->isLogged();
+
         $communication = $this->dao->getCommunicationById($id);
 
         $content = '../views/communication/one.php';
@@ -62,7 +62,7 @@ class CommunicationController extends AbstractController {
 
     public function createView() {
         $authenticatedUser = $this->isLogged();
-        // récupération des résidences
+
         $buildingDao = new BuildingDao();
         $buildings = $buildingDao->getBuildings();
 

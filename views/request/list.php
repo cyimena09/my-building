@@ -25,7 +25,8 @@
                 <td><?= $request->__get('apartment')->name; ?></td>
                 <td>
                     <a class="a-btn a-btn-dark-grey" href="/users/show/<?= $request->__get('user')->id; ?>">Voir</a>
-                    <a style="font-size: 14px" class="a-btn a-btn-green" href="/requests/validate/<?= $request->__get('id'); ?>"><i class="fas fa-check"></i>Valider</a>
+                    <a style="font-size: 14px" class="a-btn a-btn-green"
+                       href="/requests/validate/<?= $request->__get('id'); ?>"><i class="fas fa-check"></i>Valider</a>
                 </td>
             </tr>
         <?php endforeach; ?>

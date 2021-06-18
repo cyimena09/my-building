@@ -1,6 +1,7 @@
 <div>
     <h1>Communication</h1>
-    <form id="form-update-communication" class="form-in-column" action="/communications/update/<?= $communication->id ?>" method="post">
+    <form id="form-update-communication" class="form-in-column"
+          action="/communications/update/<?= $communication->id ?>" method="post">
         <input type="hidden" name="idCommunication" value="<?= $communication->id; ?>">
 
         <div class="group">

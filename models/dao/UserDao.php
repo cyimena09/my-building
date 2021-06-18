@@ -236,14 +236,6 @@ class UserDao extends AbstractDao {
         return $user;
     }
 
-    public function instantiateAll($results) {
-        $productList = array();
-        foreach ($results as $result) {
-            array_push($productList, $this->instantiate($result));
-        }
-        return $productList;
-    }
-
     public function setToken($user) {
         $token = bin2hex(random_bytes(8)) . "." . time(); // on génère un token
         $user->sessionToken = $token; // on ajoute le token à l'utilisateur

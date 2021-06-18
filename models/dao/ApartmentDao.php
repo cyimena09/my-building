@@ -185,13 +185,5 @@ class ApartmentDao extends AbstractDao {
         }
         return $apartment;
     }
-    
-    public function instantiateAll($results) {
-        $productList = array();
-        foreach ($results as $result) {
-            array_push($productList, $this->instantiate($result));
-        }
-        return $productList;
-    }
 
 }

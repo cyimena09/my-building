@@ -11,7 +11,8 @@ $x = 0;
         <div class="head">
             <h2>Localisation</h2>
         </div>
-        <form id="form-update-building" class="form-in-line" action="/buildings/update/<?= $building->id ?>" method="post">
+        <form id="form-update-building" class="form-in-line" action="/buildings/update/<?= $building->id ?>"
+              method="post">
             <input type="hidden" name="idBuilding" value="<?= $building->id; ?>">
             <div class="group group-hover">
                 <label for="name">Nom de l'immeuble</label>

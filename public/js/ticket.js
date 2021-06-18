@@ -6,7 +6,6 @@ $(document).ready(function () {
       * */
 
     const selectTAG = document.getElementsByTagName("select");
-    const containerInfo = document.getElementById('js-quick-info');
 
     for (let i = 0; i < selectTAG.length; ++i) {
         // on ajoute un event listener sur tous les selects
@@ -49,11 +48,8 @@ $(document).ready(function () {
         const subject = document.forms["form-update-ticket"]["subject"].value;
         const description = document.forms["form-update-ticket"]["description"].value;
 
-
         // On vérifie que tous les champs ont été encodé
-        if (subject == "" ||
-            description == "") {
-
+        if (subject === "" || description === "") {
             const message = "Veuillez encoder tous les champs !";
             const cssClass = 'bg-error';
             animateNotification(message, cssClass)
