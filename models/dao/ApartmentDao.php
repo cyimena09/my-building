@@ -60,33 +60,6 @@ class ApartmentDao extends AbstractDao {
         }
     }
 
-//    /**
-//     * Récupère tous les buildings avec le nombre d'appartment qu'ils possèdent et leur adresse
-//     * @return array
-//     */
-//    public function getBuildingsWithNbApartmentsAndAddress() {
-//        try {
-//            $statement = $this->connection->prepare(
-//                "SELECT b.idBuilding, b.name, COUNT(a.idApartment) as nbApartments FROM {$this->table} b
-//                            INNER JOIN apartment a on a.fkBuilding = b.idBuilding
-//                            GROUP BY b.idBuilding");
-//            $statement->execute();
-//            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-//            $buildings =  $this->instantiateAll($result);
-//
-//            $addressDao = new AddressDao();
-//
-//            foreach ($buildings as $building) {
-//                $address = $addressDao->getAddressById($building->id); // récupération de l'addresse
-//                // affectations
-//                $building->address = $address;
-//            }
-//            return $buildings;
-//        } catch (PDOException $e) {
-//            print $e->getMessage();
-//        }
-//    }
-
     public function getApartmentsByFilter($filter, $value) {
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE {$filter} = ?");
@@ -138,11 +111,10 @@ class ApartmentDao extends AbstractDao {
 
         try {
             $statement = $this->connection->prepare(
-                "UPDATE {$this->table} SET name = ?, fkOwner = ?, fkTenant = ? WHERE idApartment = ?");
+                "UPDATE {$this->table} SET name = ?, fkOwner = ? WHERE idApartment = ?");
             $statement->execute([
                 htmlspecialchars($data['name']),
                 isset($data['owner']) ? $data['owner'] : null,
-                isset($data['tenant']) ? $data['tenant'] : null,
                 htmlspecialchars($id)
             ]);
             return true;

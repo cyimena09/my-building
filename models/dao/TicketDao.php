@@ -79,7 +79,6 @@ class TicketDao extends AbstractDao {
         $currentDate = date('Y-m-d H:i:s');
         $ticket = new Ticket(null, $data['subject'], 3, $data['description'], $currentDate, $currentDate, $data['idUser']);
 
-        var_dump($ticket);
         if ($ticket) {
             try {
                 $statement = $this->connection->prepare(

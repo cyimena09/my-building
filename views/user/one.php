@@ -29,9 +29,6 @@
             <label for="role"></label>
             <input id="role" type="text" placeholder="Rôle" name="role" value="<?= $user->role->name; ?>" disabled>
         </div>
-<!--        <div class="group">-->
-<!--            <button>Mettre à jour</button>-->
-<!--        </div>-->
     </form>
 </section>
 

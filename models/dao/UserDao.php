@@ -87,6 +87,30 @@ class UserDao extends AbstractDao {
         }
     }
 
+    public function setLocation($id, $data) {
+        if (empty($id || empty($data))) {
+            return false;
+        }
+
+        $apartmentDao = new ApartmentDao();
+        $apartment = $apartmentDao->getApartmentById($data['fkApartment']); // on récupère le
+
+        try {
+            $statement = $this->connection->prepare(
+                "UPDATE {$this->table} SET fkBuilding = ?, fkApartment = ? WHERE idUser = ?");
+            $statement->execute([
+                htmlspecialchars($apartment->building),
+                htmlspecialchars($data['fkApartment']),
+                htmlspecialchars($id)
+            ]);
+
+            return true;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            return false;
+        }
+    }
+
     public function createUser($data) {
         // on vérifie que les informations de bases soit encodé
         if (
@@ -143,7 +167,7 @@ class UserDao extends AbstractDao {
         if ($user) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (firstname, lastname, email, phone, gender, password, role, fkAddress, isActive) 
+                    "INSERT INTO {$this->table} (firstname, lastname, email, phone, gender, password, fkRole, fkAddress, isActive) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 );
                 $statement->execute([

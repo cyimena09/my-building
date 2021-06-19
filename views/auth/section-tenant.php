@@ -12,5 +12,4 @@
     <div id="js-result-rented" style="visibility: hidden;">
 
     </div>
-
 </div>

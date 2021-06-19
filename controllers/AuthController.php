@@ -17,6 +17,9 @@ class AuthController extends AbstractController {
     }
 
     public function registerView() {
+        $roleDao = new RoleDao();
+        $roles = $roleDao->getRoles();
+
         $views = '../views/auth/register.php';
         include ('../views/header.php');
         include ('../views/auth/register.php');
@@ -103,17 +106,22 @@ class AuthController extends AbstractController {
      */
     public function sectionByRoleView($role, $data) {
         $buildingDao = new BuildingDao();
+        $roleDao = new RoleDao();
+        $rolesInDb = $roleDao->getRoles();
 
-        if ($role == 'LOCATAIRE') {
-            $buildings = $buildingDao->getBuildings();
-            include ('../views/auth/section-tenant.php');
-        } elseif ($role == 'PROPRIETAIRE') {
-            $buildings = $buildingDao->getBuildings();
-            include '../views/auth/section-owner.php' ;
-        } elseif ($role == 'PROPRIETAIRE_RESIDENT') {
-            $buildings = $buildingDao->getBuildings();
-            include ('../views/auth/section-tenant.php');
-            include ('../views/auth/section-owner.php');
+
+        foreach ($rolesInDb as $roleInDb) {
+            if ($roleInDb->id == $role && $roleInDb->name == RoleEnum::LOCATAIRE) {
+                $buildings = $buildingDao->getBuildings();
+                include ('../views/auth/section-tenant.php');
+            } elseif ($roleInDb->id == $role && $roleInDb->name == RoleEnum::PROPRIETAIRE) {
+                $buildings = $buildingDao->getBuildings();
+                include '../views/auth/section-owner.php';
+            } elseif ($roleInDb->id == $role && $roleInDb->name == RoleEnum::PROPRIETAIRE_RESIDENT) {
+                $buildings = $buildingDao->getBuildings();
+                include ('../views/auth/section-tenant.php');
+                include ('../views/auth/section-owner.php');
+            }
         }
     }
 

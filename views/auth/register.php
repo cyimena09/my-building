@@ -9,17 +9,16 @@
             <!--            Créer en tant que -->
             <section id="role" class="create-as">
                 <p>Créer un compte en tant que :</p>
-                <div class="group-radio">
-                    <input type="radio" id="tenant-radio" name="role" value="LOCATAIRE">
-                    <label for="tenant-radio">Locataire</label>
-                </div>
-                <div class="group-radio">
-                    <input type="radio" id="owner-radio" name="role" value="PROPRIETAIRE">
-                    <label for="owner-radio">Propriétaire et non résidant</label>
-                </div>
-                <div class="group-radio">
-                    <input type="radio" id="both-radio" name="role" value="PROPRIETAIRE_RESIDENT">
-                    <label for="both-radio">Propriétaire et résident</label>
+
+                <div class="group-radio" id="radios">
+                    <?php foreach ($roles as $role): ?>
+                        <?php if ($role->name !== RoleEnum::SYNDIC): ?>
+                            <div class="group-radio">
+                                <input type="radio" id="<?= $role->id; ?>" name="role" value="<?= $role->id; ?>">
+                                <label for="tenant-radio"><?= $role->name; ?></label>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
 
                 <!--           Js result -->
@@ -27,7 +26,6 @@
 
                 </div>
             </section>
-
 
             <!--            Informations personnelles -->
             <section class="parts">

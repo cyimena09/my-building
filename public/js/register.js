@@ -1,10 +1,11 @@
 $(document).ready(function () {
-    const LOCATAIRE = 'LOCATAIRE';
-    const PROPRIETAIRE = 'PROPRIETAIRE';
-    const PROPRIETAIRE_RESIDENT = 'PROPRIETAIRE_RESIDENT';
+    const LOCATAIRE = 'Locataire';
+    const PROPRIETAIRE = 'Propriétaire';
+    const PROPRIETAIRE_RESIDENT = 'Propriétaire Résident';
 
     let radios = document.getElementsByName("role");
     let globalRole; // role de l'utilisateur
+    let globalRoleText;
     let apartmentsList = []; // liste des appartements et des batiments sélectionné par l'utilisateur
 
     /* *****************************************************************************************
@@ -12,9 +13,13 @@ $(document).ready(function () {
     *  *****************************************************************************************
     * */
 
+    let radiosContainer = document.getElementById('radios');
+
     // écoute le choix du role de l'utilisateur dans le formulaire pour lui afficher le/les sous formulaire(s) adéquat
     for (let i = 0; i < radios.length; ++i) {
         radios[i].addEventListener('change', function (e) {
+            ;
+            globalRoleText = radiosContainer.getElementsByTagName('label')[i].innerText;
             apartmentsList = [];
             $('#js-section-result').empty();
             globalRole = radios[i].value;
@@ -40,11 +45,11 @@ $(document).ready(function () {
      * Cette fonction est nécessaire car lorsque l'on est propriétaire résident il faut exécuter deux formulaires
      */
     function formManager() {
-        if (globalRole === LOCATAIRE) {
+        if (globalRoleText === LOCATAIRE) {
             initForm(LOCATAIRE);
-        } else if (globalRole === PROPRIETAIRE) {
+        } else if (globalRoleText === PROPRIETAIRE) {
             initForm(PROPRIETAIRE);
-        } else if (globalRole === PROPRIETAIRE_RESIDENT) {
+        } else if (globalRoleText === PROPRIETAIRE_RESIDENT) {
             initForm(LOCATAIRE);
             initForm(PROPRIETAIRE);
         }
@@ -201,13 +206,6 @@ $(document).ready(function () {
             return;
         }
 
-        // vérification de la cohérence des valeurs
-        if (!(role === LOCATAIRE || role === PROPRIETAIRE || role === PROPRIETAIRE_RESIDENT)) {
-            const message = "Le rôle n'est pas valide.";
-            errorMessage(message);
-            return;
-        }
-
         const reg = new RegExp('^[0-9]+$');
 
         if (!reg.test(phone)) {
@@ -221,8 +219,9 @@ $(document).ready(function () {
             errorMessage(message);
             return;
         }
+
         // Si le role est différent de propriétaire cela signifie que l'utilisateur loue au moins un appartement
-        if (globalRole !== PROPRIETAIRE) {
+        if (globalRoleText !== PROPRIETAIRE) {
             let containerRented = document.getElementById('tenant')
             let fkBuilding = containerRented.ownerDocument.getElementsByTagName('select')[0].value;
             let fkApartment = containerRented.ownerDocument.getElementsByTagName('select')[1].value;
