@@ -1,7 +1,3 @@
-<?php
-include('../enumerations/statusEnum.php');
-$enums = statusEnum();
-?>
 <h1>Tickets</h1>
 <table>
     <thead>
@@ -16,38 +12,38 @@ $enums = statusEnum();
     </thead>
     <tbody>
     <?php if (!empty($tickets)): ?>
-        <?php foreach ($tickets as $ticket): ?>
+        <?php foreach ($tickets as $ticket) : ?>
             <tr>
                 <td><?= $ticket->__get('id'); ?></td>
                 <td><?= $ticket->__get('subject'); ?></td>
 
                 <!-- Statut du ticket pour le syndic -->
-                <?php if ($authenticatedUser->__get('role') == 'SYNDIC'): ?>
+                <?php if ($authenticatedUser->__get('role')->name == RoleEnum::SYNDIC) : ?>
                     <td>
                         <label for="status"></label>
-                        <select name="status" id="<?= $ticket->__get('id'); ?>">
-                            <?php foreach ($enums as $enum): ?>
-                                <?php if ($ticket->__get('status') == $enum): ?>
-                                    <option value="<?= $ticket->__get('id'); ?>"
-                                            selected="selected"><?= $ticket->__get('status'); ?></option>
+                        <select name="idStatus" id="<?= $ticket->__get('id'); ?>">
+                            <?php foreach ($status as $statu): ?>
+                                <?php if ($ticket->__get('status')->name == $statu->name): ?>
+                                    <option value="<?= $ticket->__get('status')->id; ?>"
+                                            selected="selected"><?= $ticket->__get('status')->name; ?></option>
                                 <?php endif; ?>
-                                <?php if ($ticket->__get('status') !== $enum): ?>
-                                    <option value="<?= $enum; ?>"><?= $enum; ?></option>
+                                <?php if ($ticket->__get('status')->name !== $statu->name): ?>
+                                    <option value="<?= $statu->id; ?>"><?= $statu->name; ?></option>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
                     </td>
 
-                    <!-- Statut du ticket pour les autres utilisateurs-->
+                    <!-- Statut du ticket pour les autres utilisateurs (seul un syndic peut modifier le ticket) -->
                 <?php else: ?>
                     <td>
-                        <?php foreach ($enums as $enum): ?>
+                        <?php foreach (StatusEnum::StatusList as $enum): ?>
                             <p class="status-ticket">
-                                <?php if ($ticket->__get('status') == $enum && $enum == 'Non traité'): ?>
+                                <?php if ($ticket->__get('status')->name == $enum && $enum == StatusEnum::NON_TRAITE): ?>
                                     <span class="bg-error"><?= $ticket->__get('status'); ?></span>
-                                <?php elseif ($ticket->__get('status') == $enum && $enum == 'En attente'): ?>
+                                <?php elseif ($ticket->__get('status')->name  == $enum && $enum == StatusEnum::EN_ATTENTE): ?>
                                     <span class="bg-orange"><?= $ticket->__get('status'); ?></span>
-                                <?php elseif ($ticket->__get('status') == $enum && $enum == 'Traité'): ?>
+                                <?php elseif ($ticket->__get('status')->name == $enum && $enum == StatusEnum::TRAITE) : ?>
                                     <span class="bg-success"><?= $ticket->__get('status'); ?></span>
                                 <?php endif; ?>
                             </p>
@@ -61,7 +57,7 @@ $enums = statusEnum();
                 <td>
                     <a href="/tickets/show/<?= $ticket->__get('id'); ?>"><i class="fas fa-edit icon-update"></i></a>
                     <!-- Un ticket n'est supprimable que par un syndic ou le propriétaire-->
-                    <?php if ($ticket->__get('user') == $authenticatedUser->id || $authenticatedUser->role == 'SYNDIC'): ?>
+                    <?php if ($ticket->__get('user') == $authenticatedUser->id || $authenticatedUser->role->name == RoleEnum::SYNDIC): ?>
                         <a href="/tickets/delete/<?= $ticket->__get('id'); ?>"><i
                                     class="fas fa-trash icon-delete"></i></a>
                     <?php endif; ?>

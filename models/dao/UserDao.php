@@ -10,7 +10,7 @@ class UserDao extends AbstractDao {
 
     public function getUsers() {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} u INNER JOIN role r on r.idRole = u.fkRole");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
@@ -21,7 +21,7 @@ class UserDao extends AbstractDao {
 
     public function getUserById($id) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE idUser = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} u LEFT JOIN role r on r.idRole = u.fkRole WHERE idUser = ?");
             $statement->execute([
                 $id
             ]);
@@ -108,10 +108,12 @@ class UserDao extends AbstractDao {
             return false;
         }
 
-        // todo vérifier qu'un utilisateur n'a pas déjà le meme mot de passe
+        // Etape 1 : vérifier si l'utilisateur n'a pas déjà un compte
+        if (!$this->isEmailUnique($data['email'])) {
+            return false;
+        }
 
-        // Etape 1 : enregistrer l'adresse de l'utilisateur
-
+        // Etape 2 : enregistrer l'adresse de l'utilisateur
         $dataAddress = [
             "street" => $data['street'],
             "houseNumber" => $data['houseNumber'],
@@ -124,7 +126,6 @@ class UserDao extends AbstractDao {
         $addressDao = new AddressDao();
         $addressId = $addressDao->createAddress($dataAddress);
 
-        // Etape 2 : cas ou l'utilisateur est un LOCATAIRE
         $user = new User(
             !empty($data['id']) ? $data['id'] : 0,
                 $data['firstName'],
@@ -133,7 +134,7 @@ class UserDao extends AbstractDao {
                 $data['phone'],
                 $data['gender'],
                 $data['role'],
-                password_hash($data['password'], PASSWORD_DEFAULT));
+                password_hash($data['password'], PASSWORD_DEFAULT)); // hash et salt le password
 
         // l'appartement, l'adresse et isActive ne sont pas dans le contructor
         $user->address = $addressId;
@@ -180,18 +181,32 @@ class UserDao extends AbstractDao {
         }
     }
 
+    /**
+     * Retourne true si l'email est unique dans la table user
+     * autrement retourne false
+     * @param $email
+     */
+    public function isEmailUnique($email) {
+        $users = $this->getUsersByFilter('email', $email);
+
+        if (count($users) == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function verify($data) {
         if (empty($data['email']) || empty($data['password'])) {
             return false;
         }
 
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE email = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} u INNER JOIN role r on r.idRole = u.fkRole WHERE email = ?");
             $statement->execute([
                 $data['email']
             ]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-
             $user = $this->instantiate($result);
 
             if ($user) {
@@ -217,6 +232,7 @@ class UserDao extends AbstractDao {
      * @return User
      */
     public function instantiate($result) {
+        $role = new Role($result['fkRole'], $result['roleName']);
         $building = new Building($result['fkBuilding'], null);
         $apartment = new Apartment($result['fkApartment'], null, null, null);
 
@@ -227,7 +243,7 @@ class UserDao extends AbstractDao {
             $result['email'],
             $result['phone'],
             $result['gender'],
-            $result['role'],
+            $role,
             $result['password']);
 
         $user->building = $building;
@@ -269,11 +285,10 @@ class UserDao extends AbstractDao {
 
     public function fetchBySession($session_token) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE session_token = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} u INNER JOIN role r on r.idRole = u.fkRole WHERE session_token = ?");
             $statement->execute([$session_token]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $result['password'] = ''; // on retire le mot de passe
-
             $user = $this->instantiate($result);
             $user->isActive = $result['isActive'];
 

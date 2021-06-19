@@ -10,9 +10,10 @@ class TicketDao extends AbstractDao {
 
     public function getTickets() {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} ORDER BY last_update DESC");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} t LEFT JOIN status s on s.idStatus = t.fkStatus ORDER BY last_update DESC");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
             print $e->getMessage();
@@ -21,7 +22,7 @@ class TicketDao extends AbstractDao {
 
     public function getTicketById($id) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE idTicket = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} t LEFT JOIN status s on s.idStatus = t.fkStatus WHERE idTicket = ?");
             $statement->execute([
                 $id
             ]);
@@ -40,7 +41,7 @@ class TicketDao extends AbstractDao {
      */
     public function getTicketsByFilter($filter, $value) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE {$filter} = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} t LEFT JOIN status s on s.idStatus = t.fkStatus WHERE {$filter} = ?");
             $statement->execute([
                 $value
             ]);
@@ -53,7 +54,7 @@ class TicketDao extends AbstractDao {
 
     public function getTicketsByBuildingId($id) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkBuilding = ? ORDER BY last_update DESC");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} t LEFT JOIN status s on s.idStatus = t.fkStatus WHERE fkBuilding = ? ORDER BY last_update DESC");
             $statement->execute([
                     $id
                 ]
@@ -76,7 +77,7 @@ class TicketDao extends AbstractDao {
 
         // on ajoute la date de création et de mise à jour qui sont identique lors de la création
         $currentDate = date('Y-m-d H:i:s');
-        $ticket = new Ticket(null, $data['subject'], 'Non traité', $data['description'], $currentDate, $currentDate, $data['idUser']);
+        $ticket = new Ticket(null, $data['subject'], StatusEnum::NON_TRAITE, $data['description'], $currentDate, $currentDate, $data['idUser']);
 
         if ($ticket) {
             try {
@@ -108,13 +109,15 @@ class TicketDao extends AbstractDao {
 
         try {
             $statement = $this->connection->prepare(
-                "UPDATE {$this->table} SET status = ? WHERE idTicket = ?");
+                "UPDATE {$this->table} SET fkStatus = ? WHERE idTicket = ?");
             $statement->execute([
-                htmlspecialchars($data['status']),
+                htmlspecialchars($data['idStatus']),
                 htmlspecialchars($id)
             ]);
+            return true;
         } catch (PDOException $e) {
             print $e->getMessage();
+            return false;
         }
     }
 
@@ -155,10 +158,11 @@ class TicketDao extends AbstractDao {
     }
 
     public function instantiate($result) {
+        $status = new Status($result['idStatus'], $result['statusName']);
         return new Ticket(
             !empty($result['idTicket']) ? $result['idTicket'] : 0,
             $result['subject'],
-            !empty($result['status']) ? $result['status'] : 'Envoyé',
+            $status,
             $result['description'],
             !empty($result['date_creation']) ? $result['date_creation'] : null,
             !empty($result['last_update']) ? $result['last_update'] : null,

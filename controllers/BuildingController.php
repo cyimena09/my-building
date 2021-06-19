@@ -31,6 +31,9 @@ class BuildingController extends AbstractController {
         // récupération des tickets
         $ticketDao = new ticketDao();
         $tickets = $ticketDao->getTicketsByBuildingId($building->id);
+        // récupération des statuts
+        $statusDao = new StatusDao();
+        $status = $statusDao->getStatus();
 
         $content = '../views/building/one.php';
         include ('../views/header.php');

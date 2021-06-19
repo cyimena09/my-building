@@ -35,7 +35,7 @@ class StatusDao extends AbstractDao {
     public function instantiate($result) {
         return new Status(
             !empty($result['idStatus']) ? $result['idStatus'] : 0,
-            $result['name']);
+            $result['statusName']);
     }
 
 }

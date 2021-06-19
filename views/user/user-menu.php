@@ -4,7 +4,7 @@
     </div>
 
     <!-- ROLE == TENANT -->
-    <?php if ($authenticatedUser->role == 'LOCATAIRE' || $authenticatedUser->role == 'PROPRIETAIRE_LOCATAIRE'): ?>
+    <?php if ($authenticatedUser->role->name === RoleEnum::LOCATAIRE || $authenticatedUser->role->name === RoleEnum::PROPRIETAIRE_RESIDENT): ?>
         <!-- Tickets -->
         <div class="group">
             <h3><i class="fas fa-tasks"></i>Tickets</h3>
@@ -25,7 +25,7 @@
     <?php endif; ?>
 
     <!-- ROLE == SYNDIC -->
-    <?php if ($authenticatedUser->role == 'SYNDIC'): ?>
+    <?php if ($authenticatedUser->role->name === RoleEnum::SYNDIC): ?>
         <!-- Communication -->
         <div class="group">
             <h3><i class="fas fa-comments"></i>Communications</h3>

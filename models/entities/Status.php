@@ -1,7 +1,7 @@
 <?php
 
 
-class Role {
+class Status {
     private $id;
     private $name;
 

@@ -13,6 +13,8 @@ class TicketController extends AbstractController {
     public function index() {
         $authenticatedUser = $this->isLogged();
         $tickets = $this->dao->getTickets();
+        $statusDao = new StatusDao();
+        $status = $statusDao->getStatus();
 
         $content = '../views/ticket/list.php';
         include ('../views/header.php');
@@ -95,7 +97,10 @@ class TicketController extends AbstractController {
         $authenticatedUser = $this->isLogged();
 
         $idTicket = $data['idTicket'];
-        $this->dao->updateStatus($idTicket, $data);
+
+        if (!$this->dao->updateStatus($idTicket, $data)) {
+            return http_response_code(401);
+        }
     }
 
     /**
@@ -108,11 +113,11 @@ class TicketController extends AbstractController {
 
         $ticket = $this->dao->getTicketById($id);
 
-        if ($ticket->user == $authenticatedUser->id || $authenticatedUser->role == 'SYNDIC') {
+        if ($ticket->user == $authenticatedUser->id || $authenticatedUser->role->name == RoleEnum::SYNDIC) {
             $this->dao->deleteTicket($id);
         }
 
-        if ($authenticatedUser->role != 'SYNDIC') {
+        if ($authenticatedUser->role->name != RoleEnum::SYNDIC) {
             $this->ticketByBuildingView();
         } else {
             $this->index();

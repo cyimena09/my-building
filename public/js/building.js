@@ -7,7 +7,6 @@ $(document).ready(function () {
 
     $('form#form-update-building').on('submit', function (e) {
         e.preventDefault();
-
         // On récupère les valeurs du formulaire
         const idBuilding = document.forms["form-update-building"]["idBuilding"].value;
         const name = document.forms["form-update-building"]["name"].value;
@@ -45,6 +44,7 @@ $(document).ready(function () {
 
         })
             .done(function (e) {
+                console.log(e)
                 const message = "Mise à jour réussie !";
                 const cssClass = 'bg-success';
                 animateNotification(message, cssClass)

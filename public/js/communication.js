@@ -31,13 +31,13 @@ $(document).ready(function () {
 
         })
             .done(function (e) {
-                const message = "Mise à jour réussie !";
+                const message = "Mise à jour réussie ! Vous allez être redirigé";
                 const cssClass = 'bg-success';
                 animateNotification(message, cssClass)
                 setTimeout(
                     () => {
                         window.location = '/communications';
-                    }, 2500);
+                    }, 1500);
             })
             .fail(function (error) {
                 console.log('error', error);

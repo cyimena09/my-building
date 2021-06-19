@@ -13,10 +13,10 @@ $(document).ready(function () {
         selectTAG[i].addEventListener('change', function (e) {
             // récupération des valeurs du formulaire
             const idTicket = selectTAG[i].id;
-            const status = selectTAG[i].value;
+            const idStatus = selectTAG[i].value;
             const data = {
                 idTicket: idTicket,
-                status: status
+                idStatus: idStatus
             }
 
             $.post('/tickets/updateStatus/', data, function () {

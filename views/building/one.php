@@ -1,6 +1,4 @@
 <?php
-include('../enumerations/statusEnum.php');
-$enums = statusEnum();
 $i = 0;
 $x = 0;
 ?>
@@ -156,14 +154,14 @@ $x = 0;
                         <!-- Tickets-->
                         <td>
                             <label for="status"></label>
-                            <select name="status" id="<?= $ticket->__get('id'); ?>">
-                                <?php foreach ($enums as $enum): ?>
-                                    <?php if ($ticket->__get('status') == $enum): ?>
-                                        <option value="<?= $ticket->__get('id'); ?>"
-                                                selected="selected"><?= $ticket->__get('status'); ?></option>
+                            <select name="idStatus" id="<?= $ticket->__get('id'); ?>">
+                                <?php foreach ($status as $statu): ?>
+                                    <?php if ($ticket->__get('status')->name == $statu->name): ?>
+                                        <option value="<?= $ticket->__get('status')->id; ?>"
+                                                selected="selected"><?= $ticket->__get('status')->name; ?></option>
                                     <?php endif; ?>
-                                    <?php if ($ticket->__get('status') !== $enum): ?>
-                                        <option value="<?= $enum; ?>"><?= $enum; ?></option>
+                                    <?php if ($ticket->__get('status')->name !== $statu->name): ?>
+                                        <option value="<?= $statu->id; ?>"><?= $statu->name; ?></option>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>

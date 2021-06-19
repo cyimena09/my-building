@@ -1,13 +1,8 @@
-<?php
-if ($authenticatedUser->role == 'PROPRIETAIRE_RESIDENT') {
-    $authenticatedUser->role = 'PROPRIÉTAIRE ET RÉSIDENT';
-}
-?>
 <div id="user-account" style="margin-top: 30px">
     <p class="role">
-            <span <?php if ($authenticatedUser->role == 'SYNDIC'): ?> class="bg-mauve"
+            <span <?php if ($authenticatedUser->role->name == RoleEnum::SYNDIC): ?> class="bg-mauve"
             <?php else : ?> class="bg-orange"<?php endif ?>>
-                <?= $authenticatedUser->role ?>
+                <?= $authenticatedUser->role->name ?>
             </span>
     </p>
 

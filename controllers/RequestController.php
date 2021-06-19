@@ -17,12 +17,15 @@ class RequestController extends AbstractController {
         $userDao = new UserDao();
         $apartmentDao = new ApartmentDao();
         foreach ($requests as $request) {
+            //var_dump($request);
             $user = $userDao->getUserById($request->user); // user contient l'id de l'user
             $request->user = $user;
 
             $apartment = $apartmentDao->getApartmentById($request->apartment); // apartment contient l'id de l'apartment
             $request->apartment = $apartment;
         }
+
+        //var_dump($requests);
 
         $content = '../views/request/list.php';
         include ('../views/header.php');

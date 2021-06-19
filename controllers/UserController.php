@@ -26,16 +26,19 @@ class UserController extends AbstractController {
 
         $user = $this->dao->getUserById($id); // cette variable contient les informations de l'utilisateur à afficher
 
+        //var_dump($user);
         // récupéraiton de l'appartement loué
         $apartmentDao = new ApartmentDao();
         $buildingDao = new BuildingDao();
 
-        // récupérations des locations
-        $rentedApartments = $apartmentDao->getApartmentsByFilter('fkTenant', $user->id);
-        // on ajoute aux appartements leurs immeubles
-        foreach ($rentedApartments as $rentedApartment) {
+        // récupération de sa location
+        if ($user->apartment->id != null) {
+            $rentedApartment = $apartmentDao->getApartmentById($user->apartment->id);
             $building = $buildingDao->getBuildingById($rentedApartment->building);
             $rentedApartment->building = $building;
+        } else {
+            $user->apartment = null;
+            $user->building = null;
         }
 
         // récupération des propriétés

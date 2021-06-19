@@ -35,7 +35,7 @@ class RoleDao extends AbstractDao {
     public function instantiate($result) {
         return new Role(
             !empty($result['idRole']) ? $result['idRole'] : 0,
-            $result['name']);
+            $result['roleName']);
     }
 
 }

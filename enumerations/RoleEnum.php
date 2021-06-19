@@ -2,6 +2,8 @@
 
 
 abstract class RoleEnum {
-    const SYNDIC = 'SYNDIC';
-    const TENANT = 'LOCATAIRE';
+    const SYNDIC = 'Syndic';
+    const LOCATAIRE = 'Locataire';
+    const PROPRIETAIRE = 'Propriétaire';
+    const PROPRIETAIRE_RESIDENT = 'Propriétaire Résident';
 }
