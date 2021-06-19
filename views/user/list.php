@@ -6,6 +6,7 @@
         <th>#</th>
         <th>Prénom</th>
         <th>Nom</th>
+        <th>Role</th>
         <th>Téléphone</th>
         <th>Email</th>
         <th>Actions</th>
@@ -18,6 +19,13 @@
                 <th><?= $i; ?></th>
                 <td><?= $user->__get('firstName'); ?></td>
                 <td><?= $user->__get('lastName'); ?></td>
+                <?php if ($user->__get('role')->name == RoleEnum::LOCATAIRE): ?>
+                    <td><span class="ask-for bg-orange"><?= $user->__get('role')->name; ?></span></td>
+                <?php elseif ($user->__get('role')->name == RoleEnum::SYNDIC) : ?>
+                    <td><span class="ask-for bg-mauve"><?= $user->__get('role')->name; ?></span></td>
+                <?php else : ?>
+                    <td><span class="ask-for bg-success"><?= $user->__get('role')->name; ?></span></td>
+                <?php endif; ?>
                 <td><?= $user->__get('phone'); ?></td>
                 <td><?= $user->__get('email'); ?></td>
                 <td>

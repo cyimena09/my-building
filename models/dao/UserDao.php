@@ -40,7 +40,7 @@ class UserDao extends AbstractDao {
 
     public function getUsersByApartmentId($id) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE fkApartment = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} u LEFT JOIN role r on r.idRole = u.fkRole WHERE fkApartment = ?");
             $statement->execute([
                 $id
             ]);

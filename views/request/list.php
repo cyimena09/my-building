@@ -15,7 +15,6 @@
         <?php foreach ($requests as $request): $i++ ?>
             <tr>
                 <th><?= $i ?></th>
-
                 <?php if ($request->__get('isOwnerRequest') == 0): ?>
                     <td><span class="ask-for bg-orange">Devenir locataire</span></td>
                 <?php elseif ($request->__get('isOwnerRequest') == 1): ?>
