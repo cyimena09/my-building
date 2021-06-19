@@ -23,7 +23,7 @@
                                 class="fas fa-edit icon-update"></i></a>
 
                     <!-- Une communication n'est supprimable que par un syndic -->
-                    <?php if ($authenticatedUser->role == 'SYNDIC'): ?>
+                    <?php if ($authenticatedUser->role->name == RoleEnum::SYNDIC) : ?>
                         <a href="/communications/delete/<?= $communication->__get('id'); ?>"><i
                                     class="fas fa-trash icon-delete"></i></a>
                     <?php endif; ?>
