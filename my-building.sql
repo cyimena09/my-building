@@ -56,15 +56,11 @@ CREATE TABLE `apartment` (
   `name` varchar(100) DEFAULT NULL,
   `fkBuilding` int(11) DEFAULT NULL,
   `fkOwner` int(11) DEFAULT NULL,
-  `fkTenant` int(11) DEFAULT NULL,
   PRIMARY KEY (`idApartment`),
-  UNIQUE KEY `apartment_un` (`fkTenant`),
   KEY `apartment_FK` (`fkBuilding`),
   KEY `apartment_FK_1` (`fkOwner`),
-  KEY `apartment_FK_2` (`fkTenant`),
   CONSTRAINT `apartment_FK` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `apartment_FK_1` FOREIGN KEY (`fkOwner`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `apartment_FK_2` FOREIGN KEY (`fkTenant`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `apartment_FK_1` FOREIGN KEY (`fkOwner`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -74,7 +70,7 @@ CREATE TABLE `apartment` (
 
 LOCK TABLES `apartment` WRITE;
 /*!40000 ALTER TABLE `apartment` DISABLE KEYS */;
-INSERT INTO `apartment` VALUES (1,'Apartement A1',1,NULL,NULL),(2,'Apartement A2',1,NULL,NULL),(3,'Apartement A3',1,NULL,NULL),(4,'Apartement A4',1,NULL,NULL),(5,'Apartement B1',2,NULL,NULL),(6,'Apartement B2',2,NULL,NULL),(7,'Apartement B3',2,NULL,NULL),(8,'Apartement C1',3,NULL,NULL),(9,'Apartement C2',3,NULL,NULL),(10,'Apartement C3',3,NULL,NULL),(11,'Apartement D1',4,NULL,NULL),(12,'Apartement D2',4,NULL,NULL),(13,'Apartement D3',4,NULL,NULL),(14,'appart',1,NULL,NULL),(15,'app 01',5,NULL,NULL),(16,'monapart123',2,NULL,NULL),(17,'monapart123',2,NULL,NULL);
+INSERT INTO `apartment` VALUES (1,'Apartement A1',1,NULL),(2,'Apartement A2',1,NULL),(3,'Apartement A3',1,NULL),(4,'Apartement A4',1,NULL),(5,'Apartement B1',2,NULL),(6,'Apartement B2',2,NULL),(7,'Apartement B3',2,NULL),(8,'Apartement C1',3,NULL),(9,'Apartement C2',3,NULL),(10,'Apartement C3',3,NULL),(11,'Apartement D1',4,NULL),(12,'Apartement D2',4,NULL),(13,'Apartement D3',4,NULL),(14,'appart',1,NULL),(15,'app 01',5,NULL),(16,'monapart123',2,NULL),(17,'monapart123',2,NULL);
 /*!40000 ALTER TABLE `apartment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,4 +300,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-19 11:57:03
+-- Dump completed on 2021-06-19 12:13:58
