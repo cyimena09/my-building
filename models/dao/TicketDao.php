@@ -77,22 +77,23 @@ class TicketDao extends AbstractDao {
 
         // on ajoute la date de création et de mise à jour qui sont identique lors de la création
         $currentDate = date('Y-m-d H:i:s');
-        $ticket = new Ticket(null, $data['subject'], StatusEnum::NON_TRAITE, $data['description'], $currentDate, $currentDate, $data['idUser']);
+        $ticket = new Ticket(null, $data['subject'], 3, $data['description'], $currentDate, $currentDate, $data['idUser']);
 
+        var_dump($ticket);
         if ($ticket) {
             try {
                 $statement = $this->connection->prepare(
-                    "INSERT INTO {$this->table} (subject, status, description, date_creation, last_update, fkUser, fkBuilding) 
+                    "INSERT INTO {$this->table} (subject, description, date_creation, last_update, fkUser, fkBuilding, fkStatus) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?)"
                 );
                 $statement->execute([
                     htmlspecialchars($ticket->__get('subject')),
-                    htmlspecialchars($ticket->__get('status')),
                     htmlspecialchars($ticket->__get('description')),
                     htmlspecialchars($ticket->__get('dateCreation')),
                     htmlspecialchars($ticket->__get('lastUpdate')),
                     htmlspecialchars($ticket->__get('user')),
-                    htmlspecialchars($data['idBuilding'])
+                    htmlspecialchars($data['idBuilding']),
+                    htmlspecialchars($ticket->__get('status')),
                 ]);
                 return true;
             } catch (PDOException $e) {

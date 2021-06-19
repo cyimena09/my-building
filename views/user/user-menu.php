@@ -3,7 +3,7 @@
         <i class="fas fa-user-circle"></i><a href="/auth/accountView">Votre compte</a>
     </div>
 
-    <!-- ROLE == TENANT -->
+    <!-- ROLE == LOCATAIRE OU PROPRIETAIRE RESIDENT -->
     <?php if ($authenticatedUser->role->name === RoleEnum::LOCATAIRE || $authenticatedUser->role->name === RoleEnum::PROPRIETAIRE_RESIDENT): ?>
         <!-- Tickets -->
         <div class="group">

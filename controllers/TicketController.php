@@ -3,8 +3,10 @@
 
 class TicketController extends AbstractController {
 
+    private $statusDao;
     public function __construct() {
         $this->dao = new TicketDao();
+        $this->statusDao = new StatusDao();
     }
 
     /**
@@ -12,9 +14,9 @@ class TicketController extends AbstractController {
      */
     public function index() {
         $authenticatedUser = $this->isLogged();
+
         $tickets = $this->dao->getTickets();
-        $statusDao = new StatusDao();
-        $status = $statusDao->getStatus();
+        $status = $this->statusDao->getStatus();
 
         $content = '../views/ticket/list.php';
         include ('../views/header.php');
@@ -29,6 +31,7 @@ class TicketController extends AbstractController {
         $authenticatedUser = $this->isLogged();
 
         $tickets = $this->dao->getTicketsByFilter('fkUser', $authenticatedUser->id);
+        $status = $this->statusDao->getStatus();
 
         $content = '../views/ticket/list.php';
         include ('../views/header.php');
@@ -43,6 +46,8 @@ class TicketController extends AbstractController {
         $authenticatedUser = $this->isLogged();
 
         $tickets = $this->dao->getTicketsByFilter('fkBuilding', $authenticatedUser->id);
+
+        $status = $this->statusDao->getStatus();
 
         $content = '../views/ticket/list.php';
         include ('../views/header.php');

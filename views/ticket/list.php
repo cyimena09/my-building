@@ -37,14 +37,14 @@
                     <!-- Statut du ticket pour les autres utilisateurs (seul un syndic peut modifier le ticket) -->
                 <?php else: ?>
                     <td>
-                        <?php foreach (StatusEnum::StatusList as $enum): ?>
+                        <?php foreach ($status as $statu): ?>
                             <p class="status-ticket">
-                                <?php if ($ticket->__get('status')->name == $enum && $enum == StatusEnum::NON_TRAITE): ?>
-                                    <span class="bg-error"><?= $ticket->__get('status'); ?></span>
-                                <?php elseif ($ticket->__get('status')->name  == $enum && $enum == StatusEnum::EN_ATTENTE): ?>
-                                    <span class="bg-orange"><?= $ticket->__get('status'); ?></span>
-                                <?php elseif ($ticket->__get('status')->name == $enum && $enum == StatusEnum::TRAITE) : ?>
-                                    <span class="bg-success"><?= $ticket->__get('status'); ?></span>
+                                <?php if ($ticket->__get('status')->name == $statu->name && $statu->name == StatusEnum::NON_TRAITE): ?>
+                                    <span class="bg-error"><?= $ticket->__get('status')->name; ?></span>
+                                <?php elseif ($ticket->__get('status')->name == $statu->name && $statu->name == StatusEnum::EN_ATTENTE): ?>
+                                    <span class="bg-orange"><?= $ticket->__get('status')->name; ?></span>
+                                <?php elseif ($ticket->__get('status')->name == $statu->name && $statu->name == StatusEnum::TRAITE) : ?>
+                                    <span class="bg-success"><?= $ticket->__get('status')->name; ?></span>
                                 <?php endif; ?>
                             </p>
                         <?php endforeach; ?>

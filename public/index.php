@@ -7,7 +7,7 @@ spl_autoload_register (function ($class) {
     } else if (strpos ($class, "Dao")) {
         include "../models/dao/{$class}.php";
     } else if(strpos($class, "Enum")) {
-            include "../enumerations/{$class}.php";
+        include "../enumerations/{$class}.php";
     } else {
         include "../models/entities/{$class}.php";
     }

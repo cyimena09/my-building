@@ -3,12 +3,12 @@
 
 abstract class StatusEnum {
     const TRAITE = 'Traité';
-    const EN_ATTENTE = 'En attente';
-    const NON_TRAITE = 'Non traité';
+    const EN_ATTENTE = 'En Attente';
+    const NON_TRAITE = 'Non Traité';
     const StatusList = [
         'Traité' => self::TRAITE,
-        'En attente' => self::EN_ATTENTE,
-        'Non traité' => self::NON_TRAITE
+        'En Attente' => self::EN_ATTENTE,
+        'Non Traité' => self::NON_TRAITE
     ];
 
 }
