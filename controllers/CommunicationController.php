@@ -86,7 +86,7 @@ class CommunicationController extends AbstractController {
     public function delete($id) {
         $authenticatedUser = $this->isLogged();
 
-        if ($authenticatedUser->role == 'SYNDIC') {
+        if ($authenticatedUser->role->name == RoleEnum::SYNDIC) {
             $this->dao->deleteCommunication($id);
             $this->index();
         }
