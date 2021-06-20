@@ -27,20 +27,14 @@ class BuildingDao extends AbstractDao {
     public function getBuildingsWithNbApartmentsAndAddress() {
         try {
             $statement = $this->connection->prepare(
-                "SELECT b.idBuilding, b.name, COUNT(a.idApartment) as nbApartments FROM {$this->table} b 
+                "SELECT b.idBuilding, b.name, b.fkAddress, COUNT(a.idApartment) as nbApartments FROM {$this->table} b 
                             LEFT JOIN apartment a on a.fkBuilding = b.idBuilding 
                             GROUP BY b.idBuilding");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             $buildings =  $this->instantiateAll($result);
 
-            $addressDao = new AddressDao();
-
             foreach ($buildings as $building) {
-                $address = $addressDao->getAddressById($building->id); // récupération de l'addresse
-                // affectations
-                $building->address = $address;
-
                 if ($building->nbApartments == null) {
                     $building->nbApartments = 0;
                 }
@@ -64,10 +58,10 @@ class BuildingDao extends AbstractDao {
 
         foreach ($buildings as $building) {
             $apartments = $apartmentDao->getApartmentsByBuildingId($building->id); // récupération des appartements
-            $address = $addressDao->getAddressById($building->id); // récupération de l'addresse
+            //$address = $addressDao->getAddressById($building->id); // récupération de l'addresse
             // affectations
             $building->apartments = $apartments;
-            $building->address = $address;
+            //$building->address = $address;
         }
 
         return $buildings;
@@ -81,15 +75,7 @@ class BuildingDao extends AbstractDao {
             ]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-            $building = $this->instantiate($result);
-
-            // on recupère et on ajoute l'adresse au batiment
-            $addressDao = new AddressDao();
-            $address = $addressDao->getAddressById($building->id);
-            $building->address = $address;
-
-            return $building;
-
+            return $this->instantiate($result);
         } catch (PDOException $e) {
             //print $e->getMessage();
             return false;
@@ -177,6 +163,10 @@ class BuildingDao extends AbstractDao {
 
     public function instantiate($result) {
         $building =  new Building(!empty($result['idBuilding']) ? $result['idBuilding'] : 0, $result['name']);
+        // on recupère et on ajoute l'adresse au batiment
+        $addressDao = new AddressDao();
+        $address = $addressDao->getAddressById($result['fkAddress']);
+        $building->address = $address;
 
         if(!empty($result['nbApartments'])) {
             $building->nbApartments = $result['nbApartments'];
