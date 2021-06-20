@@ -87,7 +87,6 @@ $(document).ready(function () {
                 button.removeEventListener("click", addOnList);
             }
 
-
             resultRented.style.visibility = 'visible';
             const globalIdBuildingRented = selectFkBuildingRented.value; // récupération de l'id de l'immeuble pour récupérer ses appartements
             const data = {
@@ -99,7 +98,7 @@ $(document).ready(function () {
             })
                 .done(function (result) {
                     if (result) {
-                        $('#' + jsResult).append(result) // on ajoute le menu des appartements (en fonction de le l'immeuble.
+                        $('#' + jsResult).append(result); // on ajoute le menu des appartements (en fonction de le l'immeuble.
 
                         // un propriétaire peut avoir plusieurs appartements
                         // donc on lui ajoute un bouton qui permet d'ajouter dans une liste plusieurs appartement
@@ -108,7 +107,7 @@ $(document).ready(function () {
                             // les id servent a différencier le formulaire.
                             // Est ce qu'on ajoute un appart en location ou en propriété
                             let resultOwned = document.getElementById(jsResult);
-                            let dropDownApartment = resultOwned.children[0].getElementsByTagName('select')[0]
+                            let dropDownApartment = resultOwned.children[0].getElementsByTagName('select')[0];
                             dropDownApartment.id = 'dropdown-apartment-owned';
                         }
                     }
@@ -131,14 +130,14 @@ $(document).ready(function () {
 
     function addOnList() {
         const containerOwned = document.getElementById('js-result-owned');
-        const idBuilding = document.getElementById('fkBuildingOwned').value // on récupère le building
+        const idBuilding = document.getElementById('fkBuildingOwned').value; // on récupère le building
         const nameBuilding = $("#fkBuildingOwned option:selected").text();
         const idApart = containerOwned.children[0].getElementsByTagName('select')[0].value; // on récupère l'appartement
         const nameApart = $("#dropdown-apartment-owned option:selected").text();
 
         // on vérifie si les valeurs ne sont pas nulles
         if (idApart === "" || idBuilding === "") {
-            const message = "Aucun appartement n'a été sélectionné."
+            const message = "Aucun appartement n'a été sélectionné.";
             errorMessage(message);
             return;
         }
@@ -146,7 +145,7 @@ $(document).ready(function () {
         // on vérifie si l'appartement n'est pas déjà dans la liste
         for (let i = 0; i < apartmentsList.length; i++) {
             if (apartmentsList[i]['idApartment'] === idApart) {
-                const message = "L'appartement est déjà dans la liste."
+                const message = "L'appartement est déjà dans la liste.";
                 errorMessage(message);
                 return;
             }
@@ -234,7 +233,7 @@ $(document).ready(function () {
         // si l'utilisateur est locataire ou propriétaire résident ils doivent habiter au moins une résidence
         // seul un propriétaire n'a pas de résidence
         if (globalRoleText === LOCATAIRE || globalRoleText === PROPRIETAIRE_RESIDENT) {
-            let containerRented = document.getElementById('tenant')
+            let containerRented = document.getElementById('tenant');
 
             if (containerRented.getElementsByTagName('select')[0].value !== "") {
                 let fkBuilding = containerRented.getElementsByTagName('select')[0].value;
@@ -246,7 +245,7 @@ $(document).ready(function () {
                 }
                 apartmentsList.push(dataToPush);
             } else {
-                const message = "Veuillez sélectionner une résidence."
+                const message = "Veuillez sélectionner une résidence.";
                 errorMessage(message);
                 return;
             }
@@ -254,7 +253,7 @@ $(document).ready(function () {
 
         // le propriétaire est obligé d'avoir au moins une propriété
         if (apartmentsList.length === 0) {
-            const message = "Veuillez ajouter au moins une propriété."
+            const message = "Veuillez ajouter au moins une propriété.";
             errorMessage(message);
             return;
         }
@@ -287,7 +286,7 @@ $(document).ready(function () {
             .fail(function (error) {
                 console.log('error', error);
                 const message = "Une erreure est survenue.";
-                errorMessage(message)
+                errorMessage(message);
             });
     });
 
