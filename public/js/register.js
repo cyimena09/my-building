@@ -130,12 +130,16 @@ $(document).ready(function () {
 
             // on vérifie si les valeurs ne sont pas nulles
             if (idApart === "" || idBuilding === "") {
+                const message = "Aucun appartement n'a été sélectionné."
+                errorMessage(message);
                 return;
             }
 
             // on vérifie si l'appartement n'est pas déjà dans la liste
             for (let i = 0; i < apartmentsList.length; i++) {
                 if (apartmentsList[i]['idApartment'] === idApart) {
+                    const message = "L'appartement est déjà dans la liste."
+                    errorMessage(message);
                     return;
                 }
             }
