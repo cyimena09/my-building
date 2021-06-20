@@ -3,22 +3,20 @@ $(document).ready(function () {
     const PROPRIETAIRE = 'Propriétaire';
     const PROPRIETAIRE_RESIDENT = 'Propriétaire Résident';
 
-    let radios = document.getElementsByName("role");
     let globalRole; // role de l'utilisateur
     let globalRoleText;
     let apartmentsList = []; // liste des appartements et des batiments sélectionné par l'utilisateur
 
     /* *****************************************************************************************
-    * ------------  AFFICHE LE SOUS FORMULAIRE EN FONCTION DU ROLE DE L'UTILISATEUR  -----------
+    *  AFFICHE LE SOUS FORMULAIRE DE SELECTION DU BUILDING EN FONCTION DU ROLE DE L'UTILISATEUR
     *  *****************************************************************************************
     * */
 
     let radiosContainer = document.getElementById('radios');
-
+    let radios = document.getElementsByName("role");
     // écoute le choix du role de l'utilisateur dans le formulaire pour lui afficher le/les sous formulaire(s) adéquat
     for (let i = 0; i < radios.length; ++i) {
-        radios[i].addEventListener('change', function (e) {
-            ;
+        radios[i].addEventListener('change', function () {
             globalRoleText = radiosContainer.getElementsByTagName('label')[i].innerText;
             apartmentsList = [];
             $('#js-section-result').empty();
@@ -75,12 +73,16 @@ $(document).ready(function () {
         let selectFkBuildingRented = document.getElementById(fkBuilding);
 
         // on ajoute un listener sur le choix de l'immeuble
-        selectFkBuildingRented.addEventListener('change', function (e) {
+        selectFkBuildingRented.addEventListener('change', function () {
             // on reset s'il y avait déjà du contenu, pour éviter les doublons
             if (resultRented.children.length > 0) {
                 let child = resultRented.children[0];
                 child.remove();
             }
+
+            // on reset l'eventlistener du bouton pour éviter une double detection
+            const button = document.getElementById('js-add-btn');
+            button.removeEventListener("click", addOnList);
 
             resultRented.style.visibility = 'visible';
             const globalIdBuildingRented = selectFkBuildingRented.value; // récupération de l'id de l'immeuble pour récupérer ses appartements
@@ -119,50 +121,51 @@ $(document).ready(function () {
     * */
 
     function addButton() {
-        const containerOwned = document.getElementById('js-result-owned');
         const addButton = document.getElementById('js-add-btn');
+        addButton.addEventListener('click', addOnList);
+    }
 
-        addButton.addEventListener('click', function (e) {
-            const idBuilding = document.getElementById('fkBuildingOwned').value // on récupère le building
-            const nameBuilding = $("#fkBuildingOwned option:selected").text();
-            const idApart = containerOwned.children[0].getElementsByTagName('select')[0].value; // on récupère l'appartement
-            const nameApart = $("#dropdown-apartment-owned option:selected").text();
+    function addOnList() {
+        const containerOwned = document.getElementById('js-result-owned');
+        const idBuilding = document.getElementById('fkBuildingOwned').value // on récupère le building
+        const nameBuilding = $("#fkBuildingOwned option:selected").text();
+        const idApart = containerOwned.children[0].getElementsByTagName('select')[0].value; // on récupère l'appartement
+        const nameApart = $("#dropdown-apartment-owned option:selected").text();
 
-            // on vérifie si les valeurs ne sont pas nulles
-            if (idApart === "" || idBuilding === "") {
-                const message = "Aucun appartement n'a été sélectionné."
+        // on vérifie si les valeurs ne sont pas nulles
+        if (idApart === "" || idBuilding === "") {
+            const message = "Aucun appartement n'a été sélectionné."
+            errorMessage(message);
+            return;
+        }
+
+        // on vérifie si l'appartement n'est pas déjà dans la liste
+        for (let i = 0; i < apartmentsList.length; i++) {
+            if (apartmentsList[i]['idApartment'] === idApart) {
+                const message = "L'appartement est déjà dans la liste."
                 errorMessage(message);
                 return;
             }
+        }
 
-            // on vérifie si l'appartement n'est pas déjà dans la liste
-            for (let i = 0; i < apartmentsList.length; i++) {
-                if (apartmentsList[i]['idApartment'] === idApart) {
-                    const message = "L'appartement est déjà dans la liste."
-                    errorMessage(message);
-                    return;
-                }
-            }
+        let data = {
+            isOwnerRequest: 1, // booléen qui indique si on ajoute une propriété ou une location (ici propriété)
+            idBuilding: idBuilding,
+            idApartment: idApart
+        }
+        apartmentsList.push(data);
 
-            let data = {
-                isOwnerRequest: 1, // booléen qui indique si on ajoute une propriété ou une location (ici propriété)
-                idBuilding: idBuilding,
-                idApartment: idApart
-            }
-            apartmentsList.push(data);
+        let div = '      <div class="container">' +
+            '                <div class="container-icon">' +
+            '                    <i class="fas fa-building"></i>' +
+            '                </div>' +
+            '                <div class="container-text">' +
+            '                    <p class="building"> <span>Immeuble :</span><span style="font-weight: bold">' + nameBuilding + '</span></p>' +
+            '                    <p class="apartment"> <span>Appartement :</span><span style="font-weight: bold">' + nameApart + '</span></p>' +
+            '                </div>' +
+            '            </div>'
 
-            let div = '      <div class="container">' +
-                '                <div class="container-icon">' +
-                '                    <i class="fas fa-building"></i>' +
-                '                </div>' +
-                '                <div class="container-text">' +
-                '                    <p class="building"> <span>Immeuble :</span><span style="font-weight: bold">' + nameBuilding + '</span></p>' +
-                '                    <p class="apartment"> <span>Appartement :</span><span style="font-weight: bold">' + nameApart + '</span></p>' +
-                '                </div>' +
-                '            </div>'
-
-            $('#js-ul').append(div);
-        });
+        $('#js-ul').append(div);
     }
 
     /* *****************************************************************************************
@@ -259,7 +262,7 @@ $(document).ready(function () {
         $.post('/auth/register', data, function () {
 
         })
-            .done(function (e) {
+            .done(function () {
                 const successMessage = encodeURI('Félicitation, votre compte a bien été créé !');
                 window.location = '/?success-message=' + successMessage;
             })
