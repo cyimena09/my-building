@@ -113,7 +113,7 @@
     <?php if (isset($building) && isset($apartment)): ?>
         <section>
             <div class="head">
-                <h2>Votre location</h2>
+                <h2>Votre location / résidence / propriété</h2>
             </div>
             <div class="container" style="display: flex; align-items: center;">
                 <div class="container-icon">
@@ -121,11 +121,12 @@
                 </div>
                 <div class="container-text">
                     <p style="display: flex; justify-content: space-between; align-items: center; width: 300px; margin-bottom: 10px">
-                        <span>Immeuble</span><span>·</span>
+                        <span>Immeuble</span>
+                        <span>·</span>
                         <span><a style="font-size: 13px" class="a-btn a-btn-mauve"
                                  href="/buildings/show/<?= $building->id ?>"> <?= $building->name ?></a></span></p>
-
-                    <p style="display: flex; justify-content: space-between; align-items: center; width: 300px;"><span>Appartement</span>
+                    <p style="display: flex; justify-content: space-between; align-items: center; width: 300px;">
+                        <span>Appartement</span>
                         <span>·</span>
                         <span><a style="font-size: 13px" class="a-btn a-btn-orange"
                                  href="/apartments/show/<?= $apartment->id ?>"> <?= $apartment->name ?></a></span></p>

@@ -1,5 +1,5 @@
 <div id="owner" class="group">
-    <h3>Ajouter vos propriétés</h3>
+    <h3>Ajouter votre ou vos propriétés(s)</h3>
 
     <label for="fkBuilding">Dans quel immeuble se trouve l'appartement ?</label>
     <select name="fkBuilding" id="fkBuildingOwned">

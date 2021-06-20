@@ -1,5 +1,5 @@
 <div id="tenant" class="group">
-    <h3>Votre lieu de vie</h3>
+    <h3>ajouter votre résidence</h3>
     <label class="label" for="fkBuildingRented">Dans quelle résidence vivez-vous ?</label>
     <select class="test" name="fkBuilding" id="fkBuildingRented">
         <option value="" selected>Choissiez votre résidence</option>

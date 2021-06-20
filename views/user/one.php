@@ -52,7 +52,7 @@
     </div>
     <?php if (count($ownedApartments) > 0): ?>
         <?php foreach ($ownedApartments as $ownedApartment): ?>
-            <p>Apartement : <?= $ownedApartment->name; ?> de l'immeuble <?= $ownedApartment->name; ?></p>
+            <p>Appartement : <?= $ownedApartment->name; ?> de l'immeuble <?= $ownedApartment->name; ?></p>
             <a href="/apartments/show/<?= $ownedApartment->id; ?>">Voir</a>
         <?php endforeach; ?>
     <?php else : ?>
