@@ -82,7 +82,11 @@ $(document).ready(function () {
 
             // on reset l'eventlistener du bouton pour éviter une double detection
             const button = document.getElementById('js-add-btn');
-            button.removeEventListener("click", addOnList);
+
+            if (button !== null) {
+                button.removeEventListener("click", addOnList);
+            }
+
 
             resultRented.style.visibility = 'visible';
             const globalIdBuildingRented = selectFkBuildingRented.value; // récupération de l'id de l'immeuble pour récupérer ses appartements
@@ -176,7 +180,7 @@ $(document).ready(function () {
     $('form#form-create-user').on('submit', function (e) {
         e.preventDefault();
 
-        // On récupère les valeurs du formulaire
+        // Utilisateur
         const role = document.forms["form-create-user"]["role"].value;
         const firstName = document.forms["form-create-user"]["firstName"].value;
         const lastName = document.forms["form-create-user"]["lastName"].value;
@@ -185,7 +189,7 @@ $(document).ready(function () {
         const password = document.forms["form-create-user"]["password"].value;
         const gender = document.forms["form-create-user"]["gender"].value;
 
-        // Address
+        // Adresse
         const street = document.forms["form-create-user"]["street"].value;
         const houseNumber = document.forms["form-create-user"]["houseNumber"].value;
         const boxNumber = document.forms["form-create-user"]["boxNumber"].value;
@@ -193,7 +197,7 @@ $(document).ready(function () {
         const city = document.forms["form-create-user"]["city"].value;
         const country = document.forms["form-create-user"]["country"].value;
 
-        // On vérifie que tous les champs ont été encodé
+        // On vérifie que tous les champs ont été encodés
         if (firstName === "" ||
             lastName === "" ||
             email === "" ||
@@ -227,18 +231,32 @@ $(document).ready(function () {
             return;
         }
 
-        // Si le role est différent de propriétaire cela signifie que l'utilisateur loue au moins un appartement
-        if (globalRoleText !== PROPRIETAIRE) {
+        // si l'utilisateur est locataire ou propriétaire résident ils doivent habiter au moins une résidence
+        // seul un propriétaire n'a pas de résidence
+        if (globalRoleText === LOCATAIRE || globalRoleText === PROPRIETAIRE_RESIDENT) {
             let containerRented = document.getElementById('tenant')
-            let fkBuilding = containerRented.ownerDocument.getElementsByTagName('select')[0].value;
-            let fkApartment = containerRented.ownerDocument.getElementsByTagName('select')[1].value;
 
-            let dataToPush = {
-                isOwnerRequest: 0,
-                idBuilding: fkBuilding,
-                idApartment: fkApartment
+            if (containerRented.getElementsByTagName('select')[0].value !== "") {
+                let fkBuilding = containerRented.getElementsByTagName('select')[0].value;
+                let fkApartment = containerRented.getElementsByTagName('select')[1].value;
+                let dataToPush = {
+                    isOwnerRequest: 0,
+                    idBuilding: fkBuilding,
+                    idApartment: fkApartment
+                }
+                apartmentsList.push(dataToPush);
+            } else {
+                const message = "Veuillez sélectionner une résidence."
+                errorMessage(message);
+                return;
             }
-            apartmentsList.push(dataToPush);
+        }
+
+        // le propriétaire est obligé d'avoir au moins une propriété
+        if (apartmentsList.length === 0) {
+            const message = "Veuillez ajouter au moins une propriété."
+            errorMessage(message);
+            return;
         }
 
         const data = {
