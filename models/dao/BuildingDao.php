@@ -96,7 +96,6 @@ class BuildingDao extends AbstractDao {
         $dataAddress = [
             "street" => $data['street'],
             "houseNumber" => $data['houseNumber'],
-            "boxNumber" => $data['boxNumber'],
             "zip" => $data['zip'],
             "city" => $data['city'],
             "country" => $data['country'],

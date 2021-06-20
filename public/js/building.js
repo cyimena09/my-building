@@ -48,7 +48,6 @@ $(document).ready(function () {
 
         })
             .done(function (e) {
-                console.log(e)
                 const message = "Mise à jour réussie !";
                 const cssClass = 'bg-success';
                 animateNotification(message, cssClass)
