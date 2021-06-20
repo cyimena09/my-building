@@ -45,10 +45,10 @@
 
         <!-- Immeubles -->
         <div class="group">
-            <h3><i class="fas fa-building"></i>Immeubles</h3>
+            <h3><i class="fas fa-building"></i>Résidences</h3>
             <ul>
-                <li><a href="/buildings">Liste des immeubles</a></li>
-                <li><a href="/buildings/createView">Ajouter un immeuble</a></li>
+                <li><a href="/buildings">Liste des résidences</a></li>
+                <li><a href="/buildings/createView">Ajouter une résidence</a></li>
             </ul>
         </div>
 

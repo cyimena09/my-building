@@ -40,6 +40,8 @@ class ApartmentDao extends AbstractDao {
      * @return array
      */
     public function getApartmentsByBuildingId($id) {
+        $userDao = new UserDao();
+
         try {
             $statement = $this->connection->prepare("SELECT a.idApartment, a.name, a.fkOwner, a.fkBuilding, COUNT(u.idUser) AS nbTenants
                                                                 FROM {$this->table} a LEFT JOIN user u ON u.fkApartment = a.idApartment 
@@ -52,6 +54,9 @@ class ApartmentDao extends AbstractDao {
             $apartments = $this->instantiateAll($result);
 
             foreach ($apartments as $apartment) {
+                // recupération et affectation du propriétaire
+                $user = $userDao->getUserById($apartment->owner);
+                $apartment->owner = $user;
                 if ($apartment->nbTenants == null) {
                     $apartment->nbTenants = 0;
                 }
@@ -64,15 +69,24 @@ class ApartmentDao extends AbstractDao {
     }
 
     public function getApartmentsByFilter($filter, $value) {
+        $buildingDao = new BuildingDao();
+
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE {$filter} = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} a  WHERE {$filter} = ?");
             $statement->execute([
                 $value
             ]);
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $this->instantiateAll($result);
+            $apartments =  $this->instantiateAll($result);
+
+            foreach ($apartments as $apartment) {
+                $building = $buildingDao->getBuildingById($apartment->building);
+                $apartment->building = $building;
+            }
+
+            return $apartments;
         } catch (PDOException $e) {
-            //print $e->getMessage();
+            print $e->getMessage();
             return null;
         }
     }

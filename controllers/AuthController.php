@@ -72,15 +72,26 @@ class AuthController extends AbstractController {
 
     public function accountView() {
         $authenticatedUser = $this->isLogged();
+        $buildingDao = new buildingDao();
+        $apartmentDao = new ApartmentDao();
 
         if ($authenticatedUser->building->id != null) {
-            $buildingDao = new buildingDao();
+            //var_dump($authenticatedUser);
+            // récupération de l'appartement ou vit l'utilisateur
+
             $building = $buildingDao->getBuildingById($authenticatedUser->building->id);
-            $apartmentDao = new ApartmentDao();
+
             $apartment = $apartmentDao->getApartmentById($authenticatedUser->apartment->id);
             // affectation
             $authenticatedUser->building = $building;
             $authenticatedUser->apartment = $apartment;
+        }
+
+        // recupérations des propriétés de l'utilisateur
+        if ($authenticatedUser->role->name === RoleEnum::PROPRIETAIRE ||
+            $authenticatedUser->role->name === RoleEnum::PROPRIETAIRE_RESIDENT) {
+            $apartmentsOwned = $apartmentDao->getApartmentsByFilter('fkOwner', $authenticatedUser->id);
+
         }
 
         $content = 'user-account.php';

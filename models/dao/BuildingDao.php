@@ -51,17 +51,12 @@ class BuildingDao extends AbstractDao {
      */
     public function getBuildingsWithApartments() {
         $apartmentDao = new ApartmentDao();
-        $addressDao = new AddressDao();
-
         // Etape 1 : on récupère tous les immeubles
         $buildings = $this->getBuildings();
-
+        // Etape 2 :affectations des appartements aux résidences
         foreach ($buildings as $building) {
             $apartments = $apartmentDao->getApartmentsByBuildingId($building->id); // récupération des appartements
-            //$address = $addressDao->getAddressById($building->id); // récupération de l'addresse
-            // affectations
             $building->apartments = $apartments;
-            //$building->address = $address;
         }
 
         return $buildings;

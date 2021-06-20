@@ -76,7 +76,14 @@ class TicketController extends AbstractController {
         } else {
             $errorMessage = "Désolé, le ticket n'a pas pu être créé.";
         }
-        $this->ticketByUserView();
+
+        $tickets = $this->dao->getTicketsByFilter('fkUser', $authenticatedUser->id);
+        $status = $this->statusDao->getStatus();
+
+        $content = '../views/ticket/list.php';
+        include ('../views/header.php');
+        include ('../views/user/user-space.php');
+        include ('../views/footer.php');
     }
 
     public function createView() {

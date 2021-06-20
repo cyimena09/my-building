@@ -14,6 +14,7 @@
                         <th>#</th>
                         <th>Numéro de l'appartement</th>
                         <th>Nombre de résident - locataire</th>
+                        <th>Propriétaire</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -23,6 +24,7 @@
                             <th><?= $i; ?></th>
                             <td><?= $apartment->__get('name'); ?></td>
                             <td><?= $apartment->__get('nbTenants'); ?></td>
+                            <td><?= $apartment->__get('owner')->firstName; ?> <?= $apartment->__get('owner')->lastName; ?></td>
                             <td>
                                 <a href="/apartments/show/<?= $apartment->__get('id'); ?>"><i
                                             class="fas fa-edit icon-update"></i></a>

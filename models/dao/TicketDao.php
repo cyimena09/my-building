@@ -51,7 +51,7 @@ class TicketDao extends AbstractDao {
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
             //print $e->getMessage();
-            return false;
+            return null;
         }
     }
 

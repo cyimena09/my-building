@@ -23,7 +23,7 @@ class CommunicationController extends AbstractController {
     public function communicationByBuildingView() {
         $authenticatedUser = $this->isLogged();
 
-        $communications = $this->dao->getCommunicationsByFilter('fkBuilding', $authenticatedUser->id);
+        $communications = $this->dao->getCommunicationsByFilter('fkBuilding', $authenticatedUser->building->id);
 
         $content = '../views/communication/list.php';
         include ('../views/header.php');

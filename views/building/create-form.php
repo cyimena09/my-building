@@ -1,10 +1,10 @@
 <div class="page">
     <div class="content-page">
-        <h1>Ajouter un nouvel immeuble</h1>
+        <h1>Ajouter une nouvelle résidence</h1>
         <form class="form-in-column" action="/buildings/create" method="post">
             <div class="group">
                 <label for="name"></label>
-                <input id="name" type="text" placeholder="Nom de l'immeuble" name="name">
+                <input id="name" type="text" placeholder="Nom de la résidence" name="name">
             </div>
             <div class="group">
                 <label for="street"></label>

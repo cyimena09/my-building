@@ -3,7 +3,7 @@ $i = 0;
 $x = 0;
 ?>
 <div>
-    <h1>Information sur l'immeuble</h1>
+    <h1>Information sur la résidence</h1>
 
     <section>
         <div class="head">
