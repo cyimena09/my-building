@@ -53,7 +53,7 @@ class AddressDao extends AbstractDao {
             !empty($data['id']) ? $data['id'] : 0,
             $data['street'],
             $data['houseNumber'],
-            $data['boxNumber'] ? $data['boxNumber']  : null,
+            !empty($data['boxNumber']) ? $data['boxNumber'] : null,
             $data['zip'],
             $data['city'],
             $data['country']);
