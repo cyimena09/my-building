@@ -52,7 +52,7 @@ class RequestController extends AbstractController {
                 'owner' => $request->user
             ];
 
-            if ($apartmentDao->updateApartment($apartment->id, $data)) {
+            if ($apartmentDao->updateApartment($apartment->id, $data) && $userDao->setIsActive($request->user)) {
                 $this->dao->deleteRequest($request->id);
             }
         }
