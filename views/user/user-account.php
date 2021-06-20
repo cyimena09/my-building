@@ -140,28 +140,31 @@
         <div class="head">
             <h2>Vos propriétés</h2>
         </div>
+        <?php if (isset($apartmentsOwned)) : ?>
+            <?php foreach ($apartmentsOwned as $apart): ?>
+                <div class="container" style="display: flex; align-items: center;">
+                    <div class="container-icon">
+                        <i class="fas fa-building" style="font-size: 45px; margin-right: 20px"></i>
+                    </div>
+                    <div class="container-text">
 
-        <?php foreach ($apartmentsOwned as $apart): ?>
-            <div class="container" style="display: flex; align-items: center;">
-                <div class="container-icon">
-                    <i class="fas fa-building" style="font-size: 45px; margin-right: 20px"></i>
+                        <p style="display: flex; justify-content: space-between; align-items: center; width: 300px;  margin-bottom: 10px">
+                            <span>Appartement</span>
+                            <span>·</span>
+                            <span class="a-btn a-btn-orange"><?= $apart->name ?></span>
+                        </p>
+
+                        <p style="display: flex; justify-content: space-between; align-items: center; width: 300px;">
+                            <span>de l'immeuble</span>
+                            <span>·</span>
+                            <span class="a-btn a-btn-mauve"><?= $apart->building->name ?></span>
+                        </p>
+                    </div>
                 </div>
-                <div class="container-text">
-
-                    <p style="display: flex; justify-content: space-between; align-items: center; width: 300px;  margin-bottom: 10px">
-                        <span>Appartement</span>
-                        <span>·</span>
-                        <span class="a-btn a-btn-orange"><?= $apart->name ?></span>
-                    </p>
-
-                    <p style="display: flex; justify-content: space-between; align-items: center; width: 300px;">
-                        <span>de l'immeuble</span>
-                        <span>·</span>
-                        <span class="a-btn a-btn-mauve"><?= $apart->building->name ?></span>
-                    </p>
-                </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php else : ?>
+        <p style="color: grey">Vous n'avez pas de propriétés</p>
+        <?php endif; ?>
     </section>
 
 </div>
