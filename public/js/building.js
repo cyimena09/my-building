@@ -10,6 +10,8 @@ $(document).ready(function () {
         // On récupère les valeurs du formulaire
         const idBuilding = document.forms["form-update-building"]["idBuilding"].value;
         const name = document.forms["form-update-building"]["name"].value;
+        // address
+        const fkAddress = document.forms["form-update-building"]["fkAddress"].value;
         const street = document.forms["form-update-building"]["street"].value;
         const houseNumber = document.forms["form-update-building"]["houseNumber"].value;
         const zip = document.forms["form-update-building"]["zip"].value;
@@ -18,6 +20,7 @@ $(document).ready(function () {
 
         // On vérifie que tous les champs ont été encodé
         if (name === "" ||
+            fkAddress === "" ||
             street === "" ||
             houseNumber === "" ||
             zip === "" ||
@@ -33,6 +36,7 @@ $(document).ready(function () {
         const data = {
             idBuilding: idBuilding,
             name: name,
+            fkAddress: fkAddress,
             street: street,
             houseNumber: houseNumber,
             zip: zip,

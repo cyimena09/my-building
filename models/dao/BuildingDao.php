@@ -139,6 +139,20 @@ class BuildingDao extends AbstractDao {
                 htmlspecialchars($data['name']),
                 htmlspecialchars($id)
             ]);
+
+            // mise à jour de l'addresse
+            $dataAddress = [
+                "street" => $data['street'],
+                "houseNumber" => $data['houseNumber'],
+                "boxNumber" => $data['boxNumber'],
+                "zip" => $data['zip'],
+                "city" => $data['city'],
+                "country" => $data['country'],
+            ];
+
+            $addressDao = new AddressDao();
+            $addressDao->updateAddress($data['fkAddress'], $dataAddress);
+
         } catch (PDOException $e) {
             //print $e->getMessage();
             return false;

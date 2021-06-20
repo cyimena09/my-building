@@ -19,6 +19,7 @@ $x = 0;
             </div>
 
             <!-- Adresse -->
+            <input type="hidden" name="fkAddress" value="<?= $building->address->id; ?>">
             <div class="group group-hover">
                 <label for="street">Rue</label>
                 <input id="street" type="text" placeholder="Rue" name="street"
@@ -27,7 +28,7 @@ $x = 0;
 
             <div class="group group-hover">
                 <label for="houseNumber">Numéro</label>
-                <input id="houseNumber" type="text" placeholder="Nom" name="houseNumber"
+                <input id="houseNumber" type="text" placeholder="Numéro" name="houseNumber"
                        value="<?= $building->address->houseNumber; ?>">
             </div>
 
