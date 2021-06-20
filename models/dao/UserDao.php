@@ -264,7 +264,6 @@ class UserDao extends AbstractDao {
         $role = new Role($result['fkRole'], $result['roleName']);
         $building = new Building($result['fkBuilding'], null);
         $apartment = new Apartment($result['fkApartment'], null, null, null);
-
         $user = new User(
             !empty($result['idUser']) ? $result['idUser'] : 0,
             $result['firstname'],
@@ -277,6 +276,7 @@ class UserDao extends AbstractDao {
 
         $user->building = $building;
         $user->apartment = $apartment;
+        $user->address = $result['fkAddress'];
 
         return $user;
     }
@@ -323,7 +323,7 @@ class UserDao extends AbstractDao {
 
             // on recupère et on ajoute l'adresse de l'utilisateur
             $addressDao = new AddressDao();
-            $address = $addressDao->getAddressById($user->id);
+            $address = $addressDao->getAddressById($user->address);
             $user->address = $address;
 
             return $user;

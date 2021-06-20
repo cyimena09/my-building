@@ -152,6 +152,7 @@ class BuildingDao extends AbstractDao {
             $addressDao = new AddressDao();
             $addressDao->updateAddress($data['fkAddress'], $dataAddress);
 
+            return true;
         } catch (PDOException $e) {
             //print $e->getMessage();
             return false;

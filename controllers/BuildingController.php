@@ -68,7 +68,10 @@ class BuildingController extends AbstractController {
         $authenticatedUser = $this->isLogged();
 
         $idBuilding = $data['idBuilding'];
-        $this->dao->updateBuilding($idBuilding, $data);
+
+        if (!$this->dao->updateBuilding($idBuilding, $data)) {
+            return http_response_code(401);
+        }
     }
 
     public function delete($id) {
