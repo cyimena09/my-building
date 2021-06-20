@@ -64,7 +64,7 @@ class RequestController extends AbstractController {
                 'fkApartment' => $apartment->id,
             ];
 
-            if ($userDao->setLocation($request->user, $data)) {
+            if ($userDao->setLocation($request->user, $data) && $userDao->setIsActive($request->user)) {
                 $this->dao->deleteRequest($request->id);
             }
         }

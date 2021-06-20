@@ -115,6 +115,25 @@ class UserDao extends AbstractDao {
         }
     }
 
+    public function setIsActive($userId) {
+        if (empty($userId)) {
+            return false;
+        }
+
+        try {
+            $statement = $this->connection->prepare(
+                "UPDATE {$this->table} SET isActive = 1 WHERE idUser = ?");
+            $statement->execute([
+                htmlspecialchars($userId)
+            ]);
+
+            return true;
+        } catch (PDOException $e) {
+            //print $e->getMessage();
+            return false;
+        }
+    }
+
     public function createUser($data) {
         // on vérifie que les informations de bases soit encodé
         if (
