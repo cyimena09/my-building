@@ -152,8 +152,8 @@ $(document).ready(function () {
                 '                    <i class="fas fa-building"></i>' +
                 '                </div>' +
                 '                <div class="container-text">' +
-                '                    <p class="building"> <span>Immeuble :</span><span>' + nameBuilding + '</span></p>' +
-                '                    <p class="apartment"> <span>Appartement :</span><span>' + nameApart + '</span></p>' +
+                '                    <p class="building"> <span>Immeuble :</span><span style="font-weight: bold">' + nameBuilding + '</span></p>' +
+                '                    <p class="apartment"> <span>Appartement :</span><span style="font-weight: bold">' + nameApart + '</span></p>' +
                 '                </div>' +
                 '            </div>'
 
