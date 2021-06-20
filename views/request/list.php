@@ -16,7 +16,7 @@
             <tr>
                 <th><?= $i ?></th>
                 <?php if ($request->__get('isOwnerRequest') == 0): ?>
-                    <td><span class="ask-for bg-orange">Devenir Résident-locataire</span></td>
+                    <td><span class="ask-for bg-orange">Devenir Résident ou locataire</span></td>
                 <?php elseif ($request->__get('isOwnerRequest') == 1): ?>
                     <td><span class="ask-for bg-mauve">Devenir propriétaire</span></td>
                 <?php endif; ?>

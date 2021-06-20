@@ -13,7 +13,7 @@
                     <tr>
                         <th>#</th>
                         <th>Numéro de l'appartement</th>
-                        <th>Nombre de locataire</th>
+                        <th>Nombre de résident - locataire</th>
                         <th>Actions</th>
                     </tr>
                     </thead>

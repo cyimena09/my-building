@@ -35,7 +35,7 @@
 <!--        Locations-->
 <section>
     <div class="head">
-        <h2>Location</h2>
+        <h2>Résidence ou Location</h2>
     </div>
     <?php if (isset($rentedApartment)): ?>
             <p>Apartement : <?= $rentedApartment->name; ?> ( immeuble : <?= $rentedApartment->building->name; ?> )</p>

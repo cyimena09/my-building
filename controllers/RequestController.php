@@ -20,7 +20,7 @@ class RequestController extends AbstractController {
             $user = $userDao->getUserById($request->user); // user contient l'id de l'user
             $request->user = $user;
 
-            $apartment = $apartmentDao->getApartmentById($request->apartment); // apartment contient l'id de l'apartment
+            $apartment = $apartmentDao->getApartmentById($request->apartment); // appartment contient l'id de l'appartment
             $request->apartment = $apartment;
         }
 

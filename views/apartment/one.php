@@ -34,10 +34,10 @@
         </section>
     <?php endif; ?>
 
-    <!-- Locataire de l'appartement -->
+    <!-- Résident ou Locataire de l'appartement -->
     <section>
         <div class="head">
-            <h2>Locataires</h2>
+            <h2>Résident ou Locataires</h2>
         </div>
         <?php if (count($tenants) > 0): ?>
             <table>
@@ -65,7 +65,7 @@
             </table>
 
         <?php else: ?>
-            <p style="color: #9d9b9b">L'appartement n'a pas de locataire</p>
+            <p style="color: #9d9b9b">L'appartement n'a pas de résident ou locataire</p>
         <?php endif; ?>
     </section>
 </div>
