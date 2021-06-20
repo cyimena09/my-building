@@ -15,7 +15,8 @@ class UserDao extends AbstractDao {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -34,7 +35,8 @@ class UserDao extends AbstractDao {
 
             return $user;
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -47,7 +49,8 @@ class UserDao extends AbstractDao {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -60,7 +63,8 @@ class UserDao extends AbstractDao {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -82,7 +86,7 @@ class UserDao extends AbstractDao {
             ]);
             return true;
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
             return false;
         }
     }
@@ -106,7 +110,7 @@ class UserDao extends AbstractDao {
 
             return true;
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
             return false;
         }
     }
@@ -184,7 +188,7 @@ class UserDao extends AbstractDao {
 
                 return $lastInsertedId = $this->connection->lastInsertId();
             } catch (PDOException $e) {
-                print $e->getMessage();
+                //print $e->getMessage();
                 return false;
             }
         }
@@ -201,7 +205,8 @@ class UserDao extends AbstractDao {
                 $id
             ]);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -244,7 +249,7 @@ class UserDao extends AbstractDao {
             }
             return false;
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
             return false;
         }
     }
@@ -302,7 +307,7 @@ class UserDao extends AbstractDao {
             ]);
             return true;
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
             return false;
         }
     }
@@ -324,7 +329,7 @@ class UserDao extends AbstractDao {
             return $user;
 
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
             return false;
         }
     }

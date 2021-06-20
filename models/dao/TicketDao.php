@@ -16,7 +16,8 @@ class TicketDao extends AbstractDao {
 
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -29,7 +30,8 @@ class TicketDao extends AbstractDao {
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->instantiate($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -48,7 +50,8 @@ class TicketDao extends AbstractDao {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -62,7 +65,8 @@ class TicketDao extends AbstractDao {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -96,7 +100,7 @@ class TicketDao extends AbstractDao {
                 ]);
                 return true;
             } catch (PDOException $e) {
-                print $e->getMessage();
+                //print $e->getMessage();
                 return false;
             }
         }
@@ -116,7 +120,7 @@ class TicketDao extends AbstractDao {
             ]);
             return true;
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
             return false;
         }
     }
@@ -138,7 +142,8 @@ class TicketDao extends AbstractDao {
                 htmlspecialchars($id)
             ]);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -153,7 +158,8 @@ class TicketDao extends AbstractDao {
                 $id
             ]);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 

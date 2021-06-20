@@ -15,7 +15,8 @@ class RoleDao extends AbstractDao {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -28,7 +29,8 @@ class RoleDao extends AbstractDao {
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->instantiate($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 

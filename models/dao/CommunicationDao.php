@@ -15,7 +15,8 @@ class CommunicationDao extends AbstractDao {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -28,7 +29,8 @@ class CommunicationDao extends AbstractDao {
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $this->instantiate($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -42,7 +44,8 @@ class CommunicationDao extends AbstractDao {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -61,7 +64,8 @@ class CommunicationDao extends AbstractDao {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return null;
         }
     }
 
@@ -92,7 +96,7 @@ class CommunicationDao extends AbstractDao {
                 ]);
                 return true;
             } catch (PDOException $e) {
-                print $e->getMessage();
+                //print $e->getMessage();
                 return false;
             }
         }
@@ -116,7 +120,7 @@ class CommunicationDao extends AbstractDao {
             ]);
             return true;
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
             return false;
         }
     }
@@ -132,7 +136,8 @@ class CommunicationDao extends AbstractDao {
                 $id
             ]);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 

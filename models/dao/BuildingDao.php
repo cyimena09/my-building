@@ -15,7 +15,8 @@ class BuildingDao extends AbstractDao {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -46,7 +47,8 @@ class BuildingDao extends AbstractDao {
             }
             return $buildings;
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return null;
         }
     }
 
@@ -89,7 +91,8 @@ class BuildingDao extends AbstractDao {
             return $building;
 
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -132,7 +135,7 @@ class BuildingDao extends AbstractDao {
                 ]);
                 return true;
             } catch (PDOException $e) {
-                print $e->getMessage();
+                //print $e->getMessage();
                 return false;
             }
         }
@@ -151,7 +154,8 @@ class BuildingDao extends AbstractDao {
                 htmlspecialchars($id)
             ]);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
@@ -166,7 +170,8 @@ class BuildingDao extends AbstractDao {
                 $id
             ]);
         } catch (PDOException $e) {
-            print $e->getMessage();
+            //print $e->getMessage();
+            return false;
         }
     }
 
