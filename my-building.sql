@@ -62,7 +62,7 @@ VALUES
 (14, 'Rue de la résidence A', '77', null, '1301', 'Bierges', 'Canada'),
 (15, 'Rue de la résidence B', '88', null, '1301', 'Chaumont-Gistoux', 'Pays-Bas'),
 (16, 'Rue de la résidence C', '18', null, '1301', 'Rixensart', 'Belgique'),
-(17, 'Rue de la résidence D', '59', null, '1302', 'Mont-Saint-Guibert', 'France');
+(17, 'Rue de la résidence D', '59', null, '1302', 'Mont-Saint-Guibert', 'France'),
 (18, 'Rue du professeur Benoit Delbar', '59', 'B', '1302', 'Wavre', 'Belgique');
 
 --
@@ -120,10 +120,10 @@ CREATE TABLE `building` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 -- Building
-INSERT INTO building(name, fkAddress) VALUES ('Building A', 14);
-INSERT INTO building(name, fkAddress) VALUES ('Building B', 15);
-INSERT INTO building(name, fkAddress) VALUES ('Building C', 16);
-INSERT INTO building(name, fkAddress) VALUES ('Building D', 17);
+INSERT INTO building(idBuilding, name, fkAddress) VALUES (1, 'Building A', 14);
+INSERT INTO building(idBuilding, name, fkAddress) VALUES (2, 'Building B', 15);
+INSERT INTO building(idBuilding, name, fkAddress) VALUES (3, 'Building C', 16);
+INSERT INTO building(idBuilding, name, fkAddress) VALUES (4, 'Building D', 17);
 
 --
 -- Table structure for table `communication`
@@ -328,7 +328,7 @@ CREATE TABLE `user` (
 INSERT INTO user(firstname, lastname, email, phone, gender, password, fkAddress, fkBuilding, fkApartment, isActive, fkRole)
 VALUES
 ('Emile', 'Cyimena', 'cyimena09@hotmail.com', '0484090853', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 1, null, null, 1, 1),
-('Benoit', 'Vankoningsloo', 'benoit@hotmail.com', '0477213465', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 2, null,1, 1, 2),
+('Benoit', 'Vankoningsloo', 'vanko@hotmail.com', '0477213465', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 2, null,1, 1, 2),
 ('Amaury', 'Cyemezo', 'cyemezo@hotmail.com', '0499591245', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 3, null, 1, 1, 3),
 ('Alice', 'Malaika', 'malaika@hotmail.com', '0476134465', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 4, null, 1, 1, 4),
 ('Mike', 'Francois', 'mike@hotmail.com', '0488124678', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 5, null, 2, 1, 2),
@@ -339,7 +339,7 @@ VALUES
 ('Venus', 'Tolwood', 'vtolwood4@w3.org', '2896359988', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 10, null, 5, 1, 2),
 ('Napoleon', 'Jencey', 'njencey5@csmonitor.com', '5625961927', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 11, null, 6, 1, 3),
 ('Kain', 'Wrist', 'kwrist6@mayoclinic.com', '5729661592', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 12, null, 7, 1, 4),
-('Vernor', 'Titchen', 'vtitchen7@moonfruit.com', '2342462343', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 13, null, 8, 1, 2);
+('Vernor', 'Titchen', 'vtitchen7@moonfruit.com', '2342462343', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 13, null, 8, 1, 2),
 ('Benoit', 'Delbar', 'benoit@hotmail.com', '0489464544', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 18, null, 8, 1, 2);
 
 --
