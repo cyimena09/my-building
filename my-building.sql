@@ -31,7 +31,7 @@ CREATE TABLE `address` (
   `city` varchar(100) DEFAULT NULL,
   `country` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idAddress`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'Rue du Syndicat','1',NULL,'1300','Wavre','Belgique'),(2,'rue de l\'immeuble A','A','','1000','Bruxelles','Belgique'),(3,'rue du l\'immeuble B','B','','75000','Paris','France'),(4,'Avenue de l\'immeuble C','C','','97100','Basse-Terre','Guadeloupe'),(5,'impasse de l\'imeuble D','D','','97200','Fort-de-France','Martinique'),(6,'straat bouwen  E','E','','8301','Knokke','Belgïe'),(7,'rue du locataire A1','01','','1000','Schaerbeek','Belgique'),(8,'rue du proprio A1','1','','1000','ma Ville','Belgique'),(9,'rue du prop multi','1','','7895','LaVille','Belgique'),(10,'prop','1','','1234','ma Ville','Belgique'),(11,'rue x','1','','456','Ville','Pay'),(12,'aze','1','','157','azr','ezr'),(13,'rzer','465','','126+','zer','zer'),(14,'azee','123','','123','azea','aze'),(15,'qsd','qsd','qsd','123','qsd','qsd');
+INSERT INTO `address` VALUES (1,'Rue du Syndicat','1',NULL,'1300','Wavre','Belgique'),(2,'rue de l\'immeuble A','A','','1000','Bruxelles','Belgique'),(3,'rue du l\'immeuble B','B','','75000','Paris','France'),(4,'Avenue de l\'immeuble C','C','','97100','Basse-Terre','Guadeloupe'),(5,'impasse de l\'imeuble D','D','','97200','Fort-de-France','Martinique'),(6,'straat bouwen  E','E','','8301','Knokke','Belgïe'),(7,'rue du locataire A1','01','','1000','Schaerbeek','Belgique'),(8,'rue du proprio A1','1','','1000','ma Ville','Belgique'),(9,'rue du prop multi','1','','7895','LaVille','Belgique'),(10,'prop','1','','1234','ma Ville','Belgique'),(11,'rue x','1','','456','Ville','Pay'),(12,'aze','1','','157','azr','ezr'),(13,'rzer','465','','126+','zer','zer'),(14,'azee','123','','123','azea','aze'),(15,'qsd','qsd','qsd','123','qsd','qsd'),(16,'rue az','132','12','1231','ma ville','Belgique'),(17,'rue sd','12','','7896','ville','Belgique'),(18,'rue fdg','132','','4563','bxl','Belgique'),(19,'sdf','13','','1234','elliv','Belgique'),(20,'fgh','456','','9874','fgh','Belgique'),(21,'sqdfq','123','','1245','sdfg','Belgique'),(22,'qsd','123','','1236','Ville','belgium'),(23,'sdf','12','','1234','Paris','Belgique');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `apartment` (
   KEY `apartment_FK_1` (`fkOwner`),
   CONSTRAINT `apartment_FK` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `apartment_FK_1` FOREIGN KEY (`fkOwner`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `apartment` (
 
 LOCK TABLES `apartment` WRITE;
 /*!40000 ALTER TABLE `apartment` DISABLE KEYS */;
-INSERT INTO `apartment` VALUES (2,'Appartement A1',1,10),(3,'Appartement A2',1,NULL),(4,'Appartement A3',1,9),(5,'Appartement B1',2,12),(6,'Appartement B2',2,9),(7,'Appartement B3',2,NULL),(8,'Appartement C1',3,13),(9,'Appartement C2',3,NULL),(10,'Appartement C3',3,9),(11,'Appartement D1',4,NULL),(12,'Appartement D2',4,NULL),(13,'Appartement D3',4,NULL),(14,'Appartement E1',5,NULL),(15,'Appartement E2',5,NULL),(16,'Appartement E3',5,NULL),(18,'Appartement E4',5,NULL),(19,'Appartement B4',2,NULL),(20,'Appartement B5',2,NULL),(21,'Appartement D4',4,NULL),(22,'Appartement D5',4,NULL),(23,'Appartement D6',4,NULL);
+INSERT INTO `apartment` VALUES (3,'Appartement A2',1,18),(7,'Appartement B3',2,NULL),(9,'Appartement C2',3,18),(11,'Appartement D1',4,20),(12,'Appartement D2',4,NULL),(13,'Appartement D3',4,NULL),(14,'Appartement E1',5,NULL),(15,'Appartement E2',5,NULL),(16,'Appartement E3',5,NULL),(18,'Appartement E4',5,NULL),(19,'Appartement B4',2,NULL),(20,'Appartement B5',2,NULL),(21,'Appartement D4',4,NULL),(22,'Appartement D5',4,21),(23,'Appartement D6',4,NULL),(24,'Appartmeent C1',3,NULL),(25,'Appartement A1',1,17),(26,'Appartement B1',2,19);
 /*!40000 ALTER TABLE `apartment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +148,7 @@ CREATE TABLE `request` (
   KEY `request_FK_1` (`fkApartment`),
   CONSTRAINT `request_FK` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `request_FK_1` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idApartment`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +231,7 @@ CREATE TABLE `ticket` (
   CONSTRAINT `ticket_FK_1` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`),
   CONSTRAINT `ticket_FK_2` FOREIGN KEY (`fkStatus`) REFERENCES `status` (`idStatus`),
   CONSTRAINT `ticket_FK_3` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -276,7 +276,7 @@ CREATE TABLE `user` (
   CONSTRAINT `user_FK_1` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idApartment`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_FK_2` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_FK_3` FOREIGN KEY (`fkRole`) REFERENCES `role` (`idRole`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,7 +285,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Admin','Syndic','cyimena09@hotmail.com','1234567','M','dcffac5f99c2b378.1624283899','2021-06-21 15:58:19','$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2',1,NULL,NULL,'1',1),(7,'Locataire','A1','locA1@L.com','123456','M','90381bd300c29f62.1624284194','2021-06-21 16:03:14','$2y$10$TuhPStCIMEzB/biTeKoG5.FwZb1B936e82OgwXqz.SBN8fYFslU3C',7,1,2,'1',2),(8,'Propriétaire','A1','propA1@L.com','123456','M','a990c338b2983e65.1624271483','2021-06-21 12:31:23','$2y$10$moyhWxIq3Ym1qe87L8cQFeTDJYajxvRpPQLzoj/r1VS/9OgmTiE4e',8,NULL,NULL,'1',3),(9,'multi propriotaire','A3 B3 C3 ','prop02@L.com','13245678','F','a4a757fef5ccf509.1624271514','2021-06-21 12:31:54','$2y$10$SdoZtPedz7uQVucEOI2FeujCCss/Z9QBXsuZ3nZYoGjmYZlCTjgym',9,NULL,NULL,'1',3),(10,'Propriétaire','B1','propA1bis@L.com','1344567','M','06665f36603b1357.1624271537','2021-06-21 12:32:17','$2y$10$jel06Cppi4clxeam5GaTYeCO0RzV3V/d0miYGIcxgWzTx7AkIKfOK',10,NULL,NULL,'1',3),(12,'Pro & Rés même appart','C1','prop03@L.com','1345698','M','8a1129edf41d9344.1624271555','2021-06-21 12:32:35','$2y$10$edbB56.RCwnKLhqagoSd2eShEc5YsX7noeht4cz3BAK1dY/HiNp92',12,1,2,'1',4),(13,'Pro & Rés différent appart','P=D1 R=C1','propC1@L.com','123465','M','e986ae1a807d5382.1624271581','2021-06-21 12:33:01','$2y$10$wDS.Nf.8pLzxd4jfCcLc1O/6Qr/70JT1muOUH3KEQeiqQVYSb8DzC',13,3,8,'1',4),(14,'Rés avec prop','C1','locE1@L.com','7987879','O',NULL,NULL,'$2y$10$3i0hUODR8ueqRGTTTxCpZuWC5ZMi7VpmgcDBGa81mS7I0t.hM/0Ti',14,2,5,'1',2),(15,'Rés solo','E2','resE2@l.com','123987','M','b7034df43064bfb3.1624272732','2021-06-21 12:52:12','$2y$10$hzbeVPEEo4Nmd7X4RQx8leF.30a/yjsGawBdPDa4tpYXSfanefmzu',15,3,8,'1',4);
+INSERT INTO `user` VALUES (1,'Admin','Syndic','admin@l.com','1234567','M','64c2657b706551f2.1624289010','2021-06-21 17:23:30','$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2',1,NULL,NULL,'1',1),(16,'Locataire','A1','locA1@l.com','123456798','M','256dd7b5ac303ae1.1624289104','2021-06-21 17:25:04','$2y$10$pbOc0xnCqhjN/18F3A4dGeZOuEs34wXOJqSEm06yi.SGc6cJG.EmW',16,1,25,'1',2),(17,'Propriétaire','A1','propA1@l.com','123456','M',NULL,NULL,'$2y$10$AWT9Yd50gQ6MtUm0fpyD8OkIrqSOmey9r4Kuf/jdNzg5TWM5XkRvi',17,NULL,NULL,'1',3),(18,'multi proprio','A2 &amp; C2','prop02@l.com','1234567','M',NULL,NULL,'$2y$10$rB2uiNWITa4s3bGJnkf/8O8WlTMGzLtXUm/7TZ8fWiBmuHAHaZIFe',18,NULL,NULL,'1',3),(19,'Proprio','B1','propB1@l.com','123456','O',NULL,NULL,'$2y$10$t0P/y89NZqYu6RPNhlpTtey3B9FhgcEcMUwR5a7zMicOWO4sLD0t.',19,NULL,NULL,'1',3),(20,'Pro &amp; Résident meme appart','D1','propD1@l.com','123456','M',NULL,NULL,'$2y$10$RHfGZEoXHyfPltROoJ.8nuULVPe7bSsmJMc6G9ABdAUoohHqsT54m',20,4,11,'1',4),(21,'Pro &amp; Rés différent appart	','P=D5 R=C1	','propC1@l.com','123456','F',NULL,NULL,'$2y$10$UL6PFu.rfmg0OO.7qHVUEO9TXWCtAyjivB6fZF.yknRhpXQnQFDB.',21,3,24,'1',4),(22,'Rés avec prop	','C1','locD1@l.com','123456','F',NULL,NULL,'$2y$10$XWh1amnGU.stYG7MLv/aheH..NcCMZOSO3gBTmT3wQtnQ.1q1p.NG',22,4,11,'1',4),(23,'Rés solo','E2','resE2@l.com','123465','O',NULL,NULL,'$2y$10$EYFsrXYl.rhzikLiehGEouHLyq3Mj2.QZ.tNksWS3GLkyTsQHTJpW',23,5,15,'1',4);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,4 +302,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-21 16:44:01
+-- Dump completed on 2021-06-21 17:25:49
