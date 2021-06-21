@@ -88,18 +88,18 @@ CREATE TABLE `apartment` (
 -- Apartment
 INSERT INTO apartment(idApartment, name, fkBuilding, fkOwner)
 VALUES
-(1, 'Apartement A1', 1, 3),
+(1, 'Apartement A1', 1, 8),
 (2, 'Apartement A2', 1, 4),
-(3, 'Apartement A3', 1, 3),
+(3, 'Apartement A3', 1, 6),
 (4, 'Apartement A4', 1, 4),
 (5, 'Apartement B1', 2, 7),
-(6, 'Apartement B2', 2, 8),
+(6, 'Apartement B2', 2, 6),
 (7, 'Apartement B3', 2, 7),
 (8, 'Apartement C1', 3, 8),
 (9, 'Apartement C2', 3, 3),
 (10, 'Apartement C3', 3, 4),
-(11, 'Apartement D1', 4, 3),
-(12, 'Apartement D2', 4, 4),
+(11, 'Apartement D1', 4, 6),
+(12, 'Apartement D2', 4, 8),
 (13, 'Apartement D3', 4, 3);
 
 --
@@ -325,22 +325,22 @@ CREATE TABLE `user` (
 --
 
 -- User
-INSERT INTO user(firstname, lastname, email, phone, gender, password, fkAddress, fkBuilding, fkApartment, isActive, fkRole)
+INSERT INTO user(idUser, firstname, lastname, email, phone, gender, password, fkAddress, fkBuilding, fkApartment, isActive, fkRole)
 VALUES
-('Emile', 'Cyimena', 'cyimena09@hotmail.com', '0484090853', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 1, null, null, 1, 1),
-('Benoit', 'Vankoningsloo', 'vanko@hotmail.com', '0477213465', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 2, null,1, 1, 2),
-('Amaury', 'Cyemezo', 'cyemezo@hotmail.com', '0499591245', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 3, null, 1, 1, 3),
-('Alice', 'Malaika', 'malaika@hotmail.com', '0476134465', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 4, null, 1, 1, 4),
-('Mike', 'Francois', 'mike@hotmail.com', '0488124678', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 5, null, 2, 1, 2),
-('Susi', 'Toupe', 'stoupe0@symantec.com', '6685851293', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 6, null, 2, 1, 2),
-('Eveline', 'Joyner', 'ejoyner1@cloudflare.com', '7861614104', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 7, null, 2, 1, 3),
-('Eba', 'Penquet', 'epenquet2@walmart.com', '7779636737', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 8, null, 3, 1, 4),
-('Justina', 'Dearth', 'jdearth3@hc360.com', '5481337107', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 9, null, 4, 1, 2),
-('Venus', 'Tolwood', 'vtolwood4@w3.org', '2896359988', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 10, null, 5, 1, 2),
-('Napoleon', 'Jencey', 'njencey5@csmonitor.com', '5625961927', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 11, null, 6, 1, 3),
-('Kain', 'Wrist', 'kwrist6@mayoclinic.com', '5729661592', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 12, null, 7, 1, 4),
-('Vernor', 'Titchen', 'vtitchen7@moonfruit.com', '2342462343', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 13, null, 8, 1, 2),
-('Benoit', 'Delbar', 'benoit@hotmail.com', '0489464544', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 18, null, 8, 1, 1);
+(1, 'Emile', 'Cyimena', 'cyimena09@hotmail.com', '0484090853', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 1, null, null, 1, 1),
+(2, 'Benoit', 'Vankoningsloo', 'vanko@hotmail.com', '0477213465', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 2, null,1, 1, 2),
+(3, 'Amaury', 'Cyemezo', 'cyemezo@hotmail.com', '0499591245', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 3, null, 1, 1, 3),
+(4, 'Alice', 'Malaika', 'malaika@hotmail.com', '0476134465', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 4, null, 1, 1, 4),
+(5, 'Mike', 'Francois', 'locataire@hotmail.com', '0488124678', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 5, null, 2, 1, 2),
+(6, 'Susi', 'Toupe', 'proprietaire@hotmail.com', '6685851293', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 6, null, 2, 1, 3),
+(7, 'Eveline', 'Joyner', 'ejoyner1@cloudflare.com', '7861614104', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 7, null, 2, 1, 3),
+(8, 'Eba', 'Penquet', 'proprietaire_resident@hotmail.com', '7779636737', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 8, null, 3, 1, 4),
+(9, 'Justina', 'Dearth', 'jdearth3@hc360.com', '5481337107', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 9, null, 4, 1, 2),
+(10, 'Venus', 'Tolwood', 'vtolwood4@w3.org', '2896359988', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 10, null, 5, 1, 2),
+(11, 'Napoleon', 'Jencey', 'njencey5@csmonitor.com', '5625961927', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 11, null, 6, 1, 3),
+(12, 'Kain', 'Wrist', 'kwrist6@mayoclinic.com', '5729661592', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 12, null, 7, 1, 4),
+(13, 'Vernor', 'Titchen', 'vtitchen7@moonfruit.com', '2342462343', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 13, null, 8, 1, 2),
+(14, 'Benoit', 'Delbar', 'syndic@hotmail.com', '0489464544', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 18, null, 8, 1, 1);
 
 --
 -- Dumping routines for database 'my-building'
