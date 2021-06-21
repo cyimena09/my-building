@@ -5,6 +5,9 @@ class AuthController extends AbstractController {
 
     public function __construct() {
        $this->dao = new UserDao();
+        $this->buildingDao = new buildingDao();
+        $this->apartmentDao = new ApartmentDao();
+        $this->roleDao = new RoleDao();
     }
 
     /**
@@ -17,9 +20,7 @@ class AuthController extends AbstractController {
     }
 
     public function registerView() {
-        $roleDao = new RoleDao();
-        $roles = $roleDao->getRoles();
-
+        $roles = $this->roleDao->getRoles();
         $views = '../views/auth/register.php';
         include ('../views/header.php');
         include ('../views/auth/register.php');
@@ -72,26 +73,23 @@ class AuthController extends AbstractController {
 
     public function accountView() {
         $authenticatedUser = $this->isLogged();
-        $buildingDao = new buildingDao();
-        $apartmentDao = new ApartmentDao();
-
-        if ($authenticatedUser->building->id != null) {
-            //var_dump($authenticatedUser);
-            // récupération de l'appartement ou vit l'utilisateur
-
-            $building = $buildingDao->getBuildingById($authenticatedUser->building->id);
-
-            $apartment = $apartmentDao->getApartmentById($authenticatedUser->apartment->id);
-            // affectation
-            $authenticatedUser->building = $building;
-            $authenticatedUser->apartment = $apartment;
+        // récupération de la résidence et de l'appartement dans lequel habite l'utilisateur
+        if ($authenticatedUser->role->name !== RoleEnum::PROPRIETAIRE) {
+            $apartmentRented = $this->apartmentDao->getApartmentById($authenticatedUser->apartment->id);
+            if ($apartmentRented->id == null) {
+                $apartmentRented = null;
+            } else {
+                $building = $this->buildingDao->getBuildingById($apartmentRented->building->id);
+                $apartmentRented->building = $building;
+            }
         }
-
-        // recupérations des propriétés de l'utilisateur
-        if ($authenticatedUser->role->name === RoleEnum::PROPRIETAIRE ||
-            $authenticatedUser->role->name === RoleEnum::PROPRIETAIRE_RESIDENT) {
-            $apartmentsOwned = $apartmentDao->getApartmentsByFilter('fkOwner', $authenticatedUser->id);
-
+        // récupération des propriétés de l'utilisateur
+        if ($authenticatedUser->role->name !== RoleEnum::LOCATAIRE) {
+            $apartmentsOwned = $this->apartmentDao->getDataByFilter('fkOwner', $authenticatedUser->id);
+            foreach ($apartmentsOwned as $apart) {
+                $building = $this->buildingDao->getBuildingById($apart->building->id);
+                $apart->building = $building;
+            }
         }
 
         $content = 'user-account.php';
@@ -102,7 +100,6 @@ class AuthController extends AbstractController {
 
     public function update($id, $data) {
         $authenticatedUser = $this->isLogged();
-
         $idUser = $data['idUser'];
 
         if (!$this->dao->updateAccount($idUser, $data)) {
@@ -116,20 +113,17 @@ class AuthController extends AbstractController {
      * @param $data
      */
     public function sectionByRoleView($role, $data) {
-        $buildingDao = new BuildingDao();
-        $roleDao = new RoleDao();
-        $rolesInDb = $roleDao->getRoles();
-
+        $rolesInDb = $this->roleDao->getRoles();
 
         foreach ($rolesInDb as $roleInDb) {
             if ($roleInDb->id == $role && $roleInDb->name == RoleEnum::LOCATAIRE) {
-                $buildings = $buildingDao->getBuildings();
+                $buildings = $this->buildingDao->getBuildings();
                 include ('../views/auth/section-tenant.php');
             } elseif ($roleInDb->id == $role && $roleInDb->name == RoleEnum::PROPRIETAIRE) {
-                $buildings = $buildingDao->getBuildings();
+                $buildings = $this->buildingDao->getBuildings();
                 include '../views/auth/section-owner.php';
             } elseif ($roleInDb->id == $role && $roleInDb->name == RoleEnum::PROPRIETAIRE_RESIDENT) {
-                $buildings = $buildingDao->getBuildings();
+                $buildings = $this->buildingDao->getBuildings();
                 include ('../views/auth/section-tenant.php');
                 include ('../views/auth/section-owner.php');
             }

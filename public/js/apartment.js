@@ -28,7 +28,7 @@ $(document).ready(function () {
         $.post('/apartments/create', data, function () {
 
         })
-            .done(function (e) {
+            .done(function () {
                 const message = "L'apartement a été créé !";
                 const cssClass = 'bg-success';
                 animateNotification(message, cssClass);

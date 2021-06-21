@@ -1,5 +1,5 @@
 <?php
-
+include "../utils/functions.php";
 
 class BuildingController extends AbstractController {
 
@@ -9,9 +9,7 @@ class BuildingController extends AbstractController {
 
     public function index() {
         $authenticatedUser = $this->isLogged();
-
-        $buildings = $this->dao->getBuildingsWithNbApartmentsAndAddress();
-
+        $buildings = $this->dao->getBuildings();
         $content = '../views/building/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -21,20 +19,15 @@ class BuildingController extends AbstractController {
     public function show($id) {
         $authenticatedUser = $this->isLogged();
         $building = $this->dao->getBuildingById($id);
-
-        // récupération des appartments
-        $apartmentDao = new ApartmentDao();
-        $apartments = $apartmentDao->getApartmentsByBuildingId($building->id);
         // récupération des communications
         $communicationDao = new communicationDao();
         $communications = $communicationDao->getCommunicationsByBuildingId($building->id);
         // récupération des tickets
         $ticketDao = new ticketDao();
-        $tickets = $ticketDao->getTicketsByBuildingId($building->id);
+        $tickets = $ticketDao->getDataByFilter('fkBuilding', $building->id);
         // récupération des statuts
         $statusDao = new StatusDao();
         $status = $statusDao->getStatus();
-
         $content = '../views/building/one.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -66,7 +59,6 @@ class BuildingController extends AbstractController {
 
     public function update($id, $data) {
         $authenticatedUser = $this->isLogged();
-
         $idBuilding = $data['idBuilding'];
 
         if (!$this->dao->updateBuilding($idBuilding, $data)) {
@@ -76,7 +68,6 @@ class BuildingController extends AbstractController {
 
     public function delete($id) {
         $authenticatedUser = $this->isLogged();
-
         $this->dao->deleteBuilding($id);
         $this->index();
     }

@@ -5,12 +5,12 @@ class CommunicationController extends AbstractController {
 
     public function __construct() {
         $this->dao = new CommunicationDao();
+        $this->apartmentDao = new ApartmentDao();
     }
 
     public function index() {
         $authenticatedUser = $this->isLogged();
         $communications = $this->dao->getCommunications();
-
         $content = '../views/communication/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -22,9 +22,9 @@ class CommunicationController extends AbstractController {
      */
     public function communicationByBuildingView() {
         $authenticatedUser = $this->isLogged();
-
-        $communications = $this->dao->getCommunicationsByFilter('fkBuilding', $authenticatedUser->building->id);
-
+        // on récupère le batiment dans lequel l'utilisateur vis
+        $apartmentRented = $this->apartmentDao->getApartmentById($authenticatedUser->apartment->id);
+        $communications = $this->dao->getDataByFilter('fkBuilding', $apartmentRented->building->id);
         $content = '../views/communication/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -33,9 +33,7 @@ class CommunicationController extends AbstractController {
 
     public function show($id) {
         $authenticatedUser = $this->isLogged();
-
         $communication = $this->dao->getCommunicationById($id);
-
         $content = '../views/communication/one.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -43,6 +41,7 @@ class CommunicationController extends AbstractController {
     }
 
     public function create($id, $data) {
+        include "../utils/functions.php";
         $authenticatedUser = $this->isLogged();
 
         if ($this->dao->createCommunication($data)) {
@@ -53,7 +52,6 @@ class CommunicationController extends AbstractController {
 
         $buildingDao = new BuildingDao();
         $buildings = $buildingDao->getBuildings();
-
         $content = '../views/communication/create-form.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -62,10 +60,8 @@ class CommunicationController extends AbstractController {
 
     public function createView() {
         $authenticatedUser = $this->isLogged();
-
         $buildingDao = new BuildingDao();
         $buildings = $buildingDao->getBuildings();
-
         $content = '../views/communication/create-form.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -73,10 +69,13 @@ class CommunicationController extends AbstractController {
     }
 
     public function update($id, $data) {
+        include "../utils/functions.php";
         $authenticatedUser = $this->isLogged();
-
         $idCommunication = $data['idCommunication'];
-        $this->dao->updateCommunication($idCommunication, $data);
+
+        if (!$this->dao->updateCommunication($idCommunication, $data)) {
+            return http_response_code(401);
+        }
     }
 
     /**

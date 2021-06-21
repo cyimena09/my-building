@@ -11,17 +11,32 @@ abstract class AbstractDao {
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    public function getDataByFilter($filter, $value) {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} a  WHERE {$filter} = ?");
+            $statement->execute([
+                $value
+            ]);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+           return $this->instantiateAll($result);
+
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            return null;
+        }
+    }
+
     public function instantiate($result) {
         var_dump('no override');
         return null;
     }
 
     public function instantiateAll($results) {
-        $productList = array();
+        $list = array();
         foreach ($results as $result) {
-            array_push($productList, $this->instantiate($result));
+            array_push($list, $this->instantiate($result));
         }
-        return $productList;
+        return $list;
     }
 
 }

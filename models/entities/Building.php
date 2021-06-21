@@ -8,9 +8,11 @@ class Building {
     private $apartments;
     private $nbApartments; // nombre d'apartement dans un immeuble
 
-    public function __construct($id, $name) {
+    public function __construct($id, $name, $apartments, $address) {
         $this->id = $id;
         $this->name = $name;
+        $this->apartments = $apartments;
+        $this->address = $address;
     }
 
     public function __get($prop) {

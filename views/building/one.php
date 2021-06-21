@@ -72,8 +72,8 @@ $x = 0;
             </tr>
             </thead>
             <tbody>
-            <?php if (!empty($apartments)): ?>
-                <?php foreach ($apartments as $apartment): $i++ ?>
+            <?php if (count($building->apartments) > 0) : ?>
+                <?php foreach ($building->apartments as $apartment): $i++ ?>
                     <tr>
                         <th><?= $i ?></th>
                         <td><?= $apartment->__get('name'); ?></td>

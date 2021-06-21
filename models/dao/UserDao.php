@@ -13,6 +13,7 @@ class UserDao extends AbstractDao {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table} u INNER JOIN role r on r.idRole = u.fkRole");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
             //print $e->getMessage();
@@ -40,34 +41,6 @@ class UserDao extends AbstractDao {
         }
     }
 
-    public function getUsersByApartmentId($id) {
-        try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} u LEFT JOIN role r on r.idRole = u.fkRole WHERE fkApartment = ?");
-            $statement->execute([
-                $id
-            ]);
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $this->instantiateAll($result);
-        } catch (PDOException $e) {
-            //print $e->getMessage();
-            return false;
-        }
-    }
-
-    public function getUsersByFilter($filter, $value) {
-        try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE {$filter} = ?");
-            $statement->execute([
-                $value
-            ]);
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $this->instantiateAll($result);
-        } catch (PDOException $e) {
-            //print $e->getMessage();
-            return false;
-        }
-    }
-
     public function updateAccount($id, $data) {
         if (empty($id || empty($data))) {
             return false;
@@ -84,6 +57,7 @@ class UserDao extends AbstractDao {
                 htmlspecialchars($data['gender']),
                 htmlspecialchars($id)
             ]);
+
             return true;
         } catch (PDOException $e) {
             //print $e->getMessage();
@@ -101,9 +75,8 @@ class UserDao extends AbstractDao {
 
         try {
             $statement = $this->connection->prepare(
-                "UPDATE {$this->table} SET fkBuilding = ?, fkApartment = ? WHERE idUser = ?");
+                "UPDATE {$this->table} SET fkApartment = ? WHERE idUser = ?");
             $statement->execute([
-                htmlspecialchars($apartment->building),
                 htmlspecialchars($data['fkApartment']),
                 htmlspecialchars($id)
             ]);
@@ -181,11 +154,8 @@ class UserDao extends AbstractDao {
                 $data['phone'],
                 $data['gender'],
                 $data['role'],
+                0,
                 password_hash($data['password'], PASSWORD_DEFAULT)); // hash et salt le password
-
-        // l'appartement, l'adresse et isActive ne sont pas dans le contructor
-        $user->address = $addressId;
-        $user->isActive = 0;
 
         if ($user) {
             try {
@@ -201,7 +171,7 @@ class UserDao extends AbstractDao {
                     htmlspecialchars($user->__get('gender')),
                     htmlspecialchars($user->__get('password')),
                     htmlspecialchars($user->__get('role')),
-                    htmlspecialchars($user->__get('address')),
+                    htmlspecialchars($addressId),
                     htmlspecialchars($user->__get('isActive'))
                 ]);
 
@@ -223,6 +193,8 @@ class UserDao extends AbstractDao {
             $statement->execute([
                 $id
             ]);
+
+            return true;
         } catch (PDOException $e) {
             //print $e->getMessage();
             return false;
@@ -235,7 +207,7 @@ class UserDao extends AbstractDao {
      * @param $email
      */
     public function isEmailUnique($email) {
-        $users = $this->getUsersByFilter('email', $email);
+        $users = $this->getDataByFilter('email', $email);
 
         if (count($users) == 0) {
             return true;
@@ -250,7 +222,7 @@ class UserDao extends AbstractDao {
         }
 
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} u INNER JOIN role r on r.idRole = u.fkRole WHERE email = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE email = ?");
             $statement->execute([
                 $data['email']
             ]);
@@ -258,10 +230,9 @@ class UserDao extends AbstractDao {
             $user = $this->instantiate($result);
 
             if ($user) {
-                if (password_verify($data['password'], $user->password)) {
+                if (password_verify($data['password'], $result['password'])) {
                     // ajout du token et suppression du mot de passe par sécurité
                     $user = $this->setToken($user);
-                    $user->password = '';
 
                     return $user;
                 }
@@ -280,9 +251,17 @@ class UserDao extends AbstractDao {
      * @return User
      */
     public function instantiate($result) {
-        $role = new Role($result['fkRole'], $result['roleName']);
-        $building = new Building($result['fkBuilding'], null);
-        $apartment = new Apartment($result['fkApartment'], null, null, null);
+        // recupération du role
+        $roleDao = new RoleDao();
+        $role = $roleDao->getRoleById($result['fkRole']);
+
+        // récupération de l'id de l'apartement
+        $apartment = new Apartment($result['fkApartment'], null, null, null, null, null);
+
+        // recupération de l'adresse
+        $addressDao = new AddressDao();
+        $address = $addressDao->getAddressById($result['fkAddress']);
+
         $user = new User(
             !empty($result['idUser']) ? $result['idUser'] : 0,
             $result['firstname'],
@@ -291,11 +270,12 @@ class UserDao extends AbstractDao {
             $result['phone'],
             $result['gender'],
             $role,
-            $result['password']);
+            $result['isActive'],
+            null);
 
-        $user->building = $building;
         $user->apartment = $apartment;
-        $user->address = $result['fkAddress'];
+        $user->address = $address;
+
 
         return $user;
     }
@@ -324,6 +304,7 @@ class UserDao extends AbstractDao {
                 $user->sessionTime,
                 $user->id
             ]);
+
             return true;
         } catch (PDOException $e) {
             //print $e->getMessage();
@@ -333,20 +314,12 @@ class UserDao extends AbstractDao {
 
     public function fetchBySession($session_token) {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} u INNER JOIN role r on r.idRole = u.fkRole WHERE session_token = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE session_token = ?");
             $statement->execute([$session_token]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $result['password'] = ''; // on retire le mot de passe
-            $user = $this->instantiate($result);
-            $user->isActive = $result['isActive'];
 
-            // on recupère et on ajoute l'adresse de l'utilisateur
-            $addressDao = new AddressDao();
-            $address = $addressDao->getAddressById($user->address);
-            $user->address = $address;
-
-            return $user;
-
+            return $this->instantiate($result);
         } catch (PDOException $e) {
             //print $e->getMessage();
             return false;

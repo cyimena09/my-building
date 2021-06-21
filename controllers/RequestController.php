@@ -5,6 +5,8 @@ class RequestController extends AbstractController {
 
     public function __construct() {
         $this->dao = new RequestDao();
+        $this->userDao = new UserDao();
+        $this->apartmentDao = new ApartmentDao();
     }
 
     /**
@@ -12,15 +14,13 @@ class RequestController extends AbstractController {
      */
     public function index() {
         $authenticatedUser = $this->isLogged();
-
         $requests = $this->dao->getRequests();
-        $userDao = new UserDao();
-        $apartmentDao = new ApartmentDao();
+
         foreach ($requests as $request) {
-            $user = $userDao->getUserById($request->user); // user contient l'id de l'user
+            $user = $this->userDao->getUserById($request->user); // user contient l'id de l'user
             $request->user = $user;
 
-            $apartment = $apartmentDao->getApartmentById($request->apartment); // appartment contient l'id de l'appartment
+            $apartment = $this->apartmentDao->getApartmentById($request->apartment); // appartment contient l'id de l'appartment
             $request->apartment = $apartment;
         }
 
@@ -37,12 +37,8 @@ class RequestController extends AbstractController {
      */
     public function validate($id) {
         $authenticatedUser = $this->isLogged();
-
         $request = $this->dao->getRequestById($id);
-        $apartmentDao = new ApartmentDao();
-        $apartment = $apartmentDao->getApartmentById($request->apartment);
-
-        $userDao = new UserDao();
+        $apartment = $this->apartmentDao->getApartmentById($request->apartment);
 
         // CAS 1 : L'utilisateur souhaite devenir propriétaire
         // Dans ce cas là, on modifie uniquement l'appartement concerné
@@ -52,7 +48,7 @@ class RequestController extends AbstractController {
                 'owner' => $request->user
             ];
 
-            if ($apartmentDao->updateApartment($apartment->id, $data) && $userDao->setIsActive($request->user)) {
+            if ($this->apartmentDao->updateApartment($apartment->id, $data) && $this->userDao->setIsActive($request->user)) {
                 $this->dao->deleteRequest($request->id);
             }
         }
@@ -64,7 +60,7 @@ class RequestController extends AbstractController {
                 'fkApartment' => $apartment->id,
             ];
 
-            if ($userDao->setLocation($request->user, $data) && $userDao->setIsActive($request->user)) {
+            if ($this->userDao->setLocation($request->user, $data) && $this->userDao->setIsActive($request->user)) {
                 $this->dao->deleteRequest($request->id);
             }
         }

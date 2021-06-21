@@ -13,6 +13,7 @@ class CommunicationDao extends AbstractDao {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table} ORDER BY last_update DESC");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
             //print $e->getMessage();
@@ -27,6 +28,7 @@ class CommunicationDao extends AbstractDao {
                 $id
             ]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
+
             return $this->instantiate($result);
         } catch (PDOException $e) {
             //print $e->getMessage();
@@ -42,30 +44,11 @@ class CommunicationDao extends AbstractDao {
                 ]
             );
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
             //print $e->getMessage();
             return false;
-        }
-    }
-
-    /**
-     * Récupère les communications en fonction du filtre appliqué
-     * @param $filter string que vous souhaitez filtrer
-     * @param $value integer valeur du champ à récupérer
-     * @return array
-     */
-    public function getCommunicationsByFilter($filter, $value) {
-        try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE {$filter} = ?");
-            $statement->execute([
-                $value
-            ]);
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $this->instantiateAll($result);
-        } catch (PDOException $e) {
-            //print $e->getMessage();
-            return null;
         }
     }
 
@@ -77,8 +60,7 @@ class CommunicationDao extends AbstractDao {
             return false;
         }
         // on récupère la date actuelle qu'on ajoutera a l'objet communcation
-        $currentDate = date('Y-m-d H:i:s');
-
+        $currentDate = getCurrentDate();
         $communication = new Communication(null, $data['subject'], $data['message'], $currentDate, $currentDate, $data['fkBuilding']);
 
         if ($communication) {
@@ -94,6 +76,7 @@ class CommunicationDao extends AbstractDao {
                     htmlspecialchars($communication->__get('lastUpdate')),
                     htmlspecialchars($communication->__get('building'))
                 ]);
+
                 return true;
             } catch (PDOException $e) {
                 //print $e->getMessage();
@@ -107,7 +90,7 @@ class CommunicationDao extends AbstractDao {
             return false;
         }
 
-        $currentDate = date('Y-m-d H:i:s');
+        $currentDate = getCurrentDate();
 
         try {
             $statement = $this->connection->prepare(
@@ -118,9 +101,10 @@ class CommunicationDao extends AbstractDao {
                 htmlspecialchars($currentDate),
                 htmlspecialchars($id)
             ]);
+
             return true;
         } catch (PDOException $e) {
-            //print $e->getMessage();
+            print $e->getMessage();
             return false;
         }
     }
@@ -135,6 +119,8 @@ class CommunicationDao extends AbstractDao {
             $statement->execute([
                 $id
             ]);
+
+            return true;
         } catch (PDOException $e) {
             //print $e->getMessage();
             return false;

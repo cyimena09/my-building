@@ -16,30 +16,28 @@
         </form>
     </section>
 
-    <?php if (isset($owner)): ?>
         <!-- Propriétaire de l'appartement-->
         <section>
             <div class="head">
                 <h2>Propriétaire</h2>
             </div>
             <p>
-                <span style="margin-right: 20px; text-transform: uppercase">Prénom</span><span><?= $owner->__get('firstName'); ?></span>
+                <span style="margin-right: 20px; text-transform: uppercase">Prénom</span><span><?= $apartment->owner->__get('firstName'); ?></span>
             </p>
             <p>
-                <span style="margin-right: 20px; text-transform: uppercase">Nom</span><span><?= $owner->__get('lastName'); ?></span>
+                <span style="margin-right: 20px; text-transform: uppercase">Nom</span><span><?= $apartment->owner->__get('lastName'); ?></span>
             </p>
             <div style="margin-top: 15px">
-                <a href="/users/show/<?= $owner->__get('id'); ?>">Voir</a>
+                <a href="/users/show/<?= $apartment->owner->__get('id'); ?>">Voir</a>
             </div>
         </section>
-    <?php endif; ?>
 
     <!-- Résident ou Locataire de l'appartement -->
     <section>
         <div class="head">
             <h2>Résident ou Locataires</h2>
         </div>
-        <?php if (count($tenants) > 0): ?>
+        <?php if ($apartment->nbTenants > 0): ?>
             <table>
                 <thead>
                 <tr>
@@ -50,7 +48,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($tenants as $tenant): $i++ ?>
+                <?php foreach ($apartment->tenants as $tenant): $i++ ?>
                     <tr>
                         <th><?= $i; ?></th>
                         <td><?= $tenant->__get('firstName'); ?></td>

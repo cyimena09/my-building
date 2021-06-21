@@ -9,7 +9,6 @@ class AddressController extends AbstractController {
 
     public function update($id, $data) {
         $authenticatedUser = $this->isLogged();
-
         $idAddress = $data['idAddress'];
         $this->dao->updateAddress($idAddress, $data);
     }

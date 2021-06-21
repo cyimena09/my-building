@@ -5,14 +5,13 @@ class ApartmentController extends AbstractController {
 
     public function __construct() {
         $this->dao = new ApartmentDao();
+        $this->buildingDao = new BuildingDao();
     }
 
     public function index() {
         $authenticatedUser = $this->isLogged();
-
         $buildingDao = new BuildingDao();
-        $buildings = $buildingDao->getBuildingsWithApartments();
-
+        $buildings = $this->buildingDao->getBuildings();
         $content = '../views/apartment/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -21,17 +20,7 @@ class ApartmentController extends AbstractController {
 
     public function show($id) {
         $authenticatedUser = $this->isLogged();
-
         $apartment = $this->dao->getApartmentById($id);
-        // on récupère les locataires de l'appartement
-        $userDao = new UserDao();
-        $tenants = $userDao->getUsersByApartmentId($id); // récupération des locataires
-        $owner = $userDao->getUserById($apartment->owner); // récupération du propriétaire
-
-        if (!empty($owner->id == 0)) {
-            $owner =null;
-        }
-
         $content = '../views/apartment/one.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -48,11 +37,7 @@ class ApartmentController extends AbstractController {
 
     public function createView() {
         $authenticatedUser = $this->isLogged();
-
-        // récupération des immeubles
-        $buildingDao = new BuildingDao();
-        $buildings = $buildingDao->getBuildings();
-
+        $buildings = $this->buildingDao->getBuildings();
         $content = '../views/apartment/create-form.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -61,26 +46,23 @@ class ApartmentController extends AbstractController {
 
     public function update($id, $data) {
         $authenticatedUser = $this->isLogged();
-
         $idApartment = $data['idApartment'];
         $this->dao->updateApartment($idApartment, $data);
     }
 
     public function delete($id) {
         $authenticatedUser = $this->isLogged();
-
         $this->dao->deleteApartment($id);
         $this->index();
     }
 
     /**
-     * Affiche une liste déroulante d'appartements en fonction de l'id contenu dans le paramètre data
+     * Affiche une liste déroulante d'appartements en fonction de l'id du paramètre data
      * @param $id
      * @param $data
      */
     public function dropdown($id, $data) {
-        $apartments = $this->dao->getApartmentsByBuildingId($data['idBuilding']);
-
+        $apartments = $this->dao->getDataByFilter('fkBuilding', $data['idBuilding']);
         include ('../views/apartment/dropdown.php');
     }
 

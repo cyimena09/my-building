@@ -7,6 +7,7 @@ class TicketController extends AbstractController {
     public function __construct() {
         $this->dao = new TicketDao();
         $this->statusDao = new StatusDao();
+        $this->apartmentDao = new ApartmentDao();
     }
 
     /**
@@ -14,10 +15,8 @@ class TicketController extends AbstractController {
      */
     public function index() {
         $authenticatedUser = $this->isLogged();
-
         $tickets = $this->dao->getTickets();
         $status = $this->statusDao->getStatus();
-
         $content = '../views/ticket/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -29,10 +28,8 @@ class TicketController extends AbstractController {
      */
     public function ticketByUserView() {
         $authenticatedUser = $this->isLogged();
-
-        $tickets = $this->dao->getTicketsByFilter('fkUser', $authenticatedUser->id);
+        $tickets = $this->dao->getDataByFilter('fkUser', $authenticatedUser->id);
         $status = $this->statusDao->getStatus();
-
         $content = '../views/ticket/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -44,11 +41,10 @@ class TicketController extends AbstractController {
      */
     public function ticketByBuildingView() {
         $authenticatedUser = $this->isLogged();
-
-        $tickets = $this->dao->getTicketsByFilter('fkBuilding', $authenticatedUser->id);
-
+        // on récupère le batiment dans lequel l'utilisateur vis
+        $apartmentRented = $this->apartmentDao->getApartmentById($authenticatedUser->apartment->id);
+        $tickets = $this->dao->getDataByFilter('fkBuilding', $apartmentRented->building->id);
         $status = $this->statusDao->getStatus();
-
         $content = '../views/ticket/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -57,9 +53,7 @@ class TicketController extends AbstractController {
 
     public function show($id) {
         $authenticatedUser = $this->isLogged();
-
         $ticket = $this->dao->getTicketById($id);
-
         $content = '../views/ticket/one.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -67,9 +61,12 @@ class TicketController extends AbstractController {
     }
 
     public function create($id, $data) {
+        include "../utils/functions.php";
         $authenticatedUser = $this->isLogged();
-
         $data['idUser'] = $authenticatedUser->id;
+        // on récupère la résidence pour l'associer au ticket
+        $apartment = $this->apartmentDao->getApartmentById($authenticatedUser->apartment->id);
+        $data['idBuilding'] =  $apartment->building->id;
 
         if ($this->dao->createTicket($data)) {
             $successMessage = 'Un nouveau ticket a été créé !';
@@ -77,9 +74,8 @@ class TicketController extends AbstractController {
             $errorMessage = "Désolé, le ticket n'a pas pu être créé.";
         }
 
-        $tickets = $this->dao->getTicketsByFilter('fkUser', $authenticatedUser->id);
+        $tickets = $this->dao->getDataByFilter('fkUser', $authenticatedUser->id);
         $status = $this->statusDao->getStatus();
-
         $content = '../views/ticket/list.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -88,10 +84,8 @@ class TicketController extends AbstractController {
 
     public function createView() {
         $authenticatedUser = $this->isLogged();
-
         $buildingDao = new BuildingDao();
         $buildings = $buildingDao->getBuildings();
-
         $content = '../views/ticket/create-form.php';
         include ('../views/header.php');
         include ('../views/user/user-space.php');
@@ -99,15 +93,17 @@ class TicketController extends AbstractController {
     }
 
     public function update($id, $data) {
+        include "../utils/functions.php";
         $authenticatedUser = $this->isLogged();
-
         $idTicket = $data['idTicket'];
-        $this->dao->updateTicket($idTicket, $data);
+
+        if (!$this->dao->updateTicket($idTicket, $data)) {
+            return http_response_code(401);
+        }
     }
 
     public function updateStatus($id, $data) {
         $authenticatedUser = $this->isLogged();
-
         $idTicket = $data['idTicket'];
 
         if (!$this->dao->updateStatus($idTicket, $data)) {
@@ -122,15 +118,14 @@ class TicketController extends AbstractController {
      */
     public function delete($id) {
         $authenticatedUser = $this->isLogged();
-
         $ticket = $this->dao->getTicketById($id);
 
-        if ($ticket->user == $authenticatedUser->id || $authenticatedUser->role->name == RoleEnum::SYNDIC) {
+        if ($ticket->user->id == $authenticatedUser->id || $authenticatedUser->role->name == RoleEnum::SYNDIC) {
             $this->dao->deleteTicket($id);
         }
 
         if ($authenticatedUser->role->name != RoleEnum::SYNDIC) {
-            $this->ticketByBuildingView();
+            $this->ticketByUserView();
         } else {
             $this->index();
         }

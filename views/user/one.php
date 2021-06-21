@@ -23,7 +23,8 @@
         </div>
         <div class="group">
             <label for="phone"></label>
-            <input id="phone" type="text" placeholder="Téléphone" name="firstName" value="<?= $user->phone; ?>" disabled>
+            <input id="phone" type="text" placeholder="Téléphone" name="firstName" value="<?= $user->phone; ?>"
+                   disabled>
         </div>
         <div class="group">
             <label for="role"></label>
@@ -38,8 +39,8 @@
         <h2>Résidence ou Location</h2>
     </div>
     <?php if (isset($rentedApartment)): ?>
-            <p>Apartement : <?= $rentedApartment->name; ?> ( immeuble : <?= $rentedApartment->building->name; ?> )</p>
-            <a href="/apartments/show/<?= $rentedApartment->id; ?>">Voir</a>
+        <p>Apartement : <?= $rentedApartment->name; ?> ( immeuble : <?= $rentedApartment->name; ?> )</p>
+        <a href="/apartments/show/<?= $rentedApartment->id; ?>">Voir</a>
     <?php else : ?>
         <p style="color: #9d9b9b"><?= $user->firstName; ?> <?= $user->lastName; ?> ne loue aucun appartement</p>
     <?php endif; ?>
@@ -50,11 +51,15 @@
     <div class="head">
         <h2>Propriété</h2>
     </div>
-    <?php if (count($ownedApartments) > 0): ?>
-        <?php foreach ($ownedApartments as $ownedApartment): ?>
-            <p>Appartement : <?= $ownedApartment->name; ?> de l'immeuble <?= $ownedApartment->name; ?></p>
-            <a href="/apartments/show/<?= $ownedApartment->id; ?>">Voir</a>
-        <?php endforeach; ?>
+    <?php if (isset($rentedApartment)): ?>
+        <?php if (count($ownedApartments) > 0): ?>
+            <?php foreach ($ownedApartments as $ownedApartment): ?>
+                <p>Appartement : <?= $ownedApartment->name; ?> de l'immeuble <?= $ownedApartment->name; ?></p>
+                <a href="/apartments/show/<?= $ownedApartment->id; ?>">Voir</a>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <p style="color: #9d9b9b"><?= $user->firstName; ?> <?= $user->lastName; ?> ne possède aucun appartement</p>
+        <?php endif; ?>
     <?php else : ?>
         <p style="color: #9d9b9b"><?= $user->firstName; ?> <?= $user->lastName; ?> ne possède aucun appartement</p>
     <?php endif; ?>

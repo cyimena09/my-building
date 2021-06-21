@@ -9,8 +9,9 @@ class Ticket {
     private $dateCreation;
     private $lastUpdate;
     private $user;
+    private $building;
 
-    public function __construct($id, $subject, $status, $description, $dateCreation, $lastUpdate, $user) {
+    public function __construct($id, $subject, $status, $description, $dateCreation, $lastUpdate, $user, $building) {
         $this->id = $id;
         $this->subject = $subject;
         $this->status = $status;
@@ -18,6 +19,7 @@ class Ticket {
         $this->dateCreation = $dateCreation;
         $this->lastUpdate = $lastUpdate;
         $this->user = $user;
+        $this->building = $building;
     }
 
     public function __get($prop) {

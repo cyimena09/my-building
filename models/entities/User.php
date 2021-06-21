@@ -11,13 +11,13 @@ class User {
     private $role;
     private $address;
     private $apartment;
-    private $building;
+    //private $building;
     private $password;
     private $sessionToken;
     private $sessionTime;
     private $isActive;
 
-    public function __construct($id, $firstName, $lastName, $email, $phone, $gender, $role, $password = false, $sessionToken = false, $sessionTime = false) {
+    public function __construct($id, $firstName, $lastName, $email, $phone, $gender, $role, $isActive, $password = false, $sessionToken = false, $sessionTime = false) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -25,6 +25,7 @@ class User {
         $this->phone = $phone;
         $this->gender = $gender;
         $this->role = $role;
+        $this->isActive = $isActive;
         $this->password = $password;
         $this->sessionToken = $sessionToken;
         $this->sessionTime = $sessionTime;

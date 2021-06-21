@@ -13,6 +13,7 @@ class AddressDao extends AbstractDao {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
             return $this->instantiateAll($result);
         } catch (PDOException $e) {
             //print $e->getMessage();
@@ -27,6 +28,7 @@ class AddressDao extends AbstractDao {
                 $id
             ]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
+
             return $this->instantiate($result);
         } catch (PDOException $e) {
             //print $e->getMessage();
@@ -72,6 +74,7 @@ class AddressDao extends AbstractDao {
                     htmlspecialchars($address->__get('city')),
                     htmlspecialchars($address->__get('country'))
                 ]);
+
                 return $lastInsertedId = $this->connection->lastInsertId();
             } catch (PDOException $e) {
                 //print $e->getMessage();
@@ -97,6 +100,8 @@ class AddressDao extends AbstractDao {
                 htmlspecialchars($data['country']),
                 htmlspecialchars($id)
             ]);
+
+            return true;
         } catch (PDOException $e) {
             //print $e->getMessage();
             return false;
@@ -105,7 +110,7 @@ class AddressDao extends AbstractDao {
 
     public function instantiate($result) {
         return new Address(
-            !empty($result['idAddress']) ? $result['idAddress'] : 0,
+             $result['idAddress'],
             $result['street'],
             $result['house_number'],
             $result['box_number'],
