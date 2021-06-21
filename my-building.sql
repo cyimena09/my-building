@@ -149,19 +149,19 @@ CREATE TABLE `communication` (
 -- Communication
 INSERT INTO communication(subject, message, date_creation, last_update, fkBuilding)
 VALUES
-('Sujet de la communication A1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 1),
-('Sujet de la communication A2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 1),
-('Sujet de la communication A3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 1),
-('Sujet de la communication B1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2),
-('Sujet de la communication B2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2),
-('Sujet de la communication B3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2),
-('Sujet de la communication C1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3),
-('Sujet de la communication C2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3),
-('Sujet de la communication C3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3),
-('Sujet de la communication D1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4),
-('Sujet de la communication D2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4),
-('Sujet de la communication D3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4),
-('Sujet de la communication D4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4);
+('Sujet de la comm A1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 1),
+('Sujet de la comm A2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 1),
+('Sujet de la comm A3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 1),
+('Sujet de la comm B1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2),
+('Sujet de la comm B2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2),
+('Sujet de la comm B3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2),
+('Sujet de la comm C1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3),
+('Sujet de la comm C2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3),
+('Sujet de la comm C3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3),
+('Sujet de la comm D1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4),
+('Sujet de la comm D2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4),
+('Sujet de la comm D3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4),
+('Sujet de la comm D4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4);
 
 --
 -- Table structure for table `request`
