@@ -35,7 +35,7 @@
     <!-- Résident ou Locataire de l'appartement -->
     <section>
         <div class="head">
-            <h2>Résident ou Locataires</h2>
+            <h2>Résidents ou Locataires</h2>
         </div>
         <?php if ($apartment->nbTenants > 0): ?>
             <table>
@@ -63,7 +63,7 @@
             </table>
 
         <?php else: ?>
-            <p style="color: #9d9b9b">L'appartement n'a pas de résident ou locataire</p>
+            <p style="color: #9d9b9b">L'appartement n'a pas de résident ou de locataire</p>
         <?php endif; ?>
     </section>
 </div>
