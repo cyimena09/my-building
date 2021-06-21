@@ -51,7 +51,7 @@
     <div class="head">
         <h2>Propriété</h2>
     </div>
-    <?php if (isset($rentedApartment)): ?>
+    <?php if (isset($ownedApartments)): ?>
         <?php if (count($ownedApartments) > 0): ?>
             <?php foreach ($ownedApartments as $ownedApartment): ?>
                 <p>Appartement : <?= $ownedApartment->name; ?> de l'immeuble <?= $ownedApartment->name; ?></p>
