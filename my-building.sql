@@ -31,7 +31,7 @@ CREATE TABLE `address` (
   `city` varchar(100) DEFAULT NULL,
   `country` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idAddress`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'Rue du Syndicat Emile','77656','17B','1301','Bierges','Belgique'),(2,'rue A','12','','1000','Bxl','Bel');
+INSERT INTO `address` VALUES (1,'Rue du Syndicat','1',NULL,'1300','Wavre','Belgique'),(2,'rue de l\'immeuble A','A','','1000','Bruxelles','Belgique'),(3,'rue du l\'immeuble B','B','','75000','Paris','France'),(4,'Avenue de l\'immeuble C','C','','97100','Basse-Terre','Guadeloupe'),(5,'impasse de l\'imeuble D','D','','97200','Fort-de-France','Martinique'),(6,'straat bouwen  E','E','','8301','Knokke','Belgïe'),(7,'rue du locataire A1','01','','1000','Schaerbeek','Belgique'),(8,'rue du proprio A1','1','','1000','ma Ville','Belgique'),(9,'rue du prop multi','1','','7895','LaVille','Belgique'),(10,'prop','1','','1234','ma Ville','Belgique'),(11,'rue x','1','','456','Ville','Pay'),(12,'aze','1','','157','azr','ezr'),(13,'rzer','465','','126+','zer','zer'),(14,'azee','123','','123','azea','aze'),(15,'qsd','qsd','qsd','123','qsd','qsd'),(16,'rue az','132','12','1231','ma ville','Belgique'),(17,'rue sd','12','','7896','ville','Belgique'),(18,'rue fdg','132','','4563','bxl','Belgique'),(19,'sdf','13','','1234','elliv','Belgique'),(20,'fgh','456','','9874','fgh','Belgique'),(21,'sqdfq','123','','1245','sdfg','Belgique'),(22,'qsd','123','','1236','Ville','belgium'),(23,'sdf','12','','1234','Paris','Belgique');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `apartment` (
   KEY `apartment_FK_1` (`fkOwner`),
   CONSTRAINT `apartment_FK` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `apartment_FK_1` FOREIGN KEY (`fkOwner`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +70,7 @@ CREATE TABLE `apartment` (
 
 LOCK TABLES `apartment` WRITE;
 /*!40000 ALTER TABLE `apartment` DISABLE KEYS */;
+INSERT INTO `apartment` VALUES (3,'Appartement A2',1,18),(7,'Appartement B3',2,NULL),(9,'Appartement C2',3,18),(11,'Appartement D1',4,20),(12,'Appartement D2',4,NULL),(13,'Appartement D3',4,NULL),(14,'Appartement E1',5,NULL),(15,'Appartement E2',5,NULL),(16,'Appartement E3',5,NULL),(18,'Appartement E4',5,NULL),(19,'Appartement B4',2,NULL),(20,'Appartement B5',2,NULL),(21,'Appartement D4',4,NULL),(22,'Appartement D5',4,21),(23,'Appartement D6',4,NULL),(24,'Appartmeent C1',3,NULL),(25,'Appartement A1',1,17),(26,'Appartement B1',2,19);
 /*!40000 ALTER TABLE `apartment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +97,7 @@ CREATE TABLE `building` (
 
 LOCK TABLES `building` WRITE;
 /*!40000 ALTER TABLE `building` DISABLE KEYS */;
-INSERT INTO `building` VALUES (5,'Immmeuble A',2);
+INSERT INTO `building` VALUES (1,'Immeuble A',2),(2,'Immeuble B',3),(3,'Immeuble C',4),(4,'Immeuble D',5),(5,'Immeuble E',6);
 /*!40000 ALTER TABLE `building` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +118,7 @@ CREATE TABLE `communication` (
   PRIMARY KEY (`idCommunication`),
   KEY `communication_FK` (`fkBuilding`),
   CONSTRAINT `communication_FK` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +127,7 @@ CREATE TABLE `communication` (
 
 LOCK TABLES `communication` WRITE;
 /*!40000 ALTER TABLE `communication` DISABLE KEYS */;
+INSERT INTO `communication` VALUES (2,'Com 1 pour bat A de Bruxelles','Bonjour,\nVous avez un nouveau message ......','2021-06-20 17:10:50','2021-06-20 19:42:41',1),(3,'Com 1 pour bat B de Paris','Salut,\nCeci est votre message','2021-06-20 17:12:17','2021-06-20 17:13:15',2),(4,'Com 1 pour bat C','Holla,\r\nVotre message est ici','2021-06-20 17:13:49','2021-06-20 17:13:49',3),(5,'Com 1 pour immeuble D','message pour dire pas de message','2021-06-20 17:14:35','2021-06-20 17:14:46',4),(6,'Com 2 pour bat D','re, \r\nenfin un deuxième message','2021-06-20 17:15:12','2021-06-20 17:15:12',4),(7,'message pour bat E','hello','2021-06-20 17:15:54','2021-06-20 17:15:54',5);
 /*!40000 ALTER TABLE `communication` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +148,7 @@ CREATE TABLE `request` (
   KEY `request_FK_1` (`fkApartment`),
   CONSTRAINT `request_FK` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `request_FK_1` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idApartment`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,10 +228,10 @@ CREATE TABLE `ticket` (
   KEY `ticket_FK` (`fkBuilding`),
   KEY `ticket_FK_1` (`fkUser`),
   KEY `ticket_FK_2` (`fkStatus`),
-  CONSTRAINT `ticket_FK` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ticket_FK_1` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ticket_FK_2` FOREIGN KEY (`fkStatus`) REFERENCES `status` (`idStatus`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `ticket_FK_1` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`),
+  CONSTRAINT `ticket_FK_2` FOREIGN KEY (`fkStatus`) REFERENCES `status` (`idStatus`),
+  CONSTRAINT `ticket_FK_3` FOREIGN KEY (`fkUser`) REFERENCES `user` (`idUser`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,6 +240,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+INSERT INTO `ticket` VALUES (5,'ticket im C','qsd','2021-06-20 19:12:59','2021-06-20 19:12:59',1,1,2),(7,'buil 5','test ','2021-06-20 19:35:38','2021-06-20 19:35:38',1,5,1),(8,'build 4','test','2021-06-20 19:39:41','2021-06-20 19:39:41',1,1,3),(15,'test syndic','zerzerzer','2021-06-21 11:02:34','2021-06-21 11:02:34',1,1,3);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +276,7 @@ CREATE TABLE `user` (
   CONSTRAINT `user_FK_1` FOREIGN KEY (`fkApartment`) REFERENCES `apartment` (`idApartment`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_FK_2` FOREIGN KEY (`fkBuilding`) REFERENCES `building` (`idBuilding`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_FK_3` FOREIGN KEY (`fkRole`) REFERENCES `role` (`idRole`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,7 +285,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Emile','Cyimena','cyimena09@hotmail.com','0484090853','M','68de45637638e929.1624192355','2021-06-20 14:32:35','$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2',1,NULL,NULL,'1',1);
+INSERT INTO `user` VALUES (1,'Admin','Syndic','admin@l.com','1234567','M','64c2657b706551f2.1624289010','2021-06-21 17:23:30','$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2',1,NULL,NULL,'1',1),(16,'Locataire','A1','locA1@l.com','123456798','M','256dd7b5ac303ae1.1624289104','2021-06-21 17:25:04','$2y$10$pbOc0xnCqhjN/18F3A4dGeZOuEs34wXOJqSEm06yi.SGc6cJG.EmW',16,1,25,'1',2),(17,'Propriétaire','A1','propA1@l.com','123456','M',NULL,NULL,'$2y$10$AWT9Yd50gQ6MtUm0fpyD8OkIrqSOmey9r4Kuf/jdNzg5TWM5XkRvi',17,NULL,NULL,'1',3),(18,'multi proprio','A2 &amp; C2','prop02@l.com','1234567','M',NULL,NULL,'$2y$10$rB2uiNWITa4s3bGJnkf/8O8WlTMGzLtXUm/7TZ8fWiBmuHAHaZIFe',18,NULL,NULL,'1',3),(19,'Proprio','B1','propB1@l.com','123456','O',NULL,NULL,'$2y$10$t0P/y89NZqYu6RPNhlpTtey3B9FhgcEcMUwR5a7zMicOWO4sLD0t.',19,NULL,NULL,'1',3),(20,'Pro &amp; Résident meme appart','D1','propD1@l.com','123456','M',NULL,NULL,'$2y$10$RHfGZEoXHyfPltROoJ.8nuULVPe7bSsmJMc6G9ABdAUoohHqsT54m',20,4,11,'1',4),(21,'Pro &amp; Rés différent appart	','P=D5 R=C1	','propC1@l.com','123456','F',NULL,NULL,'$2y$10$UL6PFu.rfmg0OO.7qHVUEO9TXWCtAyjivB6fZF.yknRhpXQnQFDB.',21,3,24,'1',4),(22,'Rés avec prop	','C1','locD1@l.com','123456','F',NULL,NULL,'$2y$10$XWh1amnGU.stYG7MLv/aheH..NcCMZOSO3gBTmT3wQtnQ.1q1p.NG',22,4,11,'1',4),(23,'Rés solo','E2','resE2@l.com','123465','O',NULL,NULL,'$2y$10$EYFsrXYl.rhzikLiehGEouHLyq3Mj2.QZ.tNksWS3GLkyTsQHTJpW',23,5,15,'1',4);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,4 +302,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-20 14:33:12
+-- Dump completed on 2021-06-21 17:25:49
