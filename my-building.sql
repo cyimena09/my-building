@@ -86,21 +86,21 @@ CREATE TABLE `apartment` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 -- Apartment
-INSERT INTO apartment(name, fkBuilding, fkOwner)
+INSERT INTO apartment(idApartment, name, fkBuilding, fkOwner)
 VALUES
-('Apartement A1', 1, 3),
-('Apartement A2', 1, 4),
-('Apartement A3', 1, 3),
-('Apartement A4', 1, 4),
-('Apartement B1', 2, 7),
-('Apartement B2', 2, 8),
-('Apartement B3', 2, 7),
-('Apartement C1', 3, 8),
-('Apartement C2', 3, 3),
-('Apartement C3', 3, 4),
-('Apartement D1', 4, 3),
-('Apartement D2', 4, 4),
-('Apartement D3', 4, 3);
+(1, 'Apartement A1', 1, 3),
+(2, 'Apartement A2', 1, 4),
+(3, 'Apartement A3', 1, 3),
+(4, 'Apartement A4', 1, 4),
+(5, 'Apartement B1', 2, 7),
+(6, 'Apartement B2', 2, 8),
+(7, 'Apartement B3', 2, 7),
+(8, 'Apartement C1', 3, 8),
+(9, 'Apartement C2', 3, 3),
+(10, 'Apartement C3', 3, 4),
+(11, 'Apartement D1', 4, 3),
+(12, 'Apartement D2', 4, 4),
+(13, 'Apartement D3', 4, 3);
 
 --
 -- Table structure for table `building`

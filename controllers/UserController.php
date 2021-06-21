@@ -34,9 +34,6 @@ class UserController extends AbstractController {
         // récupération des propriétés si l'utilisateur n'est pas un locataire
         if ($user->role->name !== RoleEnum::LOCATAIRE) {
             $ownedApartments = $this->apartmentDao->getDataByFilter('fkOwner', $user->id);
-            if ($ownedApartments->id === null) {
-                $ownedApartments = null;
-            }
         }
 
         $content = '../views/user/one.php';
