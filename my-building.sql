@@ -42,15 +42,28 @@ CREATE TABLE `address` (
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `address`
---
 
-LOCK TABLES `address` WRITE;
-/*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'Rue du Syndicat','1',NULL,'1300','Wavre','Belgique'),(2,'rue de l\'immeuble A','A','','1000','Bruxelles','Belgique'),(3,'rue du l\'immeuble B','B','','75000','Paris','France'),(4,'Avenue de l\'immeuble C','C','','97100','Basse-Terre','Guadeloupe'),(5,'impasse de l\'imeuble D','D','','97200','Fort-de-France','Martinique'),(6,'straat bouwen  E','E','','8301','Knokke','Belgïe'),(7,'rue du locataire A1','01','','1000','Schaerbeek','Belgique'),(8,'rue du proprio A1','1','','1000','ma Ville','Belgique'),(9,'rue du prop multi','1','','7895','LaVille','Belgique'),(10,'prop','1','','1234','ma Ville','Belgique'),(11,'rue x','1','','456','Ville','Pay'),(12,'aze','1','','157','azr','ezr'),(13,'rzer','465','','126+','zer','zer'),(14,'azee','123','','123','azea','aze'),(15,'qsd','qsd','qsd','123','qsd','qsd'),(16,'rue az','132','12','1231','ma ville','Belgique'),(17,'rue sd','12','','7896','ville','Belgique'),(18,'rue fdg','132','','4563','bxl','Belgique'),(19,'sdf','13','','1234','elliv','Belgique'),(20,'fgh','456','','9874','fgh','Belgique'),(21,'sqdfq','123','','1245','sdfg','Belgique'),(22,'qsd','123','','1236','Ville','belgium'),(23,'sdf','12','','1234','Paris','Belgique');
-/*!40000 ALTER TABLE `address` ENABLE KEYS */;
-UNLOCK TABLES;
+-- Address
+INSERT INTO address(idAddress, street, house_number, box_number, zip, city, country)
+VALUES
+(1, 'Rue du Syndicat Emile', '77', '17B', '1301', 'Bierges', 'Belgique'),
+(2, 'Rue du Benoit', '88', '45C', '1301', 'Chaumont-Gistoux', 'Angleterre'),
+(3, 'Rue de la place Amaury', '18', null, '1301', 'Rixensart', 'Rwanda'),
+(4, 'Rue de la place Alice', '59', null, '1302', 'Mont-Saint-Guibert', 'Espagne'),
+(5, 'Rue de la place Mike', '18', null, '1304', 'Bruxelles', 'Espagne'),
+(6, 'Rue de la place Susi', '18', null, '1306', 'Ottignies', 'Etat-unis'),
+(7, 'Rue de la place Eveline', '77', '17B', '1301', 'Bierges', 'Canada'),
+(8, 'Rue de la place Eba', '88', '45C', '1301', 'Chaumont-Gistoux', 'Belgique'),
+(9, 'Rue de la place Justina', '18', null, '1301', 'Rixensart', 'Belgique'),
+(10, 'Rue de la place Venus', '59', null, '1302', 'Mont-Saint-Guibert', 'France'),
+(11, 'Rue de la place Napoleon', '18', null, '1304', 'Bruxelles', 'Espagne'),
+(12, 'Rue de la place Kain', '18', null, '1306', 'Ottignies', 'Colombie'),
+(13, 'Rue de la place Vernor', '18', null, '1306', 'Ottignies', 'Colombie'),
+(14, 'Rue de la résidence A', '77', null, '1301', 'Bierges', 'Canada'),
+(15, 'Rue de la résidence B', '88', null, '1301', 'Chaumont-Gistoux', 'Pays-Bas'),
+(16, 'Rue de la résidence C', '18', null, '1301', 'Rixensart', 'Belgique'),
+(17, 'Rue de la résidence D', '59', null, '1302', 'Mont-Saint-Guibert', 'France');
+(18, 'Rue du professeur Benoit Delbar', '59', 'B', '1302', 'Wavre', 'Belgique');
 
 --
 -- Table structure for table `apartment`
@@ -72,15 +85,22 @@ CREATE TABLE `apartment` (
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `apartment`
---
-
-LOCK TABLES `apartment` WRITE;
-/*!40000 ALTER TABLE `apartment` DISABLE KEYS */;
-INSERT INTO `apartment` VALUES (3,'Appartement A2',1,18),(7,'Appartement B3',2,NULL),(9,'Appartement C2',3,18),(11,'Appartement D1',4,20),(12,'Appartement D2',4,NULL),(13,'Appartement D3',4,NULL),(14,'Appartement E1',5,NULL),(15,'Appartement E2',5,NULL),(16,'Appartement E3',5,NULL),(18,'Appartement E4',5,NULL),(19,'Appartement B4',2,NULL),(20,'Appartement B5',2,NULL),(21,'Appartement D4',4,NULL),(22,'Appartement D5',4,21),(23,'Appartement D6',4,NULL),(24,'Appartmeent C1',3,NULL),(25,'Appartement A1',1,17),(26,'Appartement B1',2,19);
-/*!40000 ALTER TABLE `apartment` ENABLE KEYS */;
-UNLOCK TABLES;
+-- Apartment
+INSERT INTO apartment(name, fkBuilding, fkOwner)
+VALUES
+('Apartement A1', 1, 3),
+('Apartement A2', 1, 4),
+('Apartement A3', 1, 3),
+('Apartement A4', 1, 4),
+('Apartement B1', 2, 7),
+('Apartement B2', 2, 8),
+('Apartement B3', 2, 7),
+('Apartement C1', 3, 8),
+('Apartement C2', 3, 3),
+('Apartement C3', 3, 4),
+('Apartement D1', 4, 3),
+('Apartement D2', 4, 4),
+('Apartement D3', 4, 3);
 
 --
 -- Table structure for table `building`
@@ -99,15 +119,11 @@ CREATE TABLE `building` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `building`
---
-
-LOCK TABLES `building` WRITE;
-/*!40000 ALTER TABLE `building` DISABLE KEYS */;
-INSERT INTO `building` VALUES (1,'Immeuble A',2),(2,'Immeuble B',3),(3,'Immeuble C',4),(4,'Immeuble D',5),(5,'Immeuble E',6);
-/*!40000 ALTER TABLE `building` ENABLE KEYS */;
-UNLOCK TABLES;
+-- Building
+INSERT INTO building(name, fkAddress) VALUES ('Building A', 14);
+INSERT INTO building(name, fkAddress) VALUES ('Building B', 15);
+INSERT INTO building(name, fkAddress) VALUES ('Building C', 16);
+INSERT INTO building(name, fkAddress) VALUES ('Building D', 17);
 
 --
 -- Table structure for table `communication`
@@ -129,15 +145,23 @@ CREATE TABLE `communication` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `communication`
---
 
-LOCK TABLES `communication` WRITE;
-/*!40000 ALTER TABLE `communication` DISABLE KEYS */;
-INSERT INTO `communication` VALUES (2,'Com 1 pour bat A de Bruxelles','Bonjour,\nVous avez un nouveau message ......','2021-06-20 17:10:50','2021-06-20 19:42:41',1),(3,'Com 1 pour bat B de Paris','Salut,\nCeci est votre message','2021-06-20 17:12:17','2021-06-20 17:13:15',2),(4,'Com 1 pour bat C','Holla,\r\nVotre message est ici','2021-06-20 17:13:49','2021-06-20 17:13:49',3),(5,'Com 1 pour immeuble D','message pour dire pas de message','2021-06-20 17:14:35','2021-06-20 17:14:46',4),(6,'Com 2 pour bat D','re, \r\nenfin un deuxième message','2021-06-20 17:15:12','2021-06-20 17:15:12',4),(7,'message pour bat E','hello','2021-06-20 17:15:54','2021-06-20 17:15:54',5);
-/*!40000 ALTER TABLE `communication` ENABLE KEYS */;
-UNLOCK TABLES;
+-- Communication
+INSERT INTO communication(subject, message, date_creation, last_update, fkBuilding)
+VALUES
+('Sujet de la communication A1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 1),
+('Sujet de la communication A2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 1),
+('Sujet de la communication A3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 1),
+('Sujet de la communication B1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2),
+('Sujet de la communication B2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2),
+('Sujet de la communication B3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2),
+('Sujet de la communication C1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3),
+('Sujet de la communication C2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3),
+('Sujet de la communication C3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3),
+('Sujet de la communication D1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4),
+('Sujet de la communication D2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4),
+('Sujet de la communication D3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4),
+('Sujet de la communication D4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4);
 
 --
 -- Table structure for table `request`
@@ -242,15 +266,24 @@ CREATE TABLE `ticket` (
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `ticket`
---
 
-LOCK TABLES `ticket` WRITE;
-/*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (5,'ticket im C','qsd','2021-06-20 19:12:59','2021-06-20 19:12:59',1,1,2),(7,'buil 5','test ','2021-06-20 19:35:38','2021-06-20 19:35:38',1,5,1),(8,'build 4','test','2021-06-20 19:39:41','2021-06-20 19:39:41',1,1,3),(15,'test syndic','zerzerzer','2021-06-21 11:02:34','2021-06-21 11:02:34',1,1,3);
-/*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
-UNLOCK TABLES;
+-- Ticket
+INSERT INTO ticket(subject, description, date_creation, last_update, fkUser, fkBuilding, fkStatus)
+VALUES
+('Sujet du ticket A1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2, 1, 3),
+('Sujet du ticket A2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3, 1, 2),
+('Sujet du ticket A3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4, 1, 1),
+('Sujet du ticket A4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 5, 1, 3),
+('Sujet du ticket B1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2, 2, 2),
+('Sujet du ticket B2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3, 2, 1),
+('Sujet du ticket B3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4, 2, 3),
+('Sujet du ticket B4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 5, 2, 2),
+('Sujet du ticket C1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2, 3, 1),
+('Sujet du ticket C2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 3, 3, 3),
+('Sujet du ticket C3', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 4, 3, 2),
+('Sujet du ticket C4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 5, 3, 1),
+('Sujet du ticket D1', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum molestiaetur?','2021-06-20 19:12:59','2021-06-20 19:12:59', 2, 4, 3);
+
 
 --
 -- Table structure for table `user`
@@ -291,11 +324,23 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Admin','Syndic','admin@l.com','1234567','M','64c2657b706551f2.1624289010','2021-06-21 17:23:30','$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2',1,NULL,NULL,'1',1),(16,'Locataire','A1','locA1@l.com','123456798','M','256dd7b5ac303ae1.1624289104','2021-06-21 17:25:04','$2y$10$pbOc0xnCqhjN/18F3A4dGeZOuEs34wXOJqSEm06yi.SGc6cJG.EmW',16,1,25,'1',2),(17,'Propriétaire','A1','propA1@l.com','123456','M',NULL,NULL,'$2y$10$AWT9Yd50gQ6MtUm0fpyD8OkIrqSOmey9r4Kuf/jdNzg5TWM5XkRvi',17,NULL,NULL,'1',3),(18,'multi proprio','A2 &amp; C2','prop02@l.com','1234567','M',NULL,NULL,'$2y$10$rB2uiNWITa4s3bGJnkf/8O8WlTMGzLtXUm/7TZ8fWiBmuHAHaZIFe',18,NULL,NULL,'1',3),(19,'Proprio','B1','propB1@l.com','123456','O',NULL,NULL,'$2y$10$t0P/y89NZqYu6RPNhlpTtey3B9FhgcEcMUwR5a7zMicOWO4sLD0t.',19,NULL,NULL,'1',3),(20,'Pro &amp; Résident meme appart','D1','propD1@l.com','123456','M',NULL,NULL,'$2y$10$RHfGZEoXHyfPltROoJ.8nuULVPe7bSsmJMc6G9ABdAUoohHqsT54m',20,4,11,'1',4),(21,'Pro &amp; Rés différent appart	','P=D5 R=C1	','propC1@l.com','123456','F',NULL,NULL,'$2y$10$UL6PFu.rfmg0OO.7qHVUEO9TXWCtAyjivB6fZF.yknRhpXQnQFDB.',21,3,24,'1',4),(22,'Rés avec prop	','C1','locD1@l.com','123456','F',NULL,NULL,'$2y$10$XWh1amnGU.stYG7MLv/aheH..NcCMZOSO3gBTmT3wQtnQ.1q1p.NG',22,4,11,'1',4),(23,'Rés solo','E2','resE2@l.com','123465','O',NULL,NULL,'$2y$10$EYFsrXYl.rhzikLiehGEouHLyq3Mj2.QZ.tNksWS3GLkyTsQHTJpW',23,5,15,'1',4);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
+-- User
+INSERT INTO user(firstname, lastname, email, phone, gender, password, fkAddress, fkBuilding, fkApartment, isActive, fkRole)
+VALUES
+('Emile', 'Cyimena', 'cyimena09@hotmail.com', '0484090853', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 1, null, null, 1, 1),
+('Benoit', 'Vankoningsloo', 'benoit@hotmail.com', '0477213465', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 2, null,1, 1, 2),
+('Amaury', 'Cyemezo', 'cyemezo@hotmail.com', '0499591245', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 3, null, 1, 1, 3),
+('Alice', 'Malaika', 'malaika@hotmail.com', '0476134465', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 4, null, 1, 1, 4),
+('Mike', 'Francois', 'mike@hotmail.com', '0488124678', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 5, null, 2, 1, 2),
+('Susi', 'Toupe', 'stoupe0@symantec.com', '6685851293', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 6, null, 2, 1, 2),
+('Eveline', 'Joyner', 'ejoyner1@cloudflare.com', '7861614104', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 7, null, 2, 1, 3),
+('Eba', 'Penquet', 'epenquet2@walmart.com', '7779636737', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 8, null, 3, 1, 4),
+('Justina', 'Dearth', 'jdearth3@hc360.com', '5481337107', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 9, null, 4, 1, 2),
+('Venus', 'Tolwood', 'vtolwood4@w3.org', '2896359988', 'F', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 10, null, 5, 1, 2),
+('Napoleon', 'Jencey', 'njencey5@csmonitor.com', '5625961927', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 11, null, 6, 1, 3),
+('Kain', 'Wrist', 'kwrist6@mayoclinic.com', '5729661592', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 12, null, 7, 1, 4),
+('Vernor', 'Titchen', 'vtitchen7@moonfruit.com', '2342462343', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 13, null, 8, 1, 2);
+('Benoit', 'Delbar', 'benoit@hotmail.com', '0489464544', 'M', '$2y$10$AKWxJHelS825lfPhx4rAG.dI0TX7bvQgsPzyFzQOB576rKF.U/8y2', 18, null, 8, 1, 2);
 
 --
 -- Dumping routines for database 'my-building'
