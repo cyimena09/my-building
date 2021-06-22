@@ -8,4 +8,4 @@
 
 - Pour se connecter avec un compte propriétaire : "proprietaire@hotmail.com"
 
-- Pour se connecter avec un compte locataire : "proprietaire_resident@hotmail.com"
+- Pour se connecter avec un compte propriétaire résident : "proprietaire_resident@hotmail.com"
