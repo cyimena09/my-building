@@ -111,11 +111,11 @@
     </section>
 
 
-        <section>
-            <div class="head">
-                <h2>Votre résidence</h2>
-            </div>
-            <?php if (isset($apartmentRented)): ?>
+    <section>
+        <div class="head">
+            <h2>Votre résidence</h2>
+        </div>
+        <?php if (isset($apartmentRented)): ?>
             <div class="container" style="display: flex; align-items: center;">
                 <div class="container-icon">
                     <i class="fas fa-building" style="font-size: 45px; margin-right: 20px"></i>
@@ -134,40 +134,43 @@
                     </p>
                 </div>
             </div>
-            <?php else : ?>
-                <p style="color: grey">Vous n'avez pas de propriétés</p>
-            <?php endif; ?>
-        </section>
+        <?php else : ?>
+            <p style="color: grey">Vous n'avez pas de propriétés</p>
+        <?php endif; ?>
+    </section>
 
 
     <section>
         <div class="head">
             <h2>Vos propriétés</h2>
         </div>
-        <?php if (count($apartmentsOwned) > 0) : ?>
-            <?php foreach ($apartmentsOwned as $apart): ?>
-                <div class="container" style="display: flex; align-items: center; margin-bottom: 20px; border-bottom: solid 1px #d7d7d7; padding-bottom: 10px">
-                    <div class="container-icon">
-                        <i class="fas fa-building" style="font-size: 45px; margin-right: 20px"></i>
-                    </div>
-                    <div class="container-text">
+        <?php if (isset($apartmentsOwned)): ?>
+            <?php if (count($apartmentsOwned) > 0) : ?>
+                <?php foreach ($apartmentsOwned as $apart): ?>
+                    <div class="container"
+                         style="display: flex; align-items: center; margin-bottom: 20px; border-bottom: solid 1px #d7d7d7; padding-bottom: 10px">
+                        <div class="container-icon">
+                            <i class="fas fa-building" style="font-size: 45px; margin-right: 20px"></i>
+                        </div>
+                        <div class="container-text">
 
-                        <p style="display: flex; justify-content: space-between; align-items: center; width: 300px; margin-bottom: 10px">
-                            <span>Appartement</span>
-                            <span>·</span>
-                            <span class="a-btn a-btn-orange"><?= $apart->name ?></span>
-                        </p>
+                            <p style="display: flex; justify-content: space-between; align-items: center; width: 300px; margin-bottom: 10px">
+                                <span>Appartement</span>
+                                <span>·</span>
+                                <span class="a-btn a-btn-orange"><?= $apart->name ?></span>
+                            </p>
 
-                        <p style="display: flex; justify-content: space-between; align-items: center; width: 300px;">
-                            <span>de l'immeuble</span>
-                            <span>·</span>
-                            <span class="a-btn a-btn-mauve"><?= $apart->building->name ?></span>
-                        </p>
+                            <p style="display: flex; justify-content: space-between; align-items: center; width: 300px;">
+                                <span>de l'immeuble</span>
+                                <span>·</span>
+                                <span class="a-btn a-btn-mauve"><?= $apart->building->name ?></span>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        <?php else : ?>
-        <p style="color: grey">Vous n'avez pas de propriétés</p>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p style="color: grey">Vous n'avez pas de propriétés</p>
+            <?php endif; ?>
         <?php endif; ?>
     </section>
 

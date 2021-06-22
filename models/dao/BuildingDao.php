@@ -57,7 +57,7 @@ class BuildingDao extends AbstractDao {
         $addressId = $addressDao->createAddress($dataAddress);
 
         // Etape 2 : cas ou l'utilisateur est un LOCATAIRE
-        $building = new Building(!empty($data['id']) ? $data['id'] : 0, $data['name']);
+        $building = new Building(null, $data['name'], null, $addressId);
 
         // l'appartement, l'adresse et isActive ne sont pas dans le contructor
         $building->address = $addressId;
