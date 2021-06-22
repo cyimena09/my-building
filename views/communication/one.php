@@ -19,8 +19,7 @@
         <div class="group">
             <label for="message"></label>
             <textarea id="message" name="message" cols="30" rows="10"
-                      placeholder="Message"<?php if ($authenticatedUser->role->name !== RoleEnum::SYNDIC): ?> disabled <?php endif; ?>><?= $communication->message ?>
-            </textarea>
+                      placeholder="Message"<?php if ($authenticatedUser->role->name !== RoleEnum::SYNDIC): ?> disabled <?php endif; ?>><?= $communication->message ?></textarea>
         </div>
 
         <?php if ($authenticatedUser->role->name === RoleEnum::SYNDIC): ?>
