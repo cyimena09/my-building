@@ -29,7 +29,8 @@ class AuthController extends AbstractController {
 
     public function register($id, $data) {
         $lastInserted = $this->dao->createUser($data);
-
+        // TODO ajouter la vérification de l'email ici
+        // TODO vérifier si le return n'empeche pas l'exécution du code au-delà
         if (!isset($lastInserted) || empty($lastInserted)) {
             return http_response_code(401);
         }
@@ -38,7 +39,6 @@ class AuthController extends AbstractController {
         // on encode toutes les requetes dans la db
         for ($i = 0; $i < count($data['request']); $i++) {
             $data['request'][$i]['idUser'] = $lastInserted;
-
             if (!$requestDao->createRequest($data['request'][$i])) {
                 return http_response_code(401);
             }
